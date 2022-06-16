@@ -3,7 +3,7 @@ import productImage from "../../img/loginsecondhand.png";
 import penjualImage from "../../img/img_photo3.jpg";
 import "./DetailProduk.css";
 
-const DetailProduk = (props) => {
+const DetailProduk = () => {
   return (
     <div>
       <div className="container mx-auto detail_produk">
@@ -50,25 +50,14 @@ const DetailProduk = (props) => {
               <h3>Gitar Yamaha</h3>
               <p>Gitar</p>
               <p>Rp. 250.000</p>
-
-              {props.role === "merchant" && (
-                <div className="d-grid gap-2">
-                  <button type="button" className="btn btn_publish">
-                    Terbitkan
-                  </button>
-                  <button type="button" className="btn btn_edit">
-                    Edit
-                  </button>
-                </div>
-              )}
-
-              {props.role === "customer" && (
-                <div className="d-grid gap-2">
-                  <button type="button" className="btn btn_publish">
-                    Saya tertarik dan ingin menawar
-                  </button>
-                </div>
-              )}
+              <div className="d-grid gap-2">
+                <button type="button" className="btn btn_publish">
+                  Terbitkan
+                </button>
+                <button type="button" className="btn btn_edit">
+                  Edit
+                </button>
+              </div>
             </div>
 
             {/* detail seller */}

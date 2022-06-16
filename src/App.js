@@ -1,12 +1,13 @@
-import { BrowserRouter } from "react-router-dom";
-import RouterDefault from "./routerDefault/RouterDefault";
+
+import FormLogin from "./components/FormLogin/FormLogin";
+import { FormRegistrasi } from "./components/FormRegistrasi/FormRegistrasi";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <RouterDefault />
-      </BrowserRouter>
+
+      {/* <FormLogin /> */}
+      <FormRegistrasi/>
     </div>
   );
 }
