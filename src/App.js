@@ -1,9 +1,12 @@
-import DetailProduk from "./components/DetailProduk/DetailProduk";
+import { BrowserRouter } from "react-router-dom";
+import RouterDefault from "./routerDefault/RouterDefault";
 
 function App() {
   return (
     <div className="App">
-      <DetailProduk />
+      <BrowserRouter>
+        <RouterDefault />
+      </BrowserRouter>
     </div>
   );
 }
