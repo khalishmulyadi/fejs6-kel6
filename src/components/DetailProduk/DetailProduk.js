@@ -65,7 +65,7 @@ const DetailProduk = (props) => {
               {props.role === "customer" && (
                 <div className="d-grid gap-2">
                   <button type="button" className="btn btn_publish">
-                    Saya Tertarik dan ingin nego
+                    Saya tertarik dan ingin menawar
                   </button>
                 </div>
               )}

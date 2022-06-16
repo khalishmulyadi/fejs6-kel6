@@ -6,8 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import $ from "jquery";
-import Popper from "@popperjs/core";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 // bootstrap icon
