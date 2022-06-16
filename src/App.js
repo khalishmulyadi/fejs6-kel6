@@ -1,9 +1,9 @@
-import FormLogin from "./components/FormLogin/FormLogin";
+import DetailProduk from "./components/DetailProduk/DetailProduk";
 
 function App() {
   return (
     <div className="App">
-      <FormLogin />
+      <DetailProduk />
     </div>
   );
 }
