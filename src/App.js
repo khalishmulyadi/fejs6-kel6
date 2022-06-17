@@ -1,16 +1,12 @@
-
-import DetailProduk from "./components/DetailProduk/DetailProduk";
-import FormLogin from "./components/FormLogin/FormLogin";
-import { FormRegistrasi } from "./components/FormRegistrasi/FormRegistrasi";
-import { InfoProduct } from "./Pages/InfoProduct/InfoProduct";
+import { BrowserRouter } from "react-router-dom";
+import RouterDefault from "./routerDefault/RouterDefault";
 
 function App() {
   return (
     <div className="App">
-
-      {/* <FormLogin /> */}
-      {/* <FormRegistrasi/> */}
-      <InfoProduct/>
+      <BrowserRouter>
+        <RouterDefault />
+      </BrowserRouter>
     </div>
   );
 }
