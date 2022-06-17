@@ -1,9 +1,10 @@
-import FormLogin from "./components/FormLogin/FormLogin";
+// import FormLogin from "./components/FormLogin/FormLogin";
+import Tambah from "./components/TambahProduk/Tambah";
 
 function App() {
   return (
     <div className="App">
-      <FormLogin />
+      <Tambah />
     </div>
   );
 }
