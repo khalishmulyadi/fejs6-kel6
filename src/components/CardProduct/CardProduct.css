@@ -1,0 +1,24 @@
+.card_product {
+  display: contents;
+  color: #000;
+}
+
+.card_product:hover {
+  color: #000;
+}
+
+.card {
+  width: 15rem;
+  max-height: 21rem;
+  overflow: hidden;
+}
+
+img.product_image {
+  height: 10rem;
+  transition: 0.5s;
+  object-fit: cover;
+}
+
+img.product_image:hover {
+  transform: scale(1.1);
+}
