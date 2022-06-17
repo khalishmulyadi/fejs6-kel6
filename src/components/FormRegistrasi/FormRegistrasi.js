@@ -17,8 +17,14 @@ export const FormRegistrasi = () => {
                                 <i className="bi bi-arrow-left"></i>
                             </a>
                         </div>
-                        <h3 className="mb-4 fw-bold">Masuk</h3>
+                        <h3 className="mb-4 fw-bold">Daftar</h3>
                         <form>
+                            <div className="mb-3">
+                                <label for="nama" className="form-label">
+                                    Nama
+                                </label>
+                                <input type="email" className="form-control input_form" id="nama" aria-describedby="emailHelp" placeholder="Nama Lengkap" />
+                            </div>
                             <div className="mb-3">
                                 <label for="exampleInputEmail1" className="form-label">
                                     Email
@@ -33,13 +39,13 @@ export const FormRegistrasi = () => {
                             </div>
 
                             <button type="submit" className="btn btn-primary w-100 mt-3 login_button">
-                                Masuk
+                                Daftar
                             </button>
                         </form>
                         <p className="text-center mt-5">
-                            Belum punya akun?{" "}
+                            Sudah Punya Akun?{" "}
                             <span className="regist_here">
-                                <a href="/#">Daftar di sini</a>
+                                <a href="/#">Masuk Disini</a>
                             </span>
                         </p>
                     </div>

@@ -1,0 +1,69 @@
+.carousel-inner .carousel_img {
+  height: 50vh;
+  object-fit: cover;
+}
+
+.img_penjual {
+  height: 5rem;
+  width: 5rem;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.container.seller_detail,
+.container.product_detail,
+.container.product_desc {
+  border-radius: 16px;
+  width: 85%;
+}
+
+.btn.btn_publish {
+  background-color: #7126b5;
+  color: #fff;
+  border-radius: 16px;
+}
+.btn.btn_publish:hover {
+  background-color: #60229b;
+  color: #fff;
+}
+
+.btn.btn_edit {
+  border-color: #7126b5;
+  border-radius: 16px;
+}
+
+.btn.btn_edit:hover {
+  border-color: #60229b;
+  background-color: #ebebeb;
+}
+
+.container.detail_produk {
+  position: relative;
+}
+
+.back_icon {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.bi-arrow-left-short {
+  color: white;
+  font-size: 50px;
+}
+
+@media screen and (min-width: 576px) {
+  .carousel-inner .carousel_img {
+    height: 50vh;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .back_icon {
+    display: none;
+  }
+}

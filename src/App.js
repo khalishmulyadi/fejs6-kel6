@@ -1,10 +1,12 @@
-// import FormLogin from "./components/FormLogin/FormLogin";
-import Tambah from "./components/TambahProduk/Tambah";
+import { BrowserRouter } from "react-router-dom";
+import RouterDefault from "./routerDefault/RouterDefault";
 
 function App() {
   return (
     <div className="App">
-      <Tambah />
+      <BrowserRouter>
+        <RouterDefault />
+      </BrowserRouter>
     </div>
   );
 }
