@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import './InfoProduct.css'
 import logo from '../../img/Rectangle 127.png'
@@ -7,6 +7,18 @@ import product from '../../img/jamtangan.png'
 
 
 export const InfoProduct = () => {
+    const [Modal, setModal] = useState(false);
+
+    const handleButtonTerima = () =>{
+        if(Modal) {
+            console.log("False");
+            setModal(true)
+        } else {
+            console.log("True");
+        }
+
+    }
+
     return (
         <div>
             <Container fluid >
@@ -126,7 +138,7 @@ export const InfoProduct = () => {
 
                                         <div className='container-button-infoproduct'>
                                             <button className='btn-tolak-infoproduct'>Tolak</button>
-                                            <button className='btn-terima-infoproduct'>Terima</button>
+                                            <button className='btn-terima-infoproduct' onClick={() => handleButtonTerima()}>Terima</button>
                                         </div>
 
                                         <hr />
