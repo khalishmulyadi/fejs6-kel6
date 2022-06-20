@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
 
 const Tambah = () => {
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const onSelectFile = (event) => {
+    const selectedFiles = event.target.files;
+    const selectedFilesArray = Array.from(selectedFiles);
+
+    const imagesArray = selectedFilesArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+  };
+
   return (
     <div>
       <div className="container">
@@ -24,7 +37,6 @@ const Tambah = () => {
                 className="form-control form1_custom"
                 placeholder="Nama Produk"
                 type="text"
-                
                 id="exampleFormControlInput1"
               />
             </div>
@@ -36,7 +48,6 @@ const Tambah = () => {
               <input
                 className="form-control form1_custom"
                 type="number"
-                
                 id="exampleFormControlInput1"
                 placeholder="Rp 0,00"
               />
@@ -47,7 +58,6 @@ const Tambah = () => {
                 Kategori
               </label>
               <select
-                
                 aria-label="Default select example"
                 className="form-select form1_custom"
               >
@@ -83,15 +93,22 @@ const Tambah = () => {
                 accept="image/png , image/jpeg, image/webp"
                 id="customFile"
                 hidden
+                onChange={onSelectFile}
               />
+              {selectedImages &&
+                selectedImages.map((image, index) => {
+                  return (
+                    <img src={image} className="prevgambar" alt="upload" />
+                  );
+                })}
             </div>
             <div className="button_cover">
-            <button type="submit" name="button_cover" className="preview">
-              Preview
-            </button>
-            <button type="submit" name="button_cover" className="terbitkan">
-              Terbitkan
-            </button>
+              <button type="submit" name="button_cover" className="preview">
+                Preview
+              </button>
+              <button type="submit" name="button_cover" className="terbitkan">
+                Terbitkan
+              </button>
             </div>
           </form>
         </div>
