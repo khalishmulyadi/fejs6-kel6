@@ -1,197 +1,95 @@
-.headertambahproduk {
-  position: absolute;
-  width: 1440px;
-  height: 84px;
-  left: 0px;
-  top: 0px;
-
-  background: #ffffff;
-
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-}
-
-.imgheader {
-  position: absolute;
-  width: 100px;
-  height: 34px;
-  left: 136px;
-  top: 27px;
-
-  background: #8a8a8a;
+.tambah-produk {
+  display: flex;
+  width: 50%;
 }
 
 .judulheader {
+  margin-left: 150px;
+  padding-top: 10px;
+  
+}
+
+.bi-arrow-left {
+  color: black;
+  font-size: 20px;
+  margin-bottom: 3rem;
+}
+
+.back_icon2 {
+  display: flex;
   position: absolute;
-  width: 181px;
-  height: 24px;
-  left: 630px;
-  top: 30px;
-
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-
-  text-align: center;
-
-  color: #000000;
+  /* margin-right: 50px; */
+  padding-top: 10px;
 }
 
-.formproduk {
-  position: absolute;
-  top: 100px;
-  left: 540px;
+.formproduk_custom {
+  width: 50%;
+  padding-top: 10px;
 }
 
-.boxnama {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.form-select.form1_custom,
+.form-control.form1_custom {
   padding: 12px 16px;
-  gap: 16px;
-  width: 568px;
-  height: 48px;
-  background: #ffffff;
-  border: 1px solid #d0d0d0;
+  /* width: 568px;
+  height: 48px; */
   border-radius: 16px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
+  border: 1px solid;
 }
 
-.boxharga {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.form-control.form-desc_custom {
   padding: 12px 16px;
-  gap: 16px;
-  width: 568px;
-  height: 48px;
-  background: #ffffff;
-  border: 1px solid #d0d0d0;
+  /* width: 568px;
+  height: 80px; */
   border-radius: 16px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-
-.boxkategori {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 12px 16px;
-  gap: 16px;
-  width: 568px;
-  height: 48px;
-  background: #ffffff;
-  border: 1px solid #d0d0d0;
-  border-radius: 16px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-
-.boxdeskripsi {
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 12px 16px;
-  gap: 16px;
-
-  width: 568px;
-  height: 80px;
-
-  background: #ffffff;
-
-  border: 1px solid #d0d0d0;
-  border-radius: 16px;
-
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
+  border: 1px solid;
 }
 
 .preview {
-  float: left;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 12px 24px;
-  gap: 16px;
-  width: 276px;
+  width: 50%;
   height: 48px;
   background: #ffffff;
   border: 1px solid #151515;
   border-radius: 16px;
-  flex: none;
-  order: 0;
-  flex-grow: 1;
-}
-
-p.preview {
-  width: 228px;
-  height: 20px;
-
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-
-  text-align: center;
-
-  color: #151515;
-  flex: none;
-  order: 0;
-  flex-grow: 1;
+  margin-right: 5px;
 }
 
 .terbitkan {
-  float: right;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 12px 24px;
-  gap: 16px;
-  width: 276px;
+  width: 50%;
   height: 48px;
-  background: #3c3c3c;
+  background-color: #7126b5;
+  color: #fff;
+  border: 1px solid #151515;
   border-radius: 16px;
-  flex: none;
-  order: 1;
-  flex-grow: 1;
-  color: #ffffff;
+  margin-left: 5px;
 }
 
-p.terbitkan {
-  width: 228px;
-  height: 20px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  color: #ffffff;
-  flex: none;
-  order: 0;
-  flex-grow: 1;
+.button_cover {
+  display: flex;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .customFile {
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .customFile a img:hover {
   cursor: pointer;
+  border: 2px solid;
+}
+
+@media only screen and (max-width: 425px) {
+  .tambah-produk {
+    width: 100%;
+  }
+  .judulheader {
+    align-items: center;
+    margin-left: 100px;
+  }
+  .formproduk_custom{
+    width: 100%;
+    padding: 12px 20px;
+  }
+  
 }
