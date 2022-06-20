@@ -1,23 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import './InfoProduct.css'
 import logo from '../../img/Rectangle 127.png'
 import foto from '../../img/Rectangle 33.png'
 import product from '../../img/jamtangan.png'
+import { ModalDefault } from '../../components/Modal/ModalDefault'
 
 
 export const InfoProduct = () => {
-    const [Modal, setModal] = useState(false);
+    const [modalShow, setModalShow] = React.useState(false);
 
-    const handleButtonTerima = () =>{
-        if(Modal) {
-            console.log("False");
-            setModal(true)
-        } else {
-            console.log("True");
-        }
-
-    }
 
     return (
         <div>
@@ -138,7 +130,11 @@ export const InfoProduct = () => {
 
                                         <div className='container-button-infoproduct'>
                                             <button className='btn-tolak-infoproduct'>Tolak</button>
-                                            <button className='btn-terima-infoproduct' onClick={() => handleButtonTerima()}>Terima</button>
+                                            <button className='btn-terima-infoproduct' onClick={() => setModalShow(true)}>Terima</button>
+                                            <ModalDefault
+                                                show={modalShow}
+                                                onHide={() => setModalShow(false)}
+                                            />
                                         </div>
 
                                         <hr />
