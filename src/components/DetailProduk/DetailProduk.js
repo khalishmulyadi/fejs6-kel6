@@ -2,10 +2,12 @@ import React from "react";
 import productImage from "../../img/loginsecondhand.png";
 import penjualImage from "../../img/img_photo3.jpg";
 import "./DetailProduk.css";
+import NavbarDefault from "../NavbarDefault/NavbarDefault";
 
 const DetailProduk = (props) => {
   return (
     <div>
+      <NavbarDefault />
       <div className="container mx-auto detail_produk">
         <div>
           <a className="back_icon" href="/#">

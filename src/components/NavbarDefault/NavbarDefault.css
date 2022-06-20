@@ -1,0 +1,65 @@
+.logo_website {
+  width: 100px;
+  height: 34px;
+  background: #4b1979;
+  right: 0;
+}
+
+.offcanvas.navbar_mobile {
+  width: 50%;
+}
+
+.btn.button_nav_mobile {
+  background-color: #fff;
+}
+
+.btn.button_nav_mobile i {
+  color: black;
+  font-size: 30px;
+}
+
+.btn.button_nav_mobile:hover {
+  background-color: #ebebeb;
+}
+
+.navbar_list ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar_list ul li:hover {
+  background-color: #ebebeb;
+}
+
+.input-group .search_input,
+.input-group .search_button {
+  background-color: #ebebeb;
+  border-style: none;
+}
+
+.input-group .search_input {
+  border-bottom-left-radius: 16px;
+  border-top-left-radius: 16px;
+}
+
+.input-group .search_button {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.btn.button_login {
+  background-color: #7126b5;
+  color: #fff;
+  font-weight: 500;
+}
+
+.btn.button_login:hover {
+  background-color: #60209c;
+  color: #fff;
+}
+
+.dropdown-toggle.menu_user::after,
+.dropdown-toggle.notifikasi_user::after,
+.dropdown-toggle.profile_user::after {
+  content: none;
+}
