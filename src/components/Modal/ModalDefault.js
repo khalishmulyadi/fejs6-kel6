@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, {  } from 'react'
 import './ModalDefault.css'
-import { Card, Row, Col, Modal, Button } from 'react-bootstrap'
+import { Card, Row, Col, Modal } from 'react-bootstrap'
 import whatsapp from '../../img/fi_whatsapp.svg'
 import pembeli from '../../img/Rectangle 33.png'
 import barang from '../../img/jamtangan.png'
 
 
-export const ModalDefault = (props) => {
+export const ModalDefault = ({parambtn, onHide , ...props}) => {
 
   return (
     <Modal
@@ -21,7 +21,7 @@ export const ModalDefault = (props) => {
       <Card className='card-modal'>
         <div className='container-modal'>
           <div className='container-btn-close-modalDefault'>
-            <button className='btn-close-modaldefault'>&#x2715;</button>
+            <button className='btn-close-modaldefault' onClick={onHide}>&#x2715;</button>
           </div>
 
           <div className='txt-judul-modaldefault'>
@@ -112,10 +112,11 @@ export const ModalDefault = (props) => {
           </Card>
 
           <div className='container-btn-modaldefault'>
-            <button className='btn-modaldefault'>
-              Hubungi via Whatsapp
-            </button>
 
+            <button className='btn-modaldefault' onClick={()=>{parambtn()}}>
+              Hubungi via Whatsapp
+
+            </button>
             <img alt='' src={whatsapp} className="whatsapp-btn-modaldefault" />
 
           </div>

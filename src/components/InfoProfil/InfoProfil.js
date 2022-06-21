@@ -22,7 +22,7 @@ export const InfoProfil = () => {
           </a>
         </div>
         
-        <form>
+        <form className='form-infoprofil'>
         <div className="upFoto">
             <label for="customFile" className="customFile">
               <a>
