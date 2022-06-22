@@ -11,7 +11,7 @@
 .logoheader{
     display: none;
 }
-form{
+.form-infoprofil{
     margin: 20px;
 }
 .back_icon{
@@ -42,7 +42,7 @@ form{
     .back_icon{
         margin-left: 100px;
     }
-    form{
+    .form-infoprofil{
         width: 500px;
         transform: translateX(50%);
     }
