@@ -1,0 +1,19 @@
+/* .kategori-search {
+  border-radius: 12px;
+  border: 1px solid;
+} */
+
+
+.group_input .form-control_Custom {
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.group_input .search-btn {
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.konten {
+  margin-left: 10px;
+}
