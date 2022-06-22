@@ -31,7 +31,6 @@
   border: none;
 }
 
-
 @media screen and (min-width: 1024px) {
   .infoProfil {
     width: 1024px;
@@ -46,3 +45,4 @@
     width: 500px;
     transform: translateX(50%);
   }
+}
