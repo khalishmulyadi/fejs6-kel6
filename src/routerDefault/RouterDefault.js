@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CardProduct from "../components/CardProduct/CardProduct";
 import DetailProduk from "../components/DetailProduk/DetailProduk";
 import FormLogin from "../components/FormLogin/FormLogin";
@@ -11,19 +11,21 @@ import Tambah from "../components/TambahProduk/Tambah";
 
 const RouterDefault = () => {
   return (
-    <Routes>
-      <Route path="auth/login" element={<FormLogin />} />
-      <Route path="auth/registrasi" element={<FormRegistrasi />} />
-      <Route path="product/product-detail" element={<DetailProduk role="customer" />} />
-      <Route path="product/product-preview" element={<DetailProduk role="merchant" />} />
-      <Route path="product-card" element={<CardProduct />} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="auth/login" element={<FormLogin />} />
+        <Route path="auth/registrasi" element={<FormRegistrasi />} />
+        <Route path="product/product-detail" element={<DetailProduk role="customer" />} />
+        <Route path="product/product-preview" element={<DetailProduk role="merchant" />} />
+        <Route path="product-card" element={<CardProduct />} />
 
-      <Route path="infoproduct" element={<InfoProduct />} />
+        <Route path="infoproduct" element={<InfoProduct />} />
 
-      <Route path="edit-profile" element={<InfoProfil />} />
+        <Route path="edit-profile" element={<InfoProfil />} />
 
-      <Route path="tambah-product" element={<Tambah />} />
-    </Routes>
+        <Route path="tambah-product" element={<Tambah />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

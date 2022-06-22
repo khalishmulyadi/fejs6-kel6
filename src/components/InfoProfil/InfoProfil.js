@@ -8,7 +8,7 @@ export const InfoProfil = () => {
     <div className="infoProfil">
       <div className="container-fluid">
         <div className="headerProfil">
-          <img className="logoheader" src={logo} />
+          <img className="logoheader" src={logo} alt="logo_app" />
           <h3 className="">Lengkapi Info Akun</h3>
         </div>
       </div>
@@ -20,12 +20,10 @@ export const InfoProfil = () => {
           </a>
         </div>
 
-
         <form className="form_edit_profile">
           <div className="upFoto">
-
             <label for="customFile" className="customFile">
-              <a>
+              <a href="/#">
                 <img src={upFoto} alt="upload" />
               </a>
             </label>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <div>
       <div className="container">
@@ -70,7 +70,7 @@ const NavbarDesktop = () => {
             </div>
           ) : (
             <div className="col-3">
-              <button type="button" className="btn button_login mt-3">
+              <button type="button" className="btn button_login mt-3" onClick={(e) => setLoggedIn(true)}>
                 <span className="me-2">
                   <i className="bi bi-box-arrow-in-right"></i>
                 </span>
