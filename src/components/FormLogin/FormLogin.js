@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import authService from "../../services/auth.service";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import loginImage from "../../img/loginsecondhand.png";
 import "./FormLogin.css";
 
@@ -8,7 +8,7 @@ const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();

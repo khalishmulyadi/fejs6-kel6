@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./NavbarDefault.css";
 const NavbarMobile = () => {
-  const [loggedin, setLoggedIn] = useState(true);
+  const [loggedin, setLoggedIn] = useState(false);
   return (
     <div>
       <div className="container-fluid">
@@ -57,7 +57,7 @@ const NavbarMobile = () => {
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body ">
-            <button type="button" className="btn button_login">
+            <button type="button" className="btn button_login" onClick={(e) => setLoggedIn(true)}>
               <span className="me-2">
                 <i className="bi bi-box-arrow-in-right"></i>
               </span>
