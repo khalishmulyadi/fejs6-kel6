@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import authService from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 import loginImage from "../../img/loginsecondhand.png";
 import "./FormLogin.css";
 
 const FormLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await authService.loginUser(email, password).then(() => {
+        // navigate("/product/product-detail");
+        // window.location.reload();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="container-fluid m-0">
@@ -18,18 +37,18 @@ const FormLogin = () => {
               </a>
             </div>
             <h3 className="mb-4 fw-bold">Masuk</h3>
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="mb-3">
-                <label for="exampleInputEmail1" className="form-label">
+                <label htmlFor="exampleInputEmail1" className="form-label">
                   Email
                 </label>
-                <input type="email" className="form-control input_form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contoh: johndee@gmail.com" />
+                <input type="email" className="form-control input_form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contoh: johndee@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
               <div className="mb-3">
-                <label for="exampleInputPassword1" className="form-label">
+                <label htmlFor="exampleInputPassword1" className="form-label">
                   Password
                 </label>
-                <input type="password" className="form-control input_form" id="exampleInputPassword1" placeholder="Masukkan password" />
+                <input type="password" className="form-control input_form" id="exampleInputPassword1" placeholder="Masukkan password" value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
 
               <button type="submit" className="btn btn-primary w-100 mt-3 login_button">
@@ -39,7 +58,7 @@ const FormLogin = () => {
             <p className="text-center mt-5">
               Belum punya akun?{" "}
               <span className="regist_here">
-                <a href="/#">Daftar di sini</a>
+                <a href="registrasi">Daftar di sini</a>
               </span>
             </p>
           </div>

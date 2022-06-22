@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 import logo from "../../img/Rectangle 127.png";
 import upFoto from "../../img/upFoto.png";
 import "./infoprofil.css";
 
 export const InfoProfil = () => {
   return (
-    
     <div className="infoProfil">
-      
       <div className="container-fluid">
         <div className="headerProfil">
           <img className="logoheader" src={logo} />
@@ -15,40 +13,31 @@ export const InfoProfil = () => {
         </div>
       </div>
 
-      <div className="formProfil">  
+      <div className="formProfil">
         <div className="back_icon">
           <a href="/#">
             <i className="bi bi-arrow-left"></i>
           </a>
         </div>
-        
-        <form>
-        <div className="upFoto">
+
+        <form className="form_edit_profile">
+          <div className="upFoto">
             <label for="customFile" className="customFile">
               <a>
                 <img src={upFoto} alt="upload" />
               </a>
             </label>
 
-            <input
-              type="file"
-              name="customFile"
-              accept="image/png , image/jpeg, image/webp"
-              id="customFile"
-              hidden
-            />
+            <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" id="customFile" hidden />
           </div>
-          
+
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">
               Nama*
             </label>
-            <input class="form-control form-control-lg" 
-              type="text" 
-              placeholder="Nama" 
-              aria-label=".form-control-lg example"/>
+            <input class="form-control form-control-lg" type="text" placeholder="Nama" aria-label=".form-control-lg example" />
           </div>
-            
+
           <div className="mb-3">
             <label for="exampleInputPassword1" className="form-label">
               Kota*
@@ -70,22 +59,19 @@ export const InfoProfil = () => {
               <label for="floatingTextarea2">Contoh: Jalan Ikan Hiu 33</label>
             </div>
           </div>
-            
+
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">
               No Handphone*
             </label>
-            <input class="form-control form-control-lg" 
-              type="text" 
-              name="Phone Number"
-              pattern="[7-9]{1}[0-9]{9}"
-              placeholder="contoh: +628123456789" 
-              aria-label=".form-control-lg example"/>
+            <input class="form-control form-control-lg" type="text" name="Phone Number" pattern="[7-9]{1}[0-9]{9}" placeholder="contoh: +628123456789" aria-label=".form-control-lg example" />
           </div>
-          
-          <button type="submit" className="btnsimpan">Simpan</button>
+
+          <button type="submit" className="btnsimpan">
+            Simpan
+          </button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
