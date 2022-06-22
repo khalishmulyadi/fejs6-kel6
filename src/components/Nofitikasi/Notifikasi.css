@@ -1,0 +1,15 @@
+.status_notifikasi {
+  font-size: 12px;
+  color: #8a8a8a;
+}
+
+.waktu_notifikasi {
+  font-size: 12px;
+  color: #8a8a8a;
+}
+
+.gambar_produk_notif {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
