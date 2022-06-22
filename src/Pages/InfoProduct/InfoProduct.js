@@ -1,15 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Container, Row, Col, Card, Modal } from 'react-bootstrap'
 import './InfoProduct.css'
 import logo from '../../img/Rectangle 127.png'
 import foto from '../../img/Rectangle 33.png'
 import product from '../../img/jamtangan.png'
 import { ModalDefault } from '../../components/Modal/ModalDefault'
+import { BtnInfoProductStatus } from '../../components/Button/BtnInfoProductStatus/BtnInfoProductStatus'
+import { ModalStatus } from '../../components/ModalStatus/ModalStatus'
 
 
 export const InfoProduct = () => {
     const [modalShow, setModalShow] = React.useState(false);
+    const [ParameterButton, setParameterButton] = useState(0);
 
+
+
+    const handleBtnModal = () => {
+        setParameterButton(1);
+        return console.log(ParameterButton);
+
+    }
+
+
+    const handleButtonShow = () => {
+        if (ParameterButton === 0) {
+            return <div className='container-button-infoproduct'>
+                <button className='btn-tolak-infoproduct'>Tolak</button>
+                <button className='btn-terima-infoproduct' onClick={() => setModalShow(true)}>Terima</button>
+                <ModalDefault
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    parambtn={handleBtnModal} />
+            </div>
+        } else if (ParameterButton === 1) {
+            console.log(ParameterButton);
+            return <BtnInfoProductStatus />
+        }
+    }
 
     return (
         <div>
@@ -127,15 +154,17 @@ export const InfoProduct = () => {
                                                 </Col>
                                             </Row>
                                         </div>
+                                        {handleButtonShow()}
 
-                                        <div className='container-button-infoproduct'>
+                                        {/* <div className='container-button-infoproduct'>
                                             <button className='btn-tolak-infoproduct'>Tolak</button>
                                             <button className='btn-terima-infoproduct' onClick={() => setModalShow(true)}>Terima</button>
                                             <ModalDefault
                                                 show={modalShow}
                                                 onHide={() => setModalShow(false)}
+                                                parambtn={handleBtnModal}
                                             />
-                                        </div>
+                                        </div> */}
 
                                         <hr />
                                     </div>

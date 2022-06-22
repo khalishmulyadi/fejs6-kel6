@@ -20,8 +20,10 @@ export const InfoProfil = () => {
           </a>
         </div>
 
+
         <form className="form_edit_profile">
           <div className="upFoto">
+
             <label for="customFile" className="customFile">
               <a>
                 <img src={upFoto} alt="upload" />
