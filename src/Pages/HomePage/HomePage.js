@@ -2,13 +2,41 @@ import React from "react";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import NavbarDefault from "../../components/NavbarDefault/NavbarDefault";
 import Banner from "../../img/img banner.png";
-import slider1 from "../../img/Rectangle 129.png";
+import {Swiper, SwiperSlide} from "swiper/react";
+import 'swiper/css/bundle';
 import "./HomePage.css";
 const HomePage = () => {
+
+  const slides = []
+
+  for (let i=0; i<5; i +=1) {
+    slides.push (
+      <SwiperSlide key={`slide-${i}`}>
+        <img src={Banner} alt={`Slide ${i}`}></img>
+      </SwiperSlide>
+    )
+  }
+        
   return (
     <div className="container">
+    <div className="nav-custom mx-auto">
       <NavbarDefault />
-      <div className="swiper"></div>
+    </div>
+    <div className="container swiper-konten">
+      <React.Fragment>
+        <Swiper 
+        id="main"
+        preloadImages
+        slidesPerView={1}
+        spaceBetween
+        grabCursor
+        mousewheel
+        centeredSlides
+        >
+          {slides}
+        </Swiper>
+      </React.Fragment>
+    </div>
 
       <div className="">
         <h5>Telusuri Semua Kategori</h5>
@@ -36,7 +64,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="konten row row-cols-1 row-cols-md-6">
+      <div className="container konten row row-cols-1 row-cols-md-6">
         <CardProduct />
         <CardProduct />
         <CardProduct />
