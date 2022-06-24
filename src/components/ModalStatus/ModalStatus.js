@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Card, Col, Container, Form, Modal, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Modal } from 'react-bootstrap'
 import './ModalStatus.css'
 
 
@@ -20,7 +20,20 @@ export const ModalStatus = ({ onHide, ...props }) => {
         console.log(ValueBatal);
     }
 
+    const handleValueStatus = () => {
+        setValueBerhasil(true)
+        console.log(ValueBerhasil);
+    }
+
+    const handleValueStatus2 = () => {
+        setValueBatal(true)
+        console.log(ValueBatal);
+    }
+
     
+
+
+
 
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -38,8 +51,8 @@ export const ModalStatus = ({ onHide, ...props }) => {
                     <form className='form-modalstatus' >
                         <div className='container-input-radio1-modalstatus'>
                             <div className='input-radio-modalstatus'>
-                                <input type={"radio"} value={"1"} name={"opsiseller"} id={"myradio"} onChange={(e) => { handleChecked(e.target.value) }}/>
-                                <label>Berhasil terjual</label>
+                                <input type={"radio"} value={"1"} name={"opsiseller"} id={"myradio"} onChange={(e) => { handleChecked(e.target.value) }} onClick={() => { handleValueStatus() }} />
+                                <label className='label-modalstatus'>Berhasil terjual</label>
                             </div>
 
                             <div className='desc-and-status-modalstatus'>
@@ -49,12 +62,12 @@ export const ModalStatus = ({ onHide, ...props }) => {
 
                         <div className='container-input-radio1-modalstatus'>
                             <div className='input-radio-modalstatus'>
-                                <input type={"radio"} value={"2"} name={"opsiseller"} id={"myradio"} onChange={(e) => { handleChecked2(e.target.value) }}/>
-                                <label>Batalkan transaksi</label>
+                                <input type={"radio"} value={"2"} name={"opsiseller"} id={"myradio"} onChange={(e) => { handleChecked2(e.target.value) }} onClick={() => { handleValueStatus2() }} />
+                                <label className='label-modalstatus'>Batalkan transaksi</label>
                             </div>
 
                             <div className='desc-and-status-modalstatus'>
-                                <div>Kamu membatalkan transaksi produk ini dengan pembeli</div>
+                                Kamu membatalkan transaksi produk ini dengan pembeli
                             </div>
                         </div>
                     </form>
@@ -64,6 +77,7 @@ export const ModalStatus = ({ onHide, ...props }) => {
                         <button className='btn-modalstatus' onClick={onHide}>
                             Kirim!
                         </button>
+
                     </div>
 
 

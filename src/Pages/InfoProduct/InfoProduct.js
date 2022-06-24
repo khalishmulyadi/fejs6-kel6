@@ -156,15 +156,7 @@ export const InfoProduct = () => {
                                         </div>
                                         {handleButtonShow()}
 
-                                        {/* <div className='container-button-infoproduct'>
-                                            <button className='btn-tolak-infoproduct'>Tolak</button>
-                                            <button className='btn-terima-infoproduct' onClick={() => setModalShow(true)}>Terima</button>
-                                            <ModalDefault
-                                                show={modalShow}
-                                                onHide={() => setModalShow(false)}
-                                                parambtn={handleBtnModal}
-                                            />
-                                        </div> */}
+                                       
 
                                         <hr />
                                     </div>

@@ -8,6 +8,7 @@ import { FormRegistrasi } from "../components/FormRegistrasi/FormRegistrasi";
 import { InfoProfil } from "../components/InfoProfil/InfoProfil";
 
 import Tambah from "../components/TambahProduk/Tambah";
+import DaftarJual from "../components/DaftarJual/DaftarJual";
 
 const RouterDefault = () => {
   return (
@@ -24,6 +25,9 @@ const RouterDefault = () => {
         <Route path="edit-profile" element={<InfoProfil />} />
 
         <Route path="tambah-product" element={<Tambah />} />
+
+
+        <Route path="daftar-jual" element={<DaftarJual />} />
       </Routes>
     </BrowserRouter>
   );
