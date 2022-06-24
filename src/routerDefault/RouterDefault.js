@@ -26,6 +26,7 @@ const RouterDefault = () => {
 
         <Route path="tambah-product" element={<Tambah />} />
 
+
         <Route path="daftar-jual" element={<DaftarJual />} />
       </Routes>
     </BrowserRouter>
