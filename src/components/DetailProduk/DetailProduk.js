@@ -19,7 +19,6 @@ const DetailProduk = (props) => {
 
   return (
     <div>
-      <NavbarDefault />
       {alertTawar ? (
         <div className="alert alert-success alert-dismissible w-50 mx-auto" role="alert">
           Harga tawarmu berhasil dikirim ke penjual

@@ -2,7 +2,7 @@ import React from "react";
 import MediaQuery from "react-responsive";
 import NavbarDesktop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
-const NavbarDefault = () => {
+const NavbarDefault = (props) => {
   return (
     <div>
       <MediaQuery minWidth={576}>
@@ -10,7 +10,7 @@ const NavbarDefault = () => {
       </MediaQuery>
 
       <MediaQuery maxWidth={576}>
-        <NavbarMobile />
+        <NavbarMobile title={props.title} />
       </MediaQuery>
     </div>
   );
