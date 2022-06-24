@@ -11,5 +11,6 @@
 .gambar_produk_notif {
   width: 48px;
   height: 48px;
+  border-radius: 12px;
   object-fit: cover;
 }
