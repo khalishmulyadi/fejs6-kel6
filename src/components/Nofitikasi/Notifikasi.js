@@ -22,6 +22,7 @@ const Notifikasi = () => {
             <p className="waktu_notifikasi">20 Apr, 14:04</p>
           </div>
         </div>
+        <hr></hr>
       </div>
     </div>
   );

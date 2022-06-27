@@ -39,6 +39,8 @@ const NavbarDesktop = () => {
                   <li>
                     <a className="dropdown-item px-4" href="/#">
                       <Notifikasi />
+                      <Notifikasi />
+                      <Notifikasi />
                     </a>
                   </li>
                   {/* <li>
