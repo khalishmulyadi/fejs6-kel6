@@ -8,7 +8,9 @@ import { FormRegistrasi } from "../components/FormRegistrasi/FormRegistrasi";
 import { InfoProfil } from "../components/InfoProfil/InfoProfil";
 
 import Tambah from "../components/TambahProduk/Tambah";
+
 import NotifPageMobile from "../components/NotifPageMobile/NotifPageMobile";
+import DaftarJual from "../components/DaftarJual/DaftarJual";
 
 const RouterDefault = () => {
   return (
@@ -27,6 +29,8 @@ const RouterDefault = () => {
         <Route path="tambah-product" element={<Tambah />} />
 
         <Route path="notifikasi" element={<NotifPageMobile />} />
+
+        <Route path="daftar-jual" element={<DaftarJual />} />
       </Routes>
     </BrowserRouter>
   );

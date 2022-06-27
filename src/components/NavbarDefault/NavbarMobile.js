@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./NavbarDefault.css";
-const NavbarMobile = () => {
+const NavbarMobile = (props) => {
   const [loggedin, setLoggedIn] = useState(false);
   return (
     <div>
@@ -12,15 +12,18 @@ const NavbarMobile = () => {
             </button>
           </div>
           <div className="col-8">
-            <div className="container-fluid">
-              <form className="d-flex">
+            {/*<div className="container-fluid">
+               <form className="d-flex">
                 <div className="input-group search_bar mt-2">
                   <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
                   <button className="btn search_button" id="button-addon2" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
                 </div>
-              </form>
+              </form> 
+            </div>*/}
+            <div>
+              <h3 className="mt-3">{props.title}</h3>
             </div>
           </div>
         </div>
@@ -49,7 +52,7 @@ const NavbarMobile = () => {
           </div>
         </div>
       ) : (
-        <div className="offcanvas offcanvas-start navbar_mobile" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+        <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
               AsiX
