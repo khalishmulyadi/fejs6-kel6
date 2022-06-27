@@ -9,10 +9,10 @@ const Notifikasi = () => {
     <div>
       <div className="notifikasi">
         <div className="row">
-          <div className="col-3">
+          <div className="col-2">
             <img src={productImg} className="gambar_produk_notif" alt="gambar_produk" />
           </div>
-          <div className="col-6">
+          <div className="col-7">
             <p className="status_notifikasi mb-0">Penawaran produk</p>
             <p className="mb-0">Jam Tangan Casio</p>
             <p className="mb-0">Rp 250.000</p>
@@ -22,6 +22,7 @@ const Notifikasi = () => {
             <p className="waktu_notifikasi">20 Apr, 14:04</p>
           </div>
         </div>
+        <hr></hr>
       </div>
     </div>
   );

@@ -11,5 +11,13 @@
 .gambar_produk_notif {
   width: 48px;
   height: 48px;
+  border-radius: 12px;
   object-fit: cover;
+}
+
+@media screen and (max-width: 576px) {
+  .notifikasi {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }
