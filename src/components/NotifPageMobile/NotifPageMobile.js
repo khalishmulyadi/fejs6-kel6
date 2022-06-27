@@ -7,7 +7,7 @@ const NotifPageMobile = () => {
   return (
     <div>
       <MediaQuery maxWidth={576}>
-        <NavbarDefault t />
+        <NavbarDefault title="Notifikasi" />
         <Notifikasi />
         <Notifikasi />
         <Notifikasi />

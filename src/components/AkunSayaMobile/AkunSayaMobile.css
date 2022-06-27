@@ -1,0 +1,47 @@
+.foto_profil {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.list_menu_akun_saya a,
+.list_navigasi_akun_saya a {
+  text-decoration: none;
+}
+
+.list_menu_akun_saya li {
+  list-style: none;
+  margin-bottom: 1rem;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  font-size: larger;
+  font-weight: 500;
+}
+
+.list_menu_akun_saya li i {
+  font-size: x-large;
+  color: #7126b5;
+}
+
+.list_navigasi_akun_saya li {
+  list-style: none;
+  display: grid;
+  margin-right: 25px;
+  color: #8a8a8a;
+}
+
+.list_navigasi_akun_saya li.active,
+.list_navigasi_akun_saya li.active i {
+  color: #7126b5;
+  font-weight: bold;
+}
+
+.list_navigasi_akun_saya li i {
+  font-size: x-large;
+  margin-right: auto;
+  margin-left: auto;
+  color: #8a8a8a;
+}
