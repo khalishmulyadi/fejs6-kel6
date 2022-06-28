@@ -1,3 +1,7 @@
+.navbar_product_detail {
+  display: none;
+}
+
 .carousel-inner .carousel_img {
   height: 50vh;
   object-fit: cover;
@@ -109,5 +113,9 @@
 
   .back_icon {
     display: none;
+  }
+
+  .navbar_product_detail {
+    display: contents;
   }
 }
