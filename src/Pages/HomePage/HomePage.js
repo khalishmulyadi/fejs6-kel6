@@ -5,6 +5,7 @@ import Banner from "../../img/img banner.png";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css/bundle';
 import "./HomePage.css";
+import 'bootstrap/dist/css/bootstrap.css';
 const HomePage = () => {
 
   const slides = []
@@ -18,61 +19,55 @@ const HomePage = () => {
   }
         
   return (
-    <div className="container">
-    <div className="nav-custom mx-auto">
-      <NavbarDefault />
-    </div>
-    <div className="container swiper-konten">
-      <React.Fragment>
-        <Swiper 
-        id="main"
-        preloadImages
-        slidesPerView={1}
-        spaceBetween
-        grabCursor
-        mousewheel
-        centeredSlides
-        >
-          {slides}
-        </Swiper>
-      </React.Fragment>
-    </div>
+    <div className="container homepage">
 
-      <div className="">
-        <h5>Telusuri Semua Kategori</h5>
-        <div className="kategori-search">
-          <form className="form-inline d-row">
-            <div className="group_input">
-              <div className="input-group-prepend">
-                <button
-                  className="search-btn"
-                  id="button-addon2"
-                  type="submit"
-                >
-                  <i className="bi bi-search"></i>
-                </button>
-              </div>
-              <input
-                type="text"
-                className="form-control_Custom"
-                placeholder="Username"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </div>
-          </form>
+      <div className="Navbar">
+        <NavbarDefault />
+      </div>
+
+      <div className="container section1">
+        <div className="swiper-konten">
+          <React.Fragment>
+            <Swiper 
+            id="main"
+            preloadImages
+            slidesPerView={1}
+            spaceBetween
+            grabCursor
+            mousewheel
+            centeredSlides
+            >
+              {slides}
+            </Swiper>
+          </React.Fragment>
         </div>
       </div>
+      
+      <div className="container section2">
+        <p><strong>Telurusi Kategori</strong></p>
+       
+        <div className="button-homepage">
+          <button type="button" class="btn btn-secondary me-2"><i class="bi bi-search"></i> Semua</button>
+          <button type="button" class="btn btn-secondary me-2"><i class="bi bi-search"></i> Gitar</button>
+          <button type="button" class="btn btn-secondary me-2"><i class="bi bi-search"></i> Aksesoris</button>
+          <button type="button" class="btn btn-secondary me-2"><i class="bi bi-search"></i> Search</button>
+          <button type="button" class="btn btn-secondary me-2"><i class="bi bi-search"></i> Search</button>
+        </div>
 
-      <div className="container konten row row-cols-1 row-cols-md-6">
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
+        <div className="konten row row-cols-2 row-cols-md-4">
+          <CardProduct />
+          <CardProduct />
+          <CardProduct />
+          <CardProduct />
+          <CardProduct />
+          <CardProduct />
+          <CardProduct />
+          <CardProduct />
+         
+        </div>     
       </div>
+      
+     
     </div>
   );
 };
