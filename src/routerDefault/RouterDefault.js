@@ -5,6 +5,7 @@ import { InfoProduct } from "../Pages/InfoProduct/InfoProduct";
 import { InfoProfil } from "../components/InfoProfil/InfoProfil";
 
 import Tambah from "../components/TambahProduk/Tambah";
+import HomePage from "../Pages/HomePage/HomePage";
 
 import NotifPageMobile from "../components/NotifPageMobile/NotifPageMobile";
 import AkunSayaMobile from "../components/AkunSayaMobile/AkunSayaMobile";
@@ -24,7 +25,9 @@ const RouterDefault = () => {
         <Route path="product/product-detail" element={<DetailProduct />} />
         <Route path="product/product-preview" element={<PreviewProduct />} />
         <Route path="product-card" element={<CardProduct />} />
-
+    
+      <Route path="homepage" element={<HomePage />} />
+    
         <Route path="infoproduct" element={<InfoProduct />} />
 
         <Route path="edit-profile" element={<InfoProfil />} />

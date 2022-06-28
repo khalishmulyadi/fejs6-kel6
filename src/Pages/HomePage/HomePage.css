@@ -1,0 +1,56 @@
+
+.homepage{
+  width: 1024px;
+  height: 100vh;
+ 
+}
+
+.Navbar{
+  text-align: center;
+}
+
+.swiper-konten {
+  padding-top: 20px;
+}
+
+.swiper-konten img {
+  width: 75%;
+}
+
+.section1{
+  width: 100%;
+  height: 300px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.section2{
+  width: 100%;
+}
+.button-homepage{
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.konten{
+  width: 100%;
+  padding-right: 50px;
+}
+
+
+@media only screen and (max-width: 520px){
+  .button-homepage{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 700px;
+    overflow: scroll;
+
+  }
+  .konten{  
+    padding-right: 90px;
+  }
+
+  .swiper-konten img {
+    width: 400px;
+  }
+  
+}
