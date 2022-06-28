@@ -43,9 +43,6 @@ export const FormRegistrasi = () => {
   }
   return (
     <div>
-    {
-      console.log(Name, Email, Password)
-    }
       <div className="container-fluid m-0">
         <div className="row login_group">
           <div className="d-none d-sm-flex col-sm-6 p-0">
@@ -64,19 +61,19 @@ export const FormRegistrasi = () => {
                 <label htmlFor="nama" className="form-label">
                   Nama
                 </label>
-                <input type="text" className="form-control input_form" id="nama" aria-describedby="emailHelp" placeholder="Nama Lengkap" onChange={(e) => { setName(e.target.value) }} required/>
+                <input type="text" className="form-control input_form" id="nama" aria-describedby="emailHelp" placeholder="Nama Lengkap" onChange={(e) => { setName(e.target.value) }} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">
                   Email
                 </label>
-                <input type="email" className="form-control input_form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contoh: johndee@gmail.com" onChange={(e) => { setEmail(e.target.value) }} required/>
+                <input type="email" className="form-control input_form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contoh: johndee@gmail.com" onChange={(e) => { setEmail(e.target.value) }} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">
                   Password
                 </label>
-                <input type="password" className="form-control input_form" id="exampleInputPassword1" placeholder="Masukkan password" onChange={(e) => { setPassword(e.target.value) }} required/>
+                <input type="password" className="form-control input_form" id="exampleInputPassword1" placeholder="Masukkan password" onChange={(e) => { setPassword(e.target.value) }} required />
               </div>
 
               <button type="submit" className="btn btn-primary w-100 mt-3 login_button" onClick={handleRegister}>
