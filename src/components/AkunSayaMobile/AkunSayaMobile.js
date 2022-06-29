@@ -1,12 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MediaQuery from "react-responsive";
+import axios from "axios";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import setLoginStatus from "../../redux/actions/setLoginStatus";
+import authService from "../../services/auth.service";
 
 // css
 import "./AkunSayaMobile.css";
 
-import fotoProfil from "../../img/gaeul.jpg";
+// images
+import defaultPP from "../../img/upFoto.png";
 
-const AkunSayaMobile = () => {
+const AkunSayaMobile = (props) => {
+  const [userData, setUserData] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    authService.logout();
+    navigate("/auth/login");
+  };
+  // useEffect(() => {
+  //   props.setLoginStatus();
+  //   if (props.loginStatus === false) {
+  //     navigate("/auth/login");
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    // const checkLoginStatus = async () => {
+    //   await props.setLoginStatus();
+    //   if (props.loginStatus === false) {
+    //     navigate("/auth/login");
+    //   }
+    // };
+    // checkLoginStatus().catch(console.error);
+    // if (props.loginStatus === true) {
+    const emailUser = JSON.parse(localStorage.getItem("email"));
+    const tokenUser = JSON.parse(localStorage.getItem("user"));
+    console.log(emailUser, tokenUser.access_token);
+    var config = {
+      method: "get",
+      url: `https://asix-store.herokuapp.com/user/display/${emailUser}`,
+      headers: {
+        Authorization: `Bearer ${tokenUser.access_token}`,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setUserData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+        console.log(error.response.data);
+      });
+    // }
+  }, []);
+
   return (
     <div className="mx-3">
       <MediaQuery maxWidth={576}>
@@ -16,8 +69,8 @@ const AkunSayaMobile = () => {
 
         {/* foto profil start */}
         <div className="container my-5">
-          <img src={fotoProfil} className="foto_profil d-flex mx-auto" alt="foto_penjual" />
-          <h3 className="text-center mt-2">Gaeul</h3>
+          {userData.img ? <img src={userData.img} className="foto_profil d-flex mx-auto" alt="foto_penjual" /> : <img src={defaultPP} className="foto_profil d-flex mx-auto" alt="foto_penjual" />}
+          <h3 className="text-center mt-2">{userData.nama}</h3>
         </div>
         {/* foto profil end */}
 
@@ -31,7 +84,7 @@ const AkunSayaMobile = () => {
               </li>
             </a>
 
-            <a href="logout">
+            <a href="/#" onClick={handleLogout}>
               <li className="list-group-item">
                 <i className="bi bi-box-arrow-right me-3"></i>
                 <span>Keluar</span>
@@ -86,5 +139,16 @@ const AkunSayaMobile = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
 
-export default AkunSayaMobile;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AkunSayaMobile);

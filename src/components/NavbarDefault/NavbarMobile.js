@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import setLoginStatus from "../../redux/actions/setLoginStatus";
+import { useNavigate } from "react-router-dom";
+
 import "./NavbarDefault.css";
 const NavbarMobile = (props) => {
-  const [loggedin, setLoggedIn] = useState(false);
+  useEffect(() => {
+    props.setLoginStatus();
+  }, []);
+  console.log(props.loginStatus);
+
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="container-fluid">
@@ -29,7 +40,7 @@ const NavbarMobile = (props) => {
         </div>
       </div>
 
-      {loggedin ? (
+      {props.loginStatus ? (
         <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
@@ -46,7 +57,8 @@ const NavbarMobile = (props) => {
                 <a href="/#">Daftar Jual</a>
               </li>
               <li className="list-group-item">
-                <a href="/#">Akun Saya</a>
+                <Link to={"/akun-saya"}>Akun Saya</Link>
+                {/* <a href="/akun-saya">Akun Saya</a> */}
               </li>
             </ul>
           </div>
@@ -60,12 +72,12 @@ const NavbarMobile = (props) => {
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body ">
-            <button type="button" className="btn button_login" onClick={(e) => setLoggedIn(true)}>
+            <a href="/auth/login" type="button" className="btn button_login">
               <span className="me-2">
                 <i className="bi bi-box-arrow-in-right"></i>
               </span>
               Masuk
-            </button>
+            </a>
           </div>
         </div>
       )}
@@ -73,4 +85,16 @@ const NavbarMobile = (props) => {
   );
 };
 
-export default NavbarMobile;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarMobile);

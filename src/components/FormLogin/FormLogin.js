@@ -1,24 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import authService from "../../services/auth.service";
-// import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import loginImage from "../../img/loginsecondhand.png";
 import "./FormLogin.css";
+import setLoginStatus from "../../redux/actions/setLoginStatus";
 
-const FormLogin = () => {
+const FormLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
-  // const navigate = useNavigate();
+  // console.log("token ada", props.loginStatus);
+
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // console.log(user.access_token, user.refresh_token);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    props.setLoginStatus();
+    console.log(props.loginStatus);
+  }, []);
+  if (props.loginStatus === true) {
+    navigate("/homepage", { replace: true });
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await authService.loginUser(email, password).then(() => {
-        // navigate("/product/product-detail");
+        // props.setLoginStatus();
+        setError(false);
+
+        navigate("/homepage");
         // window.location.reload();
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      setError(true);
     }
   };
 
@@ -29,13 +49,19 @@ const FormLogin = () => {
           <div className="d-none d-sm-flex col-sm-6 p-0">
             <img src={loginImage} className="img-fluid bg_login" alt="login_image" />
           </div>
-
           <div className="col-sm-6 my-auto p-md-5">
+            {error ? (
+              <div className="alert alert-danger" role="alert">
+                Email atau Password yang kamu masukkan salah!
+              </div>
+            ) : null}
+
             <div className="back_icon">
               <a href="/#">
                 <i className="bi bi-arrow-left"></i>
               </a>
             </div>
+
             <h3 className="mb-4 fw-bold">Masuk</h3>
             <form onSubmit={handleLogin}>
               <div className="mb-3">
@@ -68,4 +94,16 @@ const FormLogin = () => {
   );
 };
 
-export default FormLogin;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);

@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import setLoginStatus from "../../redux/actions/setLoginStatus";
+import authService from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
+
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
-const NavbarDesktop = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+const NavbarDesktop = (props) => {
+  useEffect(() => {
+    props.setLoginStatus();
+  }, []);
+  console.log(props.loginStatus);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    authService.logout();
+    navigate("/auth/login");
+  };
+
   return (
     <div>
       <div className="container">
@@ -23,7 +38,7 @@ const NavbarDesktop = () => {
             </div>
           </div>
 
-          {loggedIn ? (
+          {props.loginStatus ? (
             <div className="col-3">
               <div className="btn-group drop_menu">
                 <button type="button" className="btn mt-3 dropdown-toggle menu_user" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +54,11 @@ const NavbarDesktop = () => {
                   <li>
                     <a className="dropdown-item px-4" href="/#">
                       <Notifikasi />
+                    </a>
+                    <a className="dropdown-item px-4" href="/#">
                       <Notifikasi />
+                    </a>
+                    <a className="dropdown-item px-4" href="/#">
                       <Notifikasi />
                     </a>
                   </li>
@@ -63,21 +82,21 @@ const NavbarDesktop = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/#">
+                    <button className="dropdown-item" onClick={handleLogout}>
                       Keluar
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>
             </div>
           ) : (
             <div className="col-3">
-              <button type="button" className="btn button_login mt-3" onClick={(e) => setLoggedIn(true)}>
+              <a type="button" className="btn button_login mt-3" href="/auth/login">
                 <span className="me-2">
                   <i className="bi bi-box-arrow-in-right"></i>
                 </span>
                 Masuk
-              </button>
+              </a>
             </div>
           )}
         </div>
@@ -86,4 +105,16 @@ const NavbarDesktop = () => {
   );
 };
 
-export default NavbarDesktop;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarDesktop);
