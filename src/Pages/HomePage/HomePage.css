@@ -1,4 +1,13 @@
 
+.homepage{
+  width: 1024px;
+  height: 100vh;
+ 
+}
+
+.Navbar{
+  text-align: center;
+}
 
 .swiper-konten {
   padding-top: 20px;
@@ -8,22 +17,40 @@
   width: 75%;
 }
 
-/* .kategori-search {
-  border-radius: 12px;
-  border: 1px solid;
-} */
-
-
-.group_input .form-control_Custom {
-  border-bottom-right-radius: 12px;
-  border-top-right-radius: 12px;
+.section1{
+  width: 100%;
+  height: 300px;
+  margin-top: 50px;
+  text-align: center;
 }
 
-.group_input .search-btn {
-  border-bottom-left-radius: 12px;
-  border-top-left-radius: 12px;
+.section2{
+  width: 100%;
+}
+.button-homepage{
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.konten{
+  width: 100%;
+  padding-right: 50px;
 }
 
-.konten {
-  margin-left: 10px;
+
+@media only screen and (max-width: 520px){
+  .button-homepage{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 700px;
+    overflow: scroll;
+
+  }
+  .konten{  
+    padding-right: 90px;
+  }
+
+  .swiper-konten img {
+    width: 400px;
+  }
+  
 }

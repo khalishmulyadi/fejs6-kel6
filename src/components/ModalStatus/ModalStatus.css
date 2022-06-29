@@ -57,16 +57,51 @@
 
 }
 
+.label-modalstatus {
+    margin-left: 1rem;
+
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #151515;
+}
+
 .desc-and-status-modalstatus {
     display: flex;
     flex-direction: row;
     padding-left: 0.8rem;
+    margin-left: 1rem;
+
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #8A8A8A;
 }
 
 .container-btn-modalstatus {
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
+}
+
+.btn-modalstatus-false{
+    height: 2.5rem;
+    border-radius: 1rem;
+    background-color: #8A8A8A;
+    border: none;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
 }
 
 .btn-modalstatus {
@@ -84,7 +119,7 @@
 
 }
 
-.btn-modalstatus:hover{
+.btn-modalstatus:hover {
     background-color: #FFFFFF;
     color: #000000;
     border: 1px solid #7126B5;

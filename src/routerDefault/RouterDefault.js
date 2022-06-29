@@ -1,32 +1,49 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CardProduct from "../components/CardProduct/CardProduct";
-import DetailProduk from "../components/DetailProduk/DetailProduk";
-import FormLogin from "../components/FormLogin/FormLogin";
-import { ModalDefault } from "../components/Modal/ModalDefault";
 import { InfoProduct } from "../Pages/InfoProduct/InfoProduct";
-
 import { InfoProfil } from "../components/InfoProfil/InfoProfil";
 
 import Tambah from "../components/TambahProduk/Tambah";
 import HomePage from "../Pages/HomePage/HomePage";
 
+import NotifPageMobile from "../components/NotifPageMobile/NotifPageMobile";
+import AkunSayaMobile from "../components/AkunSayaMobile/AkunSayaMobile";
+import DetailProduct from "../Pages/DetailProduct/DetailProduct";
+import PreviewProduct from "../Pages/PreviewProduct/PreviewProduct";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
+import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
+import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const RouterDefault = () => {
   return (
-    <Routes>
-      <Route path="/" element={<FormLogin/>}/>
-      <Route path="product/product-detail" element={<DetailProduk role="customer" />} />
-      <Route path="product/product-preview" element={<DetailProduk role="merchant" />} />
-      <Route path="product-card" element={<CardProduct />} />
-      <Route path="homepage" element={<HomePage />} />
-      <Route path="infoproduct" element={<InfoProduct/>} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="auth/login" element={<LoginPage />} />
+        <Route path="auth/registrasi" element={<RegistrationPage />} />
+        <Route path="/" element={<HomePage />} />
 
-      <Route path="infoprofil" element={<InfoProfil />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="homepage" element={<HomePage />} />
+          <Route path="product/product-detail" element={<DetailProduct />} />
+          <Route path="product/product-preview" element={<PreviewProduct />} />
+          <Route path="infoproduct" element={<InfoProduct />} />
 
-      <Route path="tambah-product" element={<Tambah />} />
-        
-    </Routes>
+          <Route path="edit-profile" element={<InfoProfil />} />
+
+          <Route path="tambah-product" element={<Tambah />} />
+
+          <Route path="notifikasi" element={<NotifPageMobile />} />
+          <Route path="akun-saya" element={<AkunSayaMobile />} />
+
+          <Route path="daftar-jual" element={<DaftarJualSaya />} />
+          <Route path="daftar-beli" element={<DaftarBeliSaya />} />
+        </Route>
+        <Route path="product-card" element={<CardProduct />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

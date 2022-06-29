@@ -63,3 +63,8 @@
 .dropdown-toggle.profile_user::after {
   content: none;
 }
+
+.drop_notif ul {
+  width: max-content;
+  border-radius: 16px;
+}

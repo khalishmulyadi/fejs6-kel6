@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import setLoginStatus from "../../redux/actions/setLoginStatus";
+import { useNavigate } from "react-router-dom";
+
 import "./NavbarDefault.css";
-const NavbarMobile = () => {
-  const [loggedin, setLoggedIn] = useState(true);
+const NavbarMobile = (props) => {
+  useEffect(() => {
+    props.setLoginStatus();
+  }, []);
+  console.log(props.loginStatus);
+
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="container-fluid">
@@ -12,21 +23,24 @@ const NavbarMobile = () => {
             </button>
           </div>
           <div className="col-8">
-            <div className="container-fluid">
-              <form className="d-flex">
+            {/*<div className="container-fluid">
+               <form className="d-flex">
                 <div className="input-group search_bar mt-2">
                   <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
                   <button className="btn search_button" id="button-addon2" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
                 </div>
-              </form>
+              </form> 
+            </div>*/}
+            <div>
+              <h3 className="mt-3">{props.title}</h3>
             </div>
           </div>
         </div>
       </div>
 
-      {loggedin ? (
+      {props.loginStatus ? (
         <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
@@ -43,13 +57,14 @@ const NavbarMobile = () => {
                 <a href="/#">Daftar Jual</a>
               </li>
               <li className="list-group-item">
-                <a href="/#">Akun Saya</a>
+                <Link to={"/akun-saya"}>Akun Saya</Link>
+                {/* <a href="/akun-saya">Akun Saya</a> */}
               </li>
             </ul>
           </div>
         </div>
       ) : (
-        <div className="offcanvas offcanvas-start navbar_mobile" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+        <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
               AsiX
@@ -57,12 +72,12 @@ const NavbarMobile = () => {
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body ">
-            <button type="button" className="btn button_login">
+            <a href="/auth/login" type="button" className="btn button_login">
               <span className="me-2">
                 <i className="bi bi-box-arrow-in-right"></i>
               </span>
               Masuk
-            </button>
+            </a>
           </div>
         </div>
       )}
@@ -70,4 +85,16 @@ const NavbarMobile = () => {
   );
 };
 
-export default NavbarMobile;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarMobile);

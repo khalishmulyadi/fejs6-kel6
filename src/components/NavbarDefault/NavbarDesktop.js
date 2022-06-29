@@ -1,7 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import setLoginStatus from "../../redux/actions/setLoginStatus";
+import authService from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
-const NavbarDesktop = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+import Notifikasi from "../Nofitikasi/Notifikasi";
+
+const NavbarDesktop = (props) => {
+  useEffect(() => {
+    props.setLoginStatus();
+  }, []);
+  console.log(props.loginStatus);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    authService.logout();
+    navigate("/auth/login");
+  };
+
   return (
     <div>
       <div className="container">
@@ -22,52 +38,35 @@ const NavbarDesktop = () => {
             </div>
           </div>
 
-          {loggedIn ? (
+          {props.loginStatus ? (
             <div className="col-3">
               <div className="btn-group drop_menu">
                 <button type="button" className="btn mt-3 dropdown-toggle menu_user" data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="bi bi-list-ul"></i>
                 </button>
-
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
-                    </a>
-                  </li>
-                </ul>
               </div>
 
               <div className="btn-group drop_notif">
                 <button type="button" className="btn mt-3 dropdown-toggle notifikasi_user" data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="bi bi-bell"></i>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end">
+                <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
+                    <a className="dropdown-item px-4" href="/#">
+                      <Notifikasi />
+                    </a>
+                    <a className="dropdown-item px-4" href="/#">
+                      <Notifikasi />
+                    </a>
+                    <a className="dropdown-item px-4" href="/#">
+                      <Notifikasi />
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a className="dropdown-item" href="/#">
-                      Menu item
+                      <Notifikasi />
                     </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
-                    </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 
@@ -76,33 +75,28 @@ const NavbarDesktop = () => {
                   <i className="bi bi-person"></i>
                 </button>
 
-                <ul class="dropdown-menu dropdown-menu-end">
+                <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
+                    <a className="dropdown-item" href="/edit-profile">
+                      Ubah Akun
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/#">
-                      Menu item
-                    </a>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      Keluar
+                    </button>
                   </li>
                 </ul>
               </div>
             </div>
           ) : (
             <div className="col-3">
-              <button type="button" className="btn button_login mt-3">
+              <a type="button" className="btn button_login mt-3" href="/auth/login">
                 <span className="me-2">
                   <i className="bi bi-box-arrow-in-right"></i>
                 </span>
                 Masuk
-              </button>
+              </a>
             </div>
           )}
         </div>
@@ -111,4 +105,16 @@ const NavbarDesktop = () => {
   );
 };
 
-export default NavbarDesktop;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarDesktop);
