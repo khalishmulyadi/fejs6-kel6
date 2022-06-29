@@ -15,6 +15,7 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const RouterDefault = () => {
   return (
@@ -22,23 +23,25 @@ const RouterDefault = () => {
       <Routes>
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/registrasi" element={<RegistrationPage />} />
-        <Route path="product/product-detail" element={<DetailProduct />} />
-        <Route path="product/product-preview" element={<PreviewProduct />} />
+        <Route path="/" element={<HomePage />} />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="homepage" element={<HomePage />} />
+          <Route path="product/product-detail" element={<DetailProduct />} />
+          <Route path="product/product-preview" element={<PreviewProduct />} />
+          <Route path="infoproduct" element={<InfoProduct />} />
+
+          <Route path="edit-profile" element={<InfoProfil />} />
+
+          <Route path="tambah-product" element={<Tambah />} />
+
+          <Route path="notifikasi" element={<NotifPageMobile />} />
+          <Route path="akun-saya" element={<AkunSayaMobile />} />
+
+          <Route path="daftar-jual" element={<DaftarJualSaya />} />
+          <Route path="daftar-beli" element={<DaftarBeliSaya />} />
+        </Route>
         <Route path="product-card" element={<CardProduct />} />
-    
-      <Route path="homepage" element={<HomePage />} />
-    
-        <Route path="infoproduct" element={<InfoProduct />} />
-
-        <Route path="edit-profile" element={<InfoProfil />} />
-
-        <Route path="tambah-product" element={<Tambah />} />
-
-        <Route path="notifikasi" element={<NotifPageMobile />} />
-        <Route path="akun-saya" element={<AkunSayaMobile />} />
-
-        <Route path="daftar-jual" element={<DaftarJualSaya />} />
-        <Route path="daftar-beli" element={<DaftarBeliSaya />} />
       </Routes>
     </BrowserRouter>
   );

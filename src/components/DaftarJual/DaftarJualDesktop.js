@@ -64,11 +64,11 @@ const DaftarJualDesktop = (role) => {
   };
 
   const handleContentCard = () => {
-    if (first == 1) {
+    if (first === 1) {
       return carDefault();
-    } else if (first == 2) {
+    } else if (first === 2) {
       return carDefaultdua();
-    } else if (first == 3) {
+    } else if (first === 3) {
       return carDefaulttiga();
     }
   };

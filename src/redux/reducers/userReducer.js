@@ -1,4 +1,4 @@
-import { GET_USER_DETAIL, GET_USER_ROLE } from "../actions/types";
+import { GET_USER_DETAIL, GET_USER_ROLE, SET_LOGIN_STATUS } from "../actions/types";
 
 // inisialisasi nilai awal dari state
 const initialState = {
@@ -16,13 +16,16 @@ const userReducer = (state = initialState, action) => {
         ...state,
         dataUser: action.payload,
       };
-      break;
     case GET_USER_ROLE:
       return {
         ...state,
         role: action.payload,
       };
-      break;
+    case SET_LOGIN_STATUS:
+      return {
+        ...state,
+        isLoggedIn: action.loginStatus,
+      };
 
     default:
       return state;
