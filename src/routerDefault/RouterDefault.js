@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CardProduct from "../components/CardProduct/CardProduct";
 import { InfoProduct } from "../Pages/InfoProduct/InfoProduct";
-import { InfoProfil } from "../components/InfoProfil/InfoProfil";
 
 import Tambah from "../components/TambahProduk/Tambah";
 import HomePage from "../Pages/HomePage/HomePage";
 
+import UpdateProfilePage from "../Pages/UpdateProfilePage/UpdateProfilePage";
 import NotifPageMobile from "../components/NotifPageMobile/NotifPageMobile";
 import AkunSayaMobile from "../components/AkunSayaMobile/AkunSayaMobile";
 import DetailProduct from "../Pages/DetailProduct/DetailProduct";
@@ -31,7 +31,7 @@ const RouterDefault = () => {
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
 
-          <Route path="edit-profile" element={<InfoProfil />} />
+          <Route path="update-profile" element={<UpdateProfilePage />} />
 
           <Route path="tambah-product" element={<Tambah />} />
 

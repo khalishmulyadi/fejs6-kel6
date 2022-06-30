@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import userReducer from "./userReducer";
-import previewReducer from "./previewReducer";
+import productReducer from "./productReducer";
 
 // menggabungkan berbagai reducer
 export default combineReducers({
-  userReducer : userReducer,
-  previewReducer : previewReducer,
+  userReducer: userReducer,
+  productReducer: productReducer,
 });
