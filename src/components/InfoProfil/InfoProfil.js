@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../img/Rectangle 127.png";
 import upFoto from "../../img/upFoto.png";
+
+// redux
+import { connect } from "react-redux";
+import getUserDetail from "../../redux/actions/getUserDetail";
+// css
 import "./infoprofil.css";
 
-export const InfoProfil = () => {
+const InfoProfil = (props) => {
+  useEffect(() => {
+    props.getUserDetail();
+  }, []);
+
   return (
     <div className="infoProfil">
       <div className="container-fluid">
@@ -22,49 +31,51 @@ export const InfoProfil = () => {
 
         <form className="form_edit_profile">
           <div className="upFoto">
-            <label for="customFile" className="customFile">
+            <label htmlFor="customFile" className="customFile">
               <a href="/#">
                 <img src={upFoto} alt="upload" />
               </a>
             </label>
 
-            <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" id="customFile" hidden />
+            <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" id="customFile" hidden required />
           </div>
 
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               Nama*
             </label>
-            <input class="form-control form-control-lg" type="text" placeholder="Nama" aria-label=".form-control-lg example" />
+            <input className="form-control form-control-lg" type="text" placeholder="Nama" aria-label=".form-control-lg example" required />
           </div>
 
           <div className="mb-3">
-            <label for="exampleInputPassword1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Kota*
             </label>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            {/* <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option selected>Pilih Kota</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
-            </select>
+            </select> */}
+
+            <input className="form-control form-control-lg" type="text" placeholder="Kota" aria-label=".form-control-lg example" required />
           </div>
 
           <div className="mb-3">
-            <label for="inputState" class="form-label">
+            <label htmlFor="inputState" className="form-label">
               Alamat*
             </label>
-            <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" Style="height: 100px"></textarea>
-              <label for="floatingTextarea2">Contoh: Jalan Ikan Hiu 33</label>
+            <div className="form-floating">
+              <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }} required></textarea>
+              <label htmlFor="floatingTextarea2">Contoh: Jalan Ikan Hiu 33</label>
             </div>
           </div>
 
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               No Handphone*
             </label>
-            <input class="form-control form-control-lg" type="text" name="Phone Number" pattern="[7-9]{1}[0-9]{9}" placeholder="contoh: +628123456789" aria-label=".form-control-lg example" />
+            <input className="form-control form-control-lg" type="text" name="Phone Number" pattern="[7-9]{1}[0-9]{9}" placeholder="contoh: +628123456789" aria-label=".form-control-lg example" required />
           </div>
 
           <button type="submit" className="btnsimpan">
@@ -75,3 +86,18 @@ export const InfoProfil = () => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    dataUser: state.userReducer.dataUser,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // setLoginStatus: () => dispatch(setLoginStatus()),
+    getUserDetail: () => dispatch(getUserDetail()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoProfil);

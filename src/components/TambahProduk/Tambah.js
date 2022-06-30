@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import getProductPreview from "../../redux/actions/getProductPreview";
+
 import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
 
-const Tambah = () => {
+const Tambah = (props) => {
   const [Gambar, setGambar] = useState(null);
   const [PrevGambar, setPrevGambar] = useState(null);
   const [NamaProduk, setNamaProduk] = useState("");
@@ -10,7 +13,7 @@ const Tambah = () => {
   const [Kategori, setKategori] = useState("");
   const [Harga, setHarga] = useState("");
   const [Deskripsi, setDeskripsi] = useState("");
-  const [StatusProduk, setStatusProduk] = useState("tersedia")
+  const [StatusProduk, setStatusProduk] = useState("tersedia");
 
   const choosePicture = (e) => {
     // mengecek adakah file apa tidak
@@ -28,7 +31,21 @@ const Tambah = () => {
     }
   };
 
-  // const handlePreview = (e) => {
+  const dataProductPreview = {
+    namaProduk: NamaProduk,
+    seriProduk: SeriProduk,
+    hargaProduk: Harga,
+    kategoriProduk: Kategori,
+    deskripsiProduk: Deskripsi,
+    gambarProduk: Gambar,
+  };
+
+  const handlePreview = (e) => {
+    e.preventDefault();
+    props.getProductPreview(dataProductPreview);
+  };
+
+  // const handleSubmit = (e) => {
   //   var axios = require("axios");
   //   var FormData = require("form-data");
   //   var data = new FormData();
@@ -42,7 +59,7 @@ const Tambah = () => {
 
   //   var config = {
   //     method: "post",
-  //     url: 
+  //     url:
   //     // headers: {
   //     //   ...data.getHeaders(),
   //     // },
@@ -58,10 +75,10 @@ const Tambah = () => {
   //     });
   // };
 
-
-
   return (
     <div>
+      {console.log("ini data redux", props.dataProduk)}
+      {console.log("ini data yg dikirim", dataProductPreview)}
       <div className="container">
         <div className="tambah-produk mx-auto">
           <div className="back_icon2">
@@ -77,50 +94,28 @@ const Tambah = () => {
               <label for="exampleFormControlInput1" className="customFile">
                 Nama Produk
               </label>
-              <input
-                className="form-control form1_custom"
-                placeholder="Nama Produk"
-                type="text"
-                id="exampleFormControlInput1"
-                onChange={(e) => setNamaProduk(e.target.value)}
-              />
+              <input className="form-control form1_custom" placeholder="Nama Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
               <label for="exampleFormControlInput1" className="customFile">
                 Seri Produk
               </label>
-              <input
-                className="form-control form1_custom"
-                placeholder="Seri Produk"
-                type="text"
-                id="exampleFormControlInput1"
-                onChange={(e) => setSeriProduk(e.target.value)}
-              />
+              <input className="form-control form1_custom" placeholder="Seri Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setSeriProduk(e.target.value)} />
             </div>
 
             <div className="mb-3">
               <label for="exampleFormControlInput1" className="customFile">
                 Harga
               </label>
-              <input
-                className="form-control form1_custom"
-                type="number"
-                id="exampleFormControlInput1"
-                placeholder="Rp 0,00"
-                onChange={(e) => setHarga(e.target.value)}
-              />
+              <input className="form-control form1_custom" type="number" id="exampleFormControlInput1" placeholder="Rp 0,00" onChange={(e) => setHarga(e.target.value)} />
             </div>
 
             <div className="mb-3">
               <label for="exampleFormControlInput1" className="customFile">
                 Kategori
               </label>
-              <select
-                aria-label="Default select example"
-                className="form-select form1_custom"
-                onChange={(e) => setKategori(e.target.value)}
-              >
+              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)}>
                 <option selected>Pilih Kategori</option>
                 <option value="gitar">Gitar</option>
                 <option value="acsesoris">Acsesoris</option>
@@ -131,13 +126,7 @@ const Tambah = () => {
               <label for="exampleFormControlTextarea1" className="customFile">
                 Deskripsi
               </label>
-              <textarea
-                className="form-control form-desc_custom"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                placeholder="Masukkan Deskripsi Produk"
-                onChange={(e) => setDeskripsi(e.target.value)}
-              ></textarea>
+              <textarea className="form-control form-desc_custom" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan Deskripsi Produk" onChange={(e) => setDeskripsi(e.target.value)}></textarea>
             </div>
 
             <div className="upload">
@@ -148,24 +137,17 @@ const Tambah = () => {
                 </a>
               </label>
 
-              <input
-                type="file"
-                name="customFile"
-                accept="image/png , image/jpeg, image/webp"
-                id="customFile"
-                hidden
-                onChange={choosePicture}
-              />
+              <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" id="customFile" hidden onChange={choosePicture} />
               {/* {selectedImages &&
                 selectedImages.map((image, index) => {
                   return (
                     <img src={image} className="prevgambar" alt="upload" />
                   );
                 })} */}
-                {PrevGambar != null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar"/>}
+              {PrevGambar != null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar" />}
             </div>
             <div className="button_cover">
-              <button type="submit" name="button_cover" className="preview">
+              <button type="submit" name="button_cover" className="preview" onClick={handlePreview}>
                 Preview
               </button>
               <button type="submit" name="button_cover" className="terbitkan">
@@ -179,4 +161,17 @@ const Tambah = () => {
   );
 };
 
-export default Tambah;
+const mapStateToProps = (state) => {
+  return {
+    idProduk: state.productReducer.idProduk,
+    dataProduk: state.productReducer.dataProduk,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProductPreview: (dataProductPreview) => dispatch(getProductPreview(dataProductPreview)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tambah);
