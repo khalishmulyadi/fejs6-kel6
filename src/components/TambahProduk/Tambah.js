@@ -3,18 +3,62 @@ import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
 
 const Tambah = () => {
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [Gambar, setGambar] = useState(null);
+  const [PrevGambar, setPrevGambar] = useState(null);
+  const [NamaProduk, setNamaProduk] = useState("");
+  const [SeriProduk, setSeriProduk] = useState("");
+  const [Kategori, setKategori] = useState("");
+  const [Harga, setHarga] = useState("");
+  const [Deskripsi, setDeskripsi] = useState("");
+  const [StatusProduk, setStatusProduk] = useState("tersedia")
 
-  const onSelectFile = (event) => {
-    const selectedFiles = event.target.files;
-    const selectedFilesArray = Array.from(selectedFiles);
-
-    const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-
-    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+  const choosePicture = (e) => {
+    // mengecek adakah file apa tidak
+    if (e.target.files[0]) {
+      // set file yang sudah ada kesalam use State
+      setGambar(e.target.files[0]);
+      //  inisiai untuk merender data file yang sudah di upload
+      const reader = new FileReader();
+      // melakukan proses render dan di simpan dalam value
+      reader.addEventListener("load", () => {
+        setPrevGambar(reader.result);
+      });
+      // melakuan render berdasrakan image yang di pilih
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
+
+  // const handlePreview = (e) => {
+  //   var axios = require("axios");
+  //   var FormData = require("form-data");
+  //   var data = new FormData();
+  //   data.append("merk", NamaProduk);
+  //   data.append("seri", SeriProduk );
+  //   data.append("tipeBarang", Kategori);
+  //   data.append("hargaBarang", Harga);
+  //   data.append("deskripsi", Deskripsi);
+  //   data.append("Status", true);
+  //   data.append("barangImg", Gambar);
+
+  //   var config = {
+  //     method: "post",
+  //     url: 
+  //     // headers: {
+  //     //   ...data.getHeaders(),
+  //     // },
+  //     data: data,
+  //   };
+
+  //   axios(config)
+  //     .then(function (response) {
+  //       console.log(JSON.stringify(response.data));
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
+
+
 
   return (
     <div>
@@ -38,6 +82,20 @@ const Tambah = () => {
                 placeholder="Nama Produk"
                 type="text"
                 id="exampleFormControlInput1"
+                onChange={(e) => setNamaProduk(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3 align-items-center mx-auto">
+              <label for="exampleFormControlInput1" className="customFile">
+                Seri Produk
+              </label>
+              <input
+                className="form-control form1_custom"
+                placeholder="Seri Produk"
+                type="text"
+                id="exampleFormControlInput1"
+                onChange={(e) => setSeriProduk(e.target.value)}
               />
             </div>
 
@@ -50,6 +108,7 @@ const Tambah = () => {
                 type="number"
                 id="exampleFormControlInput1"
                 placeholder="Rp 0,00"
+                onChange={(e) => setHarga(e.target.value)}
               />
             </div>
 
@@ -60,6 +119,7 @@ const Tambah = () => {
               <select
                 aria-label="Default select example"
                 className="form-select form1_custom"
+                onChange={(e) => setKategori(e.target.value)}
               >
                 <option selected>Pilih Kategori</option>
                 <option value="gitar">Gitar</option>
@@ -76,6 +136,7 @@ const Tambah = () => {
                 id="exampleFormControlTextarea1"
                 rows="3"
                 placeholder="Masukkan Deskripsi Produk"
+                onChange={(e) => setDeskripsi(e.target.value)}
               ></textarea>
             </div>
 
@@ -93,14 +154,15 @@ const Tambah = () => {
                 accept="image/png , image/jpeg, image/webp"
                 id="customFile"
                 hidden
-                onChange={onSelectFile}
+                onChange={choosePicture}
               />
-              {selectedImages &&
+              {/* {selectedImages &&
                 selectedImages.map((image, index) => {
                   return (
                     <img src={image} className="prevgambar" alt="upload" />
                   );
-                })}
+                })} */}
+                {PrevGambar != null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar"/>}
             </div>
             <div className="button_cover">
               <button type="submit" name="button_cover" className="preview">

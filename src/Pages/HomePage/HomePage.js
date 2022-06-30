@@ -19,7 +19,7 @@ const HomePage = () => {
         
   return (
     <div className="container">
-    <div className="nav-custom mx-auto">
+    <div className="nav-custom">
       <NavbarDefault />
     </div>
     <div className="container swiper-konten">
