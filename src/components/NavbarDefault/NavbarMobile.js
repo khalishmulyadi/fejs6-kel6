@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import { useNavigate } from "react-router-dom";
 
@@ -57,8 +56,7 @@ const NavbarMobile = (props) => {
                 <a href="/#">Daftar Jual</a>
               </li>
               <li className="list-group-item">
-                <Link to={"/akun-saya"}>Akun Saya</Link>
-                {/* <a href="/akun-saya">Akun Saya</a> */}
+                <a href="/akun-saya">Akun Saya</a>
               </li>
             </ul>
           </div>

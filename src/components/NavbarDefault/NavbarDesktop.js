@@ -77,7 +77,7 @@ const NavbarDesktop = (props) => {
 
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <a className="dropdown-item" href="/edit-profile">
+                    <a className="dropdown-item" href="/update-profile">
                       Ubah Akun
                     </a>
                   </li>

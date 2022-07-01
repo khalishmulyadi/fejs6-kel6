@@ -77,8 +77,8 @@ const Tambah = (props) => {
 
   return (
     <div>
-      {console.log("ini data redux", props.dataProduk)}
-      {console.log("ini data yg dikirim", dataProductPreview)}
+      {/* {console.log("ini data redux", props.dataProduk)} */}
+      {/* {console.log("ini data yg dikirim", dataProductPreview)} */}
       <div className="container">
         <div className="tambah-produk mx-auto">
           <div className="back_icon2">
