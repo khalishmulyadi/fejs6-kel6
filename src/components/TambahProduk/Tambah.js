@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
+import getPreviewProduct from "../../redux/actions/getPreviewProduct";
 
-const Tambah = () => {
+const Tambah = (props) => {
   const [Gambar, setGambar] = useState(null);
   const [PrevGambar, setPrevGambar] = useState(null);
   const [NamaProduk, setNamaProduk] = useState("");
@@ -28,6 +30,24 @@ const Tambah = () => {
     }
   };
 
+
+
+  
+    const dataProductPreview = {
+      namaProduk : NamaProduk,
+      seriProduk : SeriProduk,
+      kategoriProduk : Kategori,
+      hargaProduk : Harga,
+      deskripsiProduk : Deskripsi,
+      fotoProduk : Gambar
+    };
+
+
+  const handlePreview = (e)=> {
+    e.preventDefault ()
+    props.getPreviewProduct(dataProductPreview);
+  };
+
   // const handlePreview = (e) => {
   //   var axios = require("axios");
   //   var FormData = require("form-data");
@@ -46,18 +66,7 @@ const Tambah = () => {
   //     // headers: {
   //     //   ...data.getHeaders(),
   //     // },
-  //     data: data,
-  //   };
-
-  //   axios(config)
-  //     .then(function (response) {
-  //       console.log(JSON.stringify(response.data));
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-
+  
 
 
   return (
@@ -165,7 +174,7 @@ const Tambah = () => {
                 {PrevGambar != null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar"/>}
             </div>
             <div className="button_cover">
-              <button type="submit" name="button_cover" className="preview">
+              <button type="submit" name="button_cover" className="preview" onClick={handlePreview}>
                 Preview
               </button>
               <button type="submit" name="button_cover" className="terbitkan">
@@ -179,4 +188,16 @@ const Tambah = () => {
   );
 };
 
-export default Tambah;
+const mapStateToProps = (state) => {
+  return {
+    dataProdukPreview: state.previewReducer.dataProduct,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPreviewProduct: () => dispatch(getPreviewProduct()),
+  };
+};
+
+export default connect (mapStateToProps, mapDispatchToProps)(Tambah);
