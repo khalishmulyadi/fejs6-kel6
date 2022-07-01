@@ -4,7 +4,7 @@ import { GET_USER_DETAIL, GET_USER_ROLE, SET_LOGIN_STATUS } from "../actions/typ
 const initialState = {
   idUser: null,
   dataUser: [],
-  role: null,
+  role: [],
   isLoggedIn: false,
 };
 
@@ -14,12 +14,13 @@ const userReducer = (state = initialState, action) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        dataUser: action.payload,
+        dataUser: action.userDetail,
+        idUser: action.userDetail.userId,
       };
     case GET_USER_ROLE:
       return {
         ...state,
-        role: action.payload,
+        role: action.userRole,
       };
     case SET_LOGIN_STATUS:
       return {
