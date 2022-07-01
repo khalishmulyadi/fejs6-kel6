@@ -14,7 +14,7 @@ export const FormRegistrasi = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    var data = JSON.stringify({
+    var data = JSON.stringify({ 
       "nama": Name,
       "email": Email,
       "password": Password

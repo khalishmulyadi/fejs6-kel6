@@ -52,10 +52,27 @@ const HomePage = () => {
   }
 
   return (
-    <div className="container homepage">
-      <div className="Navbar">
-        <NavbarDefault />
-      </div>
+
+    <div className="container">
+    <div className="nav-custom">
+      <NavbarDefault />
+    </div>
+    <div className="container swiper-konten">
+      <React.Fragment>
+        <Swiper 
+        id="main"
+        preloadImages
+        slidesPerView={1}
+        spaceBetween
+        grabCursor
+        mousewheel
+        centeredSlides
+        >
+          {slides}
+        </Swiper>
+      </React.Fragment>
+    </div>
+
 
       <div className="container section1">
         <div className="swiper-konten">

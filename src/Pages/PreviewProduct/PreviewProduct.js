@@ -1,12 +1,17 @@
 import React from "react";
-import DetailProduk from "../../components/DetailProduk/DetailProduk";
+import DetailPreview from "../../components/DetailProduk/DetailPreview";
+// import DetailProduk from "../../components/DetailProduk/DetailProduk";
 
 const PreviewProduct = () => {
+
   return (
     <div>
-      <DetailProduk role="merchant" />
+      <DetailPreview />
     </div>
   );
 };
+
+
+
 
 export default PreviewProduct;

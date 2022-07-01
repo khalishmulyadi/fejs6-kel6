@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MediaQuery from "react-responsive";
-import axios from "axios";
+// import axios from "axios";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import setLoginStatus from "../../redux/actions/setLoginStatus";
+// import setLoginStatus from "../../redux/actions/setLoginStatus";
+import getUserDetail from "../../redux/actions/getUserDetail";
 import authService from "../../services/auth.service";
 
 // css
@@ -13,53 +14,16 @@ import "./AkunSayaMobile.css";
 import defaultPP from "../../img/upFoto.png";
 
 const AkunSayaMobile = (props) => {
-  const [userData, setUserData] = useState([]);
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
     authService.logout();
     navigate("/auth/login");
   };
-  // useEffect(() => {
-  //   props.setLoginStatus();
-  //   if (props.loginStatus === false) {
-  //     navigate("/auth/login");
-  //   }
-  // }, []);
 
   useEffect(() => {
-    // const checkLoginStatus = async () => {
-    //   await props.setLoginStatus();
-    //   if (props.loginStatus === false) {
-    //     navigate("/auth/login");
-    //   }
-    // };
-    // checkLoginStatus().catch(console.error);
-    // if (props.loginStatus === true) {
-    const emailUser = JSON.parse(localStorage.getItem("email"));
-    const tokenUser = JSON.parse(localStorage.getItem("user"));
-    console.log(emailUser, tokenUser.access_token);
-    var config = {
-      method: "get",
-      url: `https://asix-store.herokuapp.com/user/display/${emailUser}`,
-      headers: {
-        Authorization: `Bearer ${tokenUser.access_token}`,
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setUserData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-        console.log(error.response.data);
-      });
-    // }
+    props.getUserDetail();
   }, []);
-
   return (
     <div className="mx-3">
       <MediaQuery maxWidth={576}>
@@ -69,8 +33,8 @@ const AkunSayaMobile = (props) => {
 
         {/* foto profil start */}
         <div className="container my-5">
-          {userData.img ? <img src={userData.img} className="foto_profil d-flex mx-auto" alt="foto_penjual" /> : <img src={defaultPP} className="foto_profil d-flex mx-auto" alt="foto_penjual" />}
-          <h3 className="text-center mt-2">{userData.nama}</h3>
+          {props.dataUser.img ? <img src={`data:image/jpeg;base64,${props.dataUser.img}`} className="foto_profil d-flex mx-auto" alt="foto_penjual" /> : <img src={defaultPP} className="foto_profil d-flex mx-auto" alt="foto_penjual" />}
+          <h3 className="text-center mt-2">{props.dataUser.nama}</h3>
         </div>
         {/* foto profil end */}
 
@@ -139,15 +103,17 @@ const AkunSayaMobile = (props) => {
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
-    loginStatus: state.userReducer.isLoggedIn,
+    dataUser: state.userReducer.dataUser,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setLoginStatus: () => dispatch(setLoginStatus()),
+    // setLoginStatus: () => dispatch(setLoginStatus()),
+    getUserDetail: () => dispatch(getUserDetail()),
   };
 };
 
