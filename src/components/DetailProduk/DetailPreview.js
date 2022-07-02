@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import productImage from "../../img/loginsecondhand.png";
 import penjualImage from "../../img/img_photo3.jpg";
 import "./DetailProduk.css";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
+import { connect } from "react-redux";
+import getProductPreview from "../../redux/actions/getProductPreview";
 
 const DetailProduk = (props) => {
   const [menawar, setMenawar] = useState(false);
   const [alertTawar, setAlertTawar] = useState(false);
   const [hargaTawar, setHargaTawar] = useState(0);
 
+  // useEffect(() => {
+  //   props.getProductPreview();
+  // }, []);
+
+  const detailBarang = props.dataProduk;
 
   const handleTawar = (e) => {
     e.preventDefault();
@@ -48,7 +55,7 @@ const DetailProduk = (props) => {
                 </div>
                 <div className="carousel-inner">
                   <div className="carousel-item active">
-                    <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
+                    <img src={detailBarang.gambarProduk} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                   <div className="carousel-item">
                     <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
@@ -71,11 +78,11 @@ const DetailProduk = (props) => {
           <div className="col-sm-6">
             {/* detail produk */}
             <div className="container mt-5 py-3 shadow product_detail">
-              <h3>Gitar</h3>
-              <p>Gitar</p>
-              <p>Rp. 250000</p>
+              <h3>{detailBarang.namaProduk}</h3>
+              <p>{detailBarang.kategoriProduk}</p>
+              <p>{detailBarang.hargaProduk}</p>
 
-              {props.role === "merchant" && (
+              
                 <div className="d-grid gap-2">
                   <button type="button" className="btn btn_publish">
                     Terbitkan
@@ -84,9 +91,9 @@ const DetailProduk = (props) => {
                     Edit
                   </button>
                 </div>
-              )}
+              
 
-              {props.role === "customer" && (
+              {/* {props.role === "customer" && (
                 <div className="d-grid gap-2">
                   {menawar ? (
                     <button type="button" className="btn btn-secondary rounded-pill" disabled>
@@ -98,7 +105,7 @@ const DetailProduk = (props) => {
                     </button>
                   )}
                 </div>
-              )}
+              )} */}
             </div>
 
             {/* detail seller */}
@@ -119,14 +126,14 @@ const DetailProduk = (props) => {
         {/* deskripsi produk */}
         <div className="container w-100 mt-5 mx-auto px-4 py-3 shadow product_desc">
           <h3>Deskripsi</h3>
+          <ul>
+            <li>{detailBarang.merkProduk}</li>
+            <li>{detailBarang.seriProduk}</li>
+          </ul>
           <p>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est.
-          Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem.
-          In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-          Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-          Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. Sed at lorem in nunc porta tristique. Proin nec augue.
-          Quisque aliquam tempor magna.
+            {detailBarang.deskripsiProduk}
           </p>
+
           
         </div>
       </div>
@@ -174,4 +181,17 @@ const DetailProduk = (props) => {
   );
 };
 
-export default DetailProduk;
+const mapStateToProps = (state) => {
+  return {
+    // idProduk: state.productReducer.idProduk,
+    dataProduk: state.productReducer.dataProduk,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProductPreview: (dataProductPreview) => dispatch(getProductPreview(dataProductPreview)),
+  };
+};
+
+export default connect (mapStateToProps, mapDispatchToProps)(DetailProduk);

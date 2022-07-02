@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
 import getProductPreview from "../../redux/actions/getProductPreview";
@@ -8,6 +9,7 @@ const Tambah = (props) => {
   const [Gambar, setGambar] = useState(null);
   const [PrevGambar, setPrevGambar] = useState(null);
   const [NamaProduk, setNamaProduk] = useState("");
+  const [MerkProduk, setMerkProduk] = useState("");
   const [SeriProduk, setSeriProduk] = useState("");
   const [Kategori, setKategori] = useState("");
   const [Harga, setHarga] = useState("");
@@ -32,17 +34,28 @@ const Tambah = (props) => {
 
   const dataProductPreview = {
     namaProduk: NamaProduk,
+    merkProduk: MerkProduk,
     seriProduk: SeriProduk,
     hargaProduk: Harga,
     kategoriProduk: Kategori,
     deskripsiProduk: Deskripsi,
-    gambarProduk: Gambar,
+    gambarProduk: PrevGambar,
   };
-
+  const navigate = useNavigate();
   const handlePreview = (e) => {
     e.preventDefault();
     props.getProductPreview(dataProductPreview);
+    navigate ("/product/product-preview");
   };
+
+  
+
+  // useEffect(() => {
+  //   props.getProductPreview();
+  //   console.log(props.dataProductPreview);
+  // }, []);
+
+  
 
   // const handleSubmit = (e) => {
   //   var axios = require("axios");
@@ -94,6 +107,13 @@ const Tambah = (props) => {
                 Nama Produk
               </label>
               <input className="form-control form1_custom" placeholder="Nama Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} />
+            </div>
+
+            <div className="mb-3 align-items-center mx-auto">
+              <label for="exampleFormControlInput1" className="customFile">
+                Merk Produk
+              </label>
+              <input className="form-control form1_custom" placeholder="Merk Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setMerkProduk(e.target.value)} />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
