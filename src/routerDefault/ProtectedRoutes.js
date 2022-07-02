@@ -2,7 +2,7 @@ import { Outlet, Navigate } from "react-router-dom";
 
 const ProtectedRoutes = () => {
   let auth = localStorage.getItem("user");
-  console.log(auth);
+  // console.log(auth);
 
   if (auth != null) {
     return <Outlet />;

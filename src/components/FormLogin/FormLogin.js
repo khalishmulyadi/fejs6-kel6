@@ -18,13 +18,13 @@ const FormLogin = (props) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    props.setLoginStatus();
-    console.log(props.loginStatus);
-  }, []);
-  if (props.loginStatus === true) {
-    navigate("/homepage", { replace: true });
-  }
+  // useEffect(() => {
+  //   props.setLoginStatus();
+  //   console.log(props.loginStatus);
+  // }, []);
+  // if (props.loginStatus === true) {
+  //   navigate("/homepage", { replace: true });
+  // }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -55,9 +55,14 @@ const FormLogin = (props) => {
                 Email atau Password yang kamu masukkan salah!
               </div>
             ) : null}
-
+            <div className="back_icon_desktop">
+              <a href="/">
+                <i className="bi bi-arrow-left me-2"></i>
+                Kembali ke homepage
+              </a>
+            </div>
             <div className="back_icon">
-              <a href="/#">
+              <a href="/">
                 <i className="bi bi-arrow-left"></i>
               </a>
             </div>
