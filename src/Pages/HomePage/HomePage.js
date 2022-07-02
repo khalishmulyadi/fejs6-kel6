@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import NavbarDefault from "../../components/NavbarDefault/NavbarDefault";
 import Banner from "../../img/img banner.png";
@@ -7,6 +7,9 @@ import "swiper/css/bundle";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.css";
 const HomePage = () => {
+  var axios = require('axios');
+  const [Barang, setBarang] = useState([])
+
   const slides = [];
 
   for (let i = 0; i < 5; i += 1) {
@@ -15,6 +18,37 @@ const HomePage = () => {
         <img src={Banner} alt={`Slide ${i}`}></img>
       </SwiperSlide>
     );
+  }
+
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: 'https://asix-store.herokuapp.com/barang',
+      headers: {}
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setBarang(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [])
+
+
+  const handleCardProduct = () => {
+    return Barang.map((value, index) => {
+      return <CardProduct
+        key={index}
+        namaBarang={value.namaBarang}
+        img={value.barangImg}
+        tipebarang={value.tipeBarang}
+        price={value.hargaBarang}
+      />
+    })
+
   }
 
   return (
@@ -49,7 +83,6 @@ const HomePage = () => {
           </React.Fragment>
         </div>
       </div>
-
       <div className="container section2">
         <p>
           <strong>Telurusi Kategori</strong>
@@ -74,14 +107,7 @@ const HomePage = () => {
         </div>
 
         <div className="konten row row-cols-2 row-cols-md-4">
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
+          {handleCardProduct()}
         </div>
       </div>
     </div>
