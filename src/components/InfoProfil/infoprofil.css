@@ -12,6 +12,22 @@
   display: none;
 }
 
+.btn_upload_foto_profile a {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.btn_upload_foto_profile a p:hover {
+  color: #cecece;
+}
+
+.alert_change_profpic {
+  margin-bottom: 5px;
+  color: red;
+  font-size: small;
+}
+
 .form_edit_profile {
   margin: 20px;
 }
