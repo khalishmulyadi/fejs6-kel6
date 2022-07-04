@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import authService from "../../services/auth.service";
@@ -7,8 +7,14 @@ import { useNavigate } from "react-router-dom";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    props.setLoginStatus();
+    try {
+      props.setLoginStatus();
+      setIsLoggedIn(true);
+    } catch (err) {
+      setIsLoggedIn(false);
+    }
   }, []);
   console.log(props.loginStatus);
 
@@ -38,7 +44,7 @@ const NavbarDesktop = (props) => {
             </div>
           </div>
 
-          {props.loginStatus ? (
+          {isLoggedIn ? (
             <div className="col-3">
               <div className="btn-group drop_menu">
                 <button type="button" className="btn mt-3 dropdown-toggle menu_user" data-bs-toggle="dropdown" aria-expanded="false">
