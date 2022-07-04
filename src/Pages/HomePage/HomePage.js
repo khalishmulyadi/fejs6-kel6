@@ -7,8 +7,8 @@ import "swiper/css/bundle";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.css";
 const HomePage = () => {
-  var axios = require('axios');
-  const [Barang, setBarang] = useState([])
+  var axios = require("axios");
+  const [Barang, setBarang] = useState([]);
 
   const slides = [];
 
@@ -22,57 +22,39 @@ const HomePage = () => {
 
   useEffect(() => {
     var config = {
-      method: 'get',
-      url: 'https://asix-store.herokuapp.com/barang',
-      headers: {}
+      method: "get",
+      url: "https://asix-store.herokuapp.com/barang",
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        setBarang(response.data)
+        setBarang(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, [])
-
+  }, []);
 
   const handleCardProduct = () => {
     return Barang.map((value, index) => {
-      return <CardProduct
-        key={index}
-        namaBarang={value.namaBarang}
-        img={value.barangImg}
-        tipebarang={value.tipeBarang}
-        price={value.hargaBarang}
-      />
-    })
-
-  }
+      return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} />;
+    });
+  };
 
   return (
-
     <div className="container">
-    <div className="nav-custom">
-      <NavbarDefault />
-    </div>
-    <div className="container swiper-konten">
-      <React.Fragment>
-        <Swiper 
-        id="main"
-        preloadImages
-        slidesPerView={1}
-        spaceBetween
-        grabCursor
-        mousewheel
-        centeredSlides
-        >
-          {slides}
-        </Swiper>
-      </React.Fragment>
-    </div>
-
+      <div className="nav-custom">
+        <NavbarDefault />
+      </div>
+      <div className="container swiper-konten">
+        <React.Fragment>
+          <Swiper id="main" preloadImages slidesPerView={1} spaceBetween grabCursor mousewheel centeredSlides>
+            {slides}
+          </Swiper>
+        </React.Fragment>
+      </div>
 
       <div className="container section1">
         <div className="swiper-konten">
@@ -106,9 +88,7 @@ const HomePage = () => {
           </button>
         </div>
 
-        <div className="konten row row-cols-2 row-cols-md-4">
-          {handleCardProduct()}
-        </div>
+        <div className="konten row row-cols-2 row-cols-md-4">{handleCardProduct()}</div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const setLoginStatus = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        console.log("Berhasil login");
         dispatch({
           type: SET_LOGIN_STATUS,
           loginStatus: true,
