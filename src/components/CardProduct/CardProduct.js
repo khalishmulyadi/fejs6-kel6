@@ -1,11 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import productImage from "../../img/produk.png";
 
 // css
 import "./CardProduct.css";
 
-const CardProduct = ({ namaBarang, img, tipebarang, price }) => {
-
+const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct }) => {
+  const navigate = useNavigate();
+  
   const formatRupiah = (value) => {
     if (!value || value == null) return `Rp 0`;
     // Convert value to string
@@ -32,7 +34,7 @@ const CardProduct = ({ namaBarang, img, tipebarang, price }) => {
 
   return (
     <div>
-      <a href="product/product-detail" className="card_product">
+      <a href={`product/product-detail/${ToDetailProduct}`} className="card_product">
         <div className="card p-2 m-3">
           <img src={`data:image/jpeg;base64,${img}`}
             className="card-img-top product_image" alt="product_image" />
