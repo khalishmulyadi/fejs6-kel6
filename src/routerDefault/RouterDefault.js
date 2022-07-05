@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CardProduct from "../components/CardProduct/CardProduct";
 import { InfoProduct } from "../Pages/InfoProduct/InfoProduct";
@@ -17,19 +17,26 @@ import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
 import ProtectedRoutes from "./ProtectedRoutes";
 
-const RouterDefault = () => {
+
+const RouterDefault = (props) => {
+  
+
   return (
     <BrowserRouter>
+      {console.log("status login", props.loginStatus)}
       <Routes>
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/registrasi" element={<RegistrationPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="product/product-detail" element={<DetailProduct />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="homepage" element={<HomePage />} />
-          {/* <Route path="product/product-detail" element={<DetailProduct/>} /> */}
+
+          
           <Route path="product/product-detail/:idBarang" element={<DetailProduct/>} />
-          {/* <Route path=":id" element={<DetailProduct/>} /> */}
+          
+
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
 
@@ -48,5 +55,7 @@ const RouterDefault = () => {
     </BrowserRouter>
   );
 };
+
+
 
 export default RouterDefault;

@@ -1,7 +1,9 @@
+
 import React, { useEffect, useState } from "react";
 import "./DetailProduk.css";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import { useParams } from "react-router-dom";
+
 
 const DetailProduk = ({ ...props }) => {
   var axios = require('axios');
@@ -12,6 +14,9 @@ const DetailProduk = ({ ...props }) => {
   const { idBarang } = useParams();
   const [DataBarang, setDataBarang] = useState([])
 
+  useEffect(() => {
+    props.getUserDetail();
+  }, []);
 
   const handleTawar = (e) => {
     e.preventDefault();
@@ -198,7 +203,9 @@ const DetailProduk = ({ ...props }) => {
         <div className="container w-100 mt-5 mx-auto px-4 py-3 shadow product_desc">
           <h3>Deskripsi</h3>
           <p>
+
             {DataBarang.deskripsi}
+
           </p>
         </div>
       </div>
@@ -245,5 +252,7 @@ const DetailProduk = ({ ...props }) => {
     </div>
   );
 };
+
+
 
 export default DetailProduk;

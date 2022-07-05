@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import authService from "../../services/auth.service";
@@ -7,10 +7,16 @@ import { useNavigate } from "react-router-dom";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
-  useEffect(() => {
-    props.setLoginStatus();
-  }, []);
-  console.log(props.loginStatus);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // useEffect(() => {
+  //   try {
+  //     props.setLoginStatus();
+  //     setIsLoggedIn(true);
+  //   } catch (err) {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, []);
+  // console.log(props.loginStatus);
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -77,7 +83,7 @@ const NavbarDesktop = (props) => {
 
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <a className="dropdown-item" href="/edit-profile">
+                    <a className="dropdown-item" href="/update-profile">
                       Ubah Akun
                     </a>
                   </li>

@@ -8,8 +8,10 @@ import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.css";
 import DetailProduct from "../DetailProduct/DetailProduct";
 const HomePage = () => {
+
   var axios = require('axios');
   const [Barang, setBarang] = useState([]);
+
 
 
   const slides = [];
@@ -24,19 +26,22 @@ const HomePage = () => {
 
   useEffect(() => {
     var config = {
-      method: 'get',
-      url: 'https://asix-store.herokuapp.com/barang',
-      headers: {}
+      method: "get",
+      url: "https://asix-store.herokuapp.com/barang",
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
+
         setBarang(response.data);
+
 
       })
       .catch(function (error) {
         console.log(error);
       });
+
 
     console.log(Barang);
   }, [])
@@ -55,12 +60,13 @@ const HomePage = () => {
     })
   }
 
-  return (
 
+  return (
     <div className="container">
       <div className="nav-custom">
         <NavbarDefault />
       </div>
+
       <div className="container section1">
         <div className="swiper-konten">
           <React.Fragment>
@@ -93,9 +99,7 @@ const HomePage = () => {
           </button>
         </div>
 
-        <div className="konten row row-cols-2 row-cols-md-4">
-          {handleCardProduct()}
-        </div>
+        <div className="konten row row-cols-2 row-cols-md-4">{handleCardProduct()}</div>
       </div>
     </div>
   );

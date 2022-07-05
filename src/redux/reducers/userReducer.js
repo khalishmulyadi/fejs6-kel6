@@ -14,8 +14,10 @@ const userReducer = (state = initialState, action) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        dataUser: action.userDetail,
-        idUser: action.userDetail.userId,
+        dataUser: action.payload,
+        idUser: action.payload.userId,
+        role: action.payload.roles,
+        isLoggedIn: true,
       };
     case GET_USER_ROLE:
       return {

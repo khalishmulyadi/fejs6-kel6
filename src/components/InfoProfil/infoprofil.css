@@ -1,7 +1,3 @@
-.infoProfil {
-  width: 425px;
-  height: 100vh;
-}
 .headerProfil {
   padding: 20px;
   display: flex;
@@ -13,22 +9,74 @@
 }
 
 .form_edit_profile {
-  margin: 20px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
-.back_icon {
-  margin-left: 30px;
+
+.btn_upload_foto_profile a {
+  border: none;
+  background: none;
+  cursor: pointer;
 }
+
+.btn_upload_foto_profile a p:hover {
+  color: #cecece;
+}
+
+.alert_change_profpic {
+  margin-bottom: 5px;
+  color: red;
+  font-size: small;
+}
+
 .upFoto {
   margin: 30px;
   text-align: center;
 }
+
+.upload_foto_profil {
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
 .btnsimpan {
   width: 100%;
   height: 48px;
   background: #7126b5;
-  border-radius: 5px;
+  border-radius: 12px;
   color: white;
   border: none;
+}
+
+.btnsimpan:hover {
+  background: #541d86;
+}
+
+.button_already_become_seller {
+  border: 3px solid #7126b5;
+  text-decoration: none;
+  color: black;
+  border-radius: 12px;
+}
+
+.button_already_become_seller:hover {
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.button_upgrade_role {
+  background-color: #39d113;
+  text-decoration: none;
+  color: white;
+  border-radius: 12px;
+  border: none;
+}
+
+.button_upgrade_role:hover {
+  background-color: #30b10f;
+  color: white;
 }
 
 @media screen and (min-width: 1024px) {
@@ -36,13 +84,8 @@
     width: 1024px;
     height: 100vh;
   }
-  .headerProfil {
-  }
-  .back_icon {
-    margin-left: 100px;
-  }
+
   .form_edit_profile {
     width: 500px;
-    transform: translateX(50%);
   }
 }
