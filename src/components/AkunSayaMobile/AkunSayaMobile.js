@@ -75,7 +75,7 @@ const AkunSayaMobile = (props) => {
             <div className="ms-2 fixed-bottom">
               <hr></hr>
               <ul className="d-flex list_navigasi_akun_saya">
-                <a href="/">
+                <a href="/homepage">
                   <li>
                     <i className="bi bi-house-door"></i>
                     <span>Home</span>
@@ -101,7 +101,7 @@ const AkunSayaMobile = (props) => {
                 {dataUser.roles[0].idRole === 1 && (
                   <a href="tambah-product">
                     <li>
-                      <i className="bi bi-plus-circle"></i>
+                      <i className="bi bi-cart"></i>
                       <span>Beli</span>
                     </li>
                   </a>

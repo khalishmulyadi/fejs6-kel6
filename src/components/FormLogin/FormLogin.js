@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import loginImage from "../../img/loginsecondhand.png";
 import "./FormLogin.css";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
+import getUserDetail from "../../redux/actions/getUserDetail";
 
 const FormLogin = (props) => {
   const [email, setEmail] = useState("");
@@ -18,23 +19,22 @@ const FormLogin = (props) => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   props.setLoginStatus();
-  //   console.log(props.loginStatus);
-  // }, []);
-  // if (props.loginStatus === true) {
-  //   navigate("/homepage", { replace: true });
-  // }
+  useEffect(() => {
+    // props.getUserDetail();
+    if (props.loginStatus === true) {
+      navigate("/homepage", { replace: true });
+    }
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await authService.loginUser(email, password).then(() => {
-        // props.setLoginStatus();
+        props.setLoginStatus();
         setError(false);
 
-        navigate("/homepage");
-        // window.location.reload();
+        navigate("/homepage", { replace: true });
+        // window.location.replace();
       });
     } catch (error) {
       // console.log(error);
@@ -44,6 +44,7 @@ const FormLogin = (props) => {
 
   return (
     <div>
+      {console.log(props.loginStatus)}
       <div className="container-fluid m-0">
         <div className="row login_group">
           <div className="d-none d-sm-flex col-sm-6 p-0">
@@ -108,6 +109,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setLoginStatus: () => dispatch(setLoginStatus()),
+    getUserDetail: () => dispatch(getUserDetail()),
   };
 };
 

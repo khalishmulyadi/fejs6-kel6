@@ -1,19 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import { useNavigate } from "react-router-dom";
 
 import "./NavbarDefault.css";
 const NavbarMobile = (props) => {
-  useEffect(() => {
-    props.setLoginStatus();
-  }, []);
-  console.log(props.loginStatus);
-
   const navigate = useNavigate();
 
   return (
     <div>
+      {console.log(props.role[0]?.idRole)}
       <div className="container-fluid">
         <div className="row">
           <div className="col-2">
@@ -52,9 +48,16 @@ const NavbarMobile = (props) => {
               <li className="list-group-item ">
                 <a href="/#">Notifikasi</a>
               </li>
-              <li className="list-group-item">
-                <a href="/#">Daftar Jual</a>
-              </li>
+              {props.role[0]?.idRole === 1 && (
+                <li className="list-group-item">
+                  <a href="/#">Daftar Pembelian</a>
+                </li>
+              )}
+              {props.role[0]?.idRole === 2 && (
+                <li className="list-group-item">
+                  <a href="/#">Daftar Penjualan</a>
+                </li>
+              )}
               <li className="list-group-item">
                 <a href="/akun-saya">Akun Saya</a>
               </li>
@@ -86,13 +89,14 @@ const NavbarMobile = (props) => {
 const mapStateToProps = (state) => {
   return {
     loginStatus: state.userReducer.isLoggedIn,
+    role: state.userReducer.role,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setLoginStatus: () => dispatch(setLoginStatus()),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     setLoginStatus: () => dispatch(setLoginStatus()),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarMobile);
+export default connect(mapStateToProps)(NavbarMobile);

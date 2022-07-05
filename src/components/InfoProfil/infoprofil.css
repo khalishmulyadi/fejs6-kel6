@@ -8,6 +8,11 @@
   display: none;
 }
 
+.form_edit_profile {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .btn_upload_foto_profile a {
   border: none;
   background: none;
