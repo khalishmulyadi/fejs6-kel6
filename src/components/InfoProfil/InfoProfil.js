@@ -37,39 +37,54 @@ const InfoProfil = (props) => {
   }
 
   // get user detail as default value
-  useEffect(() => {
-    var axios = require("axios");
+  // useEffect(() => {
+  //   var axios = require("axios");
 
+  //   const user = JSON.parse(localStorage.getItem("user"));
+
+  //   const email = JSON.parse(localStorage.getItem("email"));
+
+  //   var config = {
+  //     method: "get",
+  //     url: `https://asix-store.herokuapp.com/user/display/${email}`,
+  //     headers: {
+  //       Authorization: `Bearer ${user.access_token}`,
+  //     },
+  //   };
+
+  //   axios(config)
+  //     .then(function (response) {
+  //       console.log("ini response API", response.data);
+  //       setUserId(response.data.userId);
+  //       setAccessToken(user.access_token);
+  //       setNama(response.data.nama);
+  //       setKota(response.data.kota);
+  //       setAlamat(response.data.alamat);
+  //       setNoTelepon(response.data.noTelepon);
+  //       setFotoProfil(response.data.img);
+  //       setRole(response.data.roles);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       alert(error.response.data.error_message);
+  //       window.location.replace("/auth/login");
+  //     });
+  // }, []);
+
+  useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const email = JSON.parse(localStorage.getItem("email"));
-
-    var config = {
-      method: "get",
-      url: `https://asix-store.herokuapp.com/user/display/${email}`,
-      headers: {
-        Authorization: `Bearer ${user.access_token}`,
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log("ini response API", response.data);
-        setUserId(response.data.userId);
-        setAccessToken(user.access_token);
-        setNama(response.data.nama);
-        setKota(response.data.kota);
-        setAlamat(response.data.alamat);
-        setNoTelepon(response.data.noTelepon);
-        setFotoProfil(response.data.img);
-        setRole(response.data.roles);
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert(error.response.data.error_message);
-        window.location.replace("/auth/login");
-      });
-  }, []);
+    if (props.dataUser) {
+      setAccessToken(user.access_token);
+      setUserId(props.dataUser.userId ? props.dataUser.userId : "");
+      setNama(props.dataUser.nama ? props.dataUser.nama : "");
+      setKota(props.dataUser.kota ? props.dataUser.kota : "");
+      setAlamat(props.dataUser.alamat ? props.dataUser.alamat : "");
+      setNoTelepon(props.dataUser.noTelepon ? props.dataUser.noTelepon : "");
+      setFotoProfil(props.dataUser.img ? props.dataUser.img : "");
+      setRole(props.dataUser.roles ? props.dataUser.roles : { idRole: 1, roleName: "BUYER" });
+    }
+  }, [props.dataUser]);
 
   const getDefaultPP = () => {
     urlToFile(`data:image/png;base64,${fotoProfil}`, "foto_profile.png", "image/png").then(function (file) {
@@ -88,8 +103,25 @@ const InfoProfil = (props) => {
   const handleUpgradeRole = () => {
     console.log(verified);
     if (verified === true) {
-      alert("Kamu berhasil upgrade role!");
-      window.location.replace("/update-profile");
+      var axios = require("axios");
+
+      var config = {
+        method: "put",
+        url: `https://asix-store.herokuapp.com/user/update-role/${userId}`,
+        headers: {
+          Authorization: `Bearer ${access_token} `,
+        },
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          alert("Kamu berhasil upgrade role!");
+          window.location.replace("/update-profile");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } else {
       alert("Harap verifikasi captcha terlebih dahulu!");
     }
@@ -155,7 +187,9 @@ const InfoProfil = (props) => {
       </div>
 
       <div className="d-flex">
-        {userId === undefined ? (
+        {/* {console.log("local state", fotoProfil)} */}
+        {console.log("ini data user dari redux", props.dataUser)}
+        {props.dataUser.userId === undefined ? (
           <div className="mx-auto">
             <h1 className="text-center">Loading...</h1>
           </div>
@@ -266,8 +300,8 @@ const InfoProfil = (props) => {
                     id="input_no_hp"
                     type="text"
                     value={`${noTelepon}`}
-                    // pattern="[7-9]{1}[0-9]{9}"
-                    placeholder="contoh: 628123456789"
+                    pattern="[0-9]{9}"
+                    placeholder="contoh: 8123456789"
                     aria-label=".form-control-lg example"
                     onChange={(e) => {
                       setNoTelepon(e.target.value);
@@ -280,24 +314,23 @@ const InfoProfil = (props) => {
               <button type="submit" className="btnsimpan">
                 Simpan
               </button>
-
-              {role[0].idRole === 2 ? (
-                <div className=" my-3">
-                  <p>Anda sudah menjadi seller dan dapat berjualan</p>
-                  <a href="/daftar-jual" className="button_already_become_seller text-center d-block my-3 py-2">
-                    Mulai Berjualan
-                  </a>
-                </div>
-              ) : (
-                <div className=" my-3">
-                  <p>Anda belum dapat menjual barang. Upgrade akun Anda agar bisa berjualan</p>
-                  <button className="button_upgrade_role text-center d-block w-100 my-3 py-2" onClick={handleUpgradeRole}>
-                    Upgrade Jadi Penjual
-                  </button>
-                  <ReCAPTCHA sitekey="6LdvnMEgAAAAACfchNfNHLdND2D0z4f6D_ZWM0or" onChange={handleVerify} />
-                </div>
-              )}
             </form>
+            {props.dataUser.roles[0].idRole === 2 ? (
+              <div className=" my-3">
+                <p>Anda sudah menjadi seller dan dapat berjualan</p>
+                <a href="/daftar-jual" className="button_already_become_seller text-center d-block my-3 py-2">
+                  Mulai Berjualan
+                </a>
+              </div>
+            ) : (
+              <div className=" my-3">
+                <p>Anda belum dapat menjual barang. Upgrade akun Anda agar bisa berjualan</p>
+                <button className="button_upgrade_role text-center d-block w-100 my-3 py-2" onClick={handleUpgradeRole}>
+                  Upgrade Jadi Penjual
+                </button>
+                <ReCAPTCHA sitekey="6LdvnMEgAAAAACfchNfNHLdND2D0z4f6D_ZWM0or" onChange={handleVerify} />
+              </div>
+            )}
           </div>
         )}
       </div>

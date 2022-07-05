@@ -8,15 +8,15 @@ import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    try {
-      props.setLoginStatus();
-      setIsLoggedIn(true);
-    } catch (err) {
-      setIsLoggedIn(false);
-    }
-  }, []);
-  console.log(props.loginStatus);
+  // useEffect(() => {
+  //   try {
+  //     props.setLoginStatus();
+  //     setIsLoggedIn(true);
+  //   } catch (err) {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, []);
+  // console.log(props.loginStatus);
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -44,7 +44,7 @@ const NavbarDesktop = (props) => {
             </div>
           </div>
 
-          {isLoggedIn ? (
+          {props.loginStatus ? (
             <div className="col-3">
               <div className="btn-group drop_menu">
                 <button type="button" className="btn mt-3 dropdown-toggle menu_user" data-bs-toggle="dropdown" aria-expanded="false">
