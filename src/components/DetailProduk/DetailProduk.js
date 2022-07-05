@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import productImage from "../../img/loginsecondhand.png";
-import penjualImage from "../../img/img_photo3.jpg";
+import React, { useEffect, useState } from "react";
 import "./DetailProduk.css";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
+import { useParams } from "react-router-dom";
 
-const DetailProduk = (props) => {
+const DetailProduk = ({ ...props }) => {
+  var axios = require('axios');
   const [menawar, setMenawar] = useState(false);
   const [alertTawar, setAlertTawar] = useState(false);
   const [hargaTawar, setHargaTawar] = useState(0);
+  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem('user')));
+  const { idBarang } = useParams();
+  const [DataBarang, setDataBarang] = useState([])
 
 
   const handleTawar = (e) => {
@@ -16,7 +19,82 @@ const DetailProduk = (props) => {
     setAlertTawar(true);
     console.log(hargaTawar);
     console.log(menawar);
+
+
+    // send API
+    var FormData = require('form-data');
+    var data = new FormData();
+    data.append('hargaTawar', hargaTawar);
+
+    var config = {
+      method: 'put',
+      url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
+      headers: {
+        'Authorization': `Bearer ${Token.access_token}`,
+        // ...data.getHeaders()
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   };
+
+  
+
+  // ************* Get Data By Id *************
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: `https://asix-store.herokuapp.com/detail-barang/${idBarang}`,
+      headers: {}
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log();
+        setDataBarang(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    console.log(DataBarang);
+
+  }, [])
+
+
+  // Format Rupiah
+  const formatRupiah = (value) => {
+    if (!value || value == null) return `Rp 0`;
+    // Convert value to string
+    let newValue = value.toString();
+
+    // Modulus operator to get division remainder
+    let remainder = newValue.length % 3;
+
+    // Substract value based on the remainder value
+    let rupiah = newValue.substr(0, remainder);
+
+    // Substract value based on the remainder and split it into array that match 3 digit
+    let thousand = newValue.substr(remainder).match(/\d{3}/g);
+
+    // Append all string
+    if (thousand) {
+      let separator = remainder ? '.' : '';
+      rupiah += separator + thousand.join('.');
+    }
+
+    // Display output
+    return `Rp ${rupiah}`;
+  };
+
+  
 
   return (
     <div>
@@ -48,13 +126,13 @@ const DetailProduk = (props) => {
                 </div>
                 <div className="carousel-inner">
                   <div className="carousel-item active">
-                    <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
+                    <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                   <div className="carousel-item">
-                    <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
+                    <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                   <div className="carousel-item">
-                    <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
+                    <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                 </div>
                 <button className="carousel-control-prev h-50 my-auto" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -71,9 +149,9 @@ const DetailProduk = (props) => {
           <div className="col-sm-6">
             {/* detail produk */}
             <div className="container mt-5 py-3 shadow product_detail">
-              <h3>Gitar</h3>
-              <p>Gitar</p>
-              <p>Rp. 250000</p>
+              <h3>{DataBarang.namaBarang}</h3>
+              <p>{DataBarang.tipeBarang}</p>
+              <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
               {props.role === "merchant" && (
                 <div className="d-grid gap-2">
@@ -105,11 +183,11 @@ const DetailProduk = (props) => {
             <div className="container mt-3 py-3 shadow seller_detail">
               <div className="row">
                 <div className="col-3">
-                  <img src={penjualImage} className="img_penjual" alt="foto_penjual" />
+                  <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
                 </div>
                 <div className="col ms-3 ms-sm-0">
-                  <h3>Nama Penjual</h3>
-                  <p>Kota</p>
+                  <h3>{DataBarang.namaSeller}</h3>
+                  <p>{DataBarang.kota}</p>
                 </div>
               </div>
             </div>
@@ -120,14 +198,8 @@ const DetailProduk = (props) => {
         <div className="container w-100 mt-5 mx-auto px-4 py-3 shadow product_desc">
           <h3>Deskripsi</h3>
           <p>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est.
-          Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem.
-          In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-          Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-          Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. Sed at lorem in nunc porta tristique. Proin nec augue.
-          Quisque aliquam tempor magna.
+            {DataBarang.deskripsi}
           </p>
-          
         </div>
       </div>
 
@@ -146,11 +218,11 @@ const DetailProduk = (props) => {
               <div className="container product_detail_tawar py-3">
                 <div className="row">
                   <div className="col-3">
-                    <img src={productImage} className="product_img_tawar" alt="product-img-haggle" />
+                    <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="product_img_tawar" alt="product-img-haggle" />
                   </div>
                   <div className="col-9">
-                    <p className="mb-0 fw-bold">Gitar Yamaha</p>
-                    <p className="mb-0">Rp 250.000</p>
+                    <p className="mb-0 fw-bold">{DataBarang.namaBarang}</p>
+                    <p className="mb-0">{formatRupiah(DataBarang.hargaBarang)}</p>
                   </div>
                 </div>
               </div>

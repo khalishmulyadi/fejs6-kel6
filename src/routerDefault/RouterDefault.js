@@ -27,7 +27,9 @@ const RouterDefault = () => {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="homepage" element={<HomePage />} />
-          <Route path="product/product-detail" element={<DetailProduct />} />
+          {/* <Route path="product/product-detail" element={<DetailProduct/>} /> */}
+          <Route path="product/product-detail/:idBarang" element={<DetailProduct/>} />
+          {/* <Route path=":id" element={<DetailProduct/>} /> */}
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
 
