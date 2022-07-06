@@ -8,11 +8,8 @@ import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.css";
 import DetailProduct from "../DetailProduct/DetailProduct";
 const HomePage = () => {
-
-  var axios = require('axios');
+  var axios = require("axios");
   const [Barang, setBarang] = useState([]);
-
-
 
   const slides = [];
 
@@ -33,33 +30,20 @@ const HomePage = () => {
 
     axios(config)
       .then(function (response) {
-
         setBarang(response.data);
-
-
       })
       .catch(function (error) {
         console.log(error);
       });
 
-
     console.log(Barang);
-  }, [])
-
+  }, []);
 
   const handleCardProduct = () => {
     return Barang.map((value, index) => {
-      return <CardProduct
-        key={index}
-        namaBarang={value.namaBarang}
-        img={value.barangImg}
-        tipebarang={value.tipeBarang}
-        price={value.hargaBarang}
-        ToDetailProduct={value.barangId}
-      />
-    })
-  }
-
+      return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+    });
+  };
 
   return (
     <div className="container">

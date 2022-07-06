@@ -72,7 +72,7 @@ const InfoProfil = (props) => {
   // }, []);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     if (props.dataUser) {
       setAccessToken(user.access_token);
@@ -187,8 +187,6 @@ const InfoProfil = (props) => {
       </div>
 
       <div className="d-flex">
-        {/* {console.log("local state", fotoProfil)} */}
-        {console.log("ini data user dari redux", props.dataUser)}
         {props.dataUser.userId === undefined ? (
           <div className="mx-auto">
             <h1 className="text-center">Loading...</h1>

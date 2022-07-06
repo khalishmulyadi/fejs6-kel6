@@ -17,8 +17,8 @@ const loginUser = (email, password) => {
 
   return axios(config).then(function (response) {
     if (response.data.access_token) {
-      localStorage.setItem("user", JSON.stringify(response.data));
-      localStorage.setItem("email", JSON.stringify(email));
+      sessionStorage.setItem("user", JSON.stringify(response.data));
+      sessionStorage.setItem("email", JSON.stringify(email));
       // console.log(JSON.stringify(response.data));
     }
     return response.data;
@@ -26,8 +26,8 @@ const loginUser = (email, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
-  localStorage.removeItem("email");
+  sessionStorage.removeItem("user");
+  sessionStorage.removeItem("email");
 };
 
 const authService = {

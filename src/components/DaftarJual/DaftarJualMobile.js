@@ -29,7 +29,7 @@ const DaftarJualMobile = () => {
             <p>Kota</p>
           </div>
           <div className="col-3">
-            <a href="/#" className="btn btn_edit_profil_daftar_jual">
+            <a href="/update-profile" className="btn btn_edit_profil_daftar_jual">
               Edit
             </a>
           </div>
