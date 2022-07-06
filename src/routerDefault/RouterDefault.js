@@ -16,16 +16,10 @@ import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
 import ProtectedRoutes from "./ProtectedRoutes";
-import getUserDetail from "../redux/actions/getUserDetail";
-import { connect } from "react-redux";
+
 
 const RouterDefault = (props) => {
-  // useEffect(() => {
-  //   async function getUserDetail() {
-  //     await props.getUserDetail();
-  //   }
-  //   getUserDetail();
-  // }, []);
+  
 
   return (
     <BrowserRouter>
@@ -38,6 +32,11 @@ const RouterDefault = (props) => {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="homepage" element={<HomePage />} />
+
+          
+          <Route path="product/product-detail/:idBarang" element={<DetailProduct/>} />
+          
+
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
 
@@ -57,16 +56,6 @@ const RouterDefault = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    loginStatus: state.userReducer.isLoggedIn,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getUserDetail: () => dispatch(getUserDetail()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RouterDefault);
+export default RouterDefault;
