@@ -36,41 +36,6 @@ const InfoProfil = (props) => {
       });
   }
 
-  // get user detail as default value
-  // useEffect(() => {
-  //   var axios = require("axios");
-
-  //   const user = JSON.parse(localStorage.getItem("user"));
-
-  //   const email = JSON.parse(localStorage.getItem("email"));
-
-  //   var config = {
-  //     method: "get",
-  //     url: `https://asix-store.herokuapp.com/user/display/${email}`,
-  //     headers: {
-  //       Authorization: `Bearer ${user.access_token}`,
-  //     },
-  //   };
-
-  //   axios(config)
-  //     .then(function (response) {
-  //       console.log("ini response API", response.data);
-  //       setUserId(response.data.userId);
-  //       setAccessToken(user.access_token);
-  //       setNama(response.data.nama);
-  //       setKota(response.data.kota);
-  //       setAlamat(response.data.alamat);
-  //       setNoTelepon(response.data.noTelepon);
-  //       setFotoProfil(response.data.img);
-  //       setRole(response.data.roles);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //       alert(error.response.data.error_message);
-  //       window.location.replace("/auth/login");
-  //     });
-  // }, []);
-
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
 

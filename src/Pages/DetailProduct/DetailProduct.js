@@ -1,10 +1,10 @@
 import React from "react";
 import DetailProduk from "../../components/DetailProduk/DetailProduk";
 
-const DetailProduct = () => {
+const DetailProduct = (props) => {
   return (
     <div>
-      <DetailProduk role="customer" />
+      <DetailProduk pengguna={props.pengguna} />
     </div>
   );
 };

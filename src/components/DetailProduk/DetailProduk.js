@@ -1,22 +1,23 @@
-
 import React, { useEffect, useState } from "react";
 import "./DetailProduk.css";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
 
-
-const DetailProduk = ({ ...props }) => {
-  var axios = require('axios');
+const DetailProduk = ({ pengguna, ...props }) => {
+  var axios = require("axios");
   const [menawar, setMenawar] = useState(false);
   const [alertTawar, setAlertTawar] = useState(false);
   const [hargaTawar, setHargaTawar] = useState(0);
-  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem('user')));
+  // const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem("user")));
   const { idBarang } = useParams();
-  const [DataBarang, setDataBarang] = useState([])
+  const [DataBarang, setDataBarang] = useState([]);
 
-  useEffect(() => {
-    props.getUserDetail();
-  }, []);
+  // useEffect(() => {
+  //   props.getUserDetail();
+  // }, []);
+
+  const token = JSON.parse(sessionStorage.getItem("user"));
 
   const handleTawar = (e) => {
     e.preventDefault();
@@ -25,20 +26,19 @@ const DetailProduk = ({ ...props }) => {
     console.log(hargaTawar);
     console.log(menawar);
 
-
     // send API
-    var FormData = require('form-data');
+    var FormData = require("form-data");
     var data = new FormData();
-    data.append('hargaTawar', hargaTawar);
+    data.append("hargaTawar", hargaTawar);
 
     var config = {
-      method: 'put',
+      method: "put",
       url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
       headers: {
-        'Authorization': `Bearer ${Token.access_token}`,
+        Authorization: `Bearer ${token.access_token}`,
         // ...data.getHeaders()
       },
-      data: data
+      data: data,
     };
 
     axios(config)
@@ -46,33 +46,28 @@ const DetailProduk = ({ ...props }) => {
         console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        alert("Silahkan login dulu");
       });
-
   };
-
-  
 
   // ************* Get Data By Id *************
   useEffect(() => {
     var config = {
-      method: 'get',
+      method: "get",
       url: `https://asix-store.herokuapp.com/detail-barang/${idBarang}`,
-      headers: {}
+      headers: {},
     };
 
     axios(config)
       .then(function (response) {
-        // console.log();
-        setDataBarang(response.data)
+        console.log(response.data);
+        setDataBarang(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
     console.log(DataBarang);
-
-  }, [])
-
+  }, []);
 
   // Format Rupiah
   const formatRupiah = (value) => {
@@ -91,15 +86,13 @@ const DetailProduk = ({ ...props }) => {
 
     // Append all string
     if (thousand) {
-      let separator = remainder ? '.' : '';
-      rupiah += separator + thousand.join('.');
+      let separator = remainder ? "." : "";
+      rupiah += separator + thousand.join(".");
     }
 
     // Display output
     return `Rp ${rupiah}`;
   };
-
-  
 
   return (
     <div>
@@ -158,27 +151,32 @@ const DetailProduk = ({ ...props }) => {
               <p>{DataBarang.tipeBarang}</p>
               <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
-              {props.role === "merchant" && (
+              {pengguna === "merchant" && (
                 <div className="d-grid gap-2">
-                  <button type="button" className="btn btn_publish">
+                  {/* <button type="button" className="btn btn_publish">
                     Terbitkan
-                  </button>
+                  </button> */}
                   <button type="button" className="btn btn_edit">
                     Edit
                   </button>
                 </div>
               )}
 
-              {props.role === "customer" && (
+              {pengguna === "customer" && (
                 <div className="d-grid gap-2">
                   {menawar ? (
                     <button type="button" className="btn btn-secondary rounded-pill" disabled>
                       Menunggu Respon Penjual
                     </button>
                   ) : (
-                    <button type="button" className="btn btn_publish" data-bs-toggle="modal" data-bs-target="#modalTawar">
-                      Saya tertarik dan ingin nego
-                    </button>
+                    <div className="d-grid gap-2">
+                      <button type="button" className="btn btn_publish" data-bs-toggle="modal" data-bs-target="#modalTawar">
+                        Saya tertarik dan ingin nego
+                      </button>
+                      <button type="button" className="btn btn_edit" data-bs-toggle="modal" data-bs-target="#modalTawar">
+                        Tambahkan ke wishlist
+                      </button>
+                    </div>
                   )}
                 </div>
               )}
@@ -202,11 +200,11 @@ const DetailProduk = ({ ...props }) => {
         {/* deskripsi produk */}
         <div className="container w-100 mt-5 mx-auto px-4 py-3 shadow product_desc">
           <h3>Deskripsi</h3>
-          <p>
-
-            {DataBarang.deskripsi}
-
-          </p>
+          <p>{DataBarang.deskripsi}</p>
+          <ul>
+            <li>Merk: {DataBarang.merk}</li>
+            <li>Seri: {DataBarang.seri}</li>
+          </ul>
         </div>
       </div>
 
@@ -253,6 +251,10 @@ const DetailProduk = ({ ...props }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
 
-
-export default DetailProduk;
+export default connect(mapStateToProps)(DetailProduk);

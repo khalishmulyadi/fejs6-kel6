@@ -29,9 +29,9 @@ const FormLogin = (props) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await authService.loginUser(email, password).then(() => {
-        props.getUserDetail();
-        props.setLoginStatus();
+      await authService.loginUser(email, password).then(async () => {
+        await props.getUserDetail();
+        // props.setLoginStatus();
         setError(false);
 
         // navigate("/homepage", { replace: true });

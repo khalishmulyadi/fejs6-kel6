@@ -21,7 +21,7 @@ const NavbarDesktop = (props) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     authService.logout();
-    navigate("/auth/login");
+    window.location.replace("/auth/login");
   };
 
   return (
