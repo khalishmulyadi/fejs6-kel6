@@ -13,11 +13,13 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const { idBarang } = useParams();
   const [DataBarang, setDataBarang] = useState([]);
 
+
   // useEffect(() => {
   //   props.getUserDetail();
   // }, []);
 
   const token = JSON.parse(sessionStorage.getItem("user"));
+
 
   const handleTawar = (e) => {
     e.preventDefault();
