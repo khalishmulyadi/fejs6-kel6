@@ -14,9 +14,6 @@ const DetailProduk = ({ ...props }) => {
   const { idBarang } = useParams();
   const [DataBarang, setDataBarang] = useState([])
 
-  useEffect(() => {
-    props.getUserDetail();
-  }, []);
 
   const handleTawar = (e) => {
     e.preventDefault();
