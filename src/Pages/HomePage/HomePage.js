@@ -6,12 +6,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.css";
-import DetailProduct from "../DetailProduct/DetailProduct";
-const HomePage = () => {
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import getUserDetail from "../../redux/actions/getUserDetail";
+
+const HomePage = (props) => {
   var axios = require("axios");
   const [Barang, setBarang] = useState([]);
 
   const slides = [];
+
+  const navigate = useNavigate();
 
   for (let i = 0; i < 5; i += 1) {
     slides.push(
@@ -30,18 +35,36 @@ const HomePage = () => {
 
     axios(config)
       .then(function (response) {
+        console.log(response.data);
         setBarang(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    console.log(Barang);
   }, []);
 
+  useEffect(() => {
+    // props.getUserDetail();
+    if (props.loginStatus === true) {
+      navigate("/homepage");
+    }
+  }, [props.loginStatus]);
+
+  const filterBarang = Barang.filter((barang) => {
+    return barang.statusBarang === "Availabel";
+  });
+
   const handleCardProduct = () => {
-    return Barang.map((value, index) => {
-      return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+    const filterBarang = Barang.filter((barang) => {
+      return barang.statusBarang === "Availabel";
+    });
+
+    return filterBarang.map((value, index) => {
+      if (props.loginStatus === true) {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/${value.barangId}`} />;
+      } else {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/p/${value.barangId}`} />;
+      }
     });
   };
 
@@ -89,4 +112,16 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserDetail: () => dispatch(getUserDetail()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

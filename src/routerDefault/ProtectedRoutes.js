@@ -4,7 +4,7 @@ import { Outlet, Navigate, useNavigate, useLocation } from "react-router-dom";
 import getUserDetail from "../redux/actions/getUserDetail";
 
 const ProtectedRoutes = (props) => {
-  const user = localStorage.getItem("user");
+  const user = sessionStorage.getItem("user");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,7 +18,7 @@ const ProtectedRoutes = (props) => {
   //   return <Navigate to="/auth/login" />;
   // }
 
-  return props.dataUser ? <Outlet /> : <Navigate to="/auth/login" state={{ from: location }} replace />;
+  return props.dataUser ? <Outlet /> : <Navigate to="/auth/login" replace />;
 };
 
 const mapStateToProps = (state) => {
