@@ -64,6 +64,10 @@
   content: none;
 }
 
+.dropdown-toggle.menu_user a {
+  color: #000;
+}
+
 .drop_notif ul {
   width: max-content;
   border-radius: 16px;

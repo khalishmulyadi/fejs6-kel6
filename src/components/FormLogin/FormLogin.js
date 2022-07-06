@@ -30,10 +30,12 @@ const FormLogin = (props) => {
     e.preventDefault();
     try {
       await authService.loginUser(email, password).then(() => {
+        props.getUserDetail();
         props.setLoginStatus();
         setError(false);
 
-        navigate("/homepage", { replace: true });
+        // navigate("/homepage", { replace: true });
+        navigate("/homepage");
         // window.location.replace();
       });
     } catch (error) {

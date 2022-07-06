@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import CardProduct from "../CardProduct/CardProduct";
@@ -7,36 +7,62 @@ import "./DaftarjualDesktop.css";
 import seller from "../../img/Rectangle 33.png";
 import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
+import { connect } from "react-redux";
 
-const DaftarJualDesktop = (role) => {
-  const [first, setfirst] = useState(1);
+const DaftarJualDesktop = (props) => {
+  const [tabActive, setTabActive] = useState(1);
+  const [dataTransaksi1, setDataTransaksi1] = useState([]);
+  const [dataTransaksi2, setDataTransaksi2] = useState([]);
+  const [dataTransaksi3, setDataTransaksi3] = useState([]);
+
   const navigate = useNavigate();
+
+  const token = sessionStorage.getItem("user");
+
+  const getDataTransaksi = (userId, statusBarang) => {
+    var axios = require("axios");
+
+    var config = {
+      method: "get",
+      url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        if (statusBarang === 1) {
+          setDataTransaksi1(response.data);
+        } else if (statusBarang === 2) {
+          setDataTransaksi2(response.data);
+        } else if (statusBarang === 3) {
+          setDataTransaksi3(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getDataTransaksi(props.idUser, 1);
+    getDataTransaksi(props.idUser, 2);
+    getDataTransaksi(props.idUser, 3);
+  }, [props.dataUser]);
 
   const carDefault = () => {
     return (
       <div className="container-card-daftarjualdesktop">
         <div className="container-btn-add-product-daftarjualdesktop">
-          {role.role === "seller" ? (
-            <button
-              onClick={() => {
-                handleAddProduct();
-              }}
-              className="btn-add-product-daftarjualdesktop"
-            >
+          {props.role === 2 ? (
+            <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
               <i className="bi bi-plus-lg"></i>
               <label>Tambah Produk</label>
-            </button>
+            </a>
           ) : null}
         </div>
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
       </div>
     );
   };
@@ -58,23 +84,19 @@ const DaftarJualDesktop = (role) => {
           <img alt="" src={none} />
         </div>
 
-        <div className="txt-produk-diminati-daftarjualdesktop">Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok</div>
+        <div className="txt-produk-diminati-daftarjualdesktop">Belum ada produkmu yang terjual nih, sabar ya rejeki nggak kemana kok</div>
       </div>
     );
   };
 
   const handleContentCard = () => {
-    if (first === 1) {
+    if (tabActive === 1) {
       return carDefault();
-    } else if (first === 2) {
+    } else if (tabActive === 2) {
       return carDefaultdua();
-    } else if (first === 3) {
+    } else if (tabActive === 3) {
       return carDefaulttiga();
     }
-  };
-
-  const handleAddProduct = () => {
-    navigate("/tambah-product");
   };
 
   return (
@@ -84,7 +106,7 @@ const DaftarJualDesktop = (role) => {
 
         <Container className="container-content-daftarjualdesktop">
           <Row>
-            <Col xs={12}>{role.role === "seller" ? <strong> Daftar Jual Saya</strong> : <strong> Daftar Beli Saya</strong>}</Col>
+            <Col xs={12}>{props.role === 2 ? <strong> Daftar Jual Saya</strong> : <strong> Daftar Beli Saya</strong>}</Col>
           </Row>
 
           {/* card nama penjual */}
@@ -94,12 +116,12 @@ const DaftarJualDesktop = (role) => {
                 <div className="container-content-card-daftarjualdesktop">
                   <div className="container-img-txt-daftarjualdesktop">
                     <div className="container-img-daftarjuadesktop">
-                      <img alt="" src={seller} className="img-penjual-dafarjualdesktop" />
+                      <img alt="" src={`data:image/png;base64,${props.dataUser.img}`} className="img-penjual-dafarjualdesktop" />
                     </div>
 
                     <div className="txt-daftarjualdesktop">
-                      {role.role === "seller" ? <strong> Nama Penjual</strong> : <strong> Nama Pembeli</strong>}
-                      <p>Kota</p>
+                      {props.role === 2 ? <strong> {props.dataUser.nama}</strong> : <strong>{props.dataUser.nama} </strong>}
+                      <p>{props.dataUser.kota}</p>
                     </div>
                   </div>
 
@@ -117,10 +139,10 @@ const DaftarJualDesktop = (role) => {
                 <div className="content-card-kategori-daftarjualdesktop">
                   <strong> Kategori</strong>
 
-                  {role.role === "seller" ? (
+                  {props.role === 2 ? (
                     <button
                       onClick={() => {
-                        setfirst(1);
+                        setTabActive(1);
                       }}
                       className="button-kategori-produk-daftarjual"
                     >
@@ -134,7 +156,7 @@ const DaftarJualDesktop = (role) => {
                   ) : (
                     <button
                       onClick={() => {
-                        setfirst(1);
+                        setTabActive(1);
                       }}
                       className="button-kategori-produk-daftarjual"
                     >
@@ -148,10 +170,10 @@ const DaftarJualDesktop = (role) => {
                   )}
 
                   <hr />
-                  {role.role === "seller" ? (
+                  {props.role === 2 ? (
                     <button
                       onClick={() => {
-                        setfirst(2);
+                        setTabActive(2);
                       }}
                       className="button-kategori-produk-daftarjual"
                     >
@@ -166,7 +188,7 @@ const DaftarJualDesktop = (role) => {
                   ) : (
                     <button
                       onClick={() => {
-                        setfirst(2);
+                        setTabActive(2);
                       }}
                       className="button-kategori-produk-daftarjual"
                     >
@@ -182,10 +204,10 @@ const DaftarJualDesktop = (role) => {
 
                   <hr />
 
-                  {role.role === "seller" ? (
+                  {props.role === 2 ? (
                     <button
                       onClick={() => {
-                        setfirst(3);
+                        setTabActive(3);
                       }}
                       className="button-kategori-produk-daftarjual"
                     >
@@ -200,7 +222,7 @@ const DaftarJualDesktop = (role) => {
                   ) : (
                     <button
                       onClick={() => {
-                        setfirst(3);
+                        setTabActive(3);
                       }}
                       className="button-kategori-produk-daftarjual"
                     >
@@ -225,4 +247,12 @@ const DaftarJualDesktop = (role) => {
   );
 };
 
-export default DaftarJualDesktop;
+const mapStateToProps = (state) => {
+  return {
+    dataUser: state.userReducer.dataUser,
+    idUser: state.userReducer.idUser,
+    role: state.userReducer.role,
+  };
+};
+
+export default connect(mapStateToProps)(DaftarJualDesktop);

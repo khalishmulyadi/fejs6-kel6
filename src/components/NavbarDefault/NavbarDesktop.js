@@ -47,8 +47,10 @@ const NavbarDesktop = (props) => {
           {props.loginStatus ? (
             <div className="col-3">
               <div className="btn-group drop_menu">
-                <button type="button" className="btn mt-3 dropdown-toggle menu_user" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i className="bi bi-list-ul"></i>
+                <button type="button" className="btn mt-3 dropdown-toggle menu_user">
+                  <a href="/daftar-jual">
+                    <i className="bi bi-list-ul"></i>
+                  </a>
                 </button>
               </div>
 

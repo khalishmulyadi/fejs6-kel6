@@ -28,11 +28,11 @@ const HomePage = () => {
     };
 
     axios(config)
-      .then(function (response) {
+      .then(function(response) {
         console.log(response.data);
         setBarang(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, []);
