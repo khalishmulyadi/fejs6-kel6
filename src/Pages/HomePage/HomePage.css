@@ -50,7 +50,7 @@
 
 .section2{
   width: 100%;
-
+  margin-top: 2.5rem;
 }
 .button-homepage{
   display: grid;
@@ -59,6 +59,7 @@
   margin-top: 5px;
   margin-bottom: 15px;
 }
+
 .konten{
   display: flex;
   flex-wrap: wrap;

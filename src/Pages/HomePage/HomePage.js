@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import NavbarDefault from "../../components/NavbarDefault/NavbarDefault";
 import gitarSwiper from "../../img/gitar-swiper.png";
@@ -9,16 +9,84 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.css";
-const HomePage = () => {
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import getUserDetail from "../../redux/actions/getUserDetail";
+
+const HomePage = (props) => {
+  var axios = require("axios");
+  const [Barang, setBarang] = useState([]);
+
   const slides = [];
 
-  return (
+<<<<<<< HEAD
+=======
+  const navigate = useNavigate();
 
+  for (let i = 0; i < 5; i += 1) {
+    slides.push(
+      <SwiperSlide key={`slide-${i}`}>
+        <img src={Banner} alt={`Slide ${i}`}></img>
+      </SwiperSlide>
+    );
+  }
+
+  useEffect(() => {
+    var config = {
+      method: "get",
+      url: "https://asix-store.herokuapp.com/barang",
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setBarang(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // props.getUserDetail();
+    if (props.loginStatus === true) {
+      navigate("/homepage");
+    }
+  }, [props.loginStatus]);
+
+  const filterBarang = Barang.filter((barang) => {
+    return barang.statusBarang === "Availabel";
+  });
+
+  const handleCardProduct = () => {
+    const filterBarang = Barang.filter((barang) => {
+      return barang.statusBarang === "Availabel";
+    });
+
+    return filterBarang.map((value, index) => {
+      if (props.loginStatus === true) {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/${value.barangId}`} />;
+      } else {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/p/${value.barangId}`} />;
+      }
+    });
+  };
+
+>>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
+  return (
     <div className="container">
+<<<<<<< HEAD
     <div className="nav-custom">
       <NavbarDefault />
     </div>
     
+=======
+      <div className="nav-custom">
+        <NavbarDefault />
+      </div>
+
+>>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
       <div className="container section1">
         <div className="swiper-konten">
           <React.Fragment>
@@ -80,7 +148,6 @@ const HomePage = () => {
           </React.Fragment>
         </div>
       </div>
-
       <div className="container section2">
         <p>
           <strong>Telurusi Kategori</strong>
@@ -98,6 +165,7 @@ const HomePage = () => {
           </button>
         </div>
 
+<<<<<<< HEAD
         <div className="konten">
           <CardProduct />
           <CardProduct />
@@ -114,9 +182,24 @@ const HomePage = () => {
         <button type="button" className="btn btn-secondary button-jual-homepage" Style="position: fixed; bottom:20px;">
             <i className="bi bi-plus"></i> Jual
         </button>
+=======
+        <div className="konten row row-cols-2 row-cols-md-4">{handleCardProduct()}</div>
+>>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
       </div>
     </div>
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserDetail: () => dispatch(getUserDetail()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

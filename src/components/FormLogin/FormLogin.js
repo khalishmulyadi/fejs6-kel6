@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import loginImage from "../../img/loginsecondhand.png";
 import "./FormLogin.css";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
+import getUserDetail from "../../redux/actions/getUserDetail";
 
 const FormLogin = (props) => {
   const [email, setEmail] = useState("");
@@ -19,22 +20,23 @@ const FormLogin = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    props.setLoginStatus();
-    console.log(props.loginStatus);
+    // props.getUserDetail();
+    if (props.loginStatus === true) {
+      navigate("/homepage", { replace: true });
+    }
   }, []);
-  if (props.loginStatus === true) {
-    navigate("/homepage", { replace: true });
-  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await authService.loginUser(email, password).then(() => {
+      await authService.loginUser(email, password).then(async () => {
+        await props.getUserDetail();
         // props.setLoginStatus();
         setError(false);
 
+        // navigate("/homepage", { replace: true });
         navigate("/homepage");
-        // window.location.reload();
+        // window.location.replace();
       });
     } catch (error) {
       // console.log(error);
@@ -44,6 +46,7 @@ const FormLogin = (props) => {
 
   return (
     <div>
+      {console.log(props.loginStatus)}
       <div className="container-fluid m-0">
         <div className="row login_group">
           <div className="d-none d-sm-flex col-sm-6 p-0">
@@ -55,9 +58,14 @@ const FormLogin = (props) => {
                 Email atau Password yang kamu masukkan salah!
               </div>
             ) : null}
-
+            <div className="back_icon_desktop">
+              <a href="/">
+                <i className="bi bi-arrow-left me-2"></i>
+                Kembali ke homepage
+              </a>
+            </div>
             <div className="back_icon">
-              <a href="/#">
+              <a href="/">
                 <i className="bi bi-arrow-left"></i>
               </a>
             </div>
@@ -103,6 +111,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setLoginStatus: () => dispatch(setLoginStatus()),
+    getUserDetail: () => dispatch(getUserDetail()),
   };
 };
 

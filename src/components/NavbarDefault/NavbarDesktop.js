@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import authService from "../../services/auth.service";
@@ -7,16 +7,48 @@ import { useNavigate } from "react-router-dom";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
-  useEffect(() => {
-    props.setLoginStatus();
-  }, []);
-  console.log(props.loginStatus);
+  var axios = require('axios');
+  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem('user')));
+  const [DataNotif, setDataNotif] = useState([]);
+
 
   const navigate = useNavigate();
   const handleLogout = () => {
     authService.logout();
-    navigate("/auth/login");
+    window.location.replace("/auth/login");
   };
+
+
+  const handleGetNotif = () => {
+    var config = {
+      method: 'get',
+      url: `https://asix-store.herokuapp.com/user/notifikasi/${props.userId}/Bidding`,
+      headers: {
+        'Authorization': `Bearer ${Token.access_token}`}
+    };
+
+    axios(config)
+      .then(function (response) {
+        setDataNotif(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const handleMapDataNotif = () => {
+    return DataNotif.map((value, index) => {
+      return <Notifikasi
+        namaProduk={value.namaBarang}
+        harga={value.hargaBarang}
+        hargaTawar={value.hargaTawar}
+        date={value.tanggalTawar}
+        img={value.gambarBarang}
+        key={index}
+      />
+    })
+  }
+
 
   return (
     <div>
@@ -41,32 +73,28 @@ const NavbarDesktop = (props) => {
           {props.loginStatus ? (
             <div className="col-3">
               <div className="btn-group drop_menu">
-                <button type="button" className="btn mt-3 dropdown-toggle menu_user" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i className="bi bi-list-ul"></i>
+                <button type="button" className="btn mt-3 dropdown-toggle menu_user">
+                  <a href="/daftar-jual">
+                    <i className="bi bi-list-ul"></i>
+                  </a>
                 </button>
               </div>
 
               <div className="btn-group drop_notif">
-                <button type="button" className="btn mt-3 dropdown-toggle notifikasi_user" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button"
+                  className="btn mt-3 dropdown-toggle notifikasi_user"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  onClick={handleGetNotif}
+                >
                   <i className="bi bi-bell"></i>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <a className="dropdown-item px-4" href="/#">
-                      <Notifikasi />
-                    </a>
-                    <a className="dropdown-item px-4" href="/#">
-                      <Notifikasi />
-                    </a>
-                    <a className="dropdown-item px-4" href="/#">
-                      <Notifikasi />
+                      {handleMapDataNotif()}
                     </a>
                   </li>
-                  {/* <li>
-                    <a className="dropdown-item" href="/#">
-                      <Notifikasi />
-                    </a>
-                  </li> */}
                 </ul>
               </div>
 
@@ -77,7 +105,7 @@ const NavbarDesktop = (props) => {
 
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <a className="dropdown-item" href="/edit-profile">
+                    <a className="dropdown-item" href="/update-profile">
                       Ubah Akun
                     </a>
                   </li>
@@ -108,13 +136,10 @@ const NavbarDesktop = (props) => {
 const mapStateToProps = (state) => {
   return {
     loginStatus: state.userReducer.isLoggedIn,
+    userId: state.userReducer.idUser,
+    dataUser: state.userReducer.dataUser
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setLoginStatus: () => dispatch(setLoginStatus()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarDesktop);
+export default connect(mapStateToProps)(NavbarDesktop);
