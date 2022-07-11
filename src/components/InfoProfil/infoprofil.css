@@ -1,3 +1,8 @@
+
+.infoProfil {
+  width: 576px;
+  height: 100vh;
+}
 .headerProfil {
   padding: 20px;
   display: flex;
