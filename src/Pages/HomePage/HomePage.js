@@ -19,14 +19,12 @@ const HomePage = (props) => {
 
   const slides = [];
 
-<<<<<<< HEAD
-=======
   const navigate = useNavigate();
 
   for (let i = 0; i < 5; i += 1) {
     slides.push(
       <SwiperSlide key={`slide-${i}`}>
-        <img src={Banner} alt={`Slide ${i}`}></img>
+        <img src={gitarSwiper} alt={`Slide ${i}`}></img>
       </SwiperSlide>
     );
   }
@@ -73,20 +71,12 @@ const HomePage = (props) => {
     });
   };
 
->>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
   return (
     <div className="container">
-<<<<<<< HEAD
-    <div className="nav-custom">
-      <NavbarDefault />
-    </div>
-    
-=======
       <div className="nav-custom">
         <NavbarDefault />
       </div>
 
->>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
       <div className="container section1">
         <div className="swiper-konten">
           <React.Fragment>
@@ -165,26 +155,7 @@ const HomePage = (props) => {
           </button>
         </div>
 
-<<<<<<< HEAD
-        <div className="konten">
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-        </div>
-        
-      </div>
-      <div className="" Style="text-align: center;">
-        <button type="button" className="btn btn-secondary button-jual-homepage" Style="position: fixed; bottom:20px;">
-            <i className="bi bi-plus"></i> Jual
-        </button>
-=======
         <div className="konten row row-cols-2 row-cols-md-4">{handleCardProduct()}</div>
->>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
       </div>
     </div>
   );
