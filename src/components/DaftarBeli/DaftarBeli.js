@@ -3,7 +3,7 @@ import MediaQuery from "react-responsive";
 import DaftarBeliDesktop from "./DaftarBeliDesktop";
 import DaftarBeliMobile from "./DaftarBeliMobile";
 
-const DaftarJual = (role) => {
+const DaftarBeli = (role) => {
   return (
     <div>
       <MediaQuery minWidth={576}>
@@ -17,4 +17,4 @@ const DaftarJual = (role) => {
   );
 };
 
-export default DaftarJual;
+export default DaftarBeli;

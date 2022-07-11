@@ -99,7 +99,7 @@ const AkunSayaMobile = (props) => {
                 )}
 
                 {dataUser.roles[0].idRole === 1 && (
-                  <a href="tambah-product">
+                  <a href="homepage">
                     <li>
                       <i className="bi bi-cart"></i>
                       <span>Beli</span>

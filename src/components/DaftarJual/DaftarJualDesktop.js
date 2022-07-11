@@ -8,6 +8,7 @@ import seller from "../../img/Rectangle 33.png";
 import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const DaftarJualDesktop = (props) => {
   const [tabActive, setTabActive] = useState(1);
@@ -20,8 +21,6 @@ const DaftarJualDesktop = (props) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   const getDataPenjualan = (userId, statusBarang) => {
-    var axios = require("axios");
-
     var config = {
       method: "get",
       url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
@@ -56,10 +55,12 @@ const DaftarJualDesktop = (props) => {
     return (
       <div className="container-card-daftarjualdesktop">
         <div className="container-btn-add-product-daftarjualdesktop">
-          <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
-            <i className="bi bi-plus-lg"></i>
-            <label>Tambah Produk</label>
-          </a>
+          {props.role === 2 ? (
+            <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
+              <i className="bi bi-plus-lg"></i>
+              <label>Tambah Produk</label>
+            </a>
+          ) : null}
 
           {dataJualan.map((value, index) => {
             return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
@@ -70,7 +71,7 @@ const DaftarJualDesktop = (props) => {
   };
 
   const carDefaultdua = () => {
-    return dataDiminati === [] ? (
+    return dataDiminati.length > 0 ? (
       dataDiminati.map((value, index) => {
         return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
       })
@@ -86,7 +87,7 @@ const DaftarJualDesktop = (props) => {
   };
 
   const carDefaulttiga = () => {
-    return dataTerjual === [] ? (
+    return dataTerjual.length > 0 ? (
       dataTerjual.map((value, index) => {
         return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
       })

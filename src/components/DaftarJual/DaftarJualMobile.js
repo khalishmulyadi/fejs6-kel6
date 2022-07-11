@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import CardProduct from "../CardProduct/CardProduct";
 
-import fotoPenjual from "../../img/gaeul.jpg";
 import tambahProduk from "../../img/tambah_produk.png";
-import kosongPeminat from "../../img/nol_peminat.png";
+import kosongPeminat from "../../img/undraw_selection_re_ycpo 1.png";
 
 // css
 import "./DaftarJualMobile.css";
@@ -131,7 +130,7 @@ const DaftarJualMobile = (props) => {
           {/* content diminati start */}
 
           {tabActive === 2 &&
-            (dataDiminati === [] ? (
+            (dataDiminati.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataDiminati.map((value, index) => {
@@ -146,6 +145,7 @@ const DaftarJualMobile = (props) => {
             ) : (
               <div>
                 <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
+                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
               </div>
             ))}
 
@@ -154,7 +154,7 @@ const DaftarJualMobile = (props) => {
           {/* content terjual start */}
 
           {tabActive === 3 &&
-            (dataTerjual === [] ? (
+            (dataTerjual.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataTerjual.map((value, index) => {
@@ -169,6 +169,7 @@ const DaftarJualMobile = (props) => {
             ) : (
               <div>
                 <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
+                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
               </div>
             ))}
 
