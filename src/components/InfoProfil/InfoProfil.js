@@ -3,6 +3,7 @@ import logo from "../../img/Rectangle 127.png";
 import upFoto from "../../img/upFoto.png";
 
 import ReCAPTCHA from "react-google-recaptcha";
+import { Toast, ToastContainer } from "react-bootstrap";
 
 // redux
 import { connect } from "react-redux";
@@ -36,43 +37,8 @@ const InfoProfil = (props) => {
       });
   }
 
-  // get user detail as default value
-  // useEffect(() => {
-  //   var axios = require("axios");
-
-  //   const user = JSON.parse(localStorage.getItem("user"));
-
-  //   const email = JSON.parse(localStorage.getItem("email"));
-
-  //   var config = {
-  //     method: "get",
-  //     url: `https://asix-store.herokuapp.com/user/display/${email}`,
-  //     headers: {
-  //       Authorization: `Bearer ${user.access_token}`,
-  //     },
-  //   };
-
-  //   axios(config)
-  //     .then(function (response) {
-  //       console.log("ini response API", response.data);
-  //       setUserId(response.data.userId);
-  //       setAccessToken(user.access_token);
-  //       setNama(response.data.nama);
-  //       setKota(response.data.kota);
-  //       setAlamat(response.data.alamat);
-  //       setNoTelepon(response.data.noTelepon);
-  //       setFotoProfil(response.data.img);
-  //       setRole(response.data.roles);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //       alert(error.response.data.error_message);
-  //       window.location.replace("/auth/login");
-  //     });
-  // }, []);
-
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     if (props.dataUser) {
       setAccessToken(user.access_token);
@@ -173,7 +139,8 @@ const InfoProfil = (props) => {
         setUpdateAlert(true);
       })
       .catch(function (error) {
-        console.log(error);
+        alert("Gagal update data");
+        // console.log(error);
       });
   };
 
@@ -187,8 +154,6 @@ const InfoProfil = (props) => {
       </div>
 
       <div className="d-flex">
-        {/* {console.log("local state", fotoProfil)} */}
-        {console.log("ini data user dari redux", props.dataUser)}
         {props.dataUser.userId === undefined ? (
           <div className="mx-auto">
             <h1 className="text-center">Loading...</h1>
@@ -202,9 +167,15 @@ const InfoProfil = (props) => {
             </div>
             <form onSubmit={handleUpdateProfile}>
               {updateAlert ? (
-                <div className="alert alert-success" role="alert">
-                  Berhasil update profile!
-                </div>
+                <ToastContainer className="p-3" position="top-end">
+                  <Toast show={updateAlert} onClose={() => setUpdateAlert(false)} bg="success" delay={3000} autohide>
+                    <Toast.Header>
+                      <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                      <strong className="me-auto">Success</strong>
+                    </Toast.Header>
+                    <Toast.Body className="text-light">Berhasil update data!</Toast.Body>
+                  </Toast>
+                </ToastContainer>
               ) : null}
               <div className="upFoto">
                 <label htmlFor="btn_upload_foto_profile" className="btn_upload_foto_profile">
@@ -301,7 +272,9 @@ const InfoProfil = (props) => {
                     type="text"
                     value={`${noTelepon}`}
                     pattern="[0-8]{2}[0-9]{10}"
-                    placeholder="contoh: 8123456789"
+
+                    placeholder="contoh: 08123456789"
+
                     aria-label=".form-control-lg example"
                     onChange={(e) => {
                       setNoTelepon(e.target.value);

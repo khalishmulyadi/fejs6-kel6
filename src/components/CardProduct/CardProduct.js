@@ -1,10 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import productImage from "../../img/produk.png";
 
 // css
 import "./CardProduct.css";
 
-const CardProduct = ({ namaBarang, img, tipebarang, price }) => {
+const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect }) => {
+  const navigate = useNavigate();
 
   const formatRupiah = (value) => {
     if (!value || value == null) return `Rp 0`;
@@ -22,8 +25,8 @@ const CardProduct = ({ namaBarang, img, tipebarang, price }) => {
 
     // Append all string
     if (thousand) {
-      let separator = remainder ? '.' : '';
-      rupiah += separator + thousand.join('.');
+      let separator = remainder ? "." : "";
+      rupiah += separator + thousand.join(".");
     }
 
     // Display output
@@ -32,10 +35,9 @@ const CardProduct = ({ namaBarang, img, tipebarang, price }) => {
 
   return (
     <div>
-      <a href="product/product-detail" className="card_product">
+      <a href={redirect} className="card_product">
         <div className="card p-2 m-3">
-          <img src={`data:image/jpeg;base64,${img}`}
-            className="card-img-top product_image" alt="product_image" />
+          <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
           <div className="card-body">
             <h6 className="card-title">{namaBarang}</h6>
             <h6 className="card-subtitle mb-2 text-muted">{tipebarang}</h6>
@@ -47,4 +49,10 @@ const CardProduct = ({ namaBarang, img, tipebarang, price }) => {
   );
 };
 
-export default CardProduct;
+const mapStateToProps = (state) => {
+  return {
+    loginStatus: state.userReducer.isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(CardProduct);

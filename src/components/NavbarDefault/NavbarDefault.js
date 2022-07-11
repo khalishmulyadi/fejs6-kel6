@@ -5,7 +5,7 @@ import NavbarMobile from "./NavbarMobile";
 const NavbarDefault = (props) => {
   return (
     <div>
-      <MediaQuery minWidth={576}>
+      <MediaQuery minWidth={577}>
         <NavbarDesktop />
       </MediaQuery>
 

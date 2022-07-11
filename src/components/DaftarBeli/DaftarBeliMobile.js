@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import CardProduct from "../CardProduct/CardProduct";
-
-import tambahProduk from "../../img/tambah_produk.png";
 import kosongPeminat from "../../img/undraw_selection_re_ycpo 1.png";
 
 // css
-import "./DaftarJualMobile.css";
+import "./DaftarBeliMobile.css";
+
+// redux
 import { connect } from "react-redux";
 
-const DaftarJualMobile = (props) => {
+const DaftarBeliMobile = (props) => {
   const [tabActive, setTabActive] = useState(1);
-  const [dataJualan, setDataJualan] = useState([]);
-  const [dataDiminati, setDataDiminati] = useState([]);
-  const [dataTerjual, setDataTerjual] = useState([]);
+  const [dataTawaran, setDataTawaran] = useState([]);
+  const [dataWishlist, setDataWishlist] = useState([]);
+  const [dataRiwayatBeli, setDataRiwayatBeli] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const getDataPenjualan = (userId, statusBarang) => {
+  const getDataPembelian = (userId, statusBarang) => {
     var axios = require("axios");
 
     const user = JSON.parse(sessionStorage.getItem("user"));
 
     var config = {
       method: "get",
-      url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
+      url: `https://asix-store.herokuapp.com/daftar-beli/${userId}/${statusBarang}`,
       headers: {
         Authorization: `Bearer ${user.access_token}`,
       },
@@ -31,12 +32,10 @@ const DaftarJualMobile = (props) => {
     axios(config)
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
-        if (statusBarang === 1) {
-          setDataJualan(response.data);
-        } else if (statusBarang === 2) {
-          setDataDiminati(response.data);
-        } else if (statusBarang === 3) {
-          setDataTerjual(response.data);
+        if (statusBarang === "Bidding") {
+          setDataTawaran(response.data);
+        } else if (statusBarang === "Sold") {
+          setDataRiwayatBeli(response.data);
         }
       })
       .catch(function (error) {
@@ -45,14 +44,25 @@ const DaftarJualMobile = (props) => {
   };
 
   useEffect(() => {
-    getDataPenjualan(props.idUser, 1);
-    getDataPenjualan(props.idUser, 2);
-    getDataPenjualan(props.idUser, 3);
+    if (loading === true) {
+      getDataPembelian(props.idUser, "Bidding");
+      getDataPembelian(props.idUser, "Sold");
+      if (JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`)) === null) {
+        sessionStorage.setItem(`wishlist_${props.idUser}`, "[]");
+      } else {
+        const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+        if (storedWishlist !== []) {
+          setDataWishlist(storedWishlist);
+        }
+      }
+    } else {
+      setLoading(true);
+    }
   }, [props.loginStatus]);
 
   return (
     <div>
-      <NavbarDefault title={"Daftar Jual"} />
+      <NavbarDefault title={"Daftar Beli"} />
       {props.loginStatus == undefined ? (
         <div className="mx-auto">
           <h1 className="text-center">Loading...</h1>
@@ -107,36 +117,56 @@ const DaftarJualMobile = (props) => {
 
           {/* content produk start */}
 
-          {tabActive === 1 && (
-            <div className="container">
-              <div className="row row-cols-2">
-                <a href="/#">
-                  <img src={tambahProduk} className="btn_tambah_produk col" alt="tambah_produk" />
-                </a>
-
-                {dataJualan.map((value, index) => {
-                  return (
-                    <div className="col">
-                      <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
-                    </div>
-                  );
-                })}
+          {tabActive === 1 &&
+            (dataTawaran.length > 0 ? (
+              <div className="container">
+                <div className="row row-cols-2">
+                  {dataTawaran.map((value, index) => {
+                    return (
+                      <div className="col" key={index}>
+                        <CardProduct
+                          key={index}
+                          namaBarang={value.namaBarang}
+                          img={value.barangImg}
+                          tipebarang={value.tipeBarang}
+                          price={value.hargaBarang}
+                          ToDetailProduct={value.barangId}
+                          redirect={`/product/detail-product/${value.barangId}`}
+                        />
+                        ;
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          )}
+            ) : (
+              <div>
+                <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
+                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
+              </div>
+            ))}
 
           {/* content produk end */}
 
           {/* content diminati start */}
 
           {tabActive === 2 &&
-            (dataDiminati.length > 0 ? (
+            (dataWishlist.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
-                  {dataDiminati.map((value, index) => {
+                  {dataWishlist.map((value, index) => {
                     return (
-                      <div className="col">
-                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+                      <div className="col" key={index}>
+                        <CardProduct
+                          key={index}
+                          namaBarang={value.namaBarang}
+                          img={value.barangImg}
+                          tipebarang={value.tipeBarang}
+                          price={value.hargaBarang}
+                          ToDetailProduct={value.barangId}
+                          redirect={`/product/detail-product/${value.barangId}`}
+                        />
+                        ;
                       </div>
                     );
                   })}
@@ -154,13 +184,22 @@ const DaftarJualMobile = (props) => {
           {/* content terjual start */}
 
           {tabActive === 3 &&
-            (dataTerjual.length > 0 ? (
+            (dataRiwayatBeli.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
-                  {dataTerjual.map((value, index) => {
+                  {dataRiwayatBeli.map((value, index) => {
                     return (
-                      <div className="col">
-                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+                      <div className="col" key={index}>
+                        <CardProduct
+                          key={index}
+                          namaBarang={value.namaBarang}
+                          img={value.barangImg}
+                          tipebarang={value.tipeBarang}
+                          price={value.hargaBarang}
+                          ToDetailProduct={value.barangId}
+                          redirect={`/product/detail-product/${value.barangId}`}
+                        />
+                        ;
                       </div>
                     );
                   })}
@@ -191,4 +230,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DaftarJualMobile);
+export default connect(mapStateToProps)(DaftarBeliMobile);

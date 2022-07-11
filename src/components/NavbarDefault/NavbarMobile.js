@@ -48,14 +48,14 @@ const NavbarMobile = (props) => {
               <li className="list-group-item ">
                 <a href="/#">Notifikasi</a>
               </li>
-              {props.role[0]?.idRole === 1 && (
+              {props.role === 1 && (
                 <li className="list-group-item">
-                  <a href="/#">Daftar Pembelian</a>
+                  <a href="/daftar-beli">Daftar Pembelian</a>
                 </li>
               )}
-              {props.role[0]?.idRole === 2 && (
+              {props.role === 2 && (
                 <li className="list-group-item">
-                  <a href="/#">Daftar Penjualan</a>
+                  <a href="/daftar-jual">Daftar Penjualan</a>
                 </li>
               )}
               <li className="list-group-item">

@@ -3,27 +3,28 @@ import { useNavigate } from "react-router";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import CardProduct from "../CardProduct/CardProduct";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
-import "./DaftarjualDesktop.css";
+import "./DaftarBeliDesktop.css";
 import seller from "../../img/Rectangle 33.png";
 import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
 import { connect } from "react-redux";
-import axios from "axios";
 
-const DaftarJualDesktop = (props) => {
+const DaftarBeliDesktop = (props) => {
   const [tabActive, setTabActive] = useState(1);
-  const [dataJualan, setDataJualan] = useState([]);
-  const [dataDiminati, setDataDiminati] = useState([]);
-  const [dataTerjual, setDataTerjual] = useState([]);
+  const [dataTawaran, setDataTawaran] = useState([]);
+  const [dataWishlist, setDataWishlist] = useState([]);
+  const [dataRiwayatBeli, setDataRiwayatBeli] = useState([]);
 
   const navigate = useNavigate();
 
   const user = JSON.parse(sessionStorage.getItem("user"));
 
-  const getDataPenjualan = (userId, statusBarang) => {
+  const getDataPembelian = (userId, statusBarang) => {
+    var axios = require("axios");
+
     var config = {
       method: "get",
-      url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
+      url: `https://asix-store.herokuapp.com/daftar-beli/${userId}/${statusBarang}`,
       headers: {
         Authorization: `Bearer ${user.access_token}`,
       },
@@ -32,12 +33,10 @@ const DaftarJualDesktop = (props) => {
     axios(config)
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
-        if (statusBarang === 1) {
-          setDataJualan(response.data);
-        } else if (statusBarang === 2) {
-          setDataDiminati(response.data);
-        } else if (statusBarang === 3) {
-          setDataTerjual(response.data);
+        if (statusBarang === "Bidding") {
+          setDataTawaran(response.data);
+        } else if (statusBarang === "Sold") {
+          setDataRiwayatBeli(response.data);
         }
       })
       .catch(function (error) {
@@ -46,34 +45,35 @@ const DaftarJualDesktop = (props) => {
   };
 
   useEffect(() => {
-    getDataPenjualan(props.idUser, 1);
-    getDataPenjualan(props.idUser, 2);
-    getDataPenjualan(props.idUser, 3);
+    getDataPembelian(props.idUser, "Bidding");
+    getDataPembelian(props.idUser, "Sold");
+    const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+
+    if (storedWishlist !== []) {
+      setDataWishlist(storedWishlist);
+    }
   }, [props.loginStatus]);
 
   const carDefault = () => {
-    return (
-      <div className="container-card-daftarjualdesktop">
-        <div className="container-btn-add-product-daftarjualdesktop">
-          {props.role === 2 ? (
-            <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
-              <i className="bi bi-plus-lg"></i>
-              <label>Tambah Produk</label>
-            </a>
-          ) : null}
-
-          {dataJualan.map((value, index) => {
-            return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
-          })}
+    return dataTawaran.length > 0 ? (
+      dataTawaran.map((value, index) => {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/detail-product/${value.barangId}`} />;
+      })
+    ) : (
+      <div className="container-card-button2-daftarjualdesktop">
+        <div>
+          <img alt="" src={none} />
         </div>
+
+        <div className="txt-produk-diminati-daftarjualdesktop">Kamu belum membeli apapun, yuk belanja sekarang!</div>
       </div>
     );
   };
 
   const carDefaultdua = () => {
-    return dataDiminati.length > 0 ? (
-      dataDiminati.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
+    return dataWishlist.length > 0 ? (
+      dataWishlist.map((value, index) => {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/detail-product/${value.barangId}`} />;
       })
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
@@ -81,15 +81,15 @@ const DaftarJualDesktop = (props) => {
           <img alt="" src={none} />
         </div>
 
-        <div className="txt-produk-diminati-daftarjualdesktop">Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok</div>
+        <div className="txt-produk-diminati-daftarjualdesktop">Wishlist kamu kosong nih, ayo browsing lebih banyak</div>
       </div>
     );
   };
 
   const carDefaulttiga = () => {
-    return dataTerjual.length > 0 ? (
-      dataTerjual.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
+    return dataRiwayatBeli.length > 0 ? (
+      dataRiwayatBeli.map((value, index) => {
+        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/detail-product/${value.barangId}`} />;
       })
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
@@ -97,7 +97,7 @@ const DaftarJualDesktop = (props) => {
           <img alt="" src={none} />
         </div>
 
-        <div className="txt-produk-diminati-daftarjualdesktop">Belum ada produkmu yang terjual nih, sabar ya rejeki nggak kemana kok</div>
+        <div className="txt-produk-diminati-daftarjualdesktop">Kamu belum membeli apapun, yuk belanja sekarang!</div>
       </div>
     );
   };
@@ -120,13 +120,12 @@ const DaftarJualDesktop = (props) => {
         </div>
       ) : (
         <Container fluid>
+          {console.log(dataWishlist)}
           <NavbarDefault />
 
           <Container className="container-content-daftarjualdesktop">
             <Row>
-              <Col xs={12}>
-                <strong> Daftar Jual Saya</strong>
-              </Col>
+              <Col xs={12}>{props.role === 2 ? <strong> Daftar Jual Saya</strong> : <strong> Daftar Beli Saya</strong>}</Col>
             </Row>
 
             {/* card nama penjual */}
@@ -140,7 +139,7 @@ const DaftarJualDesktop = (props) => {
                       </div>
 
                       <div className="txt-daftarjualdesktop">
-                        <strong> {props.dataUser.nama}</strong>
+                        <strong>{props.dataUser.nama} </strong>
                         <p>{props.dataUser.kota}</p>
                       </div>
                     </div>
@@ -158,33 +157,31 @@ const DaftarJualDesktop = (props) => {
                 <Card className="card-kategori-daftarjualdesktop">
                   <div className="content-card-kategori-daftarjualdesktop">
                     <strong> Kategori</strong>
-
                     <button
                       onClick={() => {
                         setTabActive(1);
                       }}
-                      className="button-kategori-produk-daftarjual"
+                      className={`button-kategori-produk-daftarjual ${tabActive === 1 && "active"}`}
                     >
                       <div className="container-content-button-daftarjual">
                         <i className="bi bi-box"></i>
-                        <p className="txt-kategori-daftarjualdesktop"> Semua Produk</p>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 1 && "active"}`}> Menunggu Respon Penjual</p>
                       </div>
 
                       <img alt="" src={cevhron_right} />
                     </button>
 
                     <hr />
-
                     <button
                       onClick={() => {
                         setTabActive(2);
                       }}
-                      className="button-kategori-produk-daftarjual"
+                      className={`button-kategori-produk-daftarjual ${tabActive === 2 && "active"}`}
                     >
-                      <div className="container-content-button-daftarjual">
+                      <div className="container-content-button-daftarjual ">
                         {/* <img alt="" src={heart} /> */}
                         <i className="bi bi-heart"></i>
-                        <p className="txt-kategori-daftarjualdesktop">Diminati</p>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 2 && "active"}`}>Wishlist Saya</p>
                       </div>
 
                       <img alt="" src={cevhron_right} />
@@ -196,12 +193,12 @@ const DaftarJualDesktop = (props) => {
                       onClick={() => {
                         setTabActive(3);
                       }}
-                      className="button-kategori-produk-daftarjual"
+                      className={`button-kategori-produk-daftarjual ${tabActive === 3 && "active"}`}
                     >
                       <div className="container-content-button-daftarjual">
                         {/* <img alt="" src={dollar} /> */}
                         <i className="bi bi-currency-dollar"></i>
-                        <p className="txt-kategori-daftarjualdesktop">Terjual</p>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 3 && "active"}`}>Riwayat Pembelian</p>
                       </div>
 
                       <img alt="" src={cevhron_right} />
@@ -228,4 +225,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DaftarJualDesktop);
+export default connect(mapStateToProps)(DaftarBeliDesktop);

@@ -21,42 +21,42 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const token = JSON.parse(sessionStorage.getItem("user"));
 
   // ******* Handle Menawar *******
-  const handleTawar = (e) => {
-    e.preventDefault();
+  // const handleTawar = (e) => {
+  //   e.preventDefault();
 
-    if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
-      setMenawar(true);
-      setAlertTawar(true);
-      console.log(hargaTawar);
-      console.log(menawar);
+  //   if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
+  //     setMenawar(true);
+  //     setAlertTawar(true);
+  //     console.log(hargaTawar);
+  //     console.log(menawar);
 
-      // send API
-      var FormData = require("form-data");
-      var data = new FormData();
-      data.append("hargaTawar", hargaTawar);
+  //     // send API
+  //     var FormData = require("form-data");
+  //     var data = new FormData();
+  //     data.append("hargaTawar", hargaTawar);
 
-      var config = {
-        method: "put",
-        url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
-        headers: {
-          Authorization: `Bearer ${token.access_token}`,
-          // ...data.getHeaders()
-        },
-        data: data,
-      };
+  //     var config = {
+  //       method: "put",
+  //       url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
+  //       headers: {
+  //         Authorization: `Bearer ${token.access_token}`,
+  //         // ...data.getHeaders()
+  //       },
+  //       data: data,
+  //     };
 
-      axios(config)
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          alert("Silahkan login dulu");
-          window.location.replace("/auth/login");
-        });
-    } else {
-      alert("Mohon lengkapi data profile terlebih dahulu");
-    }
-  };
+  //     axios(config)
+  //       .then(function (response) {
+  //         console.log(response.data);
+  //       })
+  //       .catch(function (error) {
+  //         alert("Silahkan login dulu");
+  //         window.location.replace("/auth/login");
+  //       });
+  //   } else {
+  //     alert("Mohon lengkapi data profile terlebih dahulu");
+  //   }
+  // };
 
   // ************* Get Data Barang By Id *************
   useEffect(() => {
@@ -144,6 +144,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
   return (
     <div>
+      {console.log(filterWishlist)}
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
@@ -158,15 +159,9 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
       <div className="container mx-auto detail_produk">
         <div>
-          {props.loginStatus ? (
-            <a className="back_icon" href="/homepage">
-              <i className="bi bi-arrow-left-short"></i>
-            </a>
-          ) : (
-            <a className="back_icon" href="/">
-              <i className="bi bi-arrow-left-short"></i>
-            </a>
-          )}
+          <a className="back_icon" href="/#">
+            <i className="bi bi-arrow-left-short"></i>
+          </a>
         </div>
         <div className="row">
           <div className="col-sm-6 p-0">
@@ -295,7 +290,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
                 </div>
               </div>
 
-              <form onSubmit={handleTawar}>
+              <form>
                 <div className="mb-3">
                   <label htmlFor="recipient-name" className="col-form-label">
                     Harga tawar
