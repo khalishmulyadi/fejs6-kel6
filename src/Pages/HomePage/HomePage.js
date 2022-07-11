@@ -55,9 +55,9 @@ const HomePage = (props) => {
     }
   }, [props.loginStatus]);
 
-  const filterBarang = Barang.filter((barang) => {
-    return barang.statusBarang === "Availabel";
-  });
+  // const filterBarang = Barang.filter((barang) => {
+  //   return barang.statusBarang === "Availabel";
+  // });
 
   const handleCardProduct = () => {
     const filterBarang = Barang.filter((barang) => {

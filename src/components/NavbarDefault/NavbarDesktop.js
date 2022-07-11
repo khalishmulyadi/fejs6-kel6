@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
-  var axios = require('axios');
-  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem('user')));
+  var axios = require("axios");
+  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem("user")));
   const [DataNotif, setDataNotif] = useState([]);
-
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -18,13 +17,13 @@ const NavbarDesktop = (props) => {
     window.location.replace("/auth/login");
   };
 
-
   const handleGetNotif = () => {
     var config = {
-      method: 'get',
+      method: "get",
       url: `https://asix-store.herokuapp.com/user/notifikasi/${props.userId}/Bidding`,
       headers: {
-        'Authorization': `Bearer ${Token.access_token}`}
+        Authorization: `Bearer ${Token.access_token}`,
+      },
     };
 
     axios(config)
@@ -34,21 +33,13 @@ const NavbarDesktop = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const handleMapDataNotif = () => {
     return DataNotif.map((value, index) => {
-      return <Notifikasi
-        namaProduk={value.namaBarang}
-        harga={value.hargaBarang}
-        hargaTawar={value.hargaTawar}
-        date={value.tanggalTawar}
-        img={value.gambarBarang}
-        key={index}
-      />
-    })
-  }
-
+      return <Notifikasi namaProduk={value.namaBarang} harga={value.hargaBarang} hargaTawar={value.hargaTawar} date={value.tanggalTawar} img={value.gambarBarang} key={index} />;
+    });
+  };
 
   return (
     <div>
@@ -74,19 +65,20 @@ const NavbarDesktop = (props) => {
             <div className="col-3">
               <div className="btn-group drop_menu">
                 <button type="button" className="btn mt-3 dropdown-toggle menu_user">
-                  <a href="/daftar-jual">
-                    <i className="bi bi-list-ul"></i>
-                  </a>
+                  {props.roleUser === 2 ? (
+                    <a href="/daftar-jual">
+                      <i className="bi bi-list-ul"></i>
+                    </a>
+                  ) : (
+                    <a href="/daftar-beli">
+                      <i className="bi bi-list-ul"></i>
+                    </a>
+                  )}
                 </button>
               </div>
 
               <div className="btn-group drop_notif">
-                <button type="button"
-                  className="btn mt-3 dropdown-toggle notifikasi_user"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  onClick={handleGetNotif}
-                >
+                <button type="button" className="btn mt-3 dropdown-toggle notifikasi_user" data-bs-toggle="dropdown" aria-expanded="false" onClick={handleGetNotif}>
                   <i className="bi bi-bell"></i>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
@@ -137,9 +129,9 @@ const mapStateToProps = (state) => {
   return {
     loginStatus: state.userReducer.isLoggedIn,
     userId: state.userReducer.idUser,
-    dataUser: state.userReducer.dataUser
+    dataUser: state.userReducer.dataUser,
+    roleUser: state.userReducer.role,
   };
 };
-
 
 export default connect(mapStateToProps)(NavbarDesktop);

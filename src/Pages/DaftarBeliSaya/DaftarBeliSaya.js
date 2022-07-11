@@ -1,10 +1,10 @@
 import React from "react";
-import DaftarJual from "../../components/DaftarJual/DaftarJual";
+import DaftarBeli from "../../components/DaftarBeli/DaftarBeli";
 
 const DaftarBeliSaya = () => {
   return (
     <div>
-      <DaftarJual />
+      <DaftarBeli />
     </div>
   );
 };
