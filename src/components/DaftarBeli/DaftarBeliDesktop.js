@@ -63,7 +63,7 @@ const DaftarBeliDesktop = (props) => {
     return dataTawaran.length > 0 ? (
       <div className="container">
         <div className="row">
-          {dataTawaran.map((value, index) => {
+          {dataTawaran?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
                 <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
@@ -84,7 +84,7 @@ const DaftarBeliDesktop = (props) => {
   };
 
   const carDefaultdua = () => {
-    return dataWishlist.length > 0 ? (
+    return dataWishlist?.length > 0 ? (
       <div className="container">
         <div className="row">
           {dataWishlist.map((value, index) => {
@@ -108,7 +108,7 @@ const DaftarBeliDesktop = (props) => {
   };
 
   const carDefaulttiga = () => {
-    return dataRiwayatBeli.length > 0 ? (
+    return dataRiwayatBeli?.length > 0 ? (
       <div className="container">
         <div className="row">
           {dataRiwayatBeli.map((value, index) => {

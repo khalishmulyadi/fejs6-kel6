@@ -8,7 +8,7 @@ import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
   var axios = require("axios");
-  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem("user")));
+  const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem("user")));
   const [DataNotif, setDataNotif] = useState([]);
 
   const navigate = useNavigate();

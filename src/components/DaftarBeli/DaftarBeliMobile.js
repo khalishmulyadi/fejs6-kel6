@@ -121,7 +121,7 @@ const DaftarBeliMobile = (props) => {
             (dataTawaran.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
-                  {dataTawaran.map((value, index) => {
+                  {dataTawaran?.map((value, index) => {
                     return (
                       <div className="col" key={index}>
                         <CardProduct
@@ -151,7 +151,7 @@ const DaftarBeliMobile = (props) => {
           {/* content diminati start */}
 
           {tabActive === 2 &&
-            (dataWishlist.length > 0 ? (
+            (dataWishlist?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataWishlist.map((value, index) => {
@@ -184,7 +184,7 @@ const DaftarBeliMobile = (props) => {
           {/* content terjual start */}
 
           {tabActive === 3 &&
-            (dataRiwayatBeli.length > 0 ? (
+            (dataRiwayatBeli?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataRiwayatBeli.map((value, index) => {

@@ -13,11 +13,6 @@ const FormLogin = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
-  // console.log("token ada", props.loginStatus);
-
-  // const user = JSON.parse(localStorage.getItem("user"));
-  // console.log(user.access_token, user.refresh_token);
-
   const navigate = useNavigate();
 
   const token = JSON.parse(sessionStorage?.getItem("user"));
