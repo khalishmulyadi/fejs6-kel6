@@ -11,6 +11,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const [hargaTawar, setHargaTawar] = useState(0);
   const [DataBarang, setDataBarang] = useState([]);
   const [wishlist, setWishlist] = useState(JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)));
+  const [currentWishlist, setCurrentWishlist] = useState([]);
 
   if (JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)) === null) {
     sessionStorage.setItem(`wishlist_${props.userId}`, "[]");
@@ -106,7 +107,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
   useEffect(() => {
     const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`));
 
-    if (storedWishlist !== []) {
+    if (storedWishlist.length > 0) {
       setWishlist(storedWishlist);
     }
   }, [DataBarang]);
@@ -130,6 +131,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
   // menyimpan wishlist di sessionStorage
   useEffect(() => {
     sessionStorage.setItem(`wishlist_${props.userId}`, JSON.stringify(wishlist));
+    setCurrentWishlist(wishlist.filter((e) => e.barangId === DataBarang.barangId));
   }, [wishlist]);
 
   const delHandler = (barangIdWishlist) => {
@@ -140,10 +142,14 @@ const DetailProduk = ({ pengguna, ...props }) => {
     // console.log(updatedWishlist);
   };
 
-  const filterWishlist = wishlist.filter((e) => e.barangId === DataBarang.barangId);
+  // useEffect(() => {
+  //   setCurrentWishlist(wishlist.filter((e) => e.barangId === DataBarang.barangId));
+
+  // }, [wishlist]);
 
   return (
     <div>
+      {console.log(currentWishlist)}
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
@@ -230,7 +236,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
                         Saya tertarik dan ingin nego
                       </button>
 
-                      {filterWishlist.length > 0 ? (
+                      {currentWishlist.length > 0 ? (
                         <button type="button" className="btn btn_edit" onClick={() => delHandler(DataBarang.barangId)}>
                           Hapus dari wishlist
                         </button>

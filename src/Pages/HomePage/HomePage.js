@@ -19,14 +19,12 @@ const HomePage = (props) => {
 
   const slides = [];
 
-<<<<<<< HEAD
-=======
   const navigate = useNavigate();
 
   for (let i = 0; i < 5; i += 1) {
     slides.push(
       <SwiperSlide key={`slide-${i}`}>
-        <img src={Banner} alt={`Slide ${i}`}></img>
+        <img src={gitarSwiper} alt={`Slide ${i}`}></img>
       </SwiperSlide>
     );
   }
@@ -73,24 +71,16 @@ const HomePage = (props) => {
     });
   };
 
->>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
   return (
     <div className="container">
-<<<<<<< HEAD
-    <div className="nav-custom">
-      <NavbarDefault />
-    </div>
-    
-=======
       <div className="nav-custom">
         <NavbarDefault />
       </div>
 
->>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
       <div className="container section1">
         <div className="swiper-konten">
           <React.Fragment>
-          <Swiper
+            <Swiper
               spaceBetween={30}
               centeredSlides={true}
               autoplay={{
@@ -115,33 +105,29 @@ const HomePage = (props) => {
                     </div>
 
                     <div className="img-swiper-konten col-lg-6">
-                      <img src={gitarSwiper} className="card-img-side" Style="width:100%;"/>
+                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
-                  </div>                  
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-              <div className="card swiper-card">
+                <div className="card swiper-card">
                   <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6">
-                      Slide 2
-                    </div>
+                    <div className="text-swiper-konten col-lg-6">Slide 2</div>
                     <div className="img-swiper-konten col-lg-6">
-                      <img src={gitarSwiper} className="card-img-side" Style="width:100%;"/>
+                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
-                  </div>                  
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-              <div className="card swiper-card">
+                <div className="card swiper-card">
                   <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6 col-sm-12">
-                      Slide 3
-                    </div>
+                    <div className="text-swiper-konten col-lg-6 col-sm-12">Slide 3</div>
                     <div className="img-swiper-konten col-lg-6">
-                      <img src={gitarSwiper} className="card-img-side" Style="width:100%;"/>
+                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
-                  </div>                  
+                  </div>
                 </div>
               </SwiperSlide>
             </Swiper>
@@ -153,38 +139,29 @@ const HomePage = (props) => {
           <strong>Telurusi Kategori</strong>
         </p>
 
-        <div className="button-homepage">
-          <button type="button" className="btn btn-secondary button_filter_semua me-2">
-            <i className="bi bi-search"></i> Semua
-          </button>
-          <button type="button" className="btn btn-secondary me-2">
-            <i className="bi bi-search"></i> Gitar
-          </button>
-          <button type="button" className="btn btn-secondary me-2">
-            <i className="bi bi-search"></i> Aksesoris
-          </button>
+        <div className="row">
+          <div className="col-md-6 col-sm-12 button-homepage">
+            <button type="button" className="btn btn-secondary button_filter_semua me-2">
+              <i className="bi bi-search"></i> Semua
+            </button>
+            <button type="button" className="btn btn-secondary me-2">
+              <i className="bi bi-search"></i> Gitar
+            </button>
+            <button type="button" className="btn btn-secondary me-2">
+              <i className="bi bi-search"></i> Aksesoris
+            </button>
+          </div>
+          <form className="d-flex col-md-6 col-sm-12">
+            <div className="input-group search_bar mb-3">
+              <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
+              <button className="btn search_button" id="button-addon2" type="submit">
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
         </div>
 
-<<<<<<< HEAD
-        <div className="konten">
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-        </div>
-        
-      </div>
-      <div className="" Style="text-align: center;">
-        <button type="button" className="btn btn-secondary button-jual-homepage" Style="position: fixed; bottom:20px;">
-            <i className="bi bi-plus"></i> Jual
-        </button>
-=======
         <div className="konten row row-cols-2 row-cols-md-4">{handleCardProduct()}</div>
->>>>>>> 7a31689ec02c50219fcd58fd8f126ae90bbe9e55
       </div>
     </div>
   );

@@ -12,12 +12,35 @@ const ProtectedRoutes = (props) => {
 
   const user = JSON.parse(sessionStorage.getItem("user"));
 
-  const refreshToken = useCallback((token) => {
+  // const refreshToken = useCallback((token) => {
+  //   var configRefresh = {
+  //     method: "get",
+  //     url: "https://asix-store.herokuapp.com/refresh-token",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   };
+
+  //   axios(configRefresh)
+  //     .then(function (response) {
+  //       // console.log(JSON.stringify(response.data));
+  //       sessionStorage.setItem("user", JSON.stringify(response.data));
+  //       // console.log("berhasil refresh");
+  //     })
+  //     .catch(function (error) {
+  //       // console.log(error);
+  //       sessionStorage.removeItem("user");
+  //       sessionStorage.removeItem("email");
+  //       window.location.replace("/auth/login");
+  //     });
+  // }, []);
+
+  const refreshToken = (refresh_token) => {
     var configRefresh = {
       method: "get",
       url: "https://asix-store.herokuapp.com/refresh-token",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       },
     };
 
@@ -25,7 +48,6 @@ const ProtectedRoutes = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         sessionStorage.setItem("user", JSON.stringify(response.data));
-        // console.log("berhasil refresh");
       })
       .catch(function (error) {
         // console.log(error);
@@ -33,20 +55,21 @@ const ProtectedRoutes = (props) => {
         sessionStorage.removeItem("email");
         window.location.replace("/auth/login");
       });
-  }, []);
+  };
 
   useEffect(() => {
     props.getUserDetail();
+    refreshToken(user.access_token);
     // const interval = setInterval(() => refreshToken(user.access_token), 10000);
     // intervalRef.current = interval;
     // return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => refreshToken(user.refresh_token), 180000);
-    intervalRef.current = interval;
-    return () => clearInterval(interval);
-  }, [refreshToken]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => refreshToken(user.refresh_token), 180000);
+  //   intervalRef.current = interval;
+  //   return () => clearInterval(interval);
+  // }, [refreshToken]);
 
   // if (props.loginStatus === true) {
   //   return <Outlet />;
