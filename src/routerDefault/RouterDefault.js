@@ -15,6 +15,8 @@ import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
 import ProtectedRoutes from "./ProtectedRoutes";
+import DetailEditSeller from "../components/DetailProduk/DetailEditSeller";
+import UpdateBarang from "../Pages/UpdateBarang/UpdateBarang";
 
 const RouterDefault = (props) => {
   return (
@@ -30,12 +32,13 @@ const RouterDefault = (props) => {
           <Route path="homepage" element={<HomePage />} />
 
           <Route path="product/product-detail/:idBarang" element={<DetailProduct pengguna="customer" />} />
-          <Route path="product/my-product/:idBarang" element={<DetailProduct pengguna="merchant" />} />
+          <Route path="product/my-product/:idBarang" element={<DetailEditSeller />} />
 
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
 
           <Route path="update-profile" element={<UpdateProfilePage />} />
+          <Route path="update-barang/:idBarang" element={<UpdateBarang />} />
 
           <Route path="tambah-product" element={<Tambah />} />
 

@@ -3,6 +3,10 @@
   color: #000;
 }
 
+.card_product.disabled {
+  pointer-events: none;
+  cursor: default;
+}
 
 .card_product:hover {
   color: #000;
@@ -23,7 +27,6 @@ img.product_image {
 img.product_image:hover {
   transform: scale(1.1);
 }
-
 
 @media (max-width: 576px) {
   .card_product .card {

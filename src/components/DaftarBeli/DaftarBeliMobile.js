@@ -14,7 +14,7 @@ const DaftarBeliMobile = (props) => {
   const [dataTawaran, setDataTawaran] = useState([]);
   const [dataWishlist, setDataWishlist] = useState([]);
   const [dataRiwayatBeli, setDataRiwayatBeli] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getDataPembelian = (userId, statusBarang) => {
     var axios = require("axios");
@@ -44,7 +44,7 @@ const DaftarBeliMobile = (props) => {
   };
 
   useEffect(() => {
-    if (loading === true) {
+    if (loading === false) {
       getDataPembelian(props.idUser, "Bidding");
       getDataPembelian(props.idUser, "Sold");
       if (JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`)) === null) {
@@ -56,7 +56,7 @@ const DaftarBeliMobile = (props) => {
         }
       }
     } else {
-      setLoading(true);
+      setLoading(false);
     }
   }, [props.loginStatus]);
 
@@ -131,7 +131,7 @@ const DaftarBeliMobile = (props) => {
                           tipebarang={value.tipeBarang}
                           price={value.hargaBarang}
                           ToDetailProduct={value.barangId}
-                          redirect={`/product/detail-product/${value.barangId}`}
+                          redirect={`/product/product-detail/${value.barangId}`}
                         />
                         ;
                       </div>
@@ -164,7 +164,7 @@ const DaftarBeliMobile = (props) => {
                           tipebarang={value.tipeBarang}
                           price={value.hargaBarang}
                           ToDetailProduct={value.barangId}
-                          redirect={`/product/detail-product/${value.barangId}`}
+                          redirect={`/product/product-detail/${value.barangId}`}
                         />
                         ;
                       </div>
@@ -197,7 +197,7 @@ const DaftarBeliMobile = (props) => {
                           tipebarang={value.tipeBarang}
                           price={value.hargaBarang}
                           ToDetailProduct={value.barangId}
-                          redirect={`/product/detail-product/${value.barangId}`}
+                          redirect={`/product/product-detail/${value.barangId}`}
                         />
                         ;
                       </div>

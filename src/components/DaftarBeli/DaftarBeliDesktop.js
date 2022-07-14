@@ -14,6 +14,7 @@ const DaftarBeliDesktop = (props) => {
   const [dataTawaran, setDataTawaran] = useState([]);
   const [dataWishlist, setDataWishlist] = useState([]);
   const [dataRiwayatBeli, setDataRiwayatBeli] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -45,20 +46,32 @@ const DaftarBeliDesktop = (props) => {
   };
 
   useEffect(() => {
-    getDataPembelian(props.idUser, "Bidding");
-    getDataPembelian(props.idUser, "Sold");
-    const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+    if (loading === false) {
+      getDataPembelian(props.idUser, "Bidding");
+      getDataPembelian(props.idUser, "Sold");
+      const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
 
-    if (storedWishlist !== []) {
-      setDataWishlist(storedWishlist);
+      if (storedWishlist !== []) {
+        setDataWishlist(storedWishlist);
+      }
+    } else {
+      setLoading(false);
     }
   }, [props.loginStatus]);
 
   const carDefault = () => {
     return dataTawaran.length > 0 ? (
-      dataTawaran.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/detail-product/${value.barangId}`} />;
-      })
+      <div className="container">
+        <div className="row">
+          {dataTawaran.map((value, index) => {
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
@@ -72,9 +85,17 @@ const DaftarBeliDesktop = (props) => {
 
   const carDefaultdua = () => {
     return dataWishlist.length > 0 ? (
-      dataWishlist.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/detail-product/${value.barangId}`} />;
-      })
+      <div className="container">
+        <div className="row">
+          {dataWishlist.map((value, index) => {
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
@@ -88,9 +109,26 @@ const DaftarBeliDesktop = (props) => {
 
   const carDefaulttiga = () => {
     return dataRiwayatBeli.length > 0 ? (
-      dataRiwayatBeli.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/detail-product/${value.barangId}`} />;
-      })
+      <div className="container">
+        <div className="row">
+          {dataRiwayatBeli.map((value, index) => {
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct
+                  key={index}
+                  namaBarang={value.namaBarang}
+                  img={value.barangImg}
+                  tipebarang={value.tipeBarang}
+                  price={value.hargaBarang}
+                  ToDetailProduct={value.barangId}
+                  redirect={`/product/product-detail/${value.barangId}`}
+                  isDisabled={true}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
@@ -120,7 +158,6 @@ const DaftarBeliDesktop = (props) => {
         </div>
       ) : (
         <Container fluid>
-          {console.log(dataWishlist)}
           <NavbarDefault />
 
           <Container className="container-content-daftarjualdesktop">

@@ -46,18 +46,26 @@ const NavbarDesktop = (props) => {
       <div className="container">
         <div className="row">
           <div className="col-3 mt-3 ">
-            <div className="logo_website"></div>
+            {props.loginStatus ? (
+              <a href="/homepage">
+                <div className="logo_website"></div>
+              </a>
+            ) : (
+              <a href="/">
+                <div className="logo_website"></div>
+              </a>
+            )}
           </div>
           <div className="col-6">
             <div className="container">
-              <form className="d-flex">
+              {/* <form className="d-flex">
                 <div className="input-group search_bar mt-3">
                   <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
                   <button className="btn search_button" id="button-addon2" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
 
