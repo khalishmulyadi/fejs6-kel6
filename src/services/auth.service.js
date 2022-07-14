@@ -19,6 +19,7 @@ const loginUser = (email, password) => {
     if (response.data.access_token) {
       sessionStorage.setItem("user", JSON.stringify(response.data));
       sessionStorage.setItem("email", JSON.stringify(email));
+
       // console.log(JSON.stringify(response.data));
     }
     return response.data;
