@@ -47,13 +47,13 @@ const NavbarDesktop = (props) => {
         <div className="row">
           <div className="col-3 mt-3 ">
             {props.loginStatus ? (
-              <div className="logo_website">
-                <a href="/homepage"></a>
-              </div>
+              <a href="/homepage">
+                <div className="logo_website"></div>
+              </a>
             ) : (
-              <div className="logo_website">
-                <a href="/"></a>
-              </div>
+              <a href="/">
+                <div className="logo_website"></div>
+              </a>
             )}
           </div>
           <div className="col-6">
