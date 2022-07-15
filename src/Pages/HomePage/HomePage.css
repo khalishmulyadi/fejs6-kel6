@@ -60,6 +60,16 @@
   margin-bottom: 15px;
 }
 
+.button-homepage .active-btn {
+  background-color: #7126b5;
+  color: #fff;
+}
+
+.button-homepage .active-btn:hover {
+  background-color: #52158b;
+  color: #fff;
+}
+
 .konten{
   display: flex;
   flex-wrap: wrap;

@@ -63,7 +63,7 @@ const Tambah = (props) => {
   //   // JSON.parse(window.localStorage.getItem("user"))
   // );
 
-  const token = JSON.parse(localStorage.getItem("user"))
+  const token = JSON.parse(sessionStorage.getItem("user"))
 
   const handleTerbitkan = (e) => {
     
