@@ -26,7 +26,7 @@ const HomePage = (props) => {
   for (let i = 0; i < 5; i += 1) {
     slides.push(
       <SwiperSlide key={`slide-${i}`}>
-        <img src={Banner} alt={`Slide ${i}`}></img>
+        <img src={gitarSwiper} alt={`Slide ${i}`}></img>
       </SwiperSlide>
     );
   }
@@ -92,6 +92,7 @@ const HomePage = (props) => {
       }
     });
   };
+
 
   const filterResult = () => {
     var axios = require("axios");
@@ -172,6 +173,7 @@ const HomePage = (props) => {
   //   }
   // };
 
+
   return (
     <div className="container">
       <div className="nav-custom">
@@ -209,11 +211,9 @@ const HomePage = (props) => {
                     </div>
 
                     <div className="img-swiper-konten col-lg-6">
-                      <img
-                        src={gitarSwiper}
-                        className="card-img-side"
-                        style={{width:"100%"}}
-                      />
+
+                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
+
                     </div>
                   </div>
                 </div>
@@ -223,11 +223,7 @@ const HomePage = (props) => {
                   <div className="row swiper align-items-center">
                     <div className="text-swiper-konten col-lg-6">Slide 2</div>
                     <div className="img-swiper-konten col-lg-6">
-                      <img
-                        src={gitarSwiper}
-                        className="card-img-side"
-                        style={{width:"100%"}}
-                      />
+                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
                   </div>
                 </div>
@@ -235,15 +231,9 @@ const HomePage = (props) => {
               <SwiperSlide>
                 <div className="card swiper-card">
                   <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6 col-sm-12">
-                      Slide 3
-                    </div>
+                    <div className="text-swiper-konten col-lg-6 col-sm-12">Slide 3</div>
                     <div className="img-swiper-konten col-lg-6">
-                      <img
-                        src={gitarSwiper}
-                        className="card-img-side"
-                        style={{width:"100%"}}
-                      />
+                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
                   </div>
                 </div>

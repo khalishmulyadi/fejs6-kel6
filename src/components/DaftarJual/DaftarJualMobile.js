@@ -14,6 +14,7 @@ const DaftarJualMobile = (props) => {
   const [dataJualan, setDataJualan] = useState([]);
   const [dataDiminati, setDataDiminati] = useState([]);
   const [dataTerjual, setDataTerjual] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getDataPenjualan = (userId, statusBarang) => {
     var axios = require("axios");
@@ -45,9 +46,13 @@ const DaftarJualMobile = (props) => {
   };
 
   useEffect(() => {
-    getDataPenjualan(props.idUser, 1);
-    getDataPenjualan(props.idUser, 2);
-    getDataPenjualan(props.idUser, 3);
+    if (loading === false) {
+      getDataPenjualan(props.idUser, 1);
+      getDataPenjualan(props.idUser, 2);
+      getDataPenjualan(props.idUser, 3);
+    } else {
+      setLoading(false);
+    }
   }, [props.loginStatus]);
 
   return (
@@ -110,13 +115,13 @@ const DaftarJualMobile = (props) => {
           {tabActive === 1 && (
             <div className="container">
               <div className="row row-cols-2">
-                <a href="/#">
+                <a href="/tambah-product">
                   <img src={tambahProduk} className="btn_tambah_produk col" alt="tambah_produk" />
                 </a>
 
                 {dataJualan.map((value, index) => {
                   return (
-                    <div className="col">
+                    <div className="col" key={index}>
                       <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
                     </div>
                   );

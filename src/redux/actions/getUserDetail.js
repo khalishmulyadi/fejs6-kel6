@@ -45,19 +45,19 @@ const getUserDetail = () => {
         });
       })
       .catch(function (error) {
-        // console.log(error);
-        // alert(error.response.data.error_message);
-        // window.location.replace("/auth/login");
+        console.log(error);
+        alert(error.response.data.error_message);
+        window.location.replace("/auth/login");
 
-        refreshToken(user?.refresh_token).then(() => {
-          axios(config).then(function (response) {
-            // console.log(response.data, "data");
-            dispatch({
-              type: GET_USER_DETAIL,
-              payload: response.data,
-            });
-          });
-        });
+        // refreshToken(user?.refresh_token).then(() => {
+        //   axios(config).then(function (response) {
+        //     // console.log(response.data, "data");
+        //     dispatch({
+        //       type: GET_USER_DETAIL,
+        //       payload: response.data,
+        //     });
+        //   });
+        // });
       });
   };
 };

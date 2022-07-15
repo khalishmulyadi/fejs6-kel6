@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
@@ -44,7 +44,7 @@ const Tambah = (props) => {
     kategoriProduk: Kategori,
     deskripsiProduk: Deskripsi,
     gambarPreview: PrevGambar,
-    gambarProduk: Gambar, 
+    gambarProduk: Gambar,
   };
   const navigate = useNavigate();
 
@@ -66,10 +66,9 @@ const Tambah = (props) => {
   const token = JSON.parse(sessionStorage.getItem("user"))
 
   const handleTerbitkan = (e) => {
-    
     var axios = require("axios");
     var FormData = require("form-data");
-    
+
     var data = new FormData();
     data.append("merk", MerkProduk);
     data.append("seri", SeriProduk);
@@ -79,7 +78,6 @@ const Tambah = (props) => {
     data.append("hargaBarang", Harga);
     data.append("namaBarang", NamaProduk);
     // data.append("stock", Stock);
-    
 
     var config = {
       method: "post",
@@ -97,89 +95,62 @@ const Tambah = (props) => {
       })
       .catch(function (error) {
         console.log(error);
-        alert("gagal")
+        alert("gagal");
       });
 
-      e.preventDefault();
+    e.preventDefault();
   };
 
   return (
     <div>
-      
       <div className="container">
         <div className="tambah-produk mx-auto">
           <div className="back_icon2">
-            <a href="/#">
+            <a href="/homepage">
               <i className="bi bi-arrow-left"></i>
             </a>
           </div>
           <h4 className="judulheader"> Lengkapi Detail Produk</h4>
         </div>
         <div className="formproduk_custom mx-auto">
-          <form onSubmit={(e) => {
-                  handleTerbitkan(e);
-                }}>
+          <form
+            onSubmit={(e) => {
+              handleTerbitkan(e);
+            }}
+          >
             <div className="mb-3 align-items-center mx-auto">
-              <label for="exampleFormControlInput1" className="customFile">
+              <label htmlFor="exampleFormControlInput1" className="customFile">
                 Nama Produk
               </label>
-              <input
-                className="form-control form1_custom"
-                placeholder="Nama Produk"
-                type="text"
-                id="exampleFormControlInput1"
-                onChange={(e) => setNamaProduk(e.target.value)}
-              />
+              <input className="form-control form1_custom" placeholder="Nama Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
-              <label for="exampleFormControlInput1" className="customFile">
+              <label htmlFor="exampleFormControlInput1" className="customFile">
                 Merk Produk
               </label>
-              <input
-                className="form-control form1_custom"
-                placeholder="Merk Produk"
-                type="text"
-                id="exampleFormControlInput1"
-                onChange={(e) => setMerkProduk(e.target.value)}
-              />
+              <input className="form-control form1_custom" placeholder="Merk Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setMerkProduk(e.target.value)} />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
-              <label for="exampleFormControlInput1" className="customFile">
+              <label htmlFor="exampleFormControlInput1" className="customFile">
                 Seri Produk
               </label>
-              <input
-                className="form-control form1_custom"
-                placeholder="Seri Produk"
-                type="text"
-                id="exampleFormControlInput1"
-                onChange={(e) => setSeriProduk(e.target.value)}
-              />
+              <input className="form-control form1_custom" placeholder="Seri Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setSeriProduk(e.target.value)} />
             </div>
 
             <div className="mb-3">
-              <label for="exampleFormControlInput1" className="customFile">
+              <label htmlFor="exampleFormControlInput1" className="customFile">
                 Harga
               </label>
-              <input
-                className="form-control form1_custom"
-                type="number"
-                id="exampleFormControlInput1"
-                placeholder="Rp 0,00"
-                onChange={(e) => setHarga(e.target.value)}
-              />
+              <input className="form-control form1_custom" type="number" id="exampleFormControlInput1" placeholder="Rp 0,00" onChange={(e) => setHarga(e.target.value)} />
             </div>
 
             <div className="mb-3">
-              <label for="exampleFormControlInput1" className="customFile">
+              <label htmlFor="exampleFormControlInput1" className="customFile">
                 Kategori
               </label>
-              <select
-                aria-label="Default select example"
-                className="form-select form1_custom"
-                onChange={(e) => setKategori(e.target.value)}
-              >
+              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)}>
                 <option value="" disabled hidden selected>
                   Pilih Kategori
                 </option>
@@ -189,7 +160,7 @@ const Tambah = (props) => {
             </div>
 
             {/* <div className="mb-3">
-              <label for="exampleFormControlInput1" className="customFile">
+              <label htmlFor="exampleFormControlInput1" className="customFile">
                 Stock
               </label>
               <input
@@ -202,64 +173,34 @@ const Tambah = (props) => {
             </div> */}
 
             <div className="mb-3">
-              <label for="exampleFormControlTextarea1" className="customFile">
+              <label htmlFor="exampleFormControlTextarea1" className="customFile">
                 Deskripsi
               </label>
-              <textarea
-                className="form-control form-desc_custom"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                placeholder="Masukkan Deskripsi Produk"
-                onChange={(e) => setDeskripsi(e.target.value)}
-              ></textarea>
+              <textarea className="form-control form-desc_custom" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan Deskripsi Produk" onChange={(e) => setDeskripsi(e.target.value)}></textarea>
             </div>
 
             <div className="upload">
-              <label for="customFile" className="customFile">
+              <label htmlFor="customFile" className="customFile">
                 <p>Foto Produk</p>
                 <a>
                   <img src={produkImg} alt="upload" />
                 </a>
               </label>
 
-              <input
-                type="file"
-                name="customFile"
-                accept="image/png , image/jpeg, image/webp"
-                max-size={1000}
-                id="customFile"
-                hidden
-                onChange={choosePicture}
-              />
+              <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" max-size={1000} id="customFile" hidden onChange={choosePicture} />
               {/* {selectedImages &&
                 selectedImages.map((image, index) => {
                   return (
                     <img src={image} className="prevgambar" alt="upload" />
                   );
                 })} */}
-              {PrevGambar != null && (
-                <img
-                  src={PrevGambar}
-                  alt="gambar mobil"
-                  className="prevgambar"
-                />
-              )}
+              {PrevGambar != null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar" />}
             </div>
             <div className="button_cover">
-              <button
-                type="submit"
-                name="button_cover"
-                className="preview"
-                onClick={handlePreview}
-              >
+              <button type="submit" name="button_cover" className="preview" onClick={handlePreview}>
                 Preview
               </button>
-              <button
-                type="submit"
-                name="button_cover"
-                className="terbitkan"
-                
-              >
+              <button type="submit" name="button_cover" className="terbitkan">
                 Terbitkan
               </button>
             </div>
@@ -276,13 +217,13 @@ const mapStateToProps = (state) => {
     userId: state.userReducer.idUser,
     // idProduk: state.productReducer.idProduk,
     dataProduk: state.productReducer.dataProduk,
+    role: state.userReducer.role,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      getProductPreview: (dataProductPreview) =>
-      dispatch(getProductPreview(dataProductPreview)),
+    getProductPreview: (dataProductPreview) => dispatch(getProductPreview(dataProductPreview)),
   };
 };
 
