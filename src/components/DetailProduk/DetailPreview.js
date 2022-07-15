@@ -65,7 +65,7 @@ const DetailProduk = (props) => {
 
   return (
     <div>
-      {console.log("gambar", detailBarang.gambarProduk)}
+      {/* {console.log("gambar", detailBarang.gambarProduk)} */}
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
@@ -76,14 +76,9 @@ const DetailProduk = (props) => {
         </div>
       ) : null}
 
-      <div
-        className="container mx-auto detail_produk"
-        onClick={(e) => {
-          handleTerbitkan(e);
-        }}
-      >
+      <div className="container mx-auto detail_produk">
         <div>
-          <a className="back_icon" href="/#">
+          <a className="back_icon" href="/tambah-product">
             <i className="bi bi-arrow-left-short"></i>
           </a>
         </div>
@@ -127,7 +122,13 @@ const DetailProduk = (props) => {
               <p>{detailBarang.hargaProduk}</p>
 
               <div className="d-grid gap-2">
-                <button type="button" className="btn btn_publish">
+                <button
+                  type="button"
+                  className="btn btn_publish"
+                  onClick={(e) => {
+                    handleTerbitkan(e);
+                  }}
+                >
                   Terbitkan
                 </button>
                 <button type="button" className="btn btn_edit">

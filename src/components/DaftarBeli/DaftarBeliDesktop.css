@@ -54,18 +54,20 @@
   justify-content: center;
 }
 
-.edit-button-daftarjualdesktop {
+.edit-button-daftarbelidesktop {
   background-color: #ffffff;
+  padding: 7px 15px;
   border: 1px solid #7126b5;
   border-radius: 8px;
-  width: 2.9375rem;
-  height: 1.625rem;
-
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 18px;
   color: #151515;
+  text-decoration: none;
+}
+
+.edit-button-daftarbelidesktop:hover {
+  color: #ffff;
+  background-color: #7126b5;
 }
 
 .card-kategori-daftarjualdesktop {

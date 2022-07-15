@@ -25,7 +25,7 @@ const DaftarBeliMobile = (props) => {
       method: "get",
       url: `https://asix-store.herokuapp.com/daftar-beli/${userId}/${statusBarang}`,
       headers: {
-        Authorization: `Bearer ${user.access_token}`,
+        Authorization: `Bearer ${user?.access_token}`,
       },
     };
 
@@ -76,7 +76,7 @@ const DaftarBeliMobile = (props) => {
                 <img src={`data:image/png;base64,${props.dataUser.img}`} className="img_penjual" alt="foto_penjual" />
               </div>
               <div className="col-6">
-                <h3>{props.dataUser.nama}</h3>
+                <h5>{props.dataUser.nama}</h5>
                 <p>{props.dataUser.kota}</p>
               </div>
               <div className="col-3">
@@ -94,21 +94,21 @@ const DaftarBeliMobile = (props) => {
               <span className="me-2">
                 <i className="bi bi-box"></i>
               </span>
-              Produk
+              Pembelian
             </button>
 
             <button className={`btn btn_tab_diminati btn-lg mx-3 ${tabActive === 2 && "active"}`} onClick={(e) => setTabActive(2)}>
               <span className="me-2">
                 <i className="bi bi-heart"></i>
               </span>
-              Diminati
+              Wishlist
             </button>
 
             <button className={`btn btn_tab_terjual btn-lg mx-3 ${tabActive === 3 && "active"}`} onClick={(e) => setTabActive(3)}>
               <span className="me-2">
                 <i className="bi bi-currency-dollar"></i>
               </span>
-              Terjual
+              Riwayat Pembelian
             </button>
           </div>
           {/* button tab end */}
@@ -118,7 +118,7 @@ const DaftarBeliMobile = (props) => {
           {/* content produk start */}
 
           {tabActive === 1 &&
-            (dataTawaran.length > 0 ? (
+            (dataTawaran?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataTawaran?.map((value, index) => {
@@ -154,7 +154,7 @@ const DaftarBeliMobile = (props) => {
             (dataWishlist?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
-                  {dataWishlist.map((value, index) => {
+                  {dataWishlist?.map((value, index) => {
                     return (
                       <div className="col" key={index}>
                         <CardProduct
@@ -187,7 +187,7 @@ const DaftarBeliMobile = (props) => {
             (dataRiwayatBeli?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
-                  {dataRiwayatBeli.map((value, index) => {
+                  {dataRiwayatBeli?.map((value, index) => {
                     return (
                       <div className="col" key={index}>
                         <CardProduct

@@ -21,7 +21,6 @@ import UpdateBarang from "../Pages/UpdateBarang/UpdateBarang";
 const RouterDefault = (props) => {
   return (
     <BrowserRouter>
-      {console.log("status login", props.loginStatus)}
       <Routes>
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/registrasi" element={<RegistrationPage />} />

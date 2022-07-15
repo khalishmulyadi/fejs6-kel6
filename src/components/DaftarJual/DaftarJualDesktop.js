@@ -26,7 +26,7 @@ const DaftarJualDesktop = (props) => {
       method: "get",
       url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
       headers: {
-        Authorization: `Bearer ${user.access_token}`,
+        Authorization: `Bearer ${user?.access_token}`,
       },
     };
 
@@ -34,11 +34,11 @@ const DaftarJualDesktop = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         if (statusBarang === 1) {
-          setDataJualan(response.data);
+          setDataJualan(response?.data);
         } else if (statusBarang === 2) {
-          setDataDiminati(response.data);
+          setDataDiminati(response?.data);
         } else if (statusBarang === 3) {
-          setDataTerjual(response.data);
+          setDataTerjual(response?.data);
         }
       })
       .catch(function (error) {
@@ -62,13 +62,13 @@ const DaftarJualDesktop = (props) => {
         <div className="row">
           <div className="col-6">
             {props.role === 2 ? (
-              <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
+              <a href="/tambah-product" className="btn-add-product-daftarjualdesktop">
                 <i className="bi bi-plus-lg"></i>
                 <label>Tambah Produk</label>
               </a>
             ) : null}
           </div>
-          {dataJualan.map((value, index) => {
+          {dataJualan?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
                 <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />
@@ -81,7 +81,7 @@ const DaftarJualDesktop = (props) => {
   };
 
   const carDefaultdua = () => {
-    return dataDiminati.length > 0 ? (
+    return dataDiminati?.length > 0 ? (
       <div className="container">
         <div className="row">
           {dataDiminati.map((value, index) => {
@@ -105,7 +105,7 @@ const DaftarJualDesktop = (props) => {
   };
 
   const carDefaulttiga = () => {
-    return dataTerjual.length > 0 ? (
+    return dataTerjual?.length > 0 ? (
       <div className="container">
         <div className="row">
           {dataTerjual.map((value, index) => {
@@ -172,7 +172,9 @@ const DaftarJualDesktop = (props) => {
                     </div>
 
                     <div className="container-button-daftarjualdesktop">
-                      <button className="edit-button-daftarjualdesktop">Edit</button>
+                      <a href="/update-profile" className="edit-button-daftarjualdesktop">
+                        Edit
+                      </a>
                     </div>
                   </div>
                 </Card>

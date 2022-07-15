@@ -9,7 +9,6 @@ const NavbarMobile = (props) => {
 
   return (
     <div>
-      {console.log(props.role[0]?.idRole)}
       <div className="container-fluid">
         <div className="row">
           <div className="col-2">

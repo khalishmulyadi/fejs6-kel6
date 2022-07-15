@@ -35,9 +35,9 @@ const DaftarBeliDesktop = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         if (statusBarang === "Bidding") {
-          setDataTawaran(response.data);
+          setDataTawaran(response?.data);
         } else if (statusBarang === "Sold") {
-          setDataRiwayatBeli(response.data);
+          setDataRiwayatBeli(response?.data);
         }
       })
       .catch(function (error) {
@@ -60,7 +60,7 @@ const DaftarBeliDesktop = (props) => {
   }, [props.loginStatus]);
 
   const carDefault = () => {
-    return dataTawaran.length > 0 ? (
+    return dataTawaran?.length > 0 ? (
       <div className="container">
         <div className="row">
           {dataTawaran?.map((value, index) => {
@@ -87,7 +87,7 @@ const DaftarBeliDesktop = (props) => {
     return dataWishlist?.length > 0 ? (
       <div className="container">
         <div className="row">
-          {dataWishlist.map((value, index) => {
+          {dataWishlist?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
                 <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
@@ -111,7 +111,7 @@ const DaftarBeliDesktop = (props) => {
     return dataRiwayatBeli?.length > 0 ? (
       <div className="container">
         <div className="row">
-          {dataRiwayatBeli.map((value, index) => {
+          {dataRiwayatBeli?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
                 <CardProduct
@@ -162,7 +162,9 @@ const DaftarBeliDesktop = (props) => {
 
           <Container className="container-content-daftarjualdesktop">
             <Row>
-              <Col xs={12}>{props.role === 2 ? <strong> Daftar Jual Saya</strong> : <strong> Daftar Beli Saya</strong>}</Col>
+              <Col xs={12}>
+                <strong> Daftar Beli Saya</strong>
+              </Col>
             </Row>
 
             {/* card nama penjual */}
@@ -182,7 +184,9 @@ const DaftarBeliDesktop = (props) => {
                     </div>
 
                     <div className="container-button-daftarjualdesktop">
-                      <button className="edit-button-daftarjualdesktop">Edit</button>
+                      <a type="button" href="/update-profile" className="edit-button-daftarbelidesktop">
+                        Edit
+                      </a>
                     </div>
                   </div>
                 </Card>
