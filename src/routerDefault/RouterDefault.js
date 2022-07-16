@@ -15,8 +15,10 @@ import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
 import InfoProduct from "../Pages/InfoProduct/InfoProduct"
 import ProtectedRoutes from "./ProtectedRoutes";
+
 import DetailEditSeller from "../components/DetailProduk/DetailEditSeller";
 import UpdateBarang from "../Pages/UpdateBarang/UpdateBarang";
+
 
 const RouterDefault = (props) => {
   return (
@@ -26,6 +28,7 @@ const RouterDefault = (props) => {
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/registrasi" element={<RegistrationPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="card" element={<CardProduct />} />
         <Route path="product/product-detail/p/:idBarang" element={<DetailProduct pengguna="customer" />} />
 
         <Route element={<ProtectedRoutes />}>

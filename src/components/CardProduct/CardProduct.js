@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import productImage from "../../img/produk.png";
+// import productImage from "../../img/produk.png";
 
 // css
 import "./CardProduct.css";
@@ -34,17 +34,32 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
   };
 
   return (
+
     <div>
       <a href={redirect} className={`card_product ${isDisabled ? "disabled" : null}`}>
         <div className="card p-2 m-3">
           <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
-          <div className="card-body">
-            <h6 className="card-title">{namaBarang}</h6>
-            <h6 className="card-subtitle mb-2 text-muted">{tipebarang}</h6>
-            <p className="card-text">{formatRupiah(price)}</p>
+        </div>
+        <div className="body-card">
+          <h6 className="card-title">{namaBarang}</h6>
+          <p className="card-subtitle mb-2 text-muted">{tipebarang}</p>
+          <h6 className="card-text">{formatRupiah(price)}</h6>
+          <div className="tertarik-buy">
+            <h6><a href={redirect} className="card_product" Style="color: white;">Tertarik</a></h6>
           </div>
         </div>
-      </a>
+
+        {/* <a href={redirect} className="card_product">
+          <div className="card p-2 m-3">
+            <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
+            <div className="card-body">
+              <h6 className="card-title">{namaBarang}</h6>
+              <h6 className="card-subtitle mb-2 text-muted">{tipebarang}</h6>
+              <p className="card-text">{formatRupiah(price)}</p>
+            </div>
+          </div>
+        </a> */}
+      </div>
     </div>
   );
 };

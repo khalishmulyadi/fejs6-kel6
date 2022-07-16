@@ -4,22 +4,24 @@
 }
 
 .card-daftarjualdesktop {
-  width: 100%;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
-  margin-top: 0.875rem;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 16px !important;
+    width: 100%;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 11px;
+    margin-top: 0.875rem;
+    border-radius: 11px !important;
+
 
   margin-bottom: 1.5rem;
 }
 
 .container-content-card-daftarjualdesktop {
-  display: flex;
-  flex-direction: row;
-  background-color: #ffffff;
-  width: 100%;
-  padding: 1rem 1rem 1rem 1rem;
+
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: 1rem;
+
 
   justify-content: space-between;
 }
@@ -55,24 +57,27 @@
 }
 
 .edit-button-daftarjualdesktop {
-  background-color: #ffffff;
-  border: 1px solid #7126b5;
-  border-radius: 8px;
-  width: 2.9375rem;
-  height: 1.625rem;
 
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 18px;
-  color: #151515;
+    background-color: #335C67;
+    border-radius: 11px;
+    width: 7rem;
+    height: 35px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #fff;
+    text-transform: uppercase;
+
 }
 
 .card-kategori-daftarjualdesktop {
-  width: 100%;
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 16px !important;
+
+    width: 100%;
+    padding: 1.5rem;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 11px !important;
+
 }
 
 .content-card-kategori-daftarjualdesktop {
@@ -81,11 +86,14 @@
 }
 
 .txt-kategori-daftarjualdesktop {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #000000;
+
+    
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+
 
   margin-bottom: 0;
   margin-left: 0.6875rem;
@@ -113,8 +121,11 @@
 }
 
 .button-kategori-produk-daftarjual:hover {
-  background-color: #bc99de;
-  border-radius: 1rem;
+
+    background-color: #FFF3B0;
+    border-radius: 11px;
+
+
   color: white;
 }
 
@@ -122,6 +133,7 @@
   background-color: #bc99de;
   color: white;
   border-radius: 1rem;
+
 }
 
 .container-content-button-daftarjual {
