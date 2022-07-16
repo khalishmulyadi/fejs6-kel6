@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // css
 import "./CardProduct.css";
 
-const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect }) => {
+const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect, isDisabled }) => {
   const navigate = useNavigate();
 
   const formatRupiah = (value) => {
@@ -34,10 +34,10 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
   };
 
   return (
-    <div className="container container__card">
-      <div className="card card-product">
-        
-        <div className="head-card">
+
+    <div>
+      <a href={redirect} className={`card_product ${isDisabled ? "disabled" : null}`}>
+        <div className="card p-2 m-3">
           <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
         </div>
         <div className="body-card">

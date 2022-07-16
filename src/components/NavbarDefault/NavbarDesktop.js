@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import authService from "../../services/auth.service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
   var axios = require('axios');
-  const [Token, setToken] = useState(JSON.parse(window.localStorage.getItem('user')));
+  const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem('user')));
   const [DataNotif, setDataNotif] = useState([]);
-
+  const { idBarang } = useParams();
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -18,13 +18,13 @@ const NavbarDesktop = (props) => {
     window.location.replace("/auth/login");
   };
 
-
   const handleGetNotif = () => {
     var config = {
       method: 'get',
-      url: `https://asix-store.herokuapp.com/user/notifikasi/${props.userId}/Bidding`,
+      url: `https://asix-store.herokuapp.com/user/notifikasi-seller/${props.userId}/Bidding`,
       headers: {
-        'Authorization': `Bearer ${Token.access_token}`}
+        'Authorization': `Bearer ${Token.access_token}`
+      }
     };
 
     axios(config)
@@ -34,23 +34,26 @@ const NavbarDesktop = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const handleMapDataNotif = () => {
     return DataNotif.map((value, index) => {
-      return <Notifikasi
-        namaProduk={value.namaBarang}
-        harga={value.hargaBarang}
-        hargaTawar={value.hargaTawar}
-        date={value.tanggalTawar}
-        img={value.gambarBarang}
-        key={index}
-      />
+      return <a className="dropdown-item px-4" href={`infoproduct/${value.barangId}`} key={index}>
+        <Notifikasi
+          namaProduk={value.namaBarang}
+          harga={value.hargaBarang}
+          hargaTawar={value.hargaTawar}
+          date={value.tanggalTawar}
+          img={value.gambarBarang}
+          key={index}
+        />
+      </a>
     })
   }
 
 
   return (
+
     <div className="container-fluid container__nav">
 <div className="container ">
 
@@ -144,6 +147,7 @@ const NavbarDesktop = (props) => {
               <button className="btn search_button" id="button-addon2" type="submit">
                 <i className="bi bi-search"></i>
               </button>
+
             </div>
           </form>
         </div>
@@ -218,9 +222,9 @@ const mapStateToProps = (state) => {
   return {
     loginStatus: state.userReducer.isLoggedIn,
     userId: state.userReducer.idUser,
-    dataUser: state.userReducer.dataUser
+    dataUser: state.userReducer.dataUser,
+    roleUser: state.userReducer.role,
   };
 };
-
 
 export default connect(mapStateToProps)(NavbarDesktop);

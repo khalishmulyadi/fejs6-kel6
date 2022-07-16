@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import CardProduct from "../CardProduct/CardProduct";
 
-import fotoPenjual from "../../img/gaeul.jpg";
 import tambahProduk from "../../img/tambah_produk.png";
-import kosongPeminat from "../../img/nol_peminat.png";
+import kosongPeminat from "../../img/undraw_selection_re_ycpo 1.png";
 
 // css
 import "./DaftarJualMobile.css";
@@ -15,6 +14,7 @@ const DaftarJualMobile = (props) => {
   const [dataJualan, setDataJualan] = useState([]);
   const [dataDiminati, setDataDiminati] = useState([]);
   const [dataTerjual, setDataTerjual] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getDataPenjualan = (userId, statusBarang) => {
     var axios = require("axios");
@@ -46,9 +46,13 @@ const DaftarJualMobile = (props) => {
   };
 
   useEffect(() => {
-    getDataPenjualan(props.idUser, 1);
-    getDataPenjualan(props.idUser, 2);
-    getDataPenjualan(props.idUser, 3);
+    if (loading === false) {
+      getDataPenjualan(props.idUser, 1);
+      getDataPenjualan(props.idUser, 2);
+      getDataPenjualan(props.idUser, 3);
+    } else {
+      setLoading(false);
+    }
   }, [props.loginStatus]);
 
   return (
@@ -111,13 +115,13 @@ const DaftarJualMobile = (props) => {
           {tabActive === 1 && (
             <div className="container">
               <div className="row row-cols-2">
-                <a href="/#">
+                <a href="/tambah-product">
                   <img src={tambahProduk} className="btn_tambah_produk col" alt="tambah_produk" />
                 </a>
 
                 {dataJualan.map((value, index) => {
                   return (
-                    <div className="col">
+                    <div className="col" key={index}>
                       <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
                     </div>
                   );
@@ -131,7 +135,7 @@ const DaftarJualMobile = (props) => {
           {/* content diminati start */}
 
           {tabActive === 2 &&
-            (dataDiminati === [] ? (
+            (dataDiminati.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataDiminati.map((value, index) => {
@@ -146,6 +150,7 @@ const DaftarJualMobile = (props) => {
             ) : (
               <div>
                 <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
+                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
               </div>
             ))}
 
@@ -154,7 +159,7 @@ const DaftarJualMobile = (props) => {
           {/* content terjual start */}
 
           {tabActive === 3 &&
-            (dataTerjual === [] ? (
+            (dataTerjual.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataTerjual.map((value, index) => {
@@ -169,6 +174,7 @@ const DaftarJualMobile = (props) => {
             ) : (
               <div>
                 <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
+                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
               </div>
             ))}
 
