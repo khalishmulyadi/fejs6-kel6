@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Card, Modal } from 'react-bootstrap'
 import './InfoProduct.css'
 import logo from '../../img/Rectangle 127.png'
@@ -7,17 +7,45 @@ import product from '../../img/jamtangan.png'
 import { ModalDefault } from '../../components/Modal/ModalDefault'
 import { BtnInfoProductStatus } from '../../components/Button/BtnInfoProductStatus/BtnInfoProductStatus'
 import { ModalStatus } from '../../components/ModalStatus/ModalStatus'
+import { useNavigate, useParams } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 
-export const InfoProduct = () => {
+const InfoProduct = (props) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [ParameterButton, setParameterButton] = useState(0);
+    var axios = require('axios');
+    const navigate = useNavigate();
+
+    const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem('user')));
+    const [DataTransaksi, setDataTransaksi] = useState([])
+    const { idBarangBid } = useParams();
+    const [Loading, setLoading] = useState(0);
 
 
 
     const handleBtnModal = () => {
         setParameterButton(1);
         return console.log(ParameterButton);
+    }
+
+    const handleTolakBidding = () => {
+        var config = {
+            method: 'delete',
+            url: `https://asix-store.herokuapp.com/transaksi/tolak/${props.userId}/${idBarangBid}`,
+            headers: {
+                'Authorization': `Bearer ${Token.access_token}`
+            }
+        };
+
+        axios(config)
+            .then(function (response) {
+                alert(JSON.stringify(response.data));
+                navigate('/')
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
     }
 
@@ -25,21 +53,94 @@ export const InfoProduct = () => {
     const handleButtonShow = () => {
         if (ParameterButton === 0) {
             return <div className='container-button-infoproduct'>
-                <button className='btn-tolak-infoproduct'>Tolak</button>
+                <button className='btn-tolak-infoproduct' onClick={() => { handleTolakBidding() }}>Tolak</button>
                 <button className='btn-terima-infoproduct' onClick={() => setModalShow(true)}>Terima</button>
                 <ModalDefault
                     show={modalShow}
                     onHide={() => setModalShow(false)}
-                    parambtn={handleBtnModal} />
+                    parambtn={handleBtnModal}
+                    namaPembeli={namapembeli}
+                    kota={kota}
+                    namaBarang={namaBarang}
+                    harga={harga}
+                    hargaDitawar={hargaTawar}
+                    imgBarang={imgBarang}
+                    imgPembeli={imgPembeli}
+                />
             </div>
         } else if (ParameterButton === 1) {
             console.log(ParameterButton);
-            return <BtnInfoProductStatus />
+            return <BtnInfoProductStatus
+                userIdInfoProduct={props.userId}
+            />
         }
     }
 
+    // handle check array kosong
+    const namapembeli = DataTransaksi[0] ? DataTransaksi[0].namaBuyer : "";
+    const kota = DataTransaksi[0] ? DataTransaksi[0].kota : "";
+    const imgPembeli = DataTransaksi[0] ? DataTransaksi[0].profileBuyer : "";
+    const imgBarang = DataTransaksi[0] ? DataTransaksi[0].gambarBarang : "";
+    const namaBarang = DataTransaksi[0] ? DataTransaksi[0].namaBarang : "";
+    const harga = DataTransaksi[0] ? DataTransaksi[0].hargaBarang : "";
+    const hargaTawar = DataTransaksi[0] ? DataTransaksi[0].hargaTawar : "";
+
+    // Get Data from API
+    useEffect(() => {
+        var config = {
+            method: 'get',
+            url: `https://asix-store.herokuapp.com/transaksi-detail/${idBarangBid}`,
+            headers: {
+                'Authorization': `Bearer ${Token.access_token}`
+            }
+        };
+
+        axios(config)
+            .then(function (response) {
+                setDataTransaksi(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, []);
+
+    // Format Rupiah
+    const formatRupiah = (value) => {
+        if (!value || value == null) return `Rp 0`;
+        // Convert value to string
+        let newValue = value.toString();
+
+        // Modulus operator to get division remainder
+        let remainder = newValue.length % 3;
+
+        // Substract value based on the remainder value
+        let rupiah = newValue.substr(0, remainder);
+
+        // Substract value based on the remainder and split it into array that match 3 digit
+        let thousand = newValue.substr(remainder).match(/\d{3}/g);
+
+        // Append all string
+        if (thousand) {
+            let separator = remainder ? '.' : '';
+            rupiah += separator + thousand.join('.');
+        }
+
+        // Display output
+        return `Rp ${rupiah}`;
+    };
+
+    // // handle Approve harga bidding
+    // const handleApprove = () => {
+    //     alert("Hit approve")
+
+    //     console.log("Testt")
+
+    // }
+
+
     return (
         <div>
+            {console.log(idBarangBid)}
             <Container fluid >
                 <div className='navbar-info-product'>
                     <Row className='row-navbar-infoproduct'>
@@ -72,21 +173,25 @@ export const InfoProduct = () => {
                                             <div className='content-card-infoproduct'>
                                                 <Row>
                                                     <Col xs={2}>
-                                                        <img alt='' src={foto} className="foto-profil-infoproduct" />
+                                                        <img alt='' src={`data:image/png;base64,${imgPembeli}`} className="foto-profil-infoproduct" />
                                                     </Col>
 
                                                     <Col xs={10}>
                                                         <Row>
                                                             <Col xs={12}>
                                                                 <div className='namapembeli-infoproduct'>
-                                                                    Nama Pembeli
+                                                                    {/* {DataTransaksi[0] ? DataTransaksi[0].namaBuyer: "" } */}
+                                                                    {/* {DataTransaksi[0]?.namaBuyer } */}
+                                                                    {namapembeli}
+
+
                                                                 </div>
                                                             </Col>
                                                         </Row>
                                                         <Row>
                                                             <Col xs={12}>
                                                                 <div className='txt-infoproduct'>
-                                                                    Kota
+                                                                    {kota}
                                                                 </div>
                                                             </Col>
                                                         </Row>
@@ -106,7 +211,7 @@ export const InfoProduct = () => {
                                                     <Row>
                                                         <Col xs={2}>
                                                             <div className='container-img-infoproduct'>
-                                                                <img alt='' src={product} />
+                                                                <img alt='' src={`data:image/png;base64,${imgBarang}`} />
                                                             </div>
                                                         </Col>
 
@@ -128,7 +233,7 @@ export const InfoProduct = () => {
                                                             <Row>
                                                                 <Col xs={12}>
                                                                     <div className='txt2-infoproduct'>
-                                                                        Jam Tangan Casio
+                                                                        {namaBarang}
                                                                     </div>
                                                                 </Col>
                                                             </Row>
@@ -136,7 +241,7 @@ export const InfoProduct = () => {
                                                             <Row>
                                                                 <Col xs={12}>
                                                                     <div className='txt2-infoproduct'>
-                                                                        Rp 250.000
+                                                                        {formatRupiah(harga)}
                                                                     </div>
                                                                 </Col>
                                                             </Row>
@@ -144,7 +249,7 @@ export const InfoProduct = () => {
                                                             <Row>
                                                                 <Col xs={12}>
                                                                     <div className='txt2-infoproduct'>
-                                                                        Ditawar Rp 200.000
+                                                                        Ditawar {formatRupiah(hargaTawar)}
                                                                     </div>
                                                                 </Col>
                                                             </Row>
@@ -156,7 +261,7 @@ export const InfoProduct = () => {
                                         </div>
                                         {handleButtonShow()}
 
-                                       
+
 
                                         <hr />
                                     </div>
@@ -172,3 +277,11 @@ export const InfoProduct = () => {
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        userId: state.userReducer.idUser,
+    }
+}
+
+export default connect(mapStateToProps)(InfoProduct);

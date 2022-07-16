@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import NavbarDefault from "../../components/NavbarDefault/NavbarDefault";
-import gitarSwiper from "../../img/gitar-swiper.png";
+import swiper1 from "../../img/banner1.png";
+import swiper2 from "../../img/banner2.png";
+import swiper3 from "../../img/banner3.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/css";
@@ -26,7 +28,11 @@ const HomePage = (props) => {
   for (let i = 0; i < 5; i += 1) {
     slides.push(
       <SwiperSlide key={`slide-${i}`}>
-        <img src={gitarSwiper} alt={`Slide ${i}`}></img>
+
+        <img src={swiper1} alt={`Slide ${i}`}></img>
+        <img src={swiper2} alt={`Slide ${i}`}></img>
+        <img src={swiper3} alt={`Slide ${i}`}></img>
+
       </SwiperSlide>
     );
   }
@@ -92,6 +98,7 @@ const HomePage = (props) => {
       }
     });
   };
+
 
 
   const filterResult = () => {
@@ -175,12 +182,14 @@ const HomePage = (props) => {
 
 
   return (
-    <div className="container">
+    <div className="container-fluid px-0">
+
       <div className="nav-custom">
         <NavbarDefault />
       </div>
 
       <div className="container section1">
+      
         <div className="swiper-konten">
           <React.Fragment>
             <Swiper
@@ -199,7 +208,8 @@ const HomePage = (props) => {
             >
               <SwiperSlide>
                 <div className="card swiper-card">
-                  <div className="row swiper align-items-center">
+                  <img src={swiper1} className="card-img-side"></img>
+                  {/* <div className="row swiper align-items-center">
                     <div className="text-swiper-konten col-lg-6">
                       <h3>NEW COLLECTION</h3>
                       <h5>Gitar Listrik</h5>
@@ -210,32 +220,41 @@ const HomePage = (props) => {
                       {/* <button type="button" className="btn btn-secondary me-2">PESAN SEKARANG</button> */}
                     </div>
 
-                    <div className="img-swiper-konten col-lg-6">
-
-                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
-
-                    </div>
-                  </div>
-                </div>
+                    {/* <div className="img-swiper-konten col-lg-6">
+                      <img src={gitarSwiper} className="card-img-side" Style="width:100%;"/>
+                    </div> */}
+                  {/* </div>                   */}
+                {/* </div> */}
               </SwiperSlide>
               <SwiperSlide>
-                <div className="card swiper-card">
-                  <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6">Slide 2</div>
+              <div className="card swiper-card">
+              <img src={swiper2} className="card-img-side"></img>
+                  {/* <div className="row swiper align-items-center">
+                    <div className="text-swiper-konten col-lg-6">
+                      Slide 2
+                    </div>
+
                     <div className="img-swiper-konten col-lg-6">
                       <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
-                  </div>
-                </div>
+
+                  {/* </div>                   */}
+                </div> 
               </SwiperSlide>
               <SwiperSlide>
-                <div className="card swiper-card">
-                  <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6 col-sm-12">Slide 3</div>
+              <div className="card swiper-card">
+              <img src={swiper3} className="card-img-side"></img>
+                  {/* <div className="row swiper align-items-center">
+                    <div className="text-swiper-konten col-lg-6 col-sm-12">
+                      Slide 3
+                    </div>
+
                     <div className="img-swiper-konten col-lg-6">
                       <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
                     </div>
-                  </div>
+
+                  </div>                   */}
+
                 </div>
               </SwiperSlide>
             </Swiper>
@@ -248,6 +267,7 @@ const HomePage = (props) => {
         </p>
 
         <div className="button-homepage">
+
           <button
             className={`btn btn-secondary me-2 ${filterActive === 1 && "active-btn"}`}
             onClick={() => filterResult()}
@@ -271,6 +291,7 @@ const HomePage = (props) => {
         <div className="konten row row-cols-2 row-cols-md-4">
           {handleCardProduct()}
         </div>
+
       </div>
     </div>
   );

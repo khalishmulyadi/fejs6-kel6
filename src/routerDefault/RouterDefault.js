@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { InfoProduct } from "../Pages/InfoProduct/InfoProduct";
 
 import Tambah from "../components/TambahProduk/Tambah";
 import HomePage from "../Pages/HomePage/HomePage";
@@ -14,9 +13,12 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
+import InfoProduct from "../Pages/InfoProduct/InfoProduct"
 import ProtectedRoutes from "./ProtectedRoutes";
+
 import DetailEditSeller from "../components/DetailProduk/DetailEditSeller";
 import UpdateBarang from "../Pages/UpdateBarang/UpdateBarang";
+
 
 const RouterDefault = (props) => {
   return (
@@ -25,6 +27,7 @@ const RouterDefault = (props) => {
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/registrasi" element={<RegistrationPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="card" element={<CardProduct />} />
         <Route path="product/product-detail/p/:idBarang" element={<DetailProduct pengguna="customer" />} />
 
         <Route element={<ProtectedRoutes />}>
@@ -35,6 +38,7 @@ const RouterDefault = (props) => {
 
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
+          <Route path="infoproduct/:idBarangBid" element={<InfoProduct />} />
 
           <Route path="update-profile" element={<UpdateProfilePage />} />
           <Route path="update-barang/:idBarang" element={<UpdateBarang />} />

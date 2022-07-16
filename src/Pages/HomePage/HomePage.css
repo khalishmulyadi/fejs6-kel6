@@ -1,4 +1,13 @@
-.homepage {
+
+*{
+  font-family: Tahoma;
+}
+.p , .h6 {
+  font-family: verdana ;
+}
+
+.homepage{
+
   width: 1024px;
   height: 100vh;
 }
@@ -7,9 +16,8 @@
   text-align: center;
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
+p{
+  color: #335C67;
 }
 
 .swiper-slide {
@@ -37,11 +45,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 11px;
 }
 
 .section1 {
   width: 100%;
-  height: 300px;
+  height: 350px;
   margin-top: 35px;
 }
 
@@ -49,7 +58,9 @@
   width: 100%;
   margin-top: 2.5rem;
 }
-.button-homepage {
+
+
+.button-homepage{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 700px;
@@ -58,45 +69,65 @@
 }
 
 
-.button-homepage .active-btn {
-  background-color: #7126b5;
+h6{
+  color:#335C67;
+}
+.btn.button__filter {
+  background-color: #E09F3E;
   color: #fff;
+  font-weight: 500;
+  border: none;
 }
 
-.button-homepage .active-btn:hover {
-  background-color: #52158b;
+.btn.button__filter:hover {
+  background-color: #335C67;
   color: #fff;
 }
+.input-group.search-bar{
+  float: right;
+}
 
-.konten{
+/* .konten{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
+} */
 
 .button-jual-homepage {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
-.swiper-card {
-  width: 70%;
-  height: 300px;
-  padding: 30px;
+
+.swiper-card{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 350px;
+  
 }
 
-@media only screen and (max-width: 576px) {
-  .card.swiper-card {
-    width: 75%;
-    padding: 30px;
-  }
 
+@media only screen and (max-width: 576px){
+  
+  .section1{
+    height: 200px;
+    margin-bottom: -100px;
+  }
+  .card.swiper-card{
+    width: 100%;
+    height: 120px;
+  }
+  .section2{
+    /* margin-top: 250px; */
+  }
   .button-homepage {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    width: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
   }
-  .konten {
-    display: flex;
-    flex-wrap: wrap;
+  
+  .button-homepage::-webkit-scrollbar {
+    display: none;
   }
+ 
 }

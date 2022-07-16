@@ -8,15 +8,97 @@
   cursor: default;
 }
 
+
 .card_product:hover {
   color: #000;
 }
 
-.card_product .card {
+.container.container__card{
+  padding: 0;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  margin: 5px 15px;
+  gap: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+.card{
+  width: 100%;
+  height: auto;
+  grid-column: span 2;
+  margin: 0 0;
+  padding-bottom: 10px;
+  border-radius: 11px;
+  position: relative;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+  transition: all 0.5s;
+  
+}
+.head-card{
+  padding: 20px;
+  padding-bottom: 5px;
+}
+.head-card img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.body-card{
+  padding: 10px 15px;
+}
+.body-card h6{
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+}
+.body-card h6.card-text{
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+.body-card p{
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: rgb(169, 169, 169);
+}
+.body-card .tertarik-buy{
+  background-color: #335C67;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+  transition: all 0.5s;
+}
+.tertarik-buy h6{
+ 
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-top: 10px;
+  font-weight: bold;
+}
+.tertarik-buy:hover{
+  background-color: #284a53;
+  cursor: pointer;
+
+}
+.card:hover{
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+
+/* .card_product .card {
   width: 15rem;
   max-height: 21rem;
   overflow: hidden;
-}
+} */
 
 img.product_image {
   height: 10rem;
@@ -24,12 +106,35 @@ img.product_image {
   object-fit: cover;
 }
 
-img.product_image:hover {
+/* img.product_image:hover {
   transform: scale(1.1);
-}
+} */
 
 @media (max-width: 576px) {
-  .card_product .card {
+
+  .container.container__card{
+    padding: 0;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    margin: 10px 0;
+    gap: 20px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+  .card.card-product{
+    width: 100%;
+    height: auto;
+    grid-column: span 8;
+    margin: 0 0;
+    padding-bottom: 10px;
+    border-radius: 11px;
+    position: relative;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+    transition: all 0.5s;
+    
+  }
+  /* .card_product .card {
     width: 12rem;
     max-height: 16rem;
     overflow: hidden;
@@ -38,24 +143,18 @@ img.product_image:hover {
   .card_product {
     margin-top: 3rem;
     /* display: contents; */
-    color: #000;
-  }
+    /* color: #000;
+  } */
 
-  img.product_image {
+  /* img.product_image {
     height: 7rem;
     transition: 0.5s;
     object-fit: cover;
-  }
+  } */
 
-  img.product_image:hover {
+  /* img.product_image:hover {
     transform: scale(1.1);
-  }
+  } */
+/* } */  
 }
 
-@media only screen and (max-width: 576px) {
-  .card {
-    width: 11rem;
-    max-height: 16rem;
-    overflow: hidden;
-  }
-}

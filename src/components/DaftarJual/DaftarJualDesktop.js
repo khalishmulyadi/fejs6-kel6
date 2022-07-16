@@ -139,7 +139,7 @@ const DaftarJualDesktop = (props) => {
   };
 
   return (
-    <div>
+    <div className="container">
       {props.loginStatus == undefined ? (
         <div className="mx-auto">
           <h1 className="text-center">Loading...</h1>

@@ -6,7 +6,7 @@ import DaftarJualMobile from "./DaftarJualMobile";
 const DaftarJual = (role) => {
   return (
     <div>
-      <MediaQuery minWidth={576}>
+      <MediaQuery minWidth={577}>
         <DaftarJualDesktop role={role.role} />
       </MediaQuery>
 

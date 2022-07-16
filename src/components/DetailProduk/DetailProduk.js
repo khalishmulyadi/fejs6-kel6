@@ -143,10 +143,13 @@ const DetailProduk = ({ pengguna, ...props }) => {
   };
 
   return (
-    <div>
+
+    <div className="container">
+
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
+      
       {alertTawar ? (
         <div className="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="d-flex">
@@ -201,16 +204,19 @@ const DetailProduk = ({ pengguna, ...props }) => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-6">
-              {/* detail produk */}
-              <div className="container mt-5 py-3 shadow product_detail">
-                <h3>{DataBarang.namaBarang}</h3>
-                <p>{DataBarang.tipeBarang}</p>
-                <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
-                {pengguna === "merchant" && (
-                  <div className="d-grid gap-2">
-                    {/* <button type="button" className="btn btn_publish">
+          </div>
+          <div className="col-sm-6">
+            {/* detail produk */}
+            <div className="container mt-5 py-3 product_detail">
+              <h3>{DataBarang.namaBarang}</h3>
+              <p>{DataBarang.tipeBarang}</p>
+              <p>{formatRupiah(DataBarang.hargaBarang)}</p>
+
+              {pengguna === "merchant" && (
+                <div className="d-grid gap-2">
+                  {/* <button type="button" className="btn btn_publish">
+
                     Terbitkan
                   </button> */}
                     <button type="button" className="btn btn_edit">
@@ -245,6 +251,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
                   </div>
                 )}
               </div>
+
 
               {/* detail seller */}
               <div className="container mt-3 py-3 shadow seller_detail">
