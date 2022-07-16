@@ -88,10 +88,20 @@
     flex-direction: column;
 }
 
+.imgpembeli-modaldefault{
+    width: 48px;
+    height: 48px;
+}
+
 .container-namabarang-modaldefault {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
+}
+
+.imgbarang-modaldefault{
+    width: 48px;
+    height: 48px;
 }
 
 .container-detailpembeli-modaldefault {

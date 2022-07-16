@@ -6,7 +6,7 @@ import pembeli from '../../img/Rectangle 33.png'
 import barang from '../../img/jamtangan.png'
 
 
-export const ModalDefault = ({parambtn, onHide , ...props}) => {
+export const ModalDefault = ({Approve, imgPembeli, imgBarang, hargaDitawar, harga, namaBarang, kota, namaPembeli, parambtn, onHide , ...props}) => {
 
   return (
     <Modal
@@ -44,7 +44,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
               <div className='container-namapembeli-modaldefault'>
                 <Row>
                   <Col xs={3}>
-                    <img alt='' src={pembeli} />
+                    <img alt='' className='imgpembeli-modaldefault' src={`data:image/png;base64,${imgPembeli}`} />
                   </Col>
 
                   <Col xs={9}>
@@ -52,7 +52,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
                       <Row>
                         <Col xs={12}>
                           <div className='namapembeli-modaldefault'>
-                            Nama Pembeli
+                            {namaPembeli}
                           </div>
                         </Col>
                       </Row>
@@ -60,7 +60,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
                       <Row>
                         <Col xs={12}>
                           <div className='kota-modaldefault'>
-                            Kota
+                            {kota}
                           </div>
                         </Col>
                       </Row>
@@ -73,7 +73,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
               <div className='container-namabarang-modaldefault'>
                 <Row>
                   <Col xs={3}>
-                    <img alt='' src={barang} />
+                    <img alt='' className='imgbarang-modaldefault' src={`data:image/png;base64,${imgBarang}`} />
                   </Col>
 
                   <Col xs={9}>
@@ -81,7 +81,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
                       <Row>
                         <Col xs={12}>
                           <div className='namabarang-modaldefault'>
-                            Jam Tangan Casio
+                            {namaBarang}
                           </div>
                         </Col>
                       </Row>
@@ -89,7 +89,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
                       <Row>
                         <Col xs={12}>
                           <div className='harga-modaldefault'>
-                            Rp 250.000
+                            {harga}
                           </div>
                         </Col>
                       </Row>
@@ -97,7 +97,7 @@ export const ModalDefault = ({parambtn, onHide , ...props}) => {
                       <Row>
                         <Col xs={12}>
                           <div className='namabarang-modaldefault'>
-                            Ditawar Rp 200.000
+                            Ditawar {hargaDitawar}
                           </div>
                         </Col>
                       </Row>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './BtnInfoProductStatus.css'
 import whatsapp from '../../../img/fi_whatsapp.svg'
-import { ModalStatus } from '../../ModalStatus/ModalStatus'
+import {ModalStatus} from '../../ModalStatus/ModalStatus'
 
 
-export const BtnInfoProductStatus = () => {
+export const BtnInfoProductStatus = ({userIdInfoProduct}) => {
     const [modalShow, setModalShow] = useState(false);
 
 
@@ -12,7 +12,11 @@ export const BtnInfoProductStatus = () => {
         <div>
             <div className='container-button-infoproductstatus'>
                 <button className='btn-status-infoproductstatus' onClick={() => setModalShow(true)}>Status</button>
-                <ModalStatus show={modalShow} onHide={() => setModalShow(false)} />
+                <ModalStatus
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    userId = {userIdInfoProduct}
+                />
 
                 <div className='container-btn-infoproductstatus'>
 

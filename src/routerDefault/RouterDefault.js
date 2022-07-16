@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { InfoProduct } from "../Pages/InfoProduct/InfoProduct";
 
 import Tambah from "../components/TambahProduk/Tambah";
 import HomePage from "../Pages/HomePage/HomePage";
@@ -14,6 +13,7 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import DaftarJualSaya from "../Pages/DaftarJualSaya/DaftarJualSaya";
 import DaftarBeliSaya from "../Pages/DaftarBeliSaya/DaftarBeliSaya";
+import InfoProduct from "../Pages/InfoProduct/InfoProduct"
 import ProtectedRoutes from "./ProtectedRoutes";
 
 const RouterDefault = (props) => {
@@ -34,6 +34,7 @@ const RouterDefault = (props) => {
 
           <Route path="product/product-preview" element={<PreviewProduct />} />
           <Route path="infoproduct" element={<InfoProduct />} />
+          <Route path="infoproduct/:idBarangBid" element={<InfoProduct />} />
 
           <Route path="update-profile" element={<UpdateProfilePage />} />
 

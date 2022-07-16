@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +46,7 @@ const NavbarMobile = (props) => {
           <div className="offcanvas-body navbar_list">
             <ul className="list-group list-group-flush">
               <li className="list-group-item ">
-                <a href="/#">Notifikasi</a>
+                <a href="/notifikasi">Notifikasi</a>
               </li>
               {props.role[0]?.idRole === 1 && (
                 <li className="list-group-item">
@@ -90,6 +90,7 @@ const mapStateToProps = (state) => {
   return {
     loginStatus: state.userReducer.isLoggedIn,
     role: state.userReducer.role,
+    userId: state.userReducer.idUser,
   };
 };
 

@@ -22,7 +22,7 @@
 }
 
 /* responsive arrow back */
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 425px) {
     .arrow-back-mobile {
         cursor: pointer;
         display: none;
@@ -138,10 +138,11 @@
 
 
 /* responsive content  daftar product*/
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 425px) {
     .container-img-infoproduct {
         display: flex;
-        width: 100%;
+        width: 48px;
+        height: 48px;
         justify-content: center;
     }
 }
@@ -212,7 +213,7 @@
 
 
 /* responsive */
-@media screen and (max-width: 450px) {
+@media screen and (min-width: 425px) {
     .logo-infoproduct {
         display: none;
     }
