@@ -1,6 +1,3 @@
-.navbar_product_detail {
-  display: none;
-}
 
 .carousel-inner .carousel_img {
   height: 50vh;
@@ -11,34 +8,36 @@
   height: 5rem;
   width: 5rem;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 11px;
 }
 
 .container.seller_detail,
 .container.product_detail,
 .container.product_desc {
-  border-radius: 16px;
-  width: 85%;
+  border-radius: 11px;
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
 .btn.btn_publish {
-  background-color: #7126b5;
+  background-color: #335C67;
   color: #fff;
-  border-radius: 16px;
+  border-radius: 11px;
 }
 .btn.btn_publish:hover {
-  background-color: #60229b;
+  background-color: #E09F3E;
   color: #fff;
 }
 
 .btn.btn_edit {
-  border-color: #7126b5;
-  border-radius: 16px;
+  border-color: #335C67;
+  border-radius: 11px;
 }
 
 .btn.btn_edit:hover {
-  border-color: #60229b;
-  background-color: #ebebeb;
+  background-color: #E09F3E;
+  color: #fff;
+  border-color: #E09F3E;
 }
 
 .container.detail_produk {
@@ -62,7 +61,7 @@
 
 .modal-content.modal_tawar {
   width: 60%;
-  border-radius: 16px;
+  border-radius: 11px;
 }
 
 .modal-header.modal_head,
@@ -77,30 +76,30 @@
 }
 
 .container.product_detail_tawar {
-  background-color: #eeeeee;
+  background-color: #FFF3B0;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
+  border-radius: 11px;
 }
 
 .product_img_tawar {
   width: 48px;
   height: 48px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 11px;
 }
 
 .form-control.form_harga_tawar {
-  border-radius: 16px;
-  border: 1px solid #d0d0d0;
+  border-radius: 11px;
+  border: 2px solid #FFF3B0;
 }
 
 .btn.btn_kirim_tawaran {
-  background: #7126b5;
-  border-radius: 16px;
+  background: #E09F3E;
+  border-radius: 11px;
   color: #fff;
 }
 .btn.btn_kirim_tawaran:hover {
-  background: #5c1e96;
+  background: #A27B5C;
   color: #fff;
 }
 

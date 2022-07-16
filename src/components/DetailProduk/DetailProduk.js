@@ -97,10 +97,11 @@ const DetailProduk = ({ pengguna, ...props }) => {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
+      
       {alertTawar ? (
         <div className="alert alert-success alert-dismissible w-50 mx-auto" role="alert">
           Harga tawarmu berhasil dikirim ke penjual
@@ -148,7 +149,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
           </div>
           <div className="col-sm-6">
             {/* detail produk */}
-            <div className="container mt-5 py-3 shadow product_detail">
+            <div className="container mt-5 py-3 product_detail">
               <h3>{DataBarang.namaBarang}</h3>
               <p>{DataBarang.tipeBarang}</p>
               <p>{formatRupiah(DataBarang.hargaBarang)}</p>
@@ -185,7 +186,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
             </div>
 
             {/* detail seller */}
-            <div className="container mt-3 py-3 shadow seller_detail">
+            <div className="container mt-3 py-3 seller_detail">
               <div className="row">
                 <div className="col-3">
                   <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
@@ -200,7 +201,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
         </div>
 
         {/* deskripsi produk */}
-        <div className="container w-100 mt-5 mx-auto px-4 py-3 shadow product_desc">
+        <div className="container w-100 mt-5 mx-auto px-4 py-3 product_desc">
           <h3>Deskripsi</h3>
           <p>{DataBarang.deskripsi}</p>
           <ul>

@@ -59,7 +59,7 @@ const DaftarJualMobile = (props) => {
           <h1 className="text-center">Loading...</h1>
         </div>
       ) : (
-        <div>
+        <div className="daftarJual__mobile">
           {/* Profil penjual dan edit start*/}
           <div className="container mt-3 py-3 shadow seller_detail">
             <div className="row align-items-center">

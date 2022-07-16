@@ -1,16 +1,14 @@
 .container-content-daftarjualdesktop {
-    margin-top: 2.5rem;
-    padding: 1rem 2rem 1rem 2rem !important;
+    margin-top: 1.5rem;
+    padding: 1rem 2rem !important;
 }
 
 .card-daftarjualdesktop {
     width: 100%;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 16px;
+    border-radius: 11px;
     margin-top: 0.875rem;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 16px !important;
-
+    border-radius: 11px !important;
     margin-bottom: 1.5rem;
 }
 
@@ -19,7 +17,7 @@
     flex-direction: row;
     background-color: #FFFFFF;
     width: 100%;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem;
 
 
     justify-content: space-between;
@@ -58,26 +56,30 @@
 }
 
 .edit-button-daftarjualdesktop {
-    background-color: #FFFFFF;
-    border: 1px solid #7126B5;
-    border-radius: 8px;
-    width: 2.9375rem;
-    height: 1.625rem;
-
-    font-family: 'Poppins';
+    background-color: #335C67;
+    border-radius: 11px;
+    width: 7rem;
+    height: 35px;
     font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
+    font-weight: bold;
+    font-size: 14px;
     line-height: 18px;
-    color: #151515;
+    color: #fff;
+    text-transform: uppercase;
+
+}
+.edit-button-daftarjualdesktop:hover {
+    background-color: #E09F3E;
+    color: #fff;
+    border-color: #E09F3E;
 }
 
 
 .card-kategori-daftarjualdesktop {
     width: 100%;
-    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-    border-radius: 16px !important;
+    padding: 1.5rem;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 11px !important;
 }
 
 .content-card-kategori-daftarjualdesktop {
@@ -87,7 +89,6 @@
 
 
 .txt-kategori-daftarjualdesktop {
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -111,8 +112,8 @@
 }
 
 .button-kategori-produk-daftarjual:hover {
-    background-color: #bc99de;
-    border-radius: 1rem;
+    background-color: #FFF3B0;
+    border-radius: 11px;
 }
 
 .container-content-button-daftarjual {

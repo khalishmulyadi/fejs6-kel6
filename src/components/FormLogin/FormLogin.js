@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import authService from "../../services/auth.service";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import loginImage from "../../img/loginsecondhand.png";
+import loginImage from "../../img/bg-login.png";
 import "./FormLogin.css";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import getUserDetail from "../../redux/actions/getUserDetail";

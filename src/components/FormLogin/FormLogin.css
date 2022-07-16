@@ -1,70 +1,71 @@
-.login_group {
+.login_group{
   height: 100vh;
 }
 
-.form-control.input_form {
-  border-radius: 16px;
+.form-control.input_form{
+  border-radius: 11px;
 }
 
-.btn.login_button {
-  background-color: #7126b5;
-  border-color: #7126b5;
-  border-radius: 16px;
+.btn.login_button{
+  background-color: #E09F3E;
+  border-radius: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .btn.login_button:hover,
-.btn.login_button:focus {
-  background-color: #5a1d94;
-  border-color: #5a1d94;
+.btn.login_button:focus{
+  background-color: #A27B5C;
+  border-color: #A27B5C;
 }
 
-.regist_here a {
-  color: #7126b5;
+.regist_here a{
+  color: #E09F3E;
   text-decoration: none;
   font-weight: bold;
 }
 
-.regist_here a:hover {
-  color: #5a1d94;
+.regist_here a:hover{
+  color: #A27B5C;
 }
 
-.back_icon {
+.back_icon{
   margin-bottom: 3rem;
 }
 
-.back_icon_desktop {
+.back_icon_desktop{
   display: none;
 }
 
-.bi-arrow-left {
+.bi-arrow-left{
   color: black;
   font-size: 24px;
   margin-bottom: 3rem;
 }
 
-@media screen and (min-width: 576px) {
-  .bg_login {
+@media screen and (min-width: 576px){
+  .bg_login{
     max-height: 100vh;
     width: 100%;
     object-fit: cover;
   }
 
-  .back_icon_desktop {
+  .back_icon_desktop{
     display: flex;
     margin-bottom: 3rem;
   }
 
-  .back_icon_desktop .bi-arrow-left {
+  .back_icon_desktop .bi-arrow-left{
     font-size: large;
   }
 
   .back_icon_desktop a,
-  .back_icon_desktop a:hover {
+  .back_icon_desktop a:hover{
     text-decoration: none;
     color: black;
   }
 
-  .back_icon {
+  .back_icon{
     display: none;
   }
 }
