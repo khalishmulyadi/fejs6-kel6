@@ -12,13 +12,11 @@ const NavbarDesktop = (props) => {
   const [DataNotif, setDataNotif] = useState([]);
   const { idBarang } = useParams();
 
-
   const navigate = useNavigate();
   const handleLogout = () => {
     authService.logout();
     window.location.replace("/auth/login");
   };
-
 
   const handleGetNotif = () => {
     var config = {
@@ -36,7 +34,7 @@ const NavbarDesktop = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const handleMapDataNotif = () => {
     return DataNotif.map((value, index) => {
@@ -59,18 +57,26 @@ const NavbarDesktop = (props) => {
       <div className="container">
         <div className="row">
           <div className="col-3 mt-3 ">
-            <div className="logo_website"></div>
+            {props.loginStatus ? (
+              <a href="/homepage">
+                <div className="logo_website"></div>
+              </a>
+            ) : (
+              <a href="/">
+                <div className="logo_website"></div>
+              </a>
+            )}
           </div>
           <div className="col-6">
             <div className="container">
-              <form className="d-flex">
+              {/* <form className="d-flex">
                 <div className="input-group search_bar mt-3">
                   <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
                   <button className="btn search_button" id="button-addon2" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
 
@@ -78,19 +84,20 @@ const NavbarDesktop = (props) => {
             <div className="col-3">
               <div className="btn-group drop_menu">
                 <button type="button" className="btn mt-3 dropdown-toggle menu_user">
-                  <a href="/daftar-jual">
-                    <i className="bi bi-list-ul"></i>
-                  </a>
+                  {props.roleUser === 2 ? (
+                    <a href="/daftar-jual">
+                      <i className="bi bi-list-ul"></i>
+                    </a>
+                  ) : (
+                    <a href="/daftar-beli">
+                      <i className="bi bi-list-ul"></i>
+                    </a>
+                  )}
                 </button>
               </div>
 
               <div className="btn-group drop_notif">
-                <button type="button"
-                  className="btn mt-3 dropdown-toggle notifikasi_user"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  onClick={handleGetNotif}
-                >
+                <button type="button" className="btn mt-3 dropdown-toggle notifikasi_user" data-bs-toggle="dropdown" aria-expanded="false" onClick={handleGetNotif}>
                   <i className="bi bi-bell"></i>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
@@ -139,9 +146,9 @@ const mapStateToProps = (state) => {
   return {
     loginStatus: state.userReducer.isLoggedIn,
     userId: state.userReducer.idUser,
-    dataUser: state.userReducer.dataUser
+    dataUser: state.userReducer.dataUser,
+    roleUser: state.userReducer.role,
   };
 };
-
 
 export default connect(mapStateToProps)(NavbarDesktop);

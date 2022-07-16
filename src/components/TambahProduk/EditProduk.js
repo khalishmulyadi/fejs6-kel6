@@ -1,25 +1,81 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./TambahProduk.css";
 import produkImg from "../../img/Group 1.png";
-import getProductPreview from "../../redux/actions/getProductPreview";
+import { useParams } from "react-router-dom";
 
-const Tambah = (props) => {
+import { connect } from "react-redux";
+
+// css
+import "./TambahProduk.css";
+
+const EditProduk = (props) => {
+  const [barangId, setBarangId] = useState("");
   const [Gambar, setGambar] = useState(null);
   const [PrevGambar, setPrevGambar] = useState(null);
+  const [GambarDefault, setGambarDefault] = useState(null);
   const [NamaProduk, setNamaProduk] = useState("");
   const [MerkProduk, setMerkProduk] = useState("");
   const [SeriProduk, setSeriProduk] = useState("");
   const [Kategori, setKategori] = useState("");
   const [Harga, setHarga] = useState("");
-  const [Stock, setStock] = useState("");
   const [Deskripsi, setDeskripsi] = useState("");
-  const [StatusProduk, setStatusProduk] = useState("tersedia");
-  // const [access_token, setAccessToken] = useState("");
-  // const [user, setUserId] = useState(undefined);
+  const [StatusProduk, setStatusProduk] = useState("");
 
+  const token = JSON.parse(sessionStorage.getItem("user"));
+
+  const { idBarang } = useParams();
+
+  // ************* Get Data Barang By Id *************
+  useEffect(() => {
+    var config = {
+      method: "get",
+      url: `https://asix-store.herokuapp.com/detail-barang/${idBarang}`,
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(response.data);
+        setBarangId(response.data.barangId);
+        setGambarDefault(response.data.barangImg);
+        setNamaProduk(response.data.namaBarang);
+        setMerkProduk(response.data.merk);
+        setSeriProduk(response.data.seri);
+        setHarga(response.data.hargaBarang);
+        setKategori(response.data.tipeBarang);
+        setDeskripsi(response.data.deskripsi);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // console.log(DataBarang);
+  }, []);
+
+  // function convert base64 to file object
+  function urlToFile(url, filename, mimeType) {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        return new File([buf], filename, { type: mimeType });
+      });
+  }
+
+  const getDefaultPP = () => {
+    urlToFile(`data:image/png;base64,${GambarDefault}`, "foto_produk.png", "image/png").then(function (file) {
+      setGambar(file);
+    });
+  };
+
+  // convert image data base64 from API to file object
+  // in case user doesn't want to change the pic
+  // so we use the default or preview pic
+  useEffect(() => {
+    getDefaultPP();
+  }, [GambarDefault]);
+
+  // function to choose picture
   const choosePicture = (e) => {
     // mengecek adakah file apa tidak
     if (e.target.files[0]) {
@@ -33,40 +89,13 @@ const Tambah = (props) => {
       });
       // melakuan render berdasrakan image yang di pilih
       reader.readAsDataURL(e.target.files[0]);
+    } else {
+      getDefaultPP();
     }
   };
 
-  const dataProductPreview = {
-    namaProduk: NamaProduk,
-    merkProduk: MerkProduk,
-    seriProduk: SeriProduk,
-    hargaProduk: Harga,
-    kategoriProduk: Kategori,
-    deskripsiProduk: Deskripsi,
-    gambarPreview: PrevGambar,
-    gambarProduk: Gambar,
-  };
-  const navigate = useNavigate();
-
-  const handlePreview = (e) => {
+  const handleUpdateBarang = (e) => {
     e.preventDefault();
-    props.getProductPreview(dataProductPreview);
-    navigate("/product/product-preview");
-  };
-
-  // const userId = JSON.parse(localStorage.getItem("user"));
-  //   if (props.dataUser) {
-  //     setAccessToken(user.access_token);
-  //   };
-
-  // const [Token, setToken] = useState(
-  //   // JSON.parse(window.localStorage.getItem("user"))
-  // );
-
-  const token = JSON.parse(sessionStorage.getItem("user"))
-
-  const handleTerbitkan = (e) => {
-    var axios = require("axios");
     var FormData = require("form-data");
 
     var data = new FormData();
@@ -77,13 +106,12 @@ const Tambah = (props) => {
     data.append("barangImg", Gambar);
     data.append("hargaBarang", Harga);
     data.append("namaBarang", NamaProduk);
-    // data.append("stock", Stock);
 
     var config = {
-      method: "post",
-      url: `https://asix-store.herokuapp.com/barang/${props.userId}/daftar`,
+      method: "put",
+      url: `https://asix-store.herokuapp.com/barang/update/${props.userId}/${barangId}`,
       headers: {
-        Authorization: `Bearer ${token.access_token} `,
+        Authorization: `Bearer ${token?.access_token} `,
       },
       data: data,
     };
@@ -91,14 +119,13 @@ const Tambah = (props) => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        alert("Tambah Barang Berhasil");
+        alert("Update barang berhasil");
+        window.location.reload("/daftar-jual");
       })
       .catch(function (error) {
         console.log(error);
-        alert("gagal");
+        alert("Gagal update barang!");
       });
-
-    e.preventDefault();
   };
 
   return (
@@ -115,68 +142,55 @@ const Tambah = (props) => {
         <div className="formproduk_custom mx-auto">
           <form
             onSubmit={(e) => {
-              handleTerbitkan(e);
+              handleUpdateBarang(e);
             }}
           >
             <div className="mb-3 align-items-center mx-auto">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Nama Produk
               </label>
-              <input className="form-control form1_custom" placeholder="Nama Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} />
+              <input className="form-control form1_custom" placeholder="Nama Produk" type="text" value={NamaProduk} id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Merk Produk
               </label>
-              <input className="form-control form1_custom" placeholder="Merk Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setMerkProduk(e.target.value)} />
+              <input className="form-control form1_custom" placeholder="Merk Produk" type="text" value={MerkProduk} id="exampleFormControlInput1" onChange={(e) => setMerkProduk(e.target.value)} />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Seri Produk
               </label>
-              <input className="form-control form1_custom" placeholder="Seri Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setSeriProduk(e.target.value)} />
+              <input className="form-control form1_custom" placeholder="Seri Produk" type="text" value={SeriProduk} id="exampleFormControlInput1" onChange={(e) => setSeriProduk(e.target.value)} />
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Harga
               </label>
-              <input className="form-control form1_custom" type="number" id="exampleFormControlInput1" placeholder="Rp 0,00" onChange={(e) => setHarga(e.target.value)} />
+              <input className="form-control form1_custom" type="number" id="exampleFormControlInput1" value={Harga} placeholder="Rp 0,00" onChange={(e) => setHarga(e.target.value)} />
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Kategori
               </label>
-              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)}>
-                <option value="" disabled hidden selected>
+              <select defaultValue={Kategori} aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)}>
+                <option value="DEFAULT" disabled hidden>
                   Pilih Kategori
                 </option>
                 <option value="gitar">Gitar</option>
-                <option value="aksesoris">Acsesoris</option>
+                <option value="aksesoris">Accessories</option>
               </select>
             </div>
-
-            {/* <div className="mb-3">
-              <label htmlFor="exampleFormControlInput1" className="customFile">
-                Stock
-              </label>
-              <input
-                className="form-control form1_custom"
-                type="number"
-                id="exampleFormControlInput1"
-                placeholder="Stock"
-                onChange={(e) => setStock(e.target.value)}
-              />
-            </div> */}
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlTextarea1" className="customFile">
                 Deskripsi
               </label>
-              <textarea className="form-control form-desc_custom" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan Deskripsi Produk" onChange={(e) => setDeskripsi(e.target.value)}></textarea>
+              <textarea className="form-control form-desc_custom" id="exampleFormControlTextarea1" value={Deskripsi} rows="3" placeholder="Masukkan Deskripsi Produk" onChange={(e) => setDeskripsi(e.target.value)}></textarea>
             </div>
 
             <div className="upload">
@@ -194,13 +208,11 @@ const Tambah = (props) => {
                     <img src={image} className="prevgambar" alt="upload" />
                   );
                 })} */}
-              {PrevGambar != null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar" />}
+              {PrevGambar === null && <img src={`data:image/png;base64,${GambarDefault}`} alt="gambar mobil" className="prevgambar" />}
+              {PrevGambar !== null && <img src={PrevGambar} alt="gambar mobil" className="prevgambar" />}
             </div>
             <div className="button_cover">
-              <button type="submit" name="button_cover" className="preview" onClick={handlePreview}>
-                Preview
-              </button>
-              <button type="submit" name="button_cover" className="terbitkan">
+              <button type="submit" name="button_cover" className="terbitkan w-100">
                 Terbitkan
               </button>
             </div>
@@ -215,16 +227,8 @@ const mapStateToProps = (state) => {
   return {
     dataUser: state.userReducer.dataUser,
     userId: state.userReducer.idUser,
-    // idProduk: state.productReducer.idProduk,
-    dataProduk: state.productReducer.dataProduk,
     role: state.userReducer.role,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProductPreview: (dataProductPreview) => dispatch(getProductPreview(dataProductPreview)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tambah);
+export default connect(mapStateToProps)(EditProduk);

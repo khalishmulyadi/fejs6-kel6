@@ -8,20 +8,20 @@ import seller from "../../img/Rectangle 33.png";
 import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const DaftarJualDesktop = (props) => {
   const [tabActive, setTabActive] = useState(1);
   const [dataJualan, setDataJualan] = useState([]);
   const [dataDiminati, setDataDiminati] = useState([]);
   const [dataTerjual, setDataTerjual] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   const getDataPenjualan = (userId, statusBarang) => {
-    var axios = require("axios");
-
     var config = {
       method: "get",
       url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
@@ -47,22 +47,33 @@ const DaftarJualDesktop = (props) => {
   };
 
   useEffect(() => {
-    getDataPenjualan(props.idUser, 1);
-    getDataPenjualan(props.idUser, 2);
-    getDataPenjualan(props.idUser, 3);
+    if (loading === false) {
+      getDataPenjualan(props.idUser, 1);
+      getDataPenjualan(props.idUser, 2);
+      getDataPenjualan(props.idUser, 3);
+    } else {
+      setLoading(false);
+    }
   }, [props.loginStatus]);
 
   const carDefault = () => {
     return (
-      <div className="container-card-daftarjualdesktop">
-        <div className="container-btn-add-product-daftarjualdesktop">
-          <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
-            <i className="bi bi-plus-lg"></i>
-            <label>Tambah Produk</label>
-          </a>
-
+      <div className="container">
+        <div className="row">
+          <div className="col-6">
+            {props.role === 2 ? (
+              <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
+                <i className="bi bi-plus-lg"></i>
+                <label>Tambah Produk</label>
+              </a>
+            ) : null}
+          </div>
           {dataJualan.map((value, index) => {
-            return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />
+              </div>
+            );
           })}
         </div>
       </div>
@@ -70,10 +81,18 @@ const DaftarJualDesktop = (props) => {
   };
 
   const carDefaultdua = () => {
-    return dataDiminati === [] ? (
-      dataDiminati.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
-      })
+    return dataDiminati.length > 0 ? (
+      <div className="container">
+        <div className="row">
+          {dataDiminati.map((value, index) => {
+            return (
+              <div className="col-6">
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
@@ -86,10 +105,18 @@ const DaftarJualDesktop = (props) => {
   };
 
   const carDefaulttiga = () => {
-    return dataTerjual === [] ? (
-      dataTerjual.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
-      })
+    return dataTerjual.length > 0 ? (
+      <div className="container">
+        <div className="row">
+          {dataTerjual.map((value, index) => {
+            return (
+              <div className="col-6">
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/my-product/${value.barangId}`} />;
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
@@ -162,11 +189,11 @@ const DaftarJualDesktop = (props) => {
                       onClick={() => {
                         setTabActive(1);
                       }}
-                      className="button-kategori-produk-daftarjual"
+                      className={`button-kategori-produk-daftarjual ${tabActive === 1 && "active"}`}
                     >
                       <div className="container-content-button-daftarjual">
                         <i className="bi bi-box"></i>
-                        <p className="txt-kategori-daftarjualdesktop"> Semua Produk</p>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 1 && "active"}`}> Semua Produk</p>
                       </div>
 
                       <img alt="" src={cevhron_right} />
@@ -178,12 +205,12 @@ const DaftarJualDesktop = (props) => {
                       onClick={() => {
                         setTabActive(2);
                       }}
-                      className="button-kategori-produk-daftarjual"
+                      className={`button-kategori-produk-daftarjual ${tabActive === 2 && "active"}`}
                     >
                       <div className="container-content-button-daftarjual">
                         {/* <img alt="" src={heart} /> */}
                         <i className="bi bi-heart"></i>
-                        <p className="txt-kategori-daftarjualdesktop">Diminati</p>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 2 && "active"}`}>Diminati</p>
                       </div>
 
                       <img alt="" src={cevhron_right} />
@@ -195,12 +222,12 @@ const DaftarJualDesktop = (props) => {
                       onClick={() => {
                         setTabActive(3);
                       }}
-                      className="button-kategori-produk-daftarjual"
+                      className={`button-kategori-produk-daftarjual ${tabActive === 3 && "active"}`}
                     >
                       <div className="container-content-button-daftarjual">
                         {/* <img alt="" src={dollar} /> */}
                         <i className="bi bi-currency-dollar"></i>
-                        <p className="txt-kategori-daftarjualdesktop">Terjual</p>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 3 && "active"}`}>Terjual</p>
                       </div>
 
                       <img alt="" src={cevhron_right} />

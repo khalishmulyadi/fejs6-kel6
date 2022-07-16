@@ -3,6 +3,7 @@ import logo from "../../img/Rectangle 127.png";
 import upFoto from "../../img/upFoto.png";
 
 import ReCAPTCHA from "react-google-recaptcha";
+import { Toast, ToastContainer } from "react-bootstrap";
 
 // redux
 import { connect } from "react-redux";
@@ -138,7 +139,8 @@ const InfoProfil = (props) => {
         setUpdateAlert(true);
       })
       .catch(function (error) {
-        console.log(error);
+        alert("Gagal update data");
+        // console.log(error);
       });
   };
 
@@ -165,9 +167,15 @@ const InfoProfil = (props) => {
             </div>
             <form onSubmit={handleUpdateProfile}>
               {updateAlert ? (
-                <div className="alert alert-success" role="alert">
-                  Berhasil update profile!
-                </div>
+                <ToastContainer className="p-3" position="top-end">
+                  <Toast show={updateAlert} onClose={() => setUpdateAlert(false)} bg="success" delay={3000} autohide>
+                    <Toast.Header>
+                      <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                      <strong className="me-auto">Success</strong>
+                    </Toast.Header>
+                    <Toast.Body className="text-light">Berhasil update data!</Toast.Body>
+                  </Toast>
+                </ToastContainer>
               ) : null}
               <div className="upFoto">
                 <label htmlFor="btn_upload_foto_profile" className="btn_upload_foto_profile">
@@ -263,8 +271,10 @@ const InfoProfil = (props) => {
                     id="input_no_hp"
                     type="text"
                     value={`${noTelepon}`}
-                    pattern="[0-9]{9}"
-                    placeholder="contoh: 8123456789"
+                    pattern="[0-8]{2}[0-9]{10}"
+
+                    placeholder="contoh: 08123456789"
+
                     aria-label=".form-control-lg example"
                     onChange={(e) => {
                       setNoTelepon(e.target.value);

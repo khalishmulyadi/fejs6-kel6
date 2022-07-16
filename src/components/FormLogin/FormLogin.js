@@ -6,6 +6,7 @@ import loginImage from "../../img/loginsecondhand.png";
 import "./FormLogin.css";
 import setLoginStatus from "../../redux/actions/setLoginStatus";
 import getUserDetail from "../../redux/actions/getUserDetail";
+import { Toast, ToastContainer } from "react-bootstrap";
 
 const FormLogin = (props) => {
   const [email, setEmail] = useState("");
@@ -19,12 +20,16 @@ const FormLogin = (props) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // props.getUserDetail();
-    if (props.loginStatus === true) {
-      navigate("/homepage", { replace: true });
-    }
-  }, []);
+  const token = JSON.parse(sessionStorage?.getItem("user"));
+
+  // useEffect(() => {
+  //   // props.getUserDetail();
+  //   if (JSON.parse(sessionStorage?.getItem("user"))) {
+  //     navigate("/homepage", { replace: true });
+  //   } else {
+  //     navigate("/auth/login", { replace: true });
+  //   }
+  // }, [token]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -46,7 +51,6 @@ const FormLogin = (props) => {
 
   return (
     <div>
-      {console.log(props.loginStatus)}
       <div className="container-fluid m-0">
         <div className="row login_group">
           <div className="d-none d-sm-flex col-sm-6 p-0">
@@ -54,9 +58,15 @@ const FormLogin = (props) => {
           </div>
           <div className="col-sm-6 my-auto p-md-5">
             {error ? (
-              <div className="alert alert-danger" role="alert">
-                Email atau Password yang kamu masukkan salah!
-              </div>
+              <ToastContainer className="p-3" position="top-end">
+                <Toast show={error} onClose={() => setError(false)} bg="danger" delay={3000} autohide>
+                  <Toast.Header>
+                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                    <strong className="me-auto">Error</strong>
+                  </Toast.Header>
+                  <Toast.Body className="text-light">Email atau password salah!</Toast.Body>
+                </Toast>
+              </ToastContainer>
             ) : null}
             <div className="back_icon_desktop">
               <a href="/">

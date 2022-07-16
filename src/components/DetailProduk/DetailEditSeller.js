@@ -4,60 +4,13 @@ import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
-const DetailProduk = ({ pengguna, ...props }) => {
+const DetailEditSeller = ({ pengguna, ...props }) => {
   var axios = require("axios");
-  const [menawar, setMenawar] = useState(false);
-  const [alertTawar, setAlertTawar] = useState(false);
-  const [hargaTawar, setHargaTawar] = useState(0);
   const [DataBarang, setDataBarang] = useState([]);
-  const [wishlist, setWishlist] = useState(JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)));
-  const [currentWishlist, setCurrentWishlist] = useState([]);
-
-  if (JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)) === null) {
-    sessionStorage.setItem(`wishlist_${props.userId}`, "[]");
-  }
 
   const { idBarang } = useParams();
 
   const token = JSON.parse(sessionStorage.getItem("user"));
-
-  // ******* Handle Menawar *******
-  const handleTawar = (e) => {
-    e.preventDefault();
-
-    if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
-      setMenawar(true);
-      setAlertTawar(true);
-      console.log(hargaTawar);
-      console.log(menawar);
-
-      // send API
-      var FormData = require("form-data");
-      var data = new FormData();
-      data.append("hargaTawar", hargaTawar);
-
-      var config = {
-        method: "put",
-        url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
-        headers: {
-          Authorization: `Bearer ${token.access_token}`,
-          // ...data.getHeaders()
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          alert("Silahkan login dulu");
-          window.location.replace("/auth/login");
-        });
-    } else {
-      alert("Mohon lengkapi data profile terlebih dahulu");
-    }
-  };
 
   // ************* Get Data Barang By Id *************
   useEffect(() => {
@@ -103,76 +56,47 @@ const DetailProduk = ({ pengguna, ...props }) => {
     return `Rp ${rupiah}`;
   };
 
-  // ****** Get Data Wishlist *******
-  useEffect(() => {
-    const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`));
+  const deleteBarang = () => {
+    var config = {
+      method: "delete",
+      url: `https://asix-store.herokuapp.com/barang/delete/${idBarang}`,
+      headers: {
+        Authorization: `Bearer ${token.access_token} `,
+      },
+    };
 
-    if (storedWishlist.length > 0) {
-      setWishlist(storedWishlist);
-    }
-  }, [DataBarang]);
+    let confirmDelete = "Apakah kamu yakin mau menghapus barang ini?";
 
-  // ******* Handle Add to Wishlist *******
-  const handleWishlist = () => {
-    if (props.loginStatus) {
-      if (props.roleUser === 1) {
-        console.log(DataBarang);
-        setWishlist([DataBarang, ...wishlist]);
-        alert("Barang berhasil dimasukkan ke wishlist");
-      } else {
-        alert("Hanya buyer yang bisa menambahkan");
+    if (props.roleUser === 2) {
+      if (window.confirm(confirmDelete) === true) {
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            alert("Barang berhasil dihapus");
+            window.location.replace("/daftar-jual");
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert("Gagal menghapus barang");
+          });
       }
     } else {
-      alert("Silahkan login terlebih dahulu");
-      window.location.replace("/auth/login");
+      alert("Hanya seller yang bisa menghapus!");
+      window.location.replace("/homepage");
     }
   };
-
-  // menyimpan wishlist di sessionStorage
-  useEffect(() => {
-    sessionStorage.setItem(`wishlist_${props.userId}`, JSON.stringify(wishlist));
-    setCurrentWishlist(wishlist.filter((e) => e.barangId === DataBarang.barangId));
-  }, [wishlist]);
-
-  const delHandler = (barangIdWishlist) => {
-    const updatedWishlist = wishlist.filter((item) => item.barangId !== barangIdWishlist);
-
-    setWishlist(updatedWishlist);
-    alert("Barang berhasil dihapus dari wishlist");
-    // console.log(updatedWishlist);
-  };
-
-  // useEffect(() => {
-  //   setCurrentWishlist(wishlist.filter((e) => e.barangId === DataBarang.barangId));
-
-  // }, [wishlist]);
 
   return (
     <div>
-      {console.log(currentWishlist)}
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
-      {alertTawar ? (
-        <div className="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="d-flex">
-            <div className="toast-body">Harga tawarmu berhasil dikirim ke penjual!</div>
-            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-        </div>
-      ) : null}
 
       <div className="container mx-auto detail_produk">
         <div>
-          {props.loginStatus ? (
-            <a className="back_icon" href="/homepage">
-              <i className="bi bi-arrow-left-short"></i>
-            </a>
-          ) : (
-            <a className="back_icon" href="/">
-              <i className="bi bi-arrow-left-short"></i>
-            </a>
-          )}
+          <a className="back_icon" href="/#">
+            <i className="bi bi-arrow-left-short"></i>
+          </a>
         </div>
         <div className="row">
           <div className="col-sm-6 p-0">
@@ -213,42 +137,14 @@ const DetailProduk = ({ pengguna, ...props }) => {
               <p>{DataBarang.tipeBarang}</p>
               <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
-              {pengguna === "merchant" && (
-                <div className="d-grid gap-2">
-                  {/* <button type="button" className="btn btn_publish">
-                    Terbitkan
-                  </button> */}
-                  <button type="button" className="btn btn_edit">
-                    Edit
-                  </button>
-                </div>
-              )}
-
-              {pengguna === "customer" && (
-                <div className="d-grid gap-2">
-                  {menawar ? (
-                    <button type="button" className="btn btn-secondary rounded-pill" disabled>
-                      Menunggu Respon Penjual
-                    </button>
-                  ) : (
-                    <div className="d-grid gap-2">
-                      <button type="button" className="btn btn_publish" data-bs-toggle="modal" data-bs-target="#modalTawar">
-                        Saya tertarik dan ingin nego
-                      </button>
-
-                      {currentWishlist.length > 0 ? (
-                        <button type="button" className="btn btn_edit" onClick={() => delHandler(DataBarang.barangId)}>
-                          Hapus dari wishlist
-                        </button>
-                      ) : (
-                        <button type="button" className="btn btn_edit" onClick={handleWishlist}>
-                          Tambahkan ke wishlist
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
+              <div className="d-grid gap-2">
+                <a href={`/update-barang/${DataBarang.barangId}`} className="btn btn_edit">
+                  Edit
+                </a>
+                <button type="button" className="btn btn_publish" onClick={deleteBarang}>
+                  Hapus Produk
+                </button>
+              </div>
             </div>
 
             {/* detail seller */}
@@ -300,18 +196,6 @@ const DetailProduk = ({ pengguna, ...props }) => {
                   </div>
                 </div>
               </div>
-
-              <form onSubmit={handleTawar}>
-                <div className="mb-3">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Harga tawar
-                  </label>
-                  <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} />
-                </div>
-                <button type="submit" className="btn btn_kirim_tawaran w-100" data-bs-dismiss="modal">
-                  Kirim
-                </button>
-              </form>
             </div>
           </div>
         </div>
@@ -329,4 +213,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DetailProduk);
+export default connect(mapStateToProps)(DetailEditSeller);

@@ -6,7 +6,7 @@ import productImage from "../../img/produk.png";
 // css
 import "./CardProduct.css";
 
-const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect }) => {
+const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect, isDisabled }) => {
   const navigate = useNavigate();
 
   const formatRupiah = (value) => {
@@ -35,7 +35,7 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
 
   return (
     <div>
-      <a href={redirect} className="card_product">
+      <a href={redirect} className={`card_product ${isDisabled ? "disabled" : null}`}>
         <div className="card p-2 m-3">
           <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
           <div className="card-body">

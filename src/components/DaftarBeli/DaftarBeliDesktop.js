@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import CardProduct from "../CardProduct/CardProduct";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
-import "./DaftarjualDesktop.css";
+import "./DaftarBeliDesktop.css";
 import seller from "../../img/Rectangle 33.png";
 import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
@@ -11,20 +11,21 @@ import { connect } from "react-redux";
 
 const DaftarBeliDesktop = (props) => {
   const [tabActive, setTabActive] = useState(1);
-  const [dataTransaksi1, setDataTransaksi1] = useState([]);
-  const [dataTransaksi2, setDataTransaksi2] = useState([]);
-  const [dataTransaksi3, setDataTransaksi3] = useState([]);
+  const [dataTawaran, setDataTawaran] = useState([]);
+  const [dataWishlist, setDataWishlist] = useState([]);
+  const [dataRiwayatBeli, setDataRiwayatBeli] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   const user = JSON.parse(sessionStorage.getItem("user"));
 
-  const getDataTransaksi = (userId, statusBarang) => {
+  const getDataPembelian = (userId, statusBarang) => {
     var axios = require("axios");
 
     var config = {
       method: "get",
-      url: `https://asix-store.herokuapp.com/daftar-jual/${userId}/${statusBarang}`,
+      url: `https://asix-store.herokuapp.com/daftar-beli/${userId}/${statusBarang}`,
       headers: {
         Authorization: `Bearer ${user.access_token}`,
       },
@@ -33,12 +34,10 @@ const DaftarBeliDesktop = (props) => {
     axios(config)
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
-        if (statusBarang === 1) {
-          setDataTransaksi1(response.data);
-        } else if (statusBarang === 2) {
-          setDataTransaksi2(response.data);
-        } else if (statusBarang === 3) {
-          setDataTransaksi3(response.data);
+        if (statusBarang === "Bidding") {
+          setDataTawaran(response.data);
+        } else if (statusBarang === "Sold") {
+          setDataRiwayatBeli(response.data);
         }
       })
       .catch(function (error) {
@@ -47,58 +46,96 @@ const DaftarBeliDesktop = (props) => {
   };
 
   useEffect(() => {
-    getDataTransaksi(props.idUser, 1);
-    getDataTransaksi(props.idUser, 2);
-    getDataTransaksi(props.idUser, 3);
+    if (loading === false) {
+      getDataPembelian(props.idUser, "Bidding");
+      getDataPembelian(props.idUser, "Sold");
+      const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+
+      if (storedWishlist !== []) {
+        setDataWishlist(storedWishlist);
+      }
+    } else {
+      setLoading(false);
+    }
   }, [props.loginStatus]);
 
   const carDefault = () => {
-    return (
-      <div className="container-card-daftarjualdesktop">
-        <div className="container-btn-add-product-daftarjualdesktop">
-          {props.role === 2 ? (
-            <a href="/tambah-produk" className="btn-add-product-daftarjualdesktop">
-              <i className="bi bi-plus-lg"></i>
-              <label>Tambah Produk</label>
-            </a>
-          ) : null}
-
-          {dataTransaksi1.map((value, index) => {
-            return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+    return dataTawaran.length > 0 ? (
+      <div className="container">
+        <div className="row">
+          {dataTawaran.map((value, index) => {
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
+              </div>
+            );
           })}
         </div>
+      </div>
+    ) : (
+      <div className="container-card-button2-daftarjualdesktop">
+        <div>
+          <img alt="" src={none} />
+        </div>
+
+        <div className="txt-produk-diminati-daftarjualdesktop">Kamu belum membeli apapun, yuk belanja sekarang!</div>
       </div>
     );
   };
 
   const carDefaultdua = () => {
-    return dataTransaksi2 === [] ? (
-      dataTransaksi2.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
-      })
+    return dataWishlist.length > 0 ? (
+      <div className="container">
+        <div className="row">
+          {dataWishlist.map((value, index) => {
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
           <img alt="" src={none} />
         </div>
 
-        <div className="txt-produk-diminati-daftarjualdesktop">Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok</div>
+        <div className="txt-produk-diminati-daftarjualdesktop">Wishlist kamu kosong nih, ayo browsing lebih banyak</div>
       </div>
     );
   };
 
   const carDefaulttiga = () => {
-    return dataTransaksi3 === [] ? (
-      dataTransaksi2.map((value, index) => {
-        return <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
-      })
+    return dataRiwayatBeli.length > 0 ? (
+      <div className="container">
+        <div className="row">
+          {dataRiwayatBeli.map((value, index) => {
+            return (
+              <div className="col-6" key={index}>
+                <CardProduct
+                  key={index}
+                  namaBarang={value.namaBarang}
+                  img={value.barangImg}
+                  tipebarang={value.tipeBarang}
+                  price={value.hargaBarang}
+                  ToDetailProduct={value.barangId}
+                  redirect={`/product/product-detail/${value.barangId}`}
+                  isDisabled={true}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     ) : (
       <div className="container-card-button2-daftarjualdesktop">
         <div>
           <img alt="" src={none} />
         </div>
 
-        <div className="txt-produk-diminati-daftarjualdesktop">Belum ada produkmu yang terjual nih, sabar ya rejeki nggak kemana kok</div>
+        <div className="txt-produk-diminati-daftarjualdesktop">Kamu belum membeli apapun, yuk belanja sekarang!</div>
       </div>
     );
   };
@@ -115,7 +152,7 @@ const DaftarBeliDesktop = (props) => {
 
   return (
     <div>
-      {props.loginStatus !== undefined ? (
+      {props.loginStatus == undefined ? (
         <div className="mx-auto">
           <h1 className="text-center">Loading...</h1>
         </div>
@@ -139,7 +176,7 @@ const DaftarBeliDesktop = (props) => {
                       </div>
 
                       <div className="txt-daftarjualdesktop">
-                        {props.role === 2 ? <strong> {props.dataUser.nama}</strong> : <strong>{props.dataUser.nama} </strong>}
+                        <strong>{props.dataUser.nama} </strong>
                         <p>{props.dataUser.kota}</p>
                       </div>
                     </div>
@@ -157,103 +194,52 @@ const DaftarBeliDesktop = (props) => {
                 <Card className="card-kategori-daftarjualdesktop">
                   <div className="content-card-kategori-daftarjualdesktop">
                     <strong> Kategori</strong>
+                    <button
+                      onClick={() => {
+                        setTabActive(1);
+                      }}
+                      className={`button-kategori-produk-daftarjual ${tabActive === 1 && "active"}`}
+                    >
+                      <div className="container-content-button-daftarjual">
+                        <i className="bi bi-box"></i>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 1 && "active"}`}> Menunggu Respon Penjual</p>
+                      </div>
 
-                    {props.role === 2 ? (
-                      <button
-                        onClick={() => {
-                          setTabActive(1);
-                        }}
-                        className="button-kategori-produk-daftarjual"
-                      >
-                        <div className="container-content-button-daftarjual">
-                          <i className="bi bi-box"></i>
-                          <p className="txt-kategori-daftarjualdesktop"> Semua Produk</p>
-                        </div>
-
-                        <img alt="" src={cevhron_right} />
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setTabActive(1);
-                        }}
-                        className="button-kategori-produk-daftarjual"
-                      >
-                        <div className="container-content-button-daftarjual">
-                          <i className="bi bi-box"></i>
-                          <p className="txt-kategori-daftarjualdesktop"> Menunggu Respon Penjual</p>
-                        </div>
-
-                        <img alt="" src={cevhron_right} />
-                      </button>
-                    )}
+                      <img alt="" src={cevhron_right} />
+                    </button>
 
                     <hr />
-                    {props.role === 2 ? (
-                      <button
-                        onClick={() => {
-                          setTabActive(2);
-                        }}
-                        className="button-kategori-produk-daftarjual"
-                      >
-                        <div className="container-content-button-daftarjual">
-                          {/* <img alt="" src={heart} /> */}
-                          <i className="bi bi-heart"></i>
-                          <p className="txt-kategori-daftarjualdesktop">Diminati</p>
-                        </div>
+                    <button
+                      onClick={() => {
+                        setTabActive(2);
+                      }}
+                      className={`button-kategori-produk-daftarjual ${tabActive === 2 && "active"}`}
+                    >
+                      <div className="container-content-button-daftarjual ">
+                        {/* <img alt="" src={heart} /> */}
+                        <i className="bi bi-heart"></i>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 2 && "active"}`}>Wishlist Saya</p>
+                      </div>
 
-                        <img alt="" src={cevhron_right} />
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setTabActive(2);
-                        }}
-                        className="button-kategori-produk-daftarjual"
-                      >
-                        <div className="container-content-button-daftarjual">
-                          {/* <img alt="" src={heart} /> */}
-                          <i className="bi bi-heart"></i>
-                          <p className="txt-kategori-daftarjualdesktop">Wishlist Saya</p>
-                        </div>
-
-                        <img alt="" src={cevhron_right} />
-                      </button>
-                    )}
+                      <img alt="" src={cevhron_right} />
+                    </button>
 
                     <hr />
 
-                    {props.role === 2 ? (
-                      <button
-                        onClick={() => {
-                          setTabActive(3);
-                        }}
-                        className="button-kategori-produk-daftarjual"
-                      >
-                        <div className="container-content-button-daftarjual">
-                          {/* <img alt="" src={dollar} /> */}
-                          <i className="bi bi-currency-dollar"></i>
-                          <p className="txt-kategori-daftarjualdesktop">Terjual</p>
-                        </div>
+                    <button
+                      onClick={() => {
+                        setTabActive(3);
+                      }}
+                      className={`button-kategori-produk-daftarjual ${tabActive === 3 && "active"}`}
+                    >
+                      <div className="container-content-button-daftarjual">
+                        {/* <img alt="" src={dollar} /> */}
+                        <i className="bi bi-currency-dollar"></i>
+                        <p className={`txt-kategori-daftarjualdesktop ${tabActive === 3 && "active"}`}>Riwayat Pembelian</p>
+                      </div>
 
-                        <img alt="" src={cevhron_right} />
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setTabActive(3);
-                        }}
-                        className="button-kategori-produk-daftarjual"
-                      >
-                        <div className="container-content-button-daftarjual">
-                          {/* <img alt="" src={dollar} /> */}
-                          <i className="bi bi-currency-dollar"></i>
-                          <p className="txt-kategori-daftarjualdesktop">Riwayat Pembelian</p>
-                        </div>
-
-                        <img alt="" src={cevhron_right} />
-                      </button>
-                    )}
+                      <img alt="" src={cevhron_right} />
+                    </button>
                   </div>
                 </Card>
               </Col>

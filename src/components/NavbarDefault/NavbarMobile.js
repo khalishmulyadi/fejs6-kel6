@@ -38,9 +38,11 @@ const NavbarMobile = (props) => {
       {props.loginStatus ? (
         <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
-              AsiX
-            </h5>
+            <a href="/homepage">
+              <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
+                AsiX
+              </h5>
+            </a>
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body navbar_list">
@@ -48,14 +50,14 @@ const NavbarMobile = (props) => {
               <li className="list-group-item ">
                 <a href="/notifikasi">Notifikasi</a>
               </li>
-              {props.role[0]?.idRole === 1 && (
+              {props.role === 1 && (
                 <li className="list-group-item">
-                  <a href="/#">Daftar Pembelian</a>
+                  <a href="/daftar-beli">Daftar Pembelian</a>
                 </li>
               )}
-              {props.role[0]?.idRole === 2 && (
+              {props.role === 2 && (
                 <li className="list-group-item">
-                  <a href="/#">Daftar Penjualan</a>
+                  <a href="/daftar-jual">Daftar Penjualan</a>
                 </li>
               )}
               <li className="list-group-item">
@@ -67,9 +69,11 @@ const NavbarMobile = (props) => {
       ) : (
         <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
-              AsiX
-            </h5>
+            <a href="/">
+              <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
+                AsiX
+              </h5>
+            </a>
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body ">
