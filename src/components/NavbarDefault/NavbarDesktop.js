@@ -7,8 +7,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
-  var axios = require('axios');
-  const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem('user')));
+
+  var axios = require("axios");
+  const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem("user")));
+
   const [DataNotif, setDataNotif] = useState([]);
   const { idBarang } = useParams();
 
@@ -54,6 +56,7 @@ const NavbarDesktop = (props) => {
 
   return (
 
+
     <div className="container-fluid container__nav">
 <div className="container ">
 
@@ -79,6 +82,7 @@ const NavbarDesktop = (props) => {
             <button type="button" className="btn mt-3 dropdown-toggle menu_user">
               <a href="/daftar-jual">
                 <i className="bi bi-list-ul bi__nav"></i>
+
               </a>
             </button>
           </div>

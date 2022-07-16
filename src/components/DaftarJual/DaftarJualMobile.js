@@ -33,11 +33,11 @@ const DaftarJualMobile = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         if (statusBarang === 1) {
-          setDataJualan(response.data);
+          setDataJualan(response?.data);
         } else if (statusBarang === 2) {
-          setDataDiminati(response.data);
+          setDataDiminati(response?.data);
         } else if (statusBarang === 3) {
-          setDataTerjual(response.data);
+          setDataTerjual(response?.data);
         }
       })
       .catch(function (error) {
@@ -47,9 +47,9 @@ const DaftarJualMobile = (props) => {
 
   useEffect(() => {
     if (loading === false) {
-      getDataPenjualan(props.idUser, 1);
-      getDataPenjualan(props.idUser, 2);
-      getDataPenjualan(props.idUser, 3);
+      getDataPenjualan(props?.idUser, 1);
+      getDataPenjualan(props?.idUser, 2);
+      getDataPenjualan(props?.idUser, 3);
     } else {
       setLoading(false);
     }
@@ -71,8 +71,8 @@ const DaftarJualMobile = (props) => {
                 <img src={`data:image/png;base64,${props.dataUser.img}`} className="img_penjual" alt="foto_penjual" />
               </div>
               <div className="col-6">
-                <h3>{props.dataUser.nama}</h3>
-                <p>{props.dataUser.kota}</p>
+                <h5>{props?.dataUser?.nama}</h5>
+                <p>{props?.dataUser?.kota}</p>
               </div>
               <div className="col-3">
                 <a href="/update-profile" className="btn btn_edit_profil_daftar_jual">
@@ -119,10 +119,19 @@ const DaftarJualMobile = (props) => {
                   <img src={tambahProduk} className="btn_tambah_produk col" alt="tambah_produk" />
                 </a>
 
-                {dataJualan.map((value, index) => {
+                {dataJualan?.map((value, index) => {
                   return (
                     <div className="col" key={index}>
-                      <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+                      <CardProduct
+                        key={index}
+                        namaBarang={value.namaBarang}
+                        img={value.barangImg}
+                        tipebarang={value.tipeBarang}
+                        price={value.hargaBarang}
+                        ToDetailProduct={value.barangId}
+                        redirect={`/product/my-product/${value.barangId}`}
+                      />
+                      ;
                     </div>
                   );
                 })}
@@ -135,7 +144,7 @@ const DaftarJualMobile = (props) => {
           {/* content diminati start */}
 
           {tabActive === 2 &&
-            (dataDiminati.length > 0 ? (
+            (dataDiminati?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataDiminati.map((value, index) => {
@@ -150,7 +159,7 @@ const DaftarJualMobile = (props) => {
             ) : (
               <div>
                 <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
-                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
+                <p className="text-center fw-bold">Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok</p>
               </div>
             ))}
 
@@ -159,7 +168,7 @@ const DaftarJualMobile = (props) => {
           {/* content terjual start */}
 
           {tabActive === 3 &&
-            (dataTerjual.length > 0 ? (
+            (dataTerjual?.length > 0 ? (
               <div className="container">
                 <div className="row row-cols-2">
                   {dataTerjual.map((value, index) => {
@@ -174,7 +183,7 @@ const DaftarJualMobile = (props) => {
             ) : (
               <div>
                 <img src={kosongPeminat} className="kosong_peminat" alt="kosong_peminat" />
-                <p className="text-center fw-bold">Kamu belum belanja apapun, yuk mulai belanja!</p>
+                <p className="text-center fw-bold">Belum ada produkmu yang terjual nih, sabar ya rejeki nggak kemana kok</p>
               </div>
             ))}
 

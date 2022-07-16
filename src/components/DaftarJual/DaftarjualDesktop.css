@@ -1,4 +1,5 @@
 .container-content-daftarjualdesktop {
+
     margin-top: 1.5rem;
     padding: 1rem 2rem !important;
 }
@@ -20,42 +21,41 @@
     padding: 1rem;
 
 
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .container-img-txt-daftarjualdesktop {
-    display: flex;
-
+  display: flex;
 }
 
 .container-img-daftarjuadesktop {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* width: 100%; */
 }
 
 .img-penjual-dafarjualdesktop {
-    width: 3rem;
-    height: 3rem;
+  width: 3rem;
+  height: 3rem;
 }
 
-
 .txt-daftarjualdesktop {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .container-button-daftarjualdesktop {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .edit-button-daftarjualdesktop {
+
     background-color: #335C67;
     border-radius: 11px;
     width: 7rem;
@@ -72,107 +72,111 @@
     background-color: #E09F3E;
     color: #fff;
     border-color: #E09F3E;
+
 }
 
+.edit-button-daftarjualdesktop:hover {
+  color: #ffff;
+  background-color: #7126b5;
+}
 
 .card-kategori-daftarjualdesktop {
+
     width: 100%;
     padding: 1.5rem;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     border-radius: 11px !important;
+
 }
 
 .content-card-kategori-daftarjualdesktop {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
 
 .txt-kategori-daftarjualdesktop {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
 
-    margin-bottom: 0;
-    margin-left: 0.6875rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+
+
+  margin-bottom: 0;
+  margin-left: 0.6875rem;
 }
 
-.arrow-right-daftarjualdesktop {}
+.arrow-right-daftarjualdesktop {
+}
 
 .button-kategori-produk-daftarjual {
-    margin-top: 1.5rem;
-    display: flex;
-    height: 2.5rem;
-    align-items: center;
+  margin-top: 1.5rem;
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
 
-    border: none;
-    background-color: #FFFFFF;
+  border: none;
+  background-color: #ffffff;
 }
 
 .button-kategori-produk-daftarjual:hover {
+
     background-color: #FFF3B0;
     border-radius: 11px;
+
 }
 
 .container-content-button-daftarjual {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .container-card-daftarjualdesktop {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-.container-btn-add-product-daftarjualdesktop{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
+.container-btn-add-product-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.btn-add-product-daftarjualdesktop{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.btn-add-product-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    width: 12.875rem;
-    height: 12.375rem;
-    border: 3px dashed #D0D0D0;
-    border-radius: 4px;
-    background-color: #FFFFFF;
+  width: 12.875rem;
+  height: 12.375rem;
+  border: 3px dashed #d0d0d0;
+  border-radius: 4px;
+  background-color: #ffffff;
 }
 
-.btn-add-product-daftarjualdesktop:hover{
-    background-color: #949090;
+.btn-add-product-daftarjualdesktop:hover {
+  background-color: #949090;
 }
-
 
 .container-card-button2-daftarjualdesktop {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .txt-produk-diminati-daftarjualdesktop {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 20px;
-    text-align: center;
-    color: #151515;
-    margin-top: 1.5rem;
-
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 20px;
+  text-align: center;
+  color: #151515;
+  margin-top: 1.5rem;
 }

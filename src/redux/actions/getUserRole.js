@@ -1,7 +1,7 @@
 import { GET_USER_ROLE } from "./types";
 
 const getUserRole = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
   return (dispatch) => {
     var axios = require("axios");
 
