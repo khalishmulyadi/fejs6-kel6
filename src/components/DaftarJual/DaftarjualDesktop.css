@@ -1,25 +1,23 @@
 .container-content-daftarjualdesktop {
-
-    margin-top: 1.5rem;
-    padding: 1rem 2rem !important;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem !important;
 }
 
 .card-daftarjualdesktop {
-    width: 100%;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 11px;
-    margin-top: 0.875rem;
-    border-radius: 11px !important;
-    margin-bottom: 1.5rem;
+  width: 100%;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 11px;
+  margin-top: 0.875rem;
+  border-radius: 11px !important;
+  margin-bottom: 1.5rem;
 }
 
 .container-content-card-daftarjualdesktop {
-    display: flex;
-    flex-direction: row;
-    background-color: #FFFFFF;
-    width: 100%;
-    padding: 1rem;
-
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 1rem;
 
   justify-content: space-between;
 }
@@ -55,24 +53,21 @@
 }
 
 .edit-button-daftarjualdesktop {
-
-    background-color: #335C67;
-    border-radius: 11px;
-    width: 7rem;
-    height: 35px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 18px;
-    color: #fff;
-    text-transform: uppercase;
-
+  background-color: #335c67;
+  border-radius: 11px;
+  width: 7rem;
+  height: 35px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  color: #fff;
+  text-transform: uppercase;
 }
 .edit-button-daftarjualdesktop:hover {
-    background-color: #E09F3E;
-    color: #fff;
-    border-color: #E09F3E;
-
+  background-color: #e09f3e;
+  color: #fff;
+  border-color: #e09f3e;
 }
 
 .edit-button-daftarjualdesktop:hover {
@@ -81,12 +76,10 @@
 }
 
 .card-kategori-daftarjualdesktop {
-
-    width: 100%;
-    padding: 1.5rem;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 11px !important;
-
+  width: 100%;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 11px !important;
 }
 
 .content-card-kategori-daftarjualdesktop {
@@ -95,13 +88,11 @@
 }
 
 .txt-kategori-daftarjualdesktop {
-
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #000000;
-
 
   margin-bottom: 0;
   margin-left: 0.6875rem;
@@ -121,10 +112,8 @@
 }
 
 .button-kategori-produk-daftarjual:hover {
-
-    background-color: #FFF3B0;
-    border-radius: 11px;
-
+  background-color: #fff3b0;
+  border-radius: 11px;
 }
 
 .container-content-button-daftarjual {

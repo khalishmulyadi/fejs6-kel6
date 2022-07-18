@@ -143,13 +143,11 @@ const DetailProduk = ({ pengguna, ...props }) => {
   };
 
   return (
-
     <div className="container">
-
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
-      
+
       {alertTawar ? (
         <div className="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="d-flex">
@@ -204,7 +202,6 @@ const DetailProduk = ({ pengguna, ...props }) => {
                 </div>
               </div>
             </div>
-
           </div>
           <div className="col-sm-6">
             {/* detail produk */}
@@ -219,102 +216,100 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
                     Terbitkan
                   </button> */}
-                    <button type="button" className="btn btn_edit">
-                      Edit
+                  <button type="button" className="btn btn_edit">
+                    Edit
+                  </button>
+                </div>
+              )}
+
+              {pengguna === "customer" && (
+                <div className="d-grid gap-2">
+                  {menawar ? (
+                    <button type="button" className="btn btn-secondary rounded-pill" disabled>
+                      Menunggu Respon Penjual
                     </button>
-                  </div>
-                )}
-
-                {pengguna === "customer" && (
-                  <div className="d-grid gap-2">
-                    {menawar ? (
-                      <button type="button" className="btn btn-secondary rounded-pill" disabled>
-                        Menunggu Respon Penjual
+                  ) : (
+                    <div className="d-grid gap-2">
+                      <button type="button" className="btn btn_publish" data-bs-toggle="modal" data-bs-target="#modalTawar">
+                        Saya tertarik dan ingin nego
                       </button>
-                    ) : (
-                      <div className="d-grid gap-2">
-                        <button type="button" className="btn btn_publish" data-bs-toggle="modal" data-bs-target="#modalTawar">
-                          Saya tertarik dan ingin nego
+
+                      {currentWishlist.length > 0 ? (
+                        <button type="button" className="btn btn_edit" onClick={() => delHandler(DataBarang.barangId)}>
+                          Hapus dari wishlist
                         </button>
+                      ) : (
+                        <button type="button" className="btn btn_edit" onClick={handleWishlist}>
+                          Tambahkan ke wishlist
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
-                        {currentWishlist.length > 0 ? (
-                          <button type="button" className="btn btn_edit" onClick={() => delHandler(DataBarang.barangId)}>
-                            Hapus dari wishlist
-                          </button>
-                        ) : (
-                          <button type="button" className="btn btn_edit" onClick={handleWishlist}>
-                            Tambahkan ke wishlist
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-
-              {/* detail seller */}
-              <div className="container mt-3 py-3 shadow seller_detail">
-                <div className="row">
-                  <div className="col-3">
-                    <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
-                  </div>
-                  <div className="col ms-3 ms-sm-0">
-                    <h3>{DataBarang.namaSeller}</h3>
-                    <p>{DataBarang.kota}</p>
-                  </div>
+            {/* detail seller */}
+            <div className="container mt-3 py-3 shadow seller_detail">
+              <div className="row">
+                <div className="col-3">
+                  <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
+                </div>
+                <div className="col ms-3 ms-sm-0">
+                  <h3>{DataBarang.namaSeller}</h3>
+                  <p>{DataBarang.kota}</p>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* deskripsi produk */}
-          <div className="container w-100 mt-5 mb-5 mx-auto px-4 py-3 shadow product_desc">
-            <h3>Deskripsi</h3>
-            <p>{DataBarang.deskripsi}</p>
-            <ul>
-              <li>Merk: {DataBarang.merk}</li>
-              <li>Seri: {DataBarang.seri}</li>
-            </ul>
-          </div>
         </div>
 
-        <div className="modal fade " id="modalTawar" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content bg-light modal_tawar mx-auto">
-              <div className="modal-header modal_head">
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body mt-4">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Masukkan Harga Tawarmu
-                </h5>
-                <p style={{ color: "#8A8A8A" }}>Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan segera dihubungi penjual.</p>
+        {/* deskripsi produk */}
+        <div className="container w-100 mt-5 mb-5 mx-auto px-4 py-3 shadow product_desc">
+          <h3>Deskripsi</h3>
+          <p>{DataBarang.deskripsi}</p>
+          <ul>
+            <li>Merk: {DataBarang.merk}</li>
+            <li>Seri: {DataBarang.seri}</li>
+          </ul>
+        </div>
+      </div>
 
-                <div className="container product_detail_tawar py-3">
-                  <div className="row">
-                    <div className="col-3">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="product_img_tawar" alt="product-img-haggle" />
-                    </div>
-                    <div className="col-9">
-                      <p className="mb-0 fw-bold">{DataBarang.namaBarang}</p>
-                      <p className="mb-0">{formatRupiah(DataBarang.hargaBarang)}</p>
-                    </div>
+      <div className="modal fade " id="modalTawar" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content bg-light modal_tawar mx-auto">
+            <div className="modal-header modal_head">
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body mt-4">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Masukkan Harga Tawarmu
+              </h5>
+              <p style={{ color: "#8A8A8A" }}>Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan segera dihubungi penjual.</p>
+
+              <div className="container product_detail_tawar py-3">
+                <div className="row">
+                  <div className="col-3">
+                    <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="product_img_tawar" alt="product-img-haggle" />
+                  </div>
+                  <div className="col-9">
+                    <p className="mb-0 fw-bold">{DataBarang.namaBarang}</p>
+                    <p className="mb-0">{formatRupiah(DataBarang.hargaBarang)}</p>
                   </div>
                 </div>
-
-                <form onSubmit={handleTawar}>
-                  <div className="mb-3">
-                    <label htmlFor="recipient-name" className="col-form-label">
-                      Harga tawar
-                    </label>
-                    <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} />
-                  </div>
-                  <button type="submit" className="btn btn_kirim_tawaran w-100" data-bs-dismiss="modal">
-                    Kirim
-                  </button>
-                </form>
               </div>
+
+              <form onSubmit={handleTawar}>
+                <div className="mb-3">
+                  <label htmlFor="recipient-name" className="col-form-label">
+                    Harga tawar
+                  </label>
+                  <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} />
+                </div>
+                <button type="submit" className="btn btn_kirim_tawaran w-100" data-bs-dismiss="modal">
+                  Kirim
+                </button>
+              </form>
             </div>
           </div>
         </div>
