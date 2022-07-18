@@ -7,7 +7,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Notifikasi from "../Nofitikasi/Notifikasi";
 
 const NavbarDesktop = (props) => {
-
   var axios = require("axios");
   const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem("user")));
 
@@ -22,11 +21,11 @@ const NavbarDesktop = (props) => {
 
   const handleGetNotif = () => {
     var config = {
-      method: 'get',
+      method: "get",
       url: `https://asix-store.herokuapp.com/user/notifikasi-seller/${props.userId}/Bidding`,
       headers: {
-        'Authorization': `Bearer ${Token.access_token}`
-      }
+        Authorization: `Bearer ${Token.access_token}`,
+      },
     };
 
     axios(config)
@@ -40,185 +39,92 @@ const NavbarDesktop = (props) => {
 
   const handleMapDataNotif = () => {
     return DataNotif.map((value, index) => {
-      return <a className="dropdown-item px-4" href={`infoproduct/${value.barangId}`} key={index}>
-        <Notifikasi
-          namaProduk={value.namaBarang}
-          harga={value.hargaBarang}
-          hargaTawar={value.hargaTawar}
-          date={value.tanggalTawar}
-          img={value.gambarBarang}
-          key={index}
-        />
-      </a>
-    })
-  }
-
+      return (
+        <a className="dropdown-item px-4" href={`infoproduct/${value.barangId}`} key={index}>
+          <Notifikasi namaProduk={value.namaBarang} harga={value.hargaBarang} hargaTawar={value.hargaTawar} date={value.tanggalTawar} img={value.gambarBarang} key={index} />
+        </a>
+      );
+    });
+  };
 
   return (
-
-
     <div className="container-fluid container__nav">
-<div className="container ">
+      <div className="container ">
+        <nav>
+          {props.loginStatus ? (
+            <a href="/homepage">
+              <label className="logo__nav">AsiX Store</label>
+            </a>
+          ) : (
+            <a href="/">
+              <label className="logo__nav">AsiX Store</label>
+            </a>
+          )}
+          <div className="button__nav">
+            {props.loginStatus ? (
+              <div className="button__nav">
+                <div className="btn-group drop_menu">
+                  {props.roleUser === 1 ? (
+                    <button type="button" className="btn mt-3 dropdown-toggle menu_user">
+                      <a href="/daftar-beli">
+                        <i className="bi bi-list-ul bi__nav"></i>
+                      </a>
+                    </button>
+                  ) : (
+                    <button type="button" className="btn mt-3 dropdown-toggle menu_user">
+                      <a href="/daftar-jual">
+                        <i className="bi bi-list-ul bi__nav"></i>
+                      </a>
+                    </button>
+                  )}
+                </div>
 
-{/* <nav className="container-fluid nav__dekstop">
-  <label className="logo">AsiX Store</label>
-  <input className="form-control search__input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
-  <button className="btn search__button" id="button-addon2" type="submit"><i className="bi bi-search"></i></button>
-  <a type="button" className="btn button__login mt-3" href="/auth/login">
-    <span className="me-2">
-      <i className="bi bi-box-arrow-in-right"></i>
-    </span>
-    Masuk
-  </a>
-</nav> */}
+                <div className="btn-group drop_notif">
+                  <button type="button" className="btn mt-3 dropdown-toggle notifikasi_user" data-bs-toggle="dropdown" aria-expanded="false" onClick={handleGetNotif}>
+                    <i className="bi bi-bell bi__nav"></i>
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a className="dropdown-item px-4" href="/#">
+                        {handleMapDataNotif()}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
+                <div className="btn-group drop_profile">
+                  <button type="button" className="btn mt-3 dropdown-toggle profile_user" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i className="bi bi-person bi__nav"></i>
+                  </button>
 
-<nav>
-  <label className="logo__nav">AsiX Store</label>
-  <div className="button__nav">
-    {props.loginStatus ? (
-        <div className="button__nav">
-          <div className="btn-group drop_menu">
-            <button type="button" className="btn mt-3 dropdown-toggle menu_user">
-              <a href="/daftar-jual">
-                <i className="bi bi-list-ul bi__nav"></i>
-
-              </a>
-            </button>
-          </div>
-
-          <div className="btn-group drop_notif">
-            <button type="button"
-              className="btn mt-3 dropdown-toggle notifikasi_user"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              onClick={handleGetNotif}
-            >
-              <i className="bi bi-bell bi__nav"></i>
-            </button>
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a className="dropdown-item px-4" href="/#">
-                  {handleMapDataNotif()}
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a className="dropdown-item" href="/update-profile">
+                        Ubah Akun
+                      </a>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={handleLogout}>
+                        Keluar
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <div className="button__nav">
+                <a type="button" className="btn button_login mt-3" href="/auth/login">
+                  <span className="me-2">
+                    <i className="bi bi-box-arrow-in-right"></i>
+                  </span>
+                  Masuk
                 </a>
-              </li>
-            </ul>
+              </div>
+            )}
           </div>
-
-          <div className="btn-group drop_profile">
-            <button type="button" className="btn mt-3 dropdown-toggle profile_user" data-bs-toggle="dropdown" aria-expanded="false">
-              <i className="bi bi-person bi__nav"></i>
-            </button>
-
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a className="dropdown-item" href="/update-profile">
-                  Ubah Akun
-                </a>
-              </li>
-              <li>
-                <button className="dropdown-item" onClick={handleLogout}>
-                  Keluar
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-      ) : (
-        <div className="button__nav">
-          <a type="button" className="btn button_login mt-3" href="/auth/login">
-            <span className="me-2">
-              <i className="bi bi-box-arrow-in-right"></i>
-            </span>
-            Masuk
-          </a>
-        </div>
-      )}
-  </div>
-</nav>
-
-  {/* <div className="container container__nav">
-    <div className="row">
-      <div className="col-lg-3 mt-3 ">
-        <div className="logo_website">AsiX Store</div>
+        </nav>
       </div>
-      <div className="col-lg-6">
-        <div className="container">
-          <form className="d-flex">
-            <div className="input-group search_bar mt-3">
-              <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
-              <button className="btn search_button" id="button-addon2" type="submit">
-                <i className="bi bi-search"></i>
-              </button>
-
-            </div>
-          </form>
-        </div>
-      </div>
-
-      {props.loginStatus ? (
-        <div className="col-lg-3 ">
-          <div className="btn-group drop_menu">
-            <button type="button" className="btn mt-3 dropdown-toggle menu_user">
-              <a href="/daftar-jual">
-                <i className="bi bi-list-ul"></i>
-              </a>
-            </button>
-          </div>
-
-          <div className="btn-group drop_notif">
-            <button type="button"
-              className="btn mt-3 dropdown-toggle notifikasi_user"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              onClick={handleGetNotif}
-            >
-              <i className="bi bi-bell"></i>
-            </button>
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a className="dropdown-item px-4" href="/#">
-                  {handleMapDataNotif()}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="btn-group drop_profile">
-            <button type="button" className="btn mt-3 dropdown-toggle profile_user" data-bs-toggle="dropdown" aria-expanded="false">
-              <i className="bi bi-person"></i>
-            </button>
-
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a className="dropdown-item" href="/update-profile">
-                  Ubah Akun
-                </a>
-              </li>
-              <li>
-                <button className="dropdown-item" onClick={handleLogout}>
-                  Keluar
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      ) : (
-        <div className="col-3">
-          <a type="button" className="btn button_login mt-3" href="/auth/login">
-            <span className="me-2">
-              <i className="bi bi-box-arrow-in-right"></i>
-            </span>
-            Masuk
-          </a>
-        </div>
-      )}
     </div>
-  </div> */}
-</div>
-    </div>
-    
   );
 };
 

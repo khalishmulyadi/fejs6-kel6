@@ -28,11 +28,9 @@ const HomePage = (props) => {
   for (let i = 0; i < 5; i += 1) {
     slides.push(
       <SwiperSlide key={`slide-${i}`}>
-
         <img src={swiper1} alt={`Slide ${i}`}></img>
         <img src={swiper2} alt={`Slide ${i}`}></img>
         <img src={swiper3} alt={`Slide ${i}`}></img>
-
       </SwiperSlide>
     );
   }
@@ -61,10 +59,6 @@ const HomePage = (props) => {
     }
   }, [props.loginStatus]);
 
-  // const filterBarang = Barang.filter((barang) => {
-  //   return barang.statusBarang === "Availabel";
-  // });
-
   const handleCardProduct = () => {
     const filterBarang = Barang.filter((barang) => {
       return barang.statusBarang === "Availabel";
@@ -73,33 +67,19 @@ const HomePage = (props) => {
     return filterBarang.map((value, index) => {
       if (props.loginStatus === true) {
         return (
-          <CardProduct
-            key={index}
-            namaBarang={value.namaBarang}
-            img={value.barangImg}
-            tipebarang={value.tipeBarang}
-            price={value.hargaBarang}
-            ToDetailProduct={value.barangId}
-            redirect={`product/product-detail/${value.barangId}`}
-          />
+          <div className="col-md-3 col-6" key={index}>
+            <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/${value.barangId}`} />
+          </div>
         );
       } else {
         return (
-          <CardProduct
-            key={index}
-            namaBarang={value.namaBarang}
-            img={value.barangImg}
-            tipebarang={value.tipeBarang}
-            price={value.hargaBarang}
-            ToDetailProduct={value.barangId}
-            redirect={`product/product-detail/p/${value.barangId}`}
-          />
+          <div className="col-md-3 col-6" key={index}>
+            <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/p/${value.barangId}`} />
+          </div>
         );
       }
     });
   };
-
-
 
   const filterResult = () => {
     var axios = require("axios");
@@ -117,7 +97,7 @@ const HomePage = (props) => {
         // console.log(JSON.stringify(response.data));
         // console.log("berhasil");
         setBarang(response.data);
-        setfilterActive(1)
+        setfilterActive(1);
       })
       .catch(function (error) {
         console.log(error);
@@ -140,7 +120,7 @@ const HomePage = (props) => {
         // console.log(JSON.stringify(response.data));
         // console.log("berhasil");
         setBarang(response.data);
-        setfilterActive(3)
+        setfilterActive(3);
       })
       .catch(function (error) {
         console.log(error);
@@ -163,33 +143,30 @@ const HomePage = (props) => {
         // console.log(JSON.stringify(response.data));
         // console.log("berhasil");
         setBarang(response.data);
-        setfilterActive(2)
+        setfilterActive(2);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  // const handleKontenFilter = () => {
-  //   if (filterActive === 1) {
-  //     return filterResult();
-  //   } else if (filterActive === 2) {
-  //     return filterResultGitar();
-  //   } else if (filterActive === 3) {
-  //     return filterResultAksesoris();
-  //   }
-  // };
-
+  const handleKontenFilter = () => {
+    if (filterActive === 1) {
+      return filterResult();
+    } else if (filterActive === 2) {
+      return filterResultGitar();
+    } else if (filterActive === 3) {
+      return filterResultAksesoris();
+    }
+  };
 
   return (
     <div className="container-fluid px-0">
-
       <div className="nav-custom">
         <NavbarDefault />
       </div>
 
       <div className="container section1">
-      
         <div className="swiper-konten">
           <React.Fragment>
             <Swiper
@@ -208,53 +185,17 @@ const HomePage = (props) => {
             >
               <SwiperSlide>
                 <div className="card swiper-card">
-                  <img src={swiper1} className="card-img-side"></img>
-                  {/* <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6">
-                      <h3>NEW COLLECTION</h3>
-                      <h5>Gitar Listrik</h5>
-                      <p>
-                        Gitar listrik merupakan gitar yang dicolok ke listrik
-                        dan menggunakan listrik
-                      </p>
-                      {/* <button type="button" className="btn btn-secondary me-2">PESAN SEKARANG</button> */}
-                    </div>
-
-                    {/* <div className="img-swiper-konten col-lg-6">
-                      <img src={gitarSwiper} className="card-img-side" Style="width:100%;"/>
-                    </div> */}
-                  {/* </div>                   */}
-                {/* </div> */}
+                  <img src={swiper1} className="card-img-side" alt="carousel-1"></img>
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-              <div className="card swiper-card">
-              <img src={swiper2} className="card-img-side"></img>
-                  {/* <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6">
-                      Slide 2
-                    </div>
-
-                    <div className="img-swiper-konten col-lg-6">
-                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
-                    </div>
-
-                  {/* </div>                   */}
-                </div> 
+                <div className="card swiper-card">
+                  <img src={swiper2} className="card-img-side" alt="carousel-2"></img>
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-              <div className="card swiper-card">
-              <img src={swiper3} className="card-img-side"></img>
-                  {/* <div className="row swiper align-items-center">
-                    <div className="text-swiper-konten col-lg-6 col-sm-12">
-                      Slide 3
-                    </div>
-
-                    <div className="img-swiper-konten col-lg-6">
-                      <img src={gitarSwiper} className="card-img-side" alt="carousel" style={{ width: "100%" }} />
-                    </div>
-
-                  </div>                   */}
-
+                <div className="card swiper-card">
+                  <img src={swiper3} className="card-img-side" alt="carousel-3"></img>
                 </div>
               </SwiperSlide>
             </Swiper>
@@ -266,32 +207,33 @@ const HomePage = (props) => {
           <strong>Telurusi Kategori</strong>
         </p>
 
-        <div className="button-homepage">
+        <div className="row">
+          <div className="button_filters col-12 col-md-6 mb-0">
+            <button className={`btn button_filter me-2 ${filterActive === 1 && "active-btn"}`} onClick={() => filterResult()}>
+              <i className="bi bi-search"></i> Semua
+            </button>
+            <button type="button" className={`btn button_filter me-2 ${filterActive === 2 && "active-btn"}`} onClick={() => filterResultGitar()}>
+              <i className="bi bi-search"></i> Gitar
+            </button>
+            <button type="button" className={`btn button_filter me-2 ${filterActive === 3 && "active-btn"}`} onClick={() => filterResultAksesoris()}>
+              <i className="bi bi-search"></i> Aksesoris
+            </button>
+          </div>
 
-          <button
-            className={`btn btn-secondary me-2 ${filterActive === 1 && "active-btn"}`}
-            onClick={() => filterResult()}
-          >
-            <i className="bi bi-search"></i> Semua
-          </button>
-          <button
-            type="button"
-            className={`btn btn-secondary me-2 ${filterActive === 2 && "active-btn"}`}
-  
-            
-            onClick={() => filterResultGitar()}
-          >
-            <i className="bi bi-search"></i> Gitar
-          </button>
-          <button type="button" className={`btn btn-secondary me-2 ${filterActive === 3 && "active-btn"}`} onClick={() => filterResultAksesoris()}>
-            <i className="bi bi-search"></i> Aksesoris
-          </button>
+          {/* form search */}
+          <div className="col-12 col-md-6 mt-md-0 mt-3">
+            <form className="d-flex">
+              <div className="input-group search_bar">
+                <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
+                <button className="btn search_button" id="button-addon2" type="submit">
+                  <i className="bi bi-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
-        <div className="konten row row-cols-2 row-cols-md-4">
-          {handleCardProduct()}
-        </div>
-
+        <div className="konten row">{handleCardProduct()}</div>
       </div>
     </div>
   );
