@@ -18,6 +18,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 
 import DetailEditSeller from "../components/DetailProduk/DetailEditSeller";
 import UpdateBarang from "../Pages/UpdateBarang/UpdateBarang";
+import CardProduct from "../components/CardProduct/CardProduct";
 
 
 const RouterDefault = (props) => {

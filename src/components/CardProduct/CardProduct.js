@@ -59,7 +59,7 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
             </div>
           </div>
         </a> */}
-      </div>
+        </a> 
     </div>
   );
 };
