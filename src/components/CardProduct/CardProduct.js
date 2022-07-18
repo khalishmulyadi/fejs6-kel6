@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // css
 import "./CardProduct.css";
 
-const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect, isDisabled }) => {
+const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect, isDisabled, myProduct }) => {
   const navigate = useNavigate();
 
   const formatRupiah = (value) => {
@@ -34,32 +34,28 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
   };
 
   return (
-
-    <div>
-      <a href={redirect} className={`card_product ${isDisabled ? "disabled" : null}`}>
-        <div className="card p-2 m-3">
-          <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
-        </div>
+    <div className={`card_product ${isDisabled ? "disabled" : ""}`}>
+      <div className="card card_product p-2 m-3">
+        <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
         <div className="body-card">
           <h6 className="card-title">{namaBarang}</h6>
           <p className="card-subtitle mb-2 text-muted">{tipebarang}</p>
           <h6 className="card-text">{formatRupiah(price)}</h6>
-          <div className="tertarik-buy">
-            <h6><a href={redirect} className="card_product" Style="color: white;">Tertarik</a></h6>
-          </div>
-        </div>
-
-        {/* <a href={redirect} className="card_product">
-          <div className="card p-2 m-3">
-            <img src={`data:image/jpeg;base64,${img}`} className="card-img-top product_image" alt="product_image" />
-            <div className="card-body">
-              <h6 className="card-title">{namaBarang}</h6>
-              <h6 className="card-subtitle mb-2 text-muted">{tipebarang}</h6>
-              <p className="card-text">{formatRupiah(price)}</p>
+          {myProduct ? (
+            <div className="tertarik-buy">
+              <a href={redirect} className="card_product" style={{ color: "white" }}>
+                <h6>Produk Saya</h6>
+              </a>
             </div>
-          </div>
-        </a> */}
-        </a> 
+          ) : (
+            <div className="tertarik-buy">
+              <a href={redirect} className="card_product" style={{ color: "white" }}>
+                <h6>Tertarik</h6>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

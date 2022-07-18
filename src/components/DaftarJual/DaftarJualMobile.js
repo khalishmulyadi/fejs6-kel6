@@ -34,9 +34,9 @@ const DaftarJualMobile = (props) => {
         // console.log(JSON.stringify(response.data));
         if (statusBarang === 1) {
           setDataJualan(response?.data);
-        } else if (statusBarang === 2) {
-          setDataDiminati(response?.data);
         } else if (statusBarang === 3) {
+          setDataDiminati(response?.data);
+        } else if (statusBarang === 2) {
           setDataTerjual(response?.data);
         }
       })
@@ -130,8 +130,8 @@ const DaftarJualMobile = (props) => {
                         price={value.hargaBarang}
                         ToDetailProduct={value.barangId}
                         redirect={`/product/my-product/${value.barangId}`}
+                        myProduct={true}
                       />
-                      ;
                     </div>
                   );
                 })}
@@ -149,8 +149,8 @@ const DaftarJualMobile = (props) => {
                 <div className="row row-cols-2">
                   {dataDiminati.map((value, index) => {
                     return (
-                      <div className="col">
-                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+                      <div className="col" key={index}>
+                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />
                       </div>
                     );
                   })}
@@ -173,8 +173,8 @@ const DaftarJualMobile = (props) => {
                 <div className="row row-cols-2">
                   {dataTerjual.map((value, index) => {
                     return (
-                      <div className="col">
-                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />;
+                      <div className="col" key={index}>
+                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />
                       </div>
                     );
                   })}
