@@ -4,7 +4,7 @@ import whatsapp from '../../../img/fi_whatsapp.svg'
 import {ModalStatus} from '../../ModalStatus/ModalStatus'
 
 
-export const BtnInfoProductStatus = ({userIdInfoProduct}) => {
+export const BtnInfoProductStatus = ({userIdInfoProduct, tolakTawaran}) => {
     const [modalShow, setModalShow] = useState(false);
 
 
@@ -16,6 +16,7 @@ export const BtnInfoProductStatus = ({userIdInfoProduct}) => {
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     userId = {userIdInfoProduct}
+                    Tolak={()=>{tolakTawaran()}}
                 />
 
                 <div className='container-btn-infoproductstatus'>

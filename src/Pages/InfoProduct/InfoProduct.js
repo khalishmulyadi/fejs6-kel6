@@ -72,6 +72,7 @@ const InfoProduct = (props) => {
             console.log(ParameterButton);
             return <BtnInfoProductStatus
                 userIdInfoProduct={props.userId}
+                tolakTawaran={()=>{handleTolakBidding()}}
             />
         }
     }
