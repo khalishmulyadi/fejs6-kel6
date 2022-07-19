@@ -5,6 +5,7 @@ import authService from "../../services/auth.service";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Notifikasi from "../Nofitikasi/Notifikasi";
+import NotifikasiBuyer from "../NotifikasiBuyer/NotifikasiBuyer";
 
 const NavbarDesktop = (props) => {
   var axios = require("axios");
@@ -20,24 +21,42 @@ const NavbarDesktop = (props) => {
   };
 
   const handleGetNotif = () => {
-    var config = {
-      method: "get",
-      url: `https://asix-store.herokuapp.com/user/notifikasi-seller/${props.userId}/Bidding`,
-      headers: {
-        Authorization: `Bearer ${Token.access_token}`,
-      },
-    };
+    if (props.roleUser === 1) {
+      var config = {
+        method: 'get',
+        url: `https://asix-store.herokuapp.com/user/notifikasi-buyer/${props.userId}/Bidding`,
+        headers: {
+          'Authorization': `Bearer ${Token.access_token}`
+        }
+      };
 
-    axios(config)
-      .then(function (response) {
-        setDataNotif(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      axios(config)
+        .then(function (response) {
+          setDataNotif(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else if (props.roleUser === 2) {
+      var config2 = {
+        method: "get",
+        url: `https://asix-store.herokuapp.com/user/notifikasi-seller/${props.userId}/Bidding`,
+        headers: {
+          Authorization: `Bearer ${Token.access_token}`,
+        },
+      };
+
+      axios(config2)
+        .then(function (response) {
+          setDataNotif(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
-  const handleMapDataNotif = () => {
+  const handleMapDataNotifSeller = () => {
     return DataNotif.map((value, index) => {
       return (
         <a className="dropdown-item px-4" href={`infoproduct/${value.barangId}`} key={index}>
@@ -47,8 +66,43 @@ const NavbarDesktop = (props) => {
     });
   };
 
+  const handleMapDataNotifBuyer = () => {
+    return DataNotif.map((value, index) => {
+      return (
+        <a className="dropdown-item px-4" href={`infoproduct/${value.barangId}`} key={index}>
+          <NotifikasiBuyer namaProduk={value.namaBarang} harga={value.hargaBarang} hargaTawar={value.hargaTawar} date={value.tanggalTawar} img={value.gambarBarang} key={index} />
+        </a>
+      );
+    });
+  };
+
+  const handleNotifSellerAndBUyer = () => {
+    // Buyer
+    if (props.roleUser === 1) {
+      return DataNotif.map((value, index) => {
+        return (
+          <a className="dropdown-item px-4" href={`product/product-detail/${value.barangId}`} key={index}>
+            <NotifikasiBuyer namaProduk={value.namaBarang} harga={value.hargaAkhir} hargaTawar={value.hargaTawar} date={value.tanggalTransaksi} img={value.gambarBarang} key={index} />
+            
+          </a>
+        );
+      });
+    }
+    // Seller 
+    else if (props.roleUser === 2) {
+      return DataNotif.map((value, index) => {
+        return (
+          <a className="dropdown-item px-4" href={`infoproduct/${value.barangId}`} key={index}>
+            <Notifikasi namaProduk={value.namaBarang} harga={value.hargaBarang} hargaTawar={value.hargaTawar} date={value.tanggalTawar} img={value.gambarBarang} key={index} />
+          </a>
+        );
+      });
+    }
+  }
+
   return (
     <div className="container-fluid container__nav">
+      {console.log(props.roleUser)}
       <div className="container ">
         <nav>
           {props.loginStatus ? (
@@ -85,9 +139,8 @@ const NavbarDesktop = (props) => {
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a className="dropdown-item px-4" href="/#">
-                        {handleMapDataNotif()}
-                      </a>
+                      {handleNotifSellerAndBUyer()}
+
                     </li>
                   </ul>
                 </div>
