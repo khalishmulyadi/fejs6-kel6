@@ -5,7 +5,7 @@ import './ModalStatus.css'
 import { connect } from 'react-redux'
 
 
-export const ModalStatus = ({ userId, onHide, ...props }) => {
+export const ModalStatus = ({ Tolak, userId, onHide, ...props }) => {
     const [ValueInput, setValueInput] = useState(0);
     var axios = require('axios');
     const [Token, setToken] = useState(JSON.parse(window.sessionStorage.getItem('user')));
@@ -32,42 +32,12 @@ export const ModalStatus = ({ userId, onHide, ...props }) => {
                 .catch(function (error) {
                     console.log(error);
                 });
-        }else if (ValueInput === "2") {
-            alert("Barang ditolak!!!");
+        } else if (ValueInput === "2") {
+            Tolak();
         }
         e.preventDefault();
         onHide();
     }
-    // const [ValueBerhasil, setValueBerhasil] = useState(false)
-    // const [ValueBatal, setValueBatal] = useState(false)
-
-    // const handleChecked = (e) => {
-    //     // setValueBerhasil(!ValueBerhasil)
-    //     console.log(e);
-    //     console.log(ValueBerhasil);
-
-    // }
-
-    // const handleChecked2 = (e) => {
-    //     // setValueBatal(!ValueBatal)
-    //     console.log(e);
-    //     console.log(ValueBatal);
-    // }
-
-    // const handleValueStatus = () => {
-    //     setValueBerhasil(true)
-    //     console.log(ValueBerhasil);
-    // }
-
-    // const handleValueStatus2 = () => {
-    //     setValueBatal(true)
-    //     console.log(ValueBatal);
-    // }
-
-
-
-
-
 
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">

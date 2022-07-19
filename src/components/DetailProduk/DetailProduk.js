@@ -68,7 +68,6 @@ const DetailProduk = ({ pengguna, ...props }) => {
     }
   };
 
-  // ************* Get Data Barang By Id *************
   useEffect(() => {
     var config = {
       method: "get",
