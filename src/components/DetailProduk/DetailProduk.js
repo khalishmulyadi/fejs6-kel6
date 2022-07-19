@@ -25,37 +25,46 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const handleTawar = (e) => {
     e.preventDefault();
 
-    if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
-      setMenawar(true);
-      setAlertTawar(true);
-      console.log(hargaTawar);
-      console.log(menawar);
+    if (props.loginStatus) {
+      if (props.roleUser === 1) {
+        if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
+          // send API
+          var FormData = require("form-data");
+          var data = new FormData();
+          data.append("hargaTawar", hargaTawar);
 
-      // send API
-      var FormData = require("form-data");
-      var data = new FormData();
-      data.append("hargaTawar", hargaTawar);
+          var config = {
+            method: "put",
+            url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
+            headers: {
+              Authorization: `Bearer ${token.access_token}`,
+              // ...data.getHeaders()
+            },
+            data: data,
+          };
 
-      var config = {
-        method: "put",
-        url: `https://asix-store.herokuapp.com/barang/tawar/${idBarang}`,
-        headers: {
-          Authorization: `Bearer ${token.access_token}`,
-          // ...data.getHeaders()
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          alert("Silahkan login dulu");
-          window.location.replace("/auth/login");
-        });
+          axios(config)
+            .then(function (response) {
+              console.log(response.data);
+              setMenawar(true);
+              setAlertTawar(true);
+              console.log(hargaTawar);
+              console.log(menawar);
+            })
+            .catch(function (error) {
+              alert("Silahkan login dulu");
+              window.location.replace("/auth/login");
+            });
+        } else {
+          alert("Mohon lengkapi data profile terlebih dahulu");
+          window.location.replace("/update-profile");
+        }
+      } else {
+        alert("Hanya buyer yang bisa menambahkan");
+      }
     } else {
-      alert("Mohon lengkapi data profile terlebih dahulu");
+      alert("Silahkan login terlebih dahulu");
+      window.location.replace("/auth/login");
     }
   };
 
@@ -70,7 +79,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
     axios(config)
       .then(function (response) {
         // console.log(response.data);
-        setDataBarang(response.data);
+        setDataBarang(response?.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -110,6 +119,9 @@ const DetailProduk = ({ pengguna, ...props }) => {
     if (storedWishlist.length > 0) {
       setWishlist(storedWishlist);
     }
+    if (DataBarang.statusId === 3) {
+      setMenawar(true);
+    }
   }, [DataBarang]);
 
   // ******* Handle Add to Wishlist *******
@@ -143,7 +155,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid px-0">
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
@@ -171,7 +183,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
             )}
           </div>
           <div className="row">
-            <div className="col-sm-6 p-0">
+            <div className="col-md-6 p-0 col-12">
               {/* carousel gambar barang */}
               <div className="container p-0 mt-sm-5 ps-sm-3">
                 <div id="carouselExampleIndicators" className="carousel slide" data-bs-touch="true" data-bs-ride="carousel">
@@ -182,13 +194,13 @@ const DetailProduk = ({ pengguna, ...props }) => {
                   </div>
                   <div className="carousel-inner">
                     <div className="carousel-item active">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
+                      <img src={`data:image/png;base64,${DataBarang?.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
                     </div>
                     <div className="carousel-item">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
+                      <img src={`data:image/png;base64,${DataBarang?.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
                     </div>
                     <div className="carousel-item">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
+                      <img src={`data:image/png;base64,${DataBarang?.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
                     </div>
                   </div>
                   <button className="carousel-control-prev h-50 my-auto" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -202,27 +214,14 @@ const DetailProduk = ({ pengguna, ...props }) => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-sm-6">
-            {/* detail produk */}
-            <div className="container mt-5 py-3 product_detail">
-              <h3>{DataBarang.namaBarang}</h3>
-              <p>{DataBarang.tipeBarang}</p>
-              <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
-              {pengguna === "merchant" && (
-                <div className="d-grid gap-2">
-                  {/* <button type="button" className="btn btn_publish">
+            <div className="col-md-6 col-12">
+              {/* detail produk */}
+              <div className="container mt-5 py-3 product_detail">
+                <h3>{DataBarang.namaBarang}</h3>
+                <p>{DataBarang.tipeBarang}</p>
+                <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
-                    Terbitkan
-                  </button> */}
-                  <button type="button" className="btn btn_edit">
-                    Edit
-                  </button>
-                </div>
-              )}
-
-              {pengguna === "customer" && (
                 <div className="d-grid gap-2">
                   {menawar ? (
                     <button type="button" className="btn btn-secondary rounded-pill" disabled>
@@ -246,18 +245,18 @@ const DetailProduk = ({ pengguna, ...props }) => {
                     </div>
                   )}
                 </div>
-              )}
-            </div>
+              </div>
 
-            {/* detail seller */}
-            <div className="container mt-3 py-3 shadow seller_detail">
-              <div className="row">
-                <div className="col-3">
-                  <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
-                </div>
-                <div className="col ms-3 ms-sm-0">
-                  <h3>{DataBarang.namaSeller}</h3>
-                  <p>{DataBarang.kota}</p>
+              {/* detail seller */}
+              <div className="container mt-3 py-3 shadow seller_detail">
+                <div className="row">
+                  <div className="col-3">
+                    <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
+                  </div>
+                  <div className="col ms-3 ms-sm-0">
+                    <h3>{DataBarang.namaSeller}</h3>
+                    <p>{DataBarang.kota}</p>
+                  </div>
                 </div>
               </div>
             </div>

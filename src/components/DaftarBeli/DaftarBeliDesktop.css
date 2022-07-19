@@ -4,24 +4,21 @@
 }
 
 .card-daftarjualdesktop {
-    width: 100%;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 11px;
-    margin-top: 0.875rem;
-    border-radius: 11px !important;
-
+  width: 100%;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 11px;
+  margin-top: 0.875rem;
+  border-radius: 11px !important;
 
   margin-bottom: 1.5rem;
 }
 
 .container-content-card-daftarjualdesktop {
-
-    display: flex;
-    flex-direction: row;
-    background-color: #FFFFFF;
-    width: 100%;
-    padding: 1rem;
-
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 1rem;
 
   justify-content: space-between;
 }
@@ -56,11 +53,10 @@
   justify-content: center;
 }
 
-
 .edit-button-daftarbelidesktop {
   background-color: #ffffff;
   padding: 7px 15px;
-  border: 1px solid #7126b5;
+  border: 1px solid #335c67;
   border-radius: 8px;
   font-weight: 500;
   font-size: 12px;
@@ -70,17 +66,14 @@
 
 .edit-button-daftarbelidesktop:hover {
   color: #ffff;
-  background-color: #7126b5;
-
+  background-color: #335c67;
 }
 
 .card-kategori-daftarjualdesktop {
-
-    width: 100%;
-    padding: 1.5rem;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 11px !important;
-
+  width: 100%;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 11px !important;
 }
 
 .content-card-kategori-daftarjualdesktop {
@@ -89,14 +82,11 @@
 }
 
 .txt-kategori-daftarjualdesktop {
-
-    
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
 
   margin-bottom: 0;
   margin-left: 0.6875rem;
@@ -124,19 +114,16 @@
 }
 
 .button-kategori-produk-daftarjual:hover {
-
-    background-color: #FFF3B0;
-    border-radius: 11px;
-
+  background-color: #e09f3e;
+  border-radius: 11px;
 
   color: white;
 }
 
 .button-kategori-produk-daftarjual.active {
-  background-color: #bc99de;
+  background-color: #e09f3e;
   color: white;
   border-radius: 1rem;
-
 }
 
 .container-content-button-daftarjual {

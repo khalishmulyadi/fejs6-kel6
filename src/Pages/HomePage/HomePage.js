@@ -68,13 +68,31 @@ const HomePage = (props) => {
       if (props.loginStatus === true) {
         return (
           <div className="col-md-3 col-6" key={index}>
-            <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/${value.barangId}`} />
+            <CardProduct
+              key={index}
+              namaBarang={value.namaBarang}
+              img={value.barangImg}
+              tipebarang={value.tipeBarang}
+              price={value.hargaBarang}
+              ToDetailProduct={value.barangId}
+              redirect={`product/product-detail/${value.barangId}`}
+              btnCaption="Tertarik"
+            />
           </div>
         );
       } else {
         return (
           <div className="col-md-3 col-6" key={index}>
-            <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`product/product-detail/p/${value.barangId}`} />
+            <CardProduct
+              key={index}
+              namaBarang={value.namaBarang}
+              img={value.barangImg}
+              tipebarang={value.tipeBarang}
+              price={value.hargaBarang}
+              ToDetailProduct={value.barangId}
+              redirect={`product/product-detail/p/${value.barangId}`}
+              btnCaption="Tertarik"
+            />
           </div>
         );
       }

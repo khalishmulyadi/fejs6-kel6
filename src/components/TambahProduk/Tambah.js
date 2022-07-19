@@ -50,8 +50,18 @@ const Tambah = (props) => {
 
   const handlePreview = (e) => {
     e.preventDefault();
-    props.getProductPreview(dataProductPreview);
-    navigate("/product/product-preview");
+    if (props.roleUser === 2) {
+      if (props.dataUser.noTelepon !== null && props.dataUser.alamat !== null && props.dataUser.img !== null) {
+        props.getProductPreview(dataProductPreview);
+        navigate("/product/product-preview");
+      } else {
+        alert("Mohon lengkapi data terlebih dahulu!");
+        window.location.replace("/update-profile");
+      }
+    } else {
+      alert("Hanya seller yang bisa menjual!");
+      window.location.replace("/homepage");
+    }
   };
 
   // const userId = JSON.parse(localStorage.getItem("user"));
@@ -66,43 +76,52 @@ const Tambah = (props) => {
   const token = JSON.parse(sessionStorage.getItem("user"));
 
   const handleTerbitkan = (e) => {
-    var axios = require("axios");
-    var FormData = require("form-data");
+    if (props.roleUser === 2) {
+      if (props.dataUser.noTelepon !== null && props.dataUser.alamat !== null && props.dataUser.img !== null) {
+        var FormData = require("form-data");
 
-    var data = new FormData();
-    data.append("merk", MerkProduk);
-    data.append("seri", SeriProduk);
-    data.append("deskripsi", Deskripsi);
-    data.append("tipeBarang", Kategori);
-    data.append("barangImg", Gambar);
-    data.append("hargaBarang", Harga);
-    data.append("namaBarang", NamaProduk);
-    // data.append("stock", Stock);
+        var data = new FormData();
+        data.append("merk", MerkProduk);
+        data.append("seri", SeriProduk);
+        data.append("deskripsi", Deskripsi);
+        data.append("tipeBarang", Kategori);
+        data.append("barangImg", Gambar);
+        data.append("hargaBarang", Harga);
+        data.append("namaBarang", NamaProduk);
+        // data.append("stock", Stock);
 
-    var config = {
-      method: "post",
-      url: `https://asix-store.herokuapp.com/barang/${props.userId}/daftar`,
-      headers: {
-        Authorization: `Bearer ${token.access_token} `,
-      },
-      data: data,
-    };
+        var config = {
+          method: "post",
+          url: `https://asix-store.herokuapp.com/barang/${props.userId}/daftar`,
+          headers: {
+            Authorization: `Bearer ${token.access_token} `,
+          },
+          data: data,
+        };
 
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        alert("Tambah Barang Berhasil");
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert("gagal");
-      });
-
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            alert("Tambah Barang Berhasil");
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert("gagal");
+          });
+      } else {
+        alert("Mohon lengkapi data terlebih dahulu!");
+        window.location.replace("/update-profile");
+      }
+    } else {
+      alert("Hanya seller yang bisa menjual!");
+      window.location.replace("/homepage");
+    }
     e.preventDefault();
   };
 
   return (
     <div>
+      {console.log(props.dataUser)}
       <div className="container">
         <div className="tambah-produk mx-auto">
           <div className="back_icon2">
@@ -122,35 +141,35 @@ const Tambah = (props) => {
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Nama Produk
               </label>
-              <input className="form-control form1_custom" placeholder="Nama Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} />
+              <input className="form-control form1_custom" placeholder="Nama Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setNamaProduk(e.target.value)} required />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Merk Produk
               </label>
-              <input className="form-control form1_custom" placeholder="Merk Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setMerkProduk(e.target.value)} />
+              <input className="form-control form1_custom" placeholder="Merk Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setMerkProduk(e.target.value)} required />
             </div>
 
             <div className="mb-3 align-items-center mx-auto">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Seri Produk
               </label>
-              <input className="form-control form1_custom" placeholder="Seri Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setSeriProduk(e.target.value)} />
+              <input className="form-control form1_custom" placeholder="Seri Produk" type="text" id="exampleFormControlInput1" onChange={(e) => setSeriProduk(e.target.value)} required />
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Harga
               </label>
-              <input className="form-control form1_custom" type="number" id="exampleFormControlInput1" placeholder="Rp 0,00" onChange={(e) => setHarga(e.target.value)} />
+              <input className="form-control form1_custom" type="text" id="exampleFormControlInput1" placeholder="Rp 0,00" onChange={(e) => setHarga(e.target.value)} required />
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Kategori
               </label>
-              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)}>
+              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)} required>
                 <option value="" disabled hidden selected>
                   Pilih Kategori
                 </option>
@@ -158,19 +177,6 @@ const Tambah = (props) => {
                 <option value="aksesoris">Acsesoris</option>
               </select>
             </div>
-
-            {/* <div className="mb-3">
-              <label htmlFor="exampleFormControlInput1" className="customFile">
-                Stock
-              </label>
-              <input
-                className="form-control form1_custom"
-                type="number"
-                id="exampleFormControlInput1"
-                placeholder="Stock"
-                onChange={(e) => setStock(e.target.value)}
-              />
-            </div> */}
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlTextarea1" className="customFile">
@@ -187,7 +193,7 @@ const Tambah = (props) => {
                 </a>
               </label>
 
-              <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" max-size={1000} id="customFile" hidden onChange={choosePicture} />
+              <input type="file" name="customFile" accept="image/png , image/jpeg, image/webp" max-size={1000} id="customFile" hidden onChange={choosePicture} required />
               {/* {selectedImages &&
                 selectedImages.map((image, index) => {
                   return (
@@ -217,7 +223,7 @@ const mapStateToProps = (state) => {
     userId: state.userReducer.idUser,
     // idProduk: state.productReducer.idProduk,
     dataProduk: state.productReducer.dataProduk,
-    role: state.userReducer.role,
+    roleUser: state.userReducer.role,
   };
 };
 

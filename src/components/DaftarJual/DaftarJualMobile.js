@@ -130,7 +130,7 @@ const DaftarJualMobile = (props) => {
                         price={value.hargaBarang}
                         ToDetailProduct={value.barangId}
                         redirect={`/product/my-product/${value.barangId}`}
-                        myProduct={true}
+                        btnCaption="Produk Saya"
                       />
                     </div>
                   );
@@ -150,7 +150,16 @@ const DaftarJualMobile = (props) => {
                   {dataDiminati.map((value, index) => {
                     return (
                       <div className="col" key={index}>
-                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />
+                        <CardProduct
+                          key={index}
+                          namaBarang={value.namaBarang}
+                          img={value.barangImg}
+                          tipebarang={value.tipeBarang}
+                          price={value.hargaBarang}
+                          ToDetailProduct={value.barangId}
+                          redirect={`/infoproduct/${value.barangId}`}
+                          btnCaption="Produk Saya"
+                        />
                       </div>
                     );
                   })}
@@ -174,7 +183,16 @@ const DaftarJualMobile = (props) => {
                   {dataTerjual.map((value, index) => {
                     return (
                       <div className="col" key={index}>
-                        <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} />
+                        <CardProduct
+                          key={index}
+                          namaBarang={value.namaBarang}
+                          img={value.barangImg}
+                          tipebarang={value.tipeBarang}
+                          price={value.hargaBarang}
+                          ToDetailProduct={value.barangId}
+                          btnCaption="Produk Saya"
+                          redirect={`/product/my-product/${value.barangId}`}
+                        />
                       </div>
                     );
                   })}

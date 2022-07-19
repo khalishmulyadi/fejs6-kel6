@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // css
 import "./CardProduct.css";
 
-const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect, isDisabled, myProduct }) => {
+const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, loginStatus, redirect, isDisabled, btnCaption }) => {
   const navigate = useNavigate();
 
   const formatRupiah = (value) => {
@@ -41,19 +41,12 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
           <h6 className="card-title">{namaBarang}</h6>
           <p className="card-subtitle mb-2 text-muted">{tipebarang}</p>
           <h6 className="card-text">{formatRupiah(price)}</h6>
-          {myProduct ? (
-            <div className="tertarik-buy">
-              <a href={redirect} className="card_product" style={{ color: "white" }}>
-                <h6>Produk Saya</h6>
-              </a>
-            </div>
-          ) : (
-            <div className="tertarik-buy">
-              <a href={redirect} className="card_product" style={{ color: "white" }}>
-                <h6>Tertarik</h6>
-              </a>
-            </div>
-          )}
+
+          <div className="tertarik-buy">
+            <a href={redirect} className={`card_product ${isDisabled ? "disabled" : ""}`} style={{ color: "white" }}>
+              <h6>{btnCaption}</h6>
+            </a>
+          </div>
         </div>
       </div>
     </div>

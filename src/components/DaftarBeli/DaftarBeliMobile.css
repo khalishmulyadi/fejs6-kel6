@@ -22,7 +22,7 @@
 .btn_tab_daftar_jual_mobile .btn_tab_diminati,
 .btn_tab_daftar_jual_mobile .btn_tab_terjual {
   color: #3c3c3c;
-  background: #e2d4f0;
+  background: #fff3b0;
   border-radius: 12px;
 }
 
@@ -30,14 +30,14 @@
 .btn_tab_daftar_jual_mobile .btn_tab_diminati:hover,
 .btn_tab_daftar_jual_mobile .btn_tab_terjual:hover {
   color: #3c3c3c;
-  background: #c3b6cf;
+  background: #fff3b0;
 }
 
 .btn_tab_daftar_jual_mobile .btn_tab_produk.active,
 .btn_tab_daftar_jual_mobile .btn_tab_diminati.active,
 .btn_tab_daftar_jual_mobile .btn_tab_terjual.active {
   color: white;
-  background: #7126b5;
+  background: #e09f3e;
 }
 
 .btn_tambah_produk {
