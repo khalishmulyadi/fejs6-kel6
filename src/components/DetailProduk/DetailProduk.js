@@ -10,7 +10,9 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const [alertTawar, setAlertTawar] = useState(false);
   const [hargaTawar, setHargaTawar] = useState(0);
   const [DataBarang, setDataBarang] = useState([]);
-  const [wishlist, setWishlist] = useState(JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)));
+  const [wishlist, setWishlist] = useState(
+    JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`))
+  );
   const [currentWishlist, setCurrentWishlist] = useState([]);
 
   if (JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)) === null) {
@@ -25,7 +27,11 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const handleTawar = (e) => {
     e.preventDefault();
 
-    if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
+    if (
+      props.dataUser.alamat !== null &&
+      props.dataUser.noTelepon !== null &&
+      props.dataUser.img !== null
+    ) {
       setMenawar(true);
       setAlertTawar(true);
       console.log(hargaTawar);
@@ -59,7 +65,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
     }
   };
 
-  // ************* Get Data Barang By Id *************
+
   useEffect(() => {
     var config = {
       method: "get",
@@ -105,7 +111,9 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
   // ****** Get Data Wishlist *******
   useEffect(() => {
-    const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`));
+    const storedWishlist = JSON.parse(
+      sessionStorage.getItem(`wishlist_${props.userId}`)
+    );
 
     if (storedWishlist.length > 0) {
       setWishlist(storedWishlist);
@@ -130,12 +138,19 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
   // menyimpan wishlist di sessionStorage
   useEffect(() => {
-    sessionStorage.setItem(`wishlist_${props.userId}`, JSON.stringify(wishlist));
-    setCurrentWishlist(wishlist?.filter((e) => e.barangId === DataBarang.barangId));
+    sessionStorage.setItem(
+      `wishlist_${props.userId}`,
+      JSON.stringify(wishlist)
+    );
+    setCurrentWishlist(
+      wishlist?.filter((e) => e.barangId === DataBarang.barangId)
+    );
   }, [wishlist]);
 
   const delHandler = (barangIdWishlist) => {
-    const updatedWishlist = wishlist?.filter((item) => item.barangId !== barangIdWishlist);
+    const updatedWishlist = wishlist?.filter(
+      (item) => item.barangId !== barangIdWishlist
+    );
 
     setWishlist(updatedWishlist);
     alert("Barang berhasil dihapus dari wishlist");
@@ -143,62 +158,126 @@ const DetailProduk = ({ pengguna, ...props }) => {
   };
 
   return (
+    <div>
     <div className="container">
       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
 
-      {alertTawar ? (
-        <div className="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="d-flex">
-            <div className="toast-body">Harga tawarmu berhasil dikirim ke penjual!</div>
-            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        {alertTawar ? (
+          <div
+            className="toast align-items-center text-white bg-success border-0"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="d-flex">
+              <div className="toast-body">
+                Harga tawarmu berhasil dikirim ke penjual!
+              </div>
+              <button
+                type="button"
+                className="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
 
-      <div>
-        <div className="container mx-auto detail_produk">
-          <div>
-            {props.loginStatus ? (
-              <a className="back_icon" href="/homepage">
-                <i className="bi bi-arrow-left-short"></i>
-              </a>
-            ) : (
-              <a className="back_icon" href="/">
-                <i className="bi bi-arrow-left-short"></i>
-              </a>
-            )}
-          </div>
-          <div className="row">
-            <div className="col-sm-6 p-0">
-              {/* carousel gambar barang */}
-              <div className="container p-0 mt-sm-5 ps-sm-3">
-                <div id="carouselExampleIndicators" className="carousel slide" data-bs-touch="true" data-bs-ride="carousel">
-                  <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <div>
+          <div className="container mx-auto detail_produk">
+            <div>
+              {props.loginStatus ? (
+                <a className="back_icon" href="/homepage">
+                  <i className="bi bi-arrow-left-short"></i>
+                </a>
+              ) : (
+                <a className="back_icon" href="/">
+                  <i className="bi bi-arrow-left-short"></i>
+                </a>
+              )}
+            </div>
+            <div className="row">
+              <div className="col-sm-6 p-0">
+                {/* carousel gambar barang */}
+                <div className="container p-0 mt-sm-5 ps-sm-3">
+                  <div
+                    id="carouselExampleIndicators"
+                    className="carousel slide"
+                    data-bs-touch="true"
+                    data-bs-ride="carousel"
+                  >
+                    <div className="carousel-indicators">
+                      <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="0"
+                        className="active"
+                        aria-current="true"
+                        aria-label="Slide 1"
+                      ></button>
+                      <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="1"
+                        aria-label="Slide 2"
+                      ></button>
+                      <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="2"
+                        aria-label="Slide 3"
+                      ></button>
+                    </div>
+                    <div className="carousel-inner">
+                      <div className="carousel-item active">
+                        <img
+                          src={`data:image/png;base64,${DataBarang.barangImg}`}
+                          className="d-block w-100 carousel_img"
+                          alt="..."
+                        />
+                      </div>
+                      <div className="carousel-item">
+                        <img
+                          src={`data:image/png;base64,${DataBarang.barangImg}`}
+                          className="d-block w-100 carousel_img"
+                          alt="..."
+                        />
+                      </div>
+                      <div className="carousel-item">
+                        <img
+                          src={`data:image/png;base64,${DataBarang.barangImg}`}
+                          className="d-block w-100 carousel_img"
+                          alt="..."
+                        />
+                      </div>
+                    </div>
+                    <button
+                      className="carousel-control-prev h-50 my-auto"
+                      type="button"
+                      data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide="prev"
+                    >
+                      <span
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                      className="carousel-control-next h-50 my-auto"
+                      type="button"
+                      data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide="next"
+                    >
+                      <span
+                        className="carousel-control-next-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span className="visually-hidden">Next</span>
+                    </button>
                   </div>
-                  <div className="carousel-inner">
-                    <div className="carousel-item active">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
-                    </div>
-                    <div className="carousel-item">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
-                    </div>
-                    <div className="carousel-item">
-                      <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="d-block w-100 carousel_img" alt="..." />
-                    </div>
-                  </div>
-                  <button className="carousel-control-prev h-50 my-auto" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button className="carousel-control-next h-50 my-auto" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                  </button>
                 </div>
               </div>
             </div>
