@@ -92,6 +92,7 @@ const DetailEditSeller = ({ pengguna, ...props }) => {
         <NavbarDefault />
       </div>
 
+      {console.log(DataBarang.statusId)}
       <div className="container mx-auto detail_produk">
         <div>
           <a className="back_icon" href="/#">
@@ -138,7 +139,7 @@ const DetailEditSeller = ({ pengguna, ...props }) => {
               <p>{formatRupiah(DataBarang.hargaBarang)}</p>
 
               <div className="d-grid gap-2">
-                <a href={`/update-barang/${DataBarang.barangId}`} className="btn btn_edit">
+                <a href={`/update-barang/${DataBarang.barangId}`} className={`btn btn_edit ${DataBarang.statusId === 1 ? "" : "disabled"} `}>
                   Edit
                 </a>
                 <button type="button" className="btn btn_publish" onClick={deleteBarang}>

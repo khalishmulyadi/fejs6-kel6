@@ -66,7 +66,16 @@ const DaftarBeliDesktop = (props) => {
           {dataTawaran?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
-                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
+                <CardProduct
+                  key={index}
+                  namaBarang={value.namaBarang}
+                  img={value.gambarBarang}
+                  tipebarang={value.tipeBarang}
+                  price={value.hargaBarang}
+                  ToDetailProduct={value.barangId}
+                  redirect={`/product/product-detail/${value.barangId}`}
+                  btnCaption="Cek Status"
+                />
               </div>
             );
           })}
@@ -90,7 +99,16 @@ const DaftarBeliDesktop = (props) => {
           {dataWishlist?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
-                <CardProduct key={index} namaBarang={value.namaBarang} img={value.barangImg} tipebarang={value.tipeBarang} price={value.hargaBarang} ToDetailProduct={value.barangId} redirect={`/product/product-detail/${value.barangId}`} />;
+                <CardProduct
+                  key={index}
+                  namaBarang={value.namaBarang}
+                  img={value.barangImg}
+                  tipebarang={value.tipeBarang}
+                  price={value.hargaBarang}
+                  ToDetailProduct={value.barangId}
+                  redirect={`/product/product-detail/${value.barangId}`}
+                  btnCaption="Tertarik"
+                />
               </div>
             );
           })}
@@ -117,12 +135,13 @@ const DaftarBeliDesktop = (props) => {
                 <CardProduct
                   key={index}
                   namaBarang={value.namaBarang}
-                  img={value.barangImg}
+                  img={value.gambarBarang}
                   tipebarang={value.tipeBarang}
                   price={value.hargaBarang}
                   ToDetailProduct={value.barangId}
                   redirect={`/product/product-detail/${value.barangId}`}
                   isDisabled={true}
+                  btnCaption="Sudah Dibeli"
                 />
               </div>
             );
@@ -152,12 +171,12 @@ const DaftarBeliDesktop = (props) => {
 
   return (
     <div>
-      {props.loginStatus == undefined ? (
+      {props.loginStatus === undefined ? (
         <div className="mx-auto">
           <h1 className="text-center">Loading...</h1>
         </div>
       ) : (
-        <Container fluid>
+        <Container fluid className="px-0">
           <NavbarDefault />
 
           <Container className="container-content-daftarjualdesktop">
@@ -209,7 +228,7 @@ const DaftarBeliDesktop = (props) => {
                         <p className={`txt-kategori-daftarjualdesktop ${tabActive === 1 && "active"}`}> Menunggu Respon Penjual</p>
                       </div>
 
-                      <img alt="" src={cevhron_right} />
+                      <i className="bi bi-chevron-right"></i>
                     </button>
 
                     <hr />
@@ -225,7 +244,7 @@ const DaftarBeliDesktop = (props) => {
                         <p className={`txt-kategori-daftarjualdesktop ${tabActive === 2 && "active"}`}>Wishlist Saya</p>
                       </div>
 
-                      <img alt="" src={cevhron_right} />
+                      <i className="bi bi-chevron-right"></i>
                     </button>
 
                     <hr />
@@ -242,7 +261,7 @@ const DaftarBeliDesktop = (props) => {
                         <p className={`txt-kategori-daftarjualdesktop ${tabActive === 3 && "active"}`}>Riwayat Pembelian</p>
                       </div>
 
-                      <img alt="" src={cevhron_right} />
+                      <i className="bi bi-chevron-right"></i>
                     </button>
                   </div>
                 </Card>

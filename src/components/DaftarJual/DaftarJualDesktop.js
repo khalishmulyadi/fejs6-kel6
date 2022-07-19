@@ -79,7 +79,7 @@ const DaftarJualDesktop = (props) => {
                   price={value.hargaBarang}
                   ToDetailProduct={value.barangId}
                   redirect={`/product/my-product/${value.barangId}`}
-                  myProduct={true}
+                  btnCaption={"Produk Saya"}
                 />
               </div>
             );
@@ -104,7 +104,7 @@ const DaftarJualDesktop = (props) => {
                   price={value.hargaBarang}
                   ToDetailProduct={value.barangId}
                   redirect={`/infoproduct/${value.barangId}`}
-                  myProduct={true}
+                  btnCaption="Produk Saya"
                 />
               </div>
             );
@@ -137,7 +137,7 @@ const DaftarJualDesktop = (props) => {
                   price={value.hargaBarang}
                   ToDetailProduct={value.barangId}
                   redirect={`/product/my-product/${value.barangId}`}
-                  disable={true}
+                  btnCaption="Produk Saya"
                 />
               </div>
             );
@@ -166,13 +166,13 @@ const DaftarJualDesktop = (props) => {
   };
 
   return (
-    <div className="container">
-      {props.loginStatus == undefined ? (
+    <div>
+      {props.loginStatus === undefined ? (
         <div className="mx-auto">
           <h1 className="text-center">Loading...</h1>
         </div>
       ) : (
-        <Container fluid>
+        <Container fluid className="px-0">
           <NavbarDefault />
 
           <Container className="container-content-daftarjualdesktop">
@@ -225,7 +225,7 @@ const DaftarJualDesktop = (props) => {
                         <p className={`txt-kategori-daftarjualdesktop ${tabActive === 1 && "active"}`}> Semua Produk</p>
                       </div>
 
-                      <img alt="" src={cevhron_right} />
+                      <i className="bi bi-chevron-right"></i>
                     </button>
 
                     <hr />
@@ -242,7 +242,7 @@ const DaftarJualDesktop = (props) => {
                         <p className={`txt-kategori-daftarjualdesktop ${tabActive === 2 && "active"}`}>Diminati</p>
                       </div>
 
-                      <img alt="" src={cevhron_right} />
+                      <i className="bi bi-chevron-right"></i>
                     </button>
 
                     <hr />
@@ -259,7 +259,7 @@ const DaftarJualDesktop = (props) => {
                         <p className={`txt-kategori-daftarjualdesktop ${tabActive === 3 && "active"}`}>Terjual</p>
                       </div>
 
-                      <img alt="" src={cevhron_right} />
+                      <i className="bi bi-chevron-right"></i>
                     </button>
                   </div>
                 </Card>

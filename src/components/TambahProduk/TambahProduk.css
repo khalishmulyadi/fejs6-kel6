@@ -6,7 +6,6 @@
 .judulheader {
   margin-left: 150px;
   padding-top: 10px;
-  
 }
 
 .bi-arrow-left {
@@ -49,9 +48,13 @@
   width: 50%;
   height: 48px;
   background: #ffffff;
-  border: 1px solid #151515;
+  border: 1px solid #e09f3e;
   border-radius: 16px;
   margin-right: 5px;
+}
+
+.preview:hover {
+  background-color: #dddddd;
 }
 
 .prevgambar {
@@ -63,11 +66,15 @@
 .terbitkan {
   width: 50%;
   height: 48px;
-  background-color: #7126b5;
+  background-color: #e09f3e;
   color: #fff;
-  border: 1px solid #151515;
+  border: 1px solid #e09f3e;
   border-radius: 16px;
   margin-left: 5px;
+}
+
+.terbitkan:hover {
+  background-color: #d1953b;
 }
 
 .button_cover {
@@ -93,9 +100,8 @@
     align-items: center;
     margin-left: 100px;
   }
-  .formproduk_custom{
+  .formproduk_custom {
     width: 100%;
     padding: 12px 20px;
   }
-  
 }

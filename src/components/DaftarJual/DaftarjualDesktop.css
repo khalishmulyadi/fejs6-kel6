@@ -53,26 +53,19 @@
 }
 
 .edit-button-daftarjualdesktop {
-  background-color: #335c67;
-  border-radius: 11px;
-  width: 7rem;
-  height: 35px;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 18px;
-  color: #fff;
-  text-transform: uppercase;
+  background-color: #ffffff;
+  padding: 7px 15px;
+  border: 1px solid #335c67;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #151515;
+  text-decoration: none;
 }
 .edit-button-daftarjualdesktop:hover {
   background-color: #e09f3e;
   color: #fff;
   border-color: #e09f3e;
-}
-
-.edit-button-daftarjualdesktop:hover {
-  color: #ffff;
-  background-color: #7126b5;
 }
 
 .card-kategori-daftarjualdesktop {
@@ -109,6 +102,10 @@
 
   border: none;
   background-color: #ffffff;
+}
+
+.button-kategori-produk-daftarjual.active {
+  background-color: #fff3b0;
 }
 
 .button-kategori-produk-daftarjual:hover {

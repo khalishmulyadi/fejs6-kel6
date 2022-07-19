@@ -33,9 +33,9 @@ const DaftarBeliMobile = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         if (statusBarang === "Bidding") {
-          setDataTawaran(response.data);
+          setDataTawaran(response?.data);
         } else if (statusBarang === "Sold") {
-          setDataRiwayatBeli(response.data);
+          setDataRiwayatBeli(response?.data);
         }
       })
       .catch(function (error) {
@@ -45,20 +45,23 @@ const DaftarBeliMobile = (props) => {
 
   useEffect(() => {
     if (loading === false) {
-      getDataPembelian(props.idUser, "Bidding");
-      getDataPembelian(props.idUser, "Sold");
-      if (JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`)) === null) {
-        sessionStorage.setItem(`wishlist_${props.idUser}`, "[]");
-      } else {
-        const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
-        if (storedWishlist !== []) {
-          setDataWishlist(storedWishlist);
-        }
-      }
+      getDataPembelian(props?.idUser, "Bidding");
+      getDataPembelian(props?.idUser, "Sold");
     } else {
       setLoading(false);
     }
-  }, [props.loginStatus]);
+  }, [props.dataUser]);
+
+  useEffect(() => {
+    if (JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`)) === null) {
+      sessionStorage.setItem(`wishlist_${props.idUser}`, "[]");
+    } else {
+      const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+      if (storedWishlist !== []) {
+        setDataWishlist(storedWishlist);
+      }
+    }
+  }, [loading]);
 
   return (
     <div>
@@ -127,11 +130,12 @@ const DaftarBeliMobile = (props) => {
                         <CardProduct
                           key={index}
                           namaBarang={value.namaBarang}
-                          img={value.barangImg}
+                          img={value.gambarBarang}
                           tipebarang={value.tipeBarang}
                           price={value.hargaBarang}
                           ToDetailProduct={value.barangId}
                           redirect={`/product/product-detail/${value.barangId}`}
+                          btnCaption="Cek Status"
                         />
                         ;
                       </div>
@@ -165,6 +169,7 @@ const DaftarBeliMobile = (props) => {
                           price={value.hargaBarang}
                           ToDetailProduct={value.barangId}
                           redirect={`/product/product-detail/${value.barangId}`}
+                          btnCaption="Tertarik"
                         />
                         ;
                       </div>
@@ -193,11 +198,12 @@ const DaftarBeliMobile = (props) => {
                         <CardProduct
                           key={index}
                           namaBarang={value.namaBarang}
-                          img={value.barangImg}
+                          img={value.gambarBarang}
                           tipebarang={value.tipeBarang}
                           price={value.hargaBarang}
                           ToDetailProduct={value.barangId}
                           redirect={`/product/product-detail/${value.barangId}`}
+                          btnCaption="Sudah Dibeli"
                         />
                         ;
                       </div>

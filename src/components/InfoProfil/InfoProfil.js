@@ -271,10 +271,8 @@ const InfoProfil = (props) => {
                     id="input_no_hp"
                     type="text"
                     value={`${noTelepon}`}
-                    pattern="[0-8]{2}[0-9]{10}"
-
+                    pattern="[0-9]{12,}"
                     placeholder="contoh: 08123456789"
-
                     aria-label=".form-control-lg example"
                     onChange={(e) => {
                       setNoTelepon(e.target.value);
