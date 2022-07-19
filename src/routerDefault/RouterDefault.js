@@ -36,7 +36,7 @@ const RouterDefault = (props) => {
           <Route path="product/my-product/:idBarang" element={<DetailEditSeller />} />
 
           <Route path="product/product-preview" element={<PreviewProduct />} />
-          <Route path="infoproduct" element={<InfoProduct />} />
+          <Route path="infopenawar" element={<InfoProduct />} />
           <Route path="infoproduct/:idBarangBid" element={<InfoProduct />} />
 
           <Route path="update-profile" element={<UpdateProfilePage />} />

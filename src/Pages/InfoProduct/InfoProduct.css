@@ -35,9 +35,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-
-
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 1rem;
@@ -103,8 +100,6 @@
 }
 
 .namapembeli-infoproduct {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -112,8 +107,6 @@
 }
 
 .txt-infoproduct {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 400;
     font-size: 10px;
     line-height: 14px;
@@ -121,8 +114,6 @@
 }
 
 .txt1-infoproduct {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -153,8 +144,6 @@
 }
 
 .txt2-infoproduct {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -173,11 +162,8 @@
     width: 9.875rem;
     height: 2.25rem;
     background: #FFFFFF;
-    border: 1px solid #7126B5;
+    border: 2px solid #e09f3e;
     border-radius: 16px;
-
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -186,19 +172,16 @@
 }
 
 .btn-tolak-infoproduct:hover {
-    background-color: #7126B5;
-    color: #FFFFFF;
+    background-color: #e09f3e;
+  color: #fff;
 }
 
 .btn-terima-infoproduct {
     width: 9.875rem;
     height: 2.25rem;
-    background: #7126B5;
+    background-color: #e09f3e;
     border-radius: 16px;
     border: none;
-
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -208,7 +191,7 @@
 }
 
 .btn-terima-infoproduct:hover {
-    background-color: #8400ff;
+    background-color: #e09f3e;
 }
 
 
