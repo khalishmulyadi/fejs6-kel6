@@ -121,7 +121,6 @@ const Tambah = (props) => {
 
   return (
     <div>
-      {console.log(props.dataUser)}
       <div className="container">
         <div className="tambah-produk mx-auto">
           <div className="back_icon2">
@@ -170,7 +169,7 @@ const Tambah = (props) => {
                 Kategori
               </label>
               <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)} required>
-                <option value="" disabled hidden selected>
+                <option value="" disabled hidden>
                   Pilih Kategori
                 </option>
                 <option value="gitar">Gitar</option>

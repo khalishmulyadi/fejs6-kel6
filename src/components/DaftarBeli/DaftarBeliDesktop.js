@@ -66,7 +66,6 @@ const DaftarBeliDesktop = (props) => {
           {dataTawaran?.map((value, index) => {
             return (
               <div className="col-6" key={index}>
-                {console.log(value)}
                 <CardProduct
                   key={index}
                   namaBarang={value.namaBarang}
