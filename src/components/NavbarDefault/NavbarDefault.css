@@ -1,0 +1,152 @@
+
+/* .nav_container{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+.nav__dekstop{
+  font-family: sans-serif;
+  background: #DCD7C9;
+  height: 80px;
+  width: 100%;
+}
+
+label.logo{
+  color: #2C3639;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 50px;
+  font-weight: bold;
+}
+
+.search__input{
+  float: left;
+  margin-right: 20px;
+  width: 300px;
+  border-radius: 16px;
+}
+
+.search__button{
+  float: right;
+  
+}
+
+.button__login{
+  float: right;
+  background-color: #A27B5C;
+  color: #DCD7C9;
+  font-weight: 500;
+  border-radius: 5px;
+} */
+
+.container-fluid.container__nav{
+  /* padding: 0;
+  margin: 0; */
+  box-sizing: border-box;
+  background: #335C67;
+  box-shadow: 0 2px 15px 0 rgba(0,0,0,.2);
+}
+.nav{
+  height: 80px;
+  width: 100%;
+}
+.logo__nav{
+  color: #fff;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 80px;
+  font-weight: bold;
+}
+.button__nav{
+  float: right;
+  margin-right: 20px;
+}
+.btn.button_login{
+  background-color: #E09F3E;
+  color: #fff;
+  font-weight: 500;
+}
+.btn.button_login:hover{
+  background-color: #A27B5C;
+  color: #fff;
+}
+.bi.bi__nav{
+  color: #fff;
+  font-size: 1.25rem;
+}
+.bi:hover{
+  color: #FFF3B0;
+}
+
+
+
+
+.logo_website {
+  color: #335C67;
+  font-size: 25px;
+  padding: 0 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.offcanvas.navbar_mobile {
+  width: 50%;
+}
+
+.btn.button_nav_mobile {
+  background-color: #fff;
+}
+
+.btn.button_nav_mobile i {
+  color: black;
+  font-size: 30px;
+}
+
+.btn.button_nav_mobile:hover {
+  background-color: #FFF3B0;
+}
+
+.navbar_list ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar_list ul li:hover {
+  background-color: #FFF3B0;
+}
+
+
+.input-group .search_button {
+  background-color: #FFF3B0;
+  border-style: none;
+}
+
+.input-group .search_input {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.input-group .search_button {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+
+.dropdown-toggle.menu_user::after,
+.dropdown-toggle.notifikasi_user::after,
+.dropdown-toggle.profile_user::after {
+  content: none;
+}
+
+.dropdown-toggle.menu_user a {
+  color: #000;
+}
+
+.drop_notif ul {
+  width: max-content;
+  border-radius: 11px;
+}

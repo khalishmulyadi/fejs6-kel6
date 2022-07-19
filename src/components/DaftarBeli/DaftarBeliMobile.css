@@ -1,0 +1,58 @@
+.btn.btn_edit_profil_daftar_jual {
+  border: 1px solid #7126b5;
+  border-radius: 8px;
+}
+
+.btn.btn_edit_profil_daftar_jual:hover {
+  background-color: #7126b5;
+  color: #fff;
+}
+
+.btn_tab_daftar_jual_mobile {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.btn_tab_daftar_jual_mobile::-webkit-scrollbar {
+  display: none;
+}
+
+.btn_tab_daftar_jual_mobile .btn_tab_produk,
+.btn_tab_daftar_jual_mobile .btn_tab_diminati,
+.btn_tab_daftar_jual_mobile .btn_tab_terjual {
+  color: #3c3c3c;
+  background: #fff3b0;
+  border-radius: 12px;
+}
+
+.btn_tab_daftar_jual_mobile .btn_tab_produk:hover,
+.btn_tab_daftar_jual_mobile .btn_tab_diminati:hover,
+.btn_tab_daftar_jual_mobile .btn_tab_terjual:hover {
+  color: #3c3c3c;
+  background: #fff3b0;
+}
+
+.btn_tab_daftar_jual_mobile .btn_tab_produk.active,
+.btn_tab_daftar_jual_mobile .btn_tab_diminati.active,
+.btn_tab_daftar_jual_mobile .btn_tab_terjual.active {
+  color: white;
+  background: #e09f3e;
+}
+
+.btn_tambah_produk {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  width: 10rem;
+}
+
+.content_produk_jualan {
+  display: inline-grid;
+}
+
+.kosong_peminat {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7rem;
+}

@@ -1,0 +1,217 @@
+.navbar-info-product {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    height: 5.25rem;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+}
+
+.row-navbar-infoproduct {
+    padding-left: 8.5rem;
+    padding-right: 8.5rem;
+}
+
+.arrow-back-mobile {
+    font-size: 1.5rem;
+    border: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* responsive arrow back */
+@media screen and (min-width: 425px) {
+    .arrow-back-mobile {
+        cursor: pointer;
+        display: none;
+    }
+}
+
+.txt-navbar-infoproduct {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #000000;
+}
+
+.content-infoproduct {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8.75rem;
+    padding-right: 8.75rem;
+
+    margin-top: 2.5rem;
+}
+
+.container-content-infoproduct {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.arrow-back {
+    font-size: 1.5rem;
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.col-card-infoproduct {
+    display: flex;
+    justify-content: center;
+}
+
+.container-card-infoproduct {
+    display: flex;
+    flex-direction: column;
+    width: 35.5rem !important;
+}
+
+.card-1-infoproduct {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 1rem !important;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.content-card-infoproduct {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+.foto-profil-infoproduct {
+
+    width: 3rem;
+    height: 3rem;
+}
+
+.namapembeli-infoproduct {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.txt-infoproduct {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: #8A8A8A;
+}
+
+.txt1-infoproduct {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 24px;
+    color: #000000;
+}
+
+.container-daftar-product-infoproduct {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+}
+
+
+/* responsive content  daftar product*/
+@media screen and (min-width: 425px) {
+    .container-img-infoproduct {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        justify-content: center;
+    }
+}
+
+.container-txt-infoproduct {
+    display: flex;
+    justify-content: space-between;
+}
+
+.txt2-infoproduct {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.container-button-infoproduct {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+
+    justify-content: flex-end;
+}
+
+.btn-tolak-infoproduct {
+    width: 9.875rem;
+    height: 2.25rem;
+    background: #FFFFFF;
+    border: 2px solid #e09f3e;
+    border-radius: 16px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #151515;
+}
+
+.btn-tolak-infoproduct:hover {
+    background-color: #e09f3e;
+  color: #fff;
+}
+
+.btn-terima-infoproduct {
+    width: 9.875rem;
+    height: 2.25rem;
+    background-color: #e09f3e;
+    border-radius: 16px;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-left: 16px;
+}
+
+.btn-terima-infoproduct:hover {
+    background-color: #e09f3e;
+}
+
+
+/* responsive */
+@media screen and (min-width: 425px) {
+    .logo-infoproduct {
+        display: none;
+    }
+
+    .card-1-infoproduct {
+        width: 20.5rem;
+        height: 5rem;
+    }
+
+    .arrow-back {
+        display: none;
+    }
+
+    .row-navbar-infoproduct {
+        padding: 1rem 3.5rem 1rem 3.5rem;
+    }
+
+}

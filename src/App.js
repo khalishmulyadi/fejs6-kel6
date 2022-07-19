@@ -1,11 +1,12 @@
-import DetailProduk from "./components/DetailProduk/DetailProduk";
+import React from "react";
+import RouterDefault from "./routerDefault/RouterDefault";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <DetailProduk />
+    <div>
+      <RouterDefault />
     </div>
   );
-}
+};
 
 export default App;

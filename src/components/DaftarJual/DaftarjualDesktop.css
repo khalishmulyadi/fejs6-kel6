@@ -1,0 +1,168 @@
+.container-content-daftarjualdesktop {
+  margin-top: 1.5rem;
+  padding: 1rem 2rem !important;
+}
+
+.card-daftarjualdesktop {
+  width: 100%;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 11px;
+  margin-top: 0.875rem;
+  border-radius: 11px !important;
+  margin-bottom: 1.5rem;
+}
+
+.container-content-card-daftarjualdesktop {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 1rem;
+
+  justify-content: space-between;
+}
+
+.container-img-txt-daftarjualdesktop {
+  display: flex;
+}
+
+.container-img-daftarjuadesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* width: 100%; */
+}
+
+.img-penjual-dafarjualdesktop {
+  width: 3rem;
+  height: 3rem;
+}
+
+.txt-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-left: 1rem;
+}
+
+.container-button-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-button-daftarjualdesktop {
+  background-color: #ffffff;
+  padding: 7px 15px;
+  border: 1px solid #335c67;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #151515;
+  text-decoration: none;
+}
+.edit-button-daftarjualdesktop:hover {
+  background-color: #e09f3e;
+  color: #fff;
+  border-color: #e09f3e;
+}
+
+.card-kategori-daftarjualdesktop {
+  width: 100%;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 11px !important;
+}
+
+.content-card-kategori-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+}
+
+.txt-kategori-daftarjualdesktop {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+
+  margin-bottom: 0;
+  margin-left: 0.6875rem;
+}
+
+.arrow-right-daftarjualdesktop {
+}
+
+.button-kategori-produk-daftarjual {
+  margin-top: 1.5rem;
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
+
+  border: none;
+  background-color: #ffffff;
+}
+
+.button-kategori-produk-daftarjual.active {
+  background-color: #fff3b0;
+}
+
+.button-kategori-produk-daftarjual:hover {
+  background-color: #fff3b0;
+  border-radius: 11px;
+}
+
+.container-content-button-daftarjual {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.container-card-daftarjualdesktop {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.container-btn-add-product-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-add-product-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 12.875rem;
+  height: 12.375rem;
+  border: 3px dashed #d0d0d0;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.btn-add-product-daftarjualdesktop:hover {
+  background-color: #949090;
+}
+
+.container-card-button2-daftarjualdesktop {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.txt-produk-diminati-daftarjualdesktop {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 20px;
+  text-align: center;
+  color: #151515;
+  margin-top: 1.5rem;
+}

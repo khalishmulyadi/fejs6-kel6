@@ -1,0 +1,71 @@
+.container-button-infoproductstatus {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+
+    justify-content: flex-end;
+}
+
+
+.btn-status-infoproductstatus {
+    width: 9.875rem;
+    height: 2.25rem;
+    background: #FFFFFF;
+    border: 1px solid #7126B5;
+    border-radius: 16px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #151515;
+}
+
+.btn-status-infoproductstatus:hover {
+    background-color: #7126B5;
+    color: #FFFFFF;
+}
+
+.container-btn-infoproductstatus {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+    justify-content: center;
+    width: 9.875rem;
+
+    align-items: center;
+    background: #7126B5;
+    border-radius: 16px;
+}
+
+.btn-infoproductstatus{
+    border: none;
+    background-color: transparent;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+
+}
+
+.btn-infoproductstatus:hover{
+    background-color:#FFFFFF;
+    color: #151515;
+    
+}
+
+.container-btn-infoproductstatus:hover{
+    background-color:#FFFFFF;
+    color: #151515;
+    border: 1px solid #7126B5;
+}
+
+.wa-img-productstatus{
+    width: 1rem;
+    height: 1rem;
+}
