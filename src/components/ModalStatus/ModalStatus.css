@@ -107,7 +107,7 @@
 .btn-modalstatus {
     height: 2.5rem;
     border-radius: 1rem;
-    background-color: #7126B5;
+    background-color: #e09f3e;
     border: none;
 
     font-family: 'Poppins';
@@ -122,5 +122,5 @@
 .btn-modalstatus:hover {
     background-color: #FFFFFF;
     color: #000000;
-    border: 1px solid #7126B5;
+    border: 1px solid #e09f3e;
 }

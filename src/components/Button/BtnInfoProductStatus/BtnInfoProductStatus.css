@@ -11,7 +11,7 @@
     width: 9.875rem;
     height: 2.25rem;
     background: #FFFFFF;
-    border: 1px solid #7126B5;
+    border: 1px solid #e09f3e;
     border-radius: 16px;
 
     font-family: 'Poppins';
@@ -24,8 +24,8 @@
 }
 
 .btn-status-infoproductstatus:hover {
-    background-color: #7126B5;
-    color: #FFFFFF;
+    background-color: #e09f3e;
+    color: #000000;
 }
 
 .container-btn-infoproductstatus {
@@ -36,7 +36,7 @@
     width: 9.875rem;
 
     align-items: center;
-    background: #7126B5;
+    background: #e09f3e;
     border-radius: 16px;
 }
 
@@ -62,7 +62,7 @@
 .container-btn-infoproductstatus:hover{
     background-color:#FFFFFF;
     color: #151515;
-    border: 1px solid #7126B5;
+    border: 1px solid #e09f3e;
 }
 
 .wa-img-productstatus{

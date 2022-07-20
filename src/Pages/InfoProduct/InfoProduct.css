@@ -84,7 +84,7 @@
     border-radius: 1rem !important;
     justify-content: center;
     margin-bottom: 1.5rem;
-    width: 100%;
+    width: 100% !important;
 }
 
 .content-card-infoproduct {
