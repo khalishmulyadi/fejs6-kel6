@@ -155,7 +155,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #7126B5;
+    background-color: #e09f3e;
     border-radius: 1rem;
     cursor: pointer;
 }
@@ -178,6 +178,6 @@
     color: #FFFFFF;
 
     border: none;
-    background-color: #7126B5;
+    background-color: #e09f3e;
 
 }

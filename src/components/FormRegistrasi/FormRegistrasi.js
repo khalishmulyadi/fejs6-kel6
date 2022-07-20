@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import loginImage from "../../img/loginsecondhand.png";
+import loginImage from "../../img/bg-login.png";
+
 import "./FormRegistrasi.css";
 
 export const FormRegistrasi = () => {
