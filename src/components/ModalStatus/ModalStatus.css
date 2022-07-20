@@ -98,20 +98,24 @@
 }
 
 .btn-modalstatus {
-  height: 2.5rem;
-  border-radius: 1rem;
-  background-color: #7126b5;
-  border: none;
 
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  color: #ffffff;
+    height: 2.5rem;
+    border-radius: 1rem;
+    background-color: #e09f3e;
+    border: none;
+
+    
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+
 }
 
 .btn-modalstatus:hover {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #7126b5;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #e09f3e;
 }
+

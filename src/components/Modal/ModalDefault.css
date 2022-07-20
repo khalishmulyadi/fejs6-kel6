@@ -138,15 +138,17 @@
 }
 
 .container-btn-modaldefault {
-  margin-top: 20px;
-  height: 2.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: #7126b5;
-  border-radius: 1rem;
-  cursor: pointer;
+
+    margin-top: 20px;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #e09f3e;
+    border-radius: 1rem;
+    cursor: pointer;
+
 }
 
 .whatsapp-btn-modaldefault {
@@ -156,13 +158,17 @@
 }
 
 .btn-modaldefault {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  color: #ffffff;
 
-  border: none;
-  background-color: #7126b5;
+  
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+
+    border: none;
+    background-color: #e09f3e;
+
 }
+
