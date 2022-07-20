@@ -4,6 +4,8 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import CardProduct from "../CardProduct/CardProduct";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import "./DaftarBeliDesktop.css";
+import defaultPP from "../../img/default-profile.png";
+
 import seller from "../../img/Rectangle 33.png";
 import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
@@ -68,12 +70,13 @@ const DaftarBeliDesktop = (props) => {
               <div className="col-6" key={index}>
                 <CardProduct
                   key={index}
-                  namaBarang={value.namaBarang}
-                  img={value.gambarBarang}
-                  tipebarang={value.tipeBarang}
-                  price={value.hargaBarang}
-                  ToDetailProduct={value.barangId}
-                  redirect={`/product/product-detail/${value.barangId}`}
+                  namaBarang={value?.namaBarang}
+                  img={value?.gambarBarang}
+                  tipebarang={value?.tipeBarang}
+                  price={value?.hargaBarang}
+                  hargaTawar={value?.hargaTawar}
+                  ToDetailProduct={value?.barangId}
+                  redirect={`/product/product-detail/${value?.barangId}`}
                   btnCaption="Cek Status"
                 />
               </div>
@@ -101,11 +104,12 @@ const DaftarBeliDesktop = (props) => {
               <div className="col-6" key={index}>
                 <CardProduct
                   key={index}
-                  namaBarang={value.namaBarang}
-                  img={value.barangImg}
-                  tipebarang={value.tipeBarang}
-                  price={value.hargaBarang}
-                  ToDetailProduct={value.barangId}
+                  namaBarang={value?.namaBarang}
+                  img={value?.gambarBarang}
+                  tipebarang={value?.tipeBarang}
+                  price={value?.hargaBarang}
+                  hargaTawar={value?.hargaTawar}
+                  ToDetailProduct={value?.barangId}
                   redirect={`/product/product-detail/${value.barangId}`}
                   btnCaption="Tertarik"
                 />
@@ -134,11 +138,12 @@ const DaftarBeliDesktop = (props) => {
               <div className="col-6" key={index}>
                 <CardProduct
                   key={index}
-                  namaBarang={value.namaBarang}
-                  img={value.gambarBarang}
-                  tipebarang={value.tipeBarang}
-                  price={value.hargaBarang}
-                  ToDetailProduct={value.barangId}
+                  namaBarang={value?.namaBarang}
+                  img={value?.gambarBarang}
+                  tipebarang={value?.tipeBarang}
+                  price={value?.hargaTawar}
+                  hargaTawar={value?.hargaTawar}
+                  ToDetailProduct={value?.barangId}
                   redirect={`/product/product-detail/${value.barangId}`}
                   isDisabled={true}
                   btnCaption="Sudah Dibeli"
@@ -193,7 +198,8 @@ const DaftarBeliDesktop = (props) => {
                   <div className="container-content-card-daftarjualdesktop">
                     <div className="container-img-txt-daftarjualdesktop">
                       <div className="container-img-daftarjuadesktop">
-                        <img alt="" src={`data:image/png;base64,${props.dataUser.img}`} className="img-penjual-dafarjualdesktop" />
+                        {props?.dataUser?.img ? <img src={`data:image/png;base64,${props?.dataUser?.img}`} className="img-penjual-dafarjualdesktop" alt="foto_penjual" /> : <img src={defaultPP} className="img_penjual" alt="foto_penjual" />}
+                        {/* <img alt="" src={`data:image/png;base64,${props.dataUser.img}`} className="img-penjual-dafarjualdesktop" /> */}
                       </div>
 
                       <div className="txt-daftarjualdesktop">

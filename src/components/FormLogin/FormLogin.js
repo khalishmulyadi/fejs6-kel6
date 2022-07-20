@@ -81,13 +81,13 @@ const FormLogin = (props) => {
                 <label htmlFor="exampleInputEmail1" className="form-label">
                   Email
                 </label>
-                <input type="email" className="form-control input_form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contoh: johndee@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" className="form-control input_form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contoh: johndee@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">
                   Password
                 </label>
-                <input type="password" className="form-control input_form" id="exampleInputPassword1" placeholder="Masukkan password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" className="form-control input_form" id="exampleInputPassword1" placeholder="Masukkan password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               </div>
 
               <button type="submit" className="btn btn-primary w-100 mt-3 login_button">

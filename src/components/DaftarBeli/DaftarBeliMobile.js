@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import CardProduct from "../CardProduct/CardProduct";
 import kosongPeminat from "../../img/undraw_selection_re_ycpo 1.png";
+import defaultPP from "../../img/default-profile.png";
 
 // css
 import "./DaftarBeliMobile.css";
@@ -76,11 +77,11 @@ const DaftarBeliMobile = (props) => {
           <div className="container mt-3 py-3 shadow seller_detail">
             <div className="row align-items-center">
               <div className="col-3">
-                <img src={`data:image/png;base64,${props.dataUser.img}`} className="img_penjual" alt="foto_penjual" />
+                {props?.dataUser?.img ? <img src={`data:image/png;base64,${props?.dataUser?.img}`} className="img_penjual" alt="foto_penjual" /> : <img src={defaultPP} className="img_penjual" alt="foto_penjual" />}
               </div>
               <div className="col-6">
-                <h5>{props.dataUser.nama}</h5>
-                <p>{props.dataUser.kota}</p>
+                <h5>{props?.dataUser?.nama}</h5>
+                <p>{props?.dataUser?.kota}</p>
               </div>
               <div className="col-3">
                 <a href="/update-profile" className="btn btn_edit_profil_daftar_jual">
@@ -132,7 +133,7 @@ const DaftarBeliMobile = (props) => {
                           namaBarang={value.namaBarang}
                           img={value.gambarBarang}
                           tipebarang={value.tipeBarang}
-                          price={value.hargaBarang}
+                          price={value.hargaTawar}
                           ToDetailProduct={value.barangId}
                           redirect={`/product/product-detail/${value.barangId}`}
                           btnCaption="Cek Status"
@@ -200,7 +201,7 @@ const DaftarBeliMobile = (props) => {
                           namaBarang={value.namaBarang}
                           img={value.gambarBarang}
                           tipebarang={value.tipeBarang}
-                          price={value.hargaBarang}
+                          price={value.hargaTawar}
                           ToDetailProduct={value.barangId}
                           redirect={`/product/product-detail/${value.barangId}`}
                           btnCaption="Sudah Dibeli"

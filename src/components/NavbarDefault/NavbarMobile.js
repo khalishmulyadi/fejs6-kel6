@@ -37,7 +37,7 @@ const NavbarMobile = (props) => {
       {props.loginStatus ? (
         <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
-            <a href="/homepage">
+            <a href="/homepage" className="logo_mobile">
               <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
                 AsiX
               </h5>
@@ -68,7 +68,7 @@ const NavbarMobile = (props) => {
       ) : (
         <div className="offcanvas offcanvas-start navbar_mobile" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
           <div className="offcanvas-header">
-            <a href="/">
+            <a href="/" className="logo_mobile">
               <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
                 AsiX
               </h5>
