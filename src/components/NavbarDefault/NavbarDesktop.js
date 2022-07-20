@@ -23,11 +23,11 @@ const NavbarDesktop = (props) => {
   const handleGetNotif = () => {
     if (props.roleUser === 1) {
       var config = {
-        method: 'get',
+        method: "get",
         url: `https://asix-store.herokuapp.com/user/notifikasi-buyer/${props.userId}/Bidding`,
         headers: {
-          'Authorization': `Bearer ${Token.access_token}`
-        }
+          Authorization: `Bearer ${Token.access_token}`,
+        },
       };
 
       axios(config)
@@ -83,12 +83,11 @@ const NavbarDesktop = (props) => {
         return (
           <a className="dropdown-item px-4" href={`product/product-detail/${value.barangId}`} key={index}>
             <NotifikasiBuyer namaProduk={value.namaBarang} harga={value.hargaAkhir} hargaTawar={value.hargaTawar} date={value.tanggalTransaksi} img={value.gambarBarang} key={index} />
-            
           </a>
         );
       });
     }
-    // Seller 
+    // Seller
     else if (props.roleUser === 2) {
       return DataNotif.map((value, index) => {
         return (
@@ -98,11 +97,10 @@ const NavbarDesktop = (props) => {
         );
       });
     }
-  }
+  };
 
   return (
     <div className="container-fluid container__nav">
-      {console.log(props.roleUser)}
       <div className="container ">
         <nav>
           {props.loginStatus ? (
@@ -138,10 +136,7 @@ const NavbarDesktop = (props) => {
                     <i className="bi bi-bell bi__nav"></i>
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      {handleNotifSellerAndBUyer()}
-
-                    </li>
+                    <li>{handleNotifSellerAndBUyer()}</li>
                   </ul>
                 </div>
 

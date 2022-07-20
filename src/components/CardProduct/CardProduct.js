@@ -43,8 +43,8 @@ const CardProduct = ({ namaBarang, img, tipebarang, price, ToDetailProduct, logi
           <h6 className="card-text">{formatRupiah(price)}</h6>
 
           <div className="tertarik-buy">
-            <a href={redirect} className={`card_product ${isDisabled ? "disabled" : ""}`} style={{ color: "white" }}>
-              <h6>{btnCaption}</h6>
+            <a href={redirect} className={`card_button d-block text-center px-2 py-2 ${isDisabled ? "disabled" : ""}`}>
+              {btnCaption}
             </a>
           </div>
         </div>

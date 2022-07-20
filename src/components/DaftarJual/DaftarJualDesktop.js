@@ -9,6 +9,7 @@ import cevhron_right from "../../img/fi_chevron-right.png";
 import none from "../../img/undraw_selection_re_ycpo 1.png";
 import { connect } from "react-redux";
 import axios from "axios";
+import defaultPP from "../../img/default-profile.png";
 
 const DaftarJualDesktop = (props) => {
   const [tabActive, setTabActive] = useState(1);
@@ -189,7 +190,8 @@ const DaftarJualDesktop = (props) => {
                   <div className="container-content-card-daftarjualdesktop">
                     <div className="container-img-txt-daftarjualdesktop">
                       <div className="container-img-daftarjuadesktop">
-                        <img alt="" src={`data:image/png;base64,${props.dataUser.img}`} className="img-penjual-dafarjualdesktop" />
+                        {props?.dataUser?.img ? <img src={`data:image/png;base64,${props?.dataUser?.img}`} className="img-penjual-dafarjualdesktop" alt="foto_penjual" /> : <img src={defaultPP} className="img_penjual" alt="foto_penjual" />}
+                        {/* <img alt="" src={`data:image/png;base64,${props.dataUser.img}`} className="img-penjual-dafarjualdesktop" /> */}
                       </div>
 
                       <div className="txt-daftarjualdesktop">

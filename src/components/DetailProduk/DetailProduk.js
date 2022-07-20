@@ -45,7 +45,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
           axios(config)
             .then(function (response) {
-              console.log(response.data);
+              // console.log(response.data);
               setMenawar(true);
               setAlertTawar(true);
               console.log(hargaTawar);
@@ -125,7 +125,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
   // ******* Handle Add to Wishlist *******
   const handleWishlist = () => {
-    if (props.loginStatus) {
+    if (props?.loginStatus) {
       if (props.roleUser === 1) {
         console.log(DataBarang);
         setWishlist([DataBarang, ...wishlist]);
@@ -142,11 +142,11 @@ const DetailProduk = ({ pengguna, ...props }) => {
   // menyimpan wishlist di sessionStorage
   useEffect(() => {
     sessionStorage.setItem(`wishlist_${props.userId}`, JSON.stringify(wishlist));
-    setCurrentWishlist(wishlist?.filter((e) => e.barangId === DataBarang.barangId));
+    setCurrentWishlist(wishlist?.filter((e) => e.barangId === DataBarang?.barangId));
   }, [wishlist]);
 
   const delHandler = (barangIdWishlist) => {
-    const updatedWishlist = wishlist?.filter((item) => item.barangId !== barangIdWishlist);
+    const updatedWishlist = wishlist?.filter((item) => item?.barangId !== barangIdWishlist);
 
     setWishlist(updatedWishlist);
     alert("Barang berhasil dihapus dari wishlist");
@@ -217,9 +217,9 @@ const DetailProduk = ({ pengguna, ...props }) => {
             <div className="col-md-6 col-12">
               {/* detail produk */}
               <div className="container mt-5 py-3 product_detail">
-                <h3>{DataBarang.namaBarang}</h3>
-                <p>{DataBarang.tipeBarang}</p>
-                <p>{formatRupiah(DataBarang.hargaBarang)}</p>
+                <h3>{DataBarang?.namaBarang}</h3>
+                <p>{DataBarang?.tipeBarang}</p>
+                <p>{formatRupiah(DataBarang?.hargaBarang)}</p>
 
                 <div className="d-grid gap-2">
                   {menawar ? (
@@ -232,7 +232,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
                         Saya tertarik dan ingin nego
                       </button>
 
-                      {currentWishlist.length > 0 ? (
+                      {currentWishlist?.length > 0 ? (
                         <button type="button" className="btn btn_edit" onClick={() => delHandler(DataBarang.barangId)}>
                           Hapus dari wishlist
                         </button>
@@ -250,11 +250,11 @@ const DetailProduk = ({ pengguna, ...props }) => {
               <div className="container mt-3 py-3 shadow seller_detail">
                 <div className="row">
                   <div className="col-3">
-                    <img src={`data:image/png;base64,${DataBarang.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
+                    <img src={`data:image/png;base64,${DataBarang?.profilePenjual}`} className="img_penjual" alt="foto_penjual" />
                   </div>
                   <div className="col ms-3 ms-sm-0">
-                    <h3>{DataBarang.namaSeller}</h3>
-                    <p>{DataBarang.kota}</p>
+                    <h3>{DataBarang?.namaSeller}</h3>
+                    <p>{DataBarang?.kota}</p>
                   </div>
                 </div>
               </div>
@@ -265,10 +265,10 @@ const DetailProduk = ({ pengguna, ...props }) => {
         {/* deskripsi produk */}
         <div className="container w-100 mt-5 mb-5 mx-auto px-4 py-3 shadow product_desc">
           <h3>Deskripsi</h3>
-          <p>{DataBarang.deskripsi}</p>
+          <p>{DataBarang?.deskripsi}</p>
           <ul>
-            <li>Merk: {DataBarang.merk}</li>
-            <li>Seri: {DataBarang.seri}</li>
+            <li>Merk: {DataBarang?.merk}</li>
+            <li>Seri: {DataBarang?.seri}</li>
           </ul>
         </div>
       </div>
@@ -288,11 +288,11 @@ const DetailProduk = ({ pengguna, ...props }) => {
               <div className="container product_detail_tawar py-3">
                 <div className="row">
                   <div className="col-3">
-                    <img src={`data:image/png;base64,${DataBarang.barangImg}`} className="product_img_tawar" alt="product-img-haggle" />
+                    <img src={`data:image/png;base64,${DataBarang?.barangImg}`} className="product_img_tawar" alt="product-img-haggle" />
                   </div>
                   <div className="col-9">
-                    <p className="mb-0 fw-bold">{DataBarang.namaBarang}</p>
-                    <p className="mb-0">{formatRupiah(DataBarang.hargaBarang)}</p>
+                    <p className="mb-0 fw-bold">{DataBarang?.namaBarang}</p>
+                    <p className="mb-0">{formatRupiah(DataBarang?.hargaBarang)}</p>
                   </div>
                 </div>
               </div>
@@ -302,7 +302,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
                   <label htmlFor="recipient-name" className="col-form-label">
                     Harga tawar
                   </label>
-                  <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} />
+                  <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} required />
                 </div>
                 <button type="submit" className="btn btn_kirim_tawaran w-100" data-bs-dismiss="modal">
                   Kirim

@@ -23,7 +23,7 @@
 
 .list_menu_akun_saya li i {
   font-size: x-large;
-  color: #7126b5;
+  color: #e09f3e;
 }
 
 .list_navigasi_akun_saya li {
@@ -35,7 +35,7 @@
 
 .list_navigasi_akun_saya li.active,
 .list_navigasi_akun_saya li.active i {
-  color: #7126b5;
+  color: #e09f3e;
   font-weight: bold;
 }
 

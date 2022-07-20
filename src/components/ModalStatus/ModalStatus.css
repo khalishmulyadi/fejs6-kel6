@@ -1,116 +1,110 @@
 .card-modalstatus {
-    border-radius: 1rem !important;
-    width: 22.5rem;
-    max-height: 22.75rem !important;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 1rem !important;
+  width: 22.5rem;
+  max-height: 22.75rem !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 }
 
 .container-modalstatus {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1rem 1rem;
 
-    /* background-color: aqua; */
+  /* background-color: aqua; */
 }
 
 .container-closeBtn-modalstatus {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
-
 .btn-close-modalstatus {
-    border: none;
-    background-color: #FFFFFF;
-    font-weight: 400;
+  border: none;
+  background-color: #ffffff;
+  font-weight: 400;
 }
 
 .title-modalstatus {
-    margin-top: 1.375rem;
+  margin-top: 1.375rem;
 
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    color: #000000;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
 }
 
-.form-modalstatus {}
+.form-modalstatus {
+}
 
 #myradio {
-    accent-color: #7126B5;
+  accent-color: #7126b5;
 }
 
 .container-input-radio1-modalstatus {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* background-color: antiquewhite; */
-    padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* background-color: antiquewhite; */
+  padding-top: 1.5rem;
 }
 
 .input-radio-modalstatus {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .label-modalstatus {
-    margin-left: 1rem;
+  margin-left: 1rem;
 
-
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: #151515;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #151515;
 }
 
 .desc-and-status-modalstatus {
-    display: flex;
-    flex-direction: row;
-    padding-left: 0.8rem;
-    margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  padding-left: 0.8rem;
+  margin-left: 1rem;
 
-
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: #8A8A8A;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #8a8a8a;
 }
 
 .container-btn-modalstatus {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
 }
 
-.btn-modalstatus-false{
-    height: 2.5rem;
-    border-radius: 1rem;
-    background-color: #8A8A8A;
-    border: none;
+.btn-modalstatus-false {
+  height: 2.5rem;
+  border-radius: 1rem;
+  background-color: #8a8a8a;
+  border: none;
 
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    color: #FFFFFF;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
 }
 
 .btn-modalstatus {
+
     height: 2.5rem;
     border-radius: 1rem;
-    background-color: #7126B5;
+    background-color: #e09f3e;
     border: none;
 
-    font-family: 'Poppins';
+    
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -122,5 +116,6 @@
 .btn-modalstatus:hover {
     background-color: #FFFFFF;
     color: #000000;
-    border: 1px solid #7126B5;
+    border: 1px solid #e09f3e;
 }
+
