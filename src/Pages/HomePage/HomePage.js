@@ -239,7 +239,7 @@ const HomePage = (props) => {
           </div>
 
           {/* form search */}
-          <div className="col-12 col-md-6 mt-md-0 mt-3">
+          <div className="col-12 col-md-6 mt-md-0 mt-5">
             <form className="d-flex">
               <div className="input-group search_bar">
                 <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />

@@ -11,7 +11,7 @@ import authService from "../../services/auth.service";
 import "./AkunSayaMobile.css";
 
 // images
-import defaultPP from "../../img/upFoto.png";
+import defaultPP from "../../img/default-profile.png";
 
 const AkunSayaMobile = (props) => {
   const navigate = useNavigate();
@@ -39,7 +39,6 @@ const AkunSayaMobile = (props) => {
           <h3 className="my-auto text-center">Loading...</h3>
         ) : (
           <div>
-            {console.log(props.dataUser.roles)}
             {/* title start */}
             <h1 className="mt-3">Akun Saya</h1>
             {/* title end */}

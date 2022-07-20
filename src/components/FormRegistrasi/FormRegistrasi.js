@@ -60,7 +60,7 @@ export const FormRegistrasi = () => {
                     <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
                     <strong className="me-auto">Error</strong>
                   </Toast.Header>
-                  <Toast.Body className="text-light">Email sudah terdaftar!</Toast.Body>
+                  <Toast.Body className="text-light">Email atau password salah!</Toast.Body>
                 </Toast>
               </ToastContainer>
             ) : null}
@@ -76,7 +76,7 @@ export const FormRegistrasi = () => {
               </a>
             </div>
             <h3 className="mb-4 fw-bold">Daftar</h3>
-            <form>
+            <form onSubmit={handleRegister}>
               <div className="mb-3">
                 <label htmlFor="nama" className="form-label">
                   Nama
@@ -125,7 +125,7 @@ export const FormRegistrasi = () => {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary w-100 mt-3 login_button" onClick={handleRegister}>
+              <button type="submit" className="btn btn-primary w-100 mt-3 login_button">
                 Daftar
               </button>
             </form>
