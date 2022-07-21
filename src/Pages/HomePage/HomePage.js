@@ -19,7 +19,9 @@ import getUserDetail from "../../redux/actions/getUserDetail";
 const HomePage = (props) => {
   var axios = require("axios");
   const [Barang, setBarang] = useState([]);
+  const [searchBarang, setSearchBarang] = useState([]);
   const [filterActive, setfilterActive] = useState(1);
+  const [searchKey, setSearchKey] = useState("");
 
   const slides = [];
 
@@ -44,8 +46,11 @@ const HomePage = (props) => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
-        setBarang(response.data);
+        // console.log(response.data);
+        const filterBarang = response?.data?.filter((barang) => {
+          return barang?.statusBarang.includes("Availabel");
+        });
+        setBarang(filterBarang);
       })
       .catch(function (error) {
         console.log(error);
@@ -60,43 +65,87 @@ const HomePage = (props) => {
   }, [props.loginStatus]);
 
   const handleCardProduct = () => {
-    const filterBarang = Barang.filter((barang) => {
-      return barang.statusBarang === "Availabel";
-    });
+    if (searchBarang?.length === 0) {
+      return Barang.map((value, index) => {
+        if (props.loginStatus === true) {
+          return (
+            <div className="col-md-3 col-6" key={index}>
+              <CardProduct
+                key={index}
+                namaBarang={value.namaBarang}
+                img={value.barangImg}
+                tipebarang={value.tipeBarang}
+                price={value.hargaBarang}
+                ToDetailProduct={value.barangId}
+                redirect={`product/product-detail/${value.barangId}`}
+                btnCaption="Tertarik"
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div className="col-md-3 col-6" key={index}>
+              <CardProduct
+                key={index}
+                namaBarang={value.namaBarang}
+                img={value.barangImg}
+                tipebarang={value.tipeBarang}
+                price={value.hargaBarang}
+                ToDetailProduct={value.barangId}
+                redirect={`product/product-detail/p/${value.barangId}`}
+                btnCaption="Tertarik"
+              />
+            </div>
+          );
+        }
+      });
+    } else {
+      return searchBarang.map((value, index) => {
+        if (props.loginStatus === true) {
+          return (
+            <div className="col-md-3 col-6" key={index}>
+              <CardProduct
+                key={index}
+                namaBarang={value.namaBarang}
+                img={value.barangImg}
+                tipebarang={value.tipeBarang}
+                price={value.hargaBarang}
+                ToDetailProduct={value.barangId}
+                redirect={`product/product-detail/${value.barangId}`}
+                btnCaption="Tertarik"
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div className="col-md-3 col-6" key={index}>
+              <CardProduct
+                key={index}
+                namaBarang={value.namaBarang}
+                img={value.barangImg}
+                tipebarang={value.tipeBarang}
+                price={value.hargaBarang}
+                ToDetailProduct={value.barangId}
+                redirect={`product/product-detail/p/${value.barangId}`}
+                btnCaption="Tertarik"
+              />
+            </div>
+          );
+        }
+      });
+    }
+  };
 
-    return filterBarang.map((value, index) => {
-      if (props.loginStatus === true) {
-        return (
-          <div className="col-md-3 col-6" key={index}>
-            <CardProduct
-              key={index}
-              namaBarang={value.namaBarang}
-              img={value.barangImg}
-              tipebarang={value.tipeBarang}
-              price={value.hargaBarang}
-              ToDetailProduct={value.barangId}
-              redirect={`product/product-detail/${value.barangId}`}
-              btnCaption="Tertarik"
-            />
-          </div>
-        );
+  const handleSearchBarang = (e) => {
+    e.preventDefault();
+    const searchFilter = Barang.filter((searchRes) => {
+      if (searchKey === "") {
+        return searchRes;
       } else {
-        return (
-          <div className="col-md-3 col-6" key={index}>
-            <CardProduct
-              key={index}
-              namaBarang={value.namaBarang}
-              img={value.barangImg}
-              tipebarang={value.tipeBarang}
-              price={value.hargaBarang}
-              ToDetailProduct={value.barangId}
-              redirect={`product/product-detail/p/${value.barangId}`}
-              btnCaption="Tertarik"
-            />
-          </div>
-        );
+        return searchRes?.namaBarang.toLowerCase().includes(searchKey.toLowerCase());
       }
     });
+    setSearchBarang(searchFilter);
   };
 
   const filterResult = () => {
@@ -240,9 +289,9 @@ const HomePage = (props) => {
 
           {/* form search */}
           <div className="col-12 col-md-6 mt-md-0 mt-5">
-            <form className="d-flex">
+            <form className="d-flex" onSubmit={handleSearchBarang}>
               <div className="input-group search_bar">
-                <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" />
+                <input className="form-control search_input" type="search" placeholder="Cari di sini..." aria-label="Search" aria-describedby="button-addon2" onChange={(e) => setSearchKey(e.target.value)} />
                 <button className="btn search_button" id="button-addon2" type="submit">
                   <i className="bi bi-search"></i>
                 </button>

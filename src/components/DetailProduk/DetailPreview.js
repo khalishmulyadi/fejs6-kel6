@@ -56,6 +56,7 @@ const DetailProduk = (props) => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         alert("Tambah Barang Berhasil");
+        window.location.replace("/homepage");
       })
       .catch(function (error) {
         console.log(error);
