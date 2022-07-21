@@ -163,7 +163,10 @@ const HomePage = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         // console.log("berhasil");
-        setBarang(response.data);
+        const filterBarang = response?.data?.filter((barang) => {
+          return barang?.statusBarang.includes("Availabel");
+        });
+        setBarang(filterBarang);
         setfilterActive(1);
       })
       .catch(function (error) {
@@ -186,7 +189,10 @@ const HomePage = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         // console.log("berhasil");
-        setBarang(response.data);
+        const filterBarang = response?.data?.filter((barang) => {
+          return barang?.statusBarang.includes("Availabel");
+        });
+        setBarang(filterBarang);
         setfilterActive(3);
       })
       .catch(function (error) {
@@ -209,7 +215,10 @@ const HomePage = (props) => {
       .then(function (response) {
         // console.log(JSON.stringify(response.data));
         // console.log("berhasil");
-        setBarang(response.data);
+        const filterBarang = response?.data?.filter((barang) => {
+          return barang?.statusBarang.includes("Availabel");
+        });
+        setBarang(filterBarang);
         setfilterActive(2);
       })
       .catch(function (error) {

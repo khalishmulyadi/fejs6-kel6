@@ -120,7 +120,7 @@ const EditProduk = (props) => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         alert("Update barang berhasil");
-        window.location.reload("/daftar-jual");
+        window.location.replace("/daftar-jual");
       })
       .catch(function (error) {
         console.log(error);

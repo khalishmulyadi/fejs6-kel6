@@ -101,8 +101,14 @@ const Tambah = (props) => {
 
         axios(config)
           .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            alert("Tambah Barang Berhasil");
+            console.log(response.data);
+            if (response.data === "") {
+              alert("Tambah Barang Berhasil");
+              window.location.replace("/homepage");
+            } else {
+              alert(response.data);
+              window.location.replace("/homepage");
+            }
           })
           .catch(function (error) {
             console.log(error);
