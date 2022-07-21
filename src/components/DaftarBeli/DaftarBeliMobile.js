@@ -13,9 +13,13 @@ import { connect } from "react-redux";
 const DaftarBeliMobile = (props) => {
   const [tabActive, setTabActive] = useState(1);
   const [dataTawaran, setDataTawaran] = useState([]);
-  const [dataWishlist, setDataWishlist] = useState([]);
+  const [dataWishlist, setDataWishlist] = useState(JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)));
   const [dataRiwayatBeli, setDataRiwayatBeli] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  if (JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`)) === null) {
+    sessionStorage.setItem(`wishlist_${props.userId}`, "[]");
+  }
 
   const getDataPembelian = (userId, statusBarang) => {
     var axios = require("axios");
@@ -50,7 +54,7 @@ const DaftarBeliMobile = (props) => {
       getDataPembelian(props?.idUser, "Sold");
       const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
 
-      if (storedWishlist !== []) {
+      if (storedWishlist?.length > 0) {
         setDataWishlist(storedWishlist);
       }
     } else {
@@ -143,7 +147,6 @@ const DaftarBeliMobile = (props) => {
                           redirect={`/product/product-detail/${value.barangId}`}
                           btnCaption="Cek Status"
                         />
-                        ;
                       </div>
                     );
                   })}
@@ -177,7 +180,6 @@ const DaftarBeliMobile = (props) => {
                           redirect={`/product/product-detail/${value.barangId}`}
                           btnCaption="Tertarik"
                         />
-                        ;
                       </div>
                     );
                   })}
@@ -211,7 +213,6 @@ const DaftarBeliMobile = (props) => {
                           redirect={`/product/product-detail/${value.barangId}`}
                           btnCaption="Sudah Dibeli"
                         />
-                        ;
                       </div>
                     );
                   })}
