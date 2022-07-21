@@ -302,7 +302,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
                   <label htmlFor="recipient-name" className="col-form-label">
                     Harga tawar
                   </label>
-                  <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} required />
+                  <input type="text" placeholder="Rp. 0,00" className="form-control form_harga_tawar" id="recipient-name" onChange={(e) => setHargaTawar(e.target.value)} require="true" />
                 </div>
                 <button type="submit" className="btn btn_kirim_tawaran w-100" data-bs-dismiss="modal">
                   Kirim
