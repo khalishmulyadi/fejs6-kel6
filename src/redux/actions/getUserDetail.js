@@ -46,7 +46,7 @@ const getUserDetail = () => {
       })
       .catch(function (error) {
         console.log(error);
-        alert(error.response.data.error_message);
+        alert("Silahkan login kembali!");
         window.location.replace("/auth/login");
 
         // refreshToken(user?.refresh_token).then(() => {
