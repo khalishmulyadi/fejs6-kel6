@@ -44,7 +44,7 @@ const Notifikasi = (props) => {
                 <p className="waktu_notifikasi">{props.date}</p>
 
               </div>
-              <p className="mb-0">{props.namaProduk}</p>
+              <p className="mb-0 namaproduct-seller">{props.namaProduk}</p>
               <p className="mb-0">{formatRupiah(props.harga)}</p>
               <p className="mb-0">Ditawar {formatRupiah(props.hargaTawar)}</p>
               <p className="waktu_notifikasi-mobile">{props.date}</p>
