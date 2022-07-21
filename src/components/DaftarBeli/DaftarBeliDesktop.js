@@ -105,7 +105,7 @@ const DaftarBeliDesktop = (props) => {
                 <CardProduct
                   key={index}
                   namaBarang={value?.namaBarang}
-                  img={value?.gambarBarang}
+                  img={value?.barangImg}
                   tipebarang={value?.tipeBarang}
                   price={value?.hargaBarang}
                   hargaTawar={value?.hargaTawar}

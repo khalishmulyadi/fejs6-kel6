@@ -34,17 +34,18 @@ const NotifikasiBuyer = (props) => {
     <div>
       <div className="notifikasi">
         <div className="row">
-          <div className="col-1">
+          <div className="col-2">
             <img src={`data:image/png;base64,${props.img}`} className="gambar_produk_notif" alt="gambar_produk" />
           </div>
-          <div className="col-7">
-            <p className="status_notifikasi mb-0">Penawaran produk</p>
-            <p className="mb-0">{props.namaProduk}</p>
+          <div className="col-10">
+            <div className="container-notifikasibuyer">
+              <p className="status_notifikasi mb-0">Penawaran produk</p>
+              <p className="waktu_notifikasi-buyer">{props.date}</p>
+            </div>
+            <p className="mb-0 namaproduct-buyer">{props.namaProduk}</p>
             <p className="mb-0">Harga Tawar Anda: {formatRupiah(props.harga)}</p>
-            {/* <p className="mb-0">Ditawar {formatRupiah(props.hargaTawar)}</p> */}
-          </div>
-          <div className="col-3">
-            <p className="waktu_notifikasi">{props.date}</p>
+            <p className="waktu_notifikasi-buyer-mobile">{props.date}</p>
+
           </div>
         </div>
         <hr></hr>
