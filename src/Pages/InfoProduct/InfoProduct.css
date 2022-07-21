@@ -1,3 +1,8 @@
+/* .container-fluidInfoproduct{
+    width: 100vw !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+} */
 .navbar-info-product {
     display: flex;
     flex-direction: column;
@@ -9,25 +14,29 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
 }
 
-.row-navbar-infoproduct {
-    padding-left: 8.5rem;
-    padding-right: 8.5rem;
-}
 
-.arrow-back-mobile {
+.arrow-back-mobile-infoproduct {
     font-size: 1.5rem;
     border: none;
     background-color: #FFFFFF;
     cursor: pointer;
 }
-
 /* responsive arrow back */
-@media screen and (min-width: 425px) {
-    .arrow-back-mobile {
-        cursor: pointer;
+@media screen and (min-width: 426px) {
+    .arrow-back-mobile-infoproduct {
         display: none;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .arrow-back-mobile-infoproduct {
+        font-size: 1.5rem;
+        border: none;
+        background-color: #FFFFFF;
+        cursor: pointer;
+    }
+}
+
 
 .txt-navbar-infoproduct {
     display: flex;
@@ -66,6 +75,29 @@
     font-size: 1.5rem;
     border: none;
     background-color: #FFFFFF;
+}
+
+@media screen and (min-width: 320px) {
+
+    /* .arrow-back {
+        display: none;
+    } */
+    .logo-infoproduct {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    .arrow-back {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .arrow-back {
+        display: none;
+    }
 }
 
 .col-card-infoproduct {
@@ -127,16 +159,22 @@
     background-color: #FFFFFF;
 }
 
+.container-img-infoproduct {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+}
 
 /* responsive content  daftar product*/
-@media screen and (min-width: 425px) {
+/* @media screen and (max-width: 320px) {
     .container-img-infoproduct {
         display: flex;
         width: 48px;
         height: 48px;
         justify-content: center;
     }
-}
+} */
 
 .container-txt-infoproduct {
     display: flex;
@@ -173,7 +211,7 @@
 
 .btn-tolak-infoproduct:hover {
     background-color: #e09f3e;
-  color: #fff;
+    color: #fff;
 }
 
 .btn-terima-infoproduct {
@@ -196,19 +234,15 @@
 
 
 /* responsive */
-@media screen and (min-width: 425px) {
-    .logo-infoproduct {
-        display: none;
-    }
+@media screen and (max-width: 320px) {
+
 
     .card-1-infoproduct {
         width: 20.5rem;
         height: 5rem;
     }
 
-    .arrow-back {
-        display: none;
-    }
+
 
     .row-navbar-infoproduct {
         padding: 1rem 3.5rem 1rem 3.5rem;

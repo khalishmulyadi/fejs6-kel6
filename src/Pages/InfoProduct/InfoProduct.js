@@ -29,6 +29,10 @@ const InfoProduct = (props) => {
         return console.log(ParameterButton);
     }
 
+    const handleBack = () =>{
+        navigate('/homepage')
+    }
+
     const handleTolakBidding = () => {
         var config = {
             method: 'delete',
@@ -142,15 +146,14 @@ const InfoProduct = (props) => {
     return (
         <div>
             {console.log(idBarangBid)}
-            <Container fluid >
+            <Container fluid className='px-0'>
                 <div className='navbar-info-product'>
-                    <Row className='row-navbar-infoproduct'>
+                    <Row className='mx-0'>
                         <Col xs={1} >
-                            <img alt='' src={logo} className="logo-infoproduct" />
-                            <button className='arrow-back-mobile'>&#8592;</button>
+                            <button className='arrow-back-mobile-infoproduct' onClick={() =>{handleBack()}}><i class="bi bi-arrow-left"></i></button>
                         </Col>
 
-                        <Col xs={11}>
+                        <Col xs={11} >
                             <div className='txt-navbar-infoproduct'>
                                 Info Penawar
                             </div>
@@ -164,7 +167,7 @@ const InfoProduct = (props) => {
                             <Row>
                                 <Col xs={1}>
                                     <div className='container-button'>
-                                        <button className='arrow-back'>&#8592;</button>
+                                        <button className='arrow-back' onClick={()=>{handleBack()}}><i class="bi bi-arrow-left"></i></button>
                                     </div>
                                 </Col>
 
