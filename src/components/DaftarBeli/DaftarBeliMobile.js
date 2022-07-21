@@ -48,21 +48,26 @@ const DaftarBeliMobile = (props) => {
     if (loading === false) {
       getDataPembelian(props?.idUser, "Bidding");
       getDataPembelian(props?.idUser, "Sold");
+      const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+
+      if (storedWishlist !== []) {
+        setDataWishlist(storedWishlist);
+      }
     } else {
       setLoading(false);
     }
   }, [props.dataUser]);
 
-  useEffect(() => {
-    if (JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`)) === null) {
-      sessionStorage.setItem(`wishlist_${props.idUser}`, "[]");
-    } else {
-      const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
-      if (storedWishlist !== []) {
-        setDataWishlist(storedWishlist);
-      }
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   if (JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`)) === null) {
+  //     sessionStorage.setItem(`wishlist_${props.idUser}`, "[]");
+  //   } else {
+  //     const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.idUser}`));
+  //     if (storedWishlist !== []) {
+  //       setDataWishlist(storedWishlist);
+  //     }
+  //   }
+  // }, [loading]);
 
   return (
     <div>
