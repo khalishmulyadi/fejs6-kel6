@@ -115,7 +115,7 @@ const DetailProduk = ({ pengguna, ...props }) => {
   useEffect(() => {
     const storedWishlist = JSON.parse(sessionStorage.getItem(`wishlist_${props.userId}`));
 
-    if (storedWishlist.length > 0) {
+    if (storedWishlist?.length > 0) {
       setWishlist(storedWishlist);
     }
     if (DataBarang.statusId === 3) {
