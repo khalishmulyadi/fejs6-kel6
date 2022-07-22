@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore } from "react";
 import logo from "../../img/Rectangle 127.png";
 import upFoto from "../../img/upFoto.png";
 
@@ -14,6 +14,7 @@ import setLoginStatus from "../../redux/actions/setLoginStatus";
 import "./infoprofil.css";
 
 const InfoProfil = (props) => {
+  var axios = require('axios');
   const [updateAlert, setUpdateAlert] = useState(false);
   const [userId, setUserId] = useState(undefined);
   const [access_token, setAccessToken] = useState("");
@@ -26,6 +27,7 @@ const InfoProfil = (props) => {
   const [Gambar, setGambar] = useState(null);
   const [PrevGambar, setPrevGambar] = useState(null);
   const [verified, setVerified] = useState(false);
+  const [DataBid, setDataBid] = useState([])
 
   function urlToFile(url, filename, mimeType) {
     return fetch(url)
@@ -67,29 +69,31 @@ const InfoProfil = (props) => {
   };
 
   const handleUpgradeRole = () => {
-    console.log(verified);
-    if (verified === true) {
-      var axios = require("axios");
+    if (DataBid?.length > 0) {
+      alert("Upgrade akun Ditolak! Anda sedang menawar barang");
+    } else if (DataBid?.length === 0) {
+      console.log(verified);
+      if (verified === true) {
+        var config = {
+          method: "put",
+          url: `https://asix-store.herokuapp.com/user/update-role/${userId}`,
+          headers: {
+            Authorization: `Bearer ${access_token} `,
+          },
+        };
 
-      var config = {
-        method: "put",
-        url: `https://asix-store.herokuapp.com/user/update-role/${userId}`,
-        headers: {
-          Authorization: `Bearer ${access_token} `,
-        },
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          alert("Kamu berhasil upgrade role!");
-          window.location.replace("/update-profile");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
-      alert("Harap verifikasi captcha terlebih dahulu!");
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            alert("Kamu berhasil upgrade role!");
+            window.location.replace("/update-profile");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        alert("Harap verifikasi captcha terlebih dahulu!");
+      }
     }
   };
 
@@ -144,8 +148,32 @@ const InfoProfil = (props) => {
       });
   };
 
+  const token = JSON.parse(sessionStorage.getItem("user"));
+  useEffect(() => {
+    if (props.userId !== null) {
+      var config = {
+        method: 'get',
+        url: `https://asix-store.herokuapp.com/daftar-beli/${props.userId}/Bidding`,
+        headers: {
+          'Authorization': `Bearer ${token.access_token}`
+        }
+      };
+
+      axios(config)
+        .then(function (response) {
+          setDataBid(response.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+  }, [props.userId])
+
+
   return (
     <div className="">
+      {console.log(DataBid?.length)}
       <div className="container-fluid">
         <div className="headerProfil">
           <img className="logoheader" src={logo} alt="logo_app" />
@@ -313,6 +341,7 @@ const mapStateToProps = (state) => {
   return {
     dataUser: state.userReducer.dataUser,
     loginStatus: state.userReducer.isLoggedIn,
+    userId: state.userReducer.idUser,
   };
 };
 
