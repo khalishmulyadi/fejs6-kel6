@@ -25,9 +25,9 @@ const DetailProduk = ({ pengguna, ...props }) => {
   const handleTawar = (e) => {
     e.preventDefault();
 
-    if (props.loginStatus) {
-      if (props.roleUser === 1) {
-        if (props.dataUser.alamat !== null && props.dataUser.noTelepon !== null && props.dataUser.img !== null) {
+    if (props?.loginStatus) {
+      if (props?.roleUser === 1) {
+        if (props?.dataUser?.alamat !== null && props?.dataUser?.noTelepon !== null && props?.dataUser?.img !== null) {
           // send API
           var FormData = require("form-data");
           var data = new FormData();
@@ -155,7 +155,8 @@ const DetailProduk = ({ pengguna, ...props }) => {
 
   return (
     <div className="container-fluid px-0">
-      <div className="navbar_product_detail">
+    {console.log (props?.dataUser)}
+       <div className="navbar_product_detail">
         <NavbarDefault />
       </div>
 
