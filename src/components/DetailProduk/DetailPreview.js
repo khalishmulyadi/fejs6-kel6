@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import productImage from "../../img/loginsecondhand.png";
 import penjualImage from "../../img/img_photo3.jpg";
 import "./DetailProduk.css";
+import { useNavigate } from "react-router-dom";
 import NavbarDefault from "../NavbarDefault/NavbarDefault";
 import { connect } from "react-redux";
 import getProductPreview from "../../redux/actions/getProductPreview";
@@ -69,6 +70,12 @@ const DetailProduk = (props) => {
       });
   };
 
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+        navigate("/tambah-product");
+    }
+
   return (
     <div>
       {/* {console.log("gambar", detailBarang.gambarProduk)} */}
@@ -103,10 +110,10 @@ const DetailProduk = (props) => {
                     <img src={detailBarang.gambarPreview} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                   <div className="carousel-item">
-                    <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
+                    <img src={detailBarang.gambarPreview} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                   <div className="carousel-item">
-                    <img src={productImage} className="d-block w-100 carousel_img" alt="..." />
+                    <img src={detailBarang.gambarPreview} className="d-block w-100 carousel_img" alt="..." />
                   </div>
                 </div>
                 <button className="carousel-control-prev h-50 my-auto" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -137,7 +144,9 @@ const DetailProduk = (props) => {
                 >
                   Terbitkan
                 </button>
-                <button type="button" className="btn btn_edit">
+                <button type="button" className="btn btn_edit" onClick={(e) => {
+                    handleEdit(e);
+                  }}>
                   Edit
                 </button>
               </div>
