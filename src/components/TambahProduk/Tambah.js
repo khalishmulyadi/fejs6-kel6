@@ -174,10 +174,8 @@ const Tambah = (props) => {
               <label htmlFor="exampleFormControlInput1" className="customFile">
                 Kategori
               </label>
-              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)} required>
-                <option value="" disabled>
-                  Pilih Kategori
-                </option>
+              <select aria-label="Default select example" className="form-select form1_custom" onChange={(e) => setKategori(e.target.value)} required="true">
+              <option disabled selected value="">Pilih Kategori</option>
                 <option value="gitar">Gitar</option>
                 <option value="aksesoris">Acsesoris</option>
               </select>
